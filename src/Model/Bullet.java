@@ -1,11 +1,14 @@
+package Model;
+
 import java.awt.*;
 import java.util.logging.Handler;
+import Controller.*;
 
 public class Bullet extends GameObject {
 
-    private Handler1 handler;
+    private Controller.Handler1 handler;
 
-    public Bullet(int x, int y, ID id,Handler1 handler,int mx,int my) {
+    public Bullet(int x, int y, ID id, Handler1 handler, int mx, int my) {
         super(x, y, id);
         this.handler=handler;
 
@@ -20,7 +23,7 @@ public class Bullet extends GameObject {
 
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
-            if (temp.getId()==ID.Block){
+            if (temp.getId()== ID.Block){
                 if(getBounds().intersects(temp.getBounds())){
                     handler.removeObject(this);
                 }

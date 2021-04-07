@@ -1,9 +1,15 @@
+package Controller;
+
+import Model.GameObject;
+
 import java.awt.*;
 import java.util.LinkedList;
 
 public class Handler1 {
 
-    LinkedList<GameObject>objects=new LinkedList<GameObject>();
+    // Linked list an Objekten die sich im Spiel befinden
+    // Beispiel: Spieler, Wand, etc.
+    public LinkedList<GameObject>objects = new LinkedList<GameObject>();
 
     public boolean isUp() {
         return up;

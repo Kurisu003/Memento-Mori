@@ -1,3 +1,8 @@
+package Controller;
+
+import Controller.Handler1;
+import Model.GameObject;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -11,9 +16,9 @@ public class KeyInput extends KeyAdapter {
 
     public void keyPressed(KeyEvent e){
         int key=e.getKeyCode();
-        for(int i=0;i<handler1.objects.size();i++){
+        for(int i=0; i < handler1.objects.size(); i++){
             GameObject temp= handler1.objects.get(i);
-            if(temp.getId()==ID.Dante){
+            if(temp.getId()== Model.ID.Dante){
                 if(key == KeyEvent.VK_W) handler1.setUp(true);
                 if(key == KeyEvent.VK_S) handler1.setDown(true);
                 if(key == KeyEvent.VK_A) handler1.setLeft(true);
@@ -28,7 +33,7 @@ public class KeyInput extends KeyAdapter {
         int key=e.getKeyCode();
         for(int i=0;i<handler1.objects.size();i++){
             GameObject temp= handler1.objects.get(i);
-            if(temp.getId()==ID.Dante){
+            if(temp.getId()== Model.ID.Dante){
                 if(key == KeyEvent.VK_W) handler1.setUp(false);
                 if(key == KeyEvent.VK_S) handler1.setDown(false);
                 if(key == KeyEvent.VK_A) handler1.setLeft(false);

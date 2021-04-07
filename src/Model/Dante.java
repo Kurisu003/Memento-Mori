@@ -1,10 +1,12 @@
+package Model;
+
 import java.awt.*;
 
-public class Dante extends GameObject{
+public class Dante extends GameObject {
 
-    Handler1 handler;
+    Controller.Handler1 handler;
 
-    public Dante(int x, int y, ID id,Handler1 handler1) {
+    public Dante(int x, int y, ID id, Controller.Handler1 handler1) {
         super(x, y, id);
         this.handler=handler1;
     }
@@ -33,7 +35,7 @@ public class Dante extends GameObject{
     public void collision(){
         for(int i=0;i<handler.objects.size();i++){
             GameObject temp= handler.objects.get(i);
-            if(temp.getId()==ID.Block){
+            if(temp.getId()== ID.Block){
                 if(getBounds().intersects(temp.getBounds())){
                     x+=velX*-1;
                     y+=velY*-1;

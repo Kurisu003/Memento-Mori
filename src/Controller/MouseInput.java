@@ -1,3 +1,10 @@
+/*package Controller;
+
+import Controller.Handler1;
+import Model.Bullet;
+import Model.Camera;
+import Model.GameObject;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -25,3 +32,4 @@ public class MouseInput extends MouseAdapter {
         }
     }
 }
+*/

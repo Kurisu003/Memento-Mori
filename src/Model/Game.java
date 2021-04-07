@@ -1,27 +1,30 @@
+package Model;
+
+import View.BufferedImageLoader;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.util.logging.Handler;
+import Controller.*;
 
 public class Game extends Canvas implements Runnable {
 
     private Thread thread;
     private boolean isRunning=false;
     private Handler1 handler;
-    private BufferedImage level=null;
-    private Camera camera;
+    private BufferedImage level = null;
+    private Model.Camera camera;
 
     public Game(){
-        new Window(1000,563,"Memento Mori",this);
+        new View.Window(960,540,"Memento Mori",this);
         start();
-        handler= new Handler1();
-        camera=new Camera(0,0);
+        handler = new Handler1();
+        camera = new Camera(0,0);
         this.addKeyListener(new KeyInput(handler));
-        this.addMouseListener(new MouseInput(handler,camera));
+//        this.addMouseListener(new Controller.MouseInput(handler,camera));
 
-        BufferedImageLoader loader=new BufferedImageLoader();
-        level=loader.loadImage("/TopDownGame.png");
+        BufferedImageLoader loader = new BufferedImageLoader();
+        level = loader.loadImage("../TopDownGame.png");
         loadlevel(level);
         //handler.addObject(new Box(100,100,ID.Block));
 
@@ -76,7 +79,7 @@ public class Game extends Canvas implements Runnable {
 
         for(int i=0;i<handler.objects.size();i++){
             GameObject temp= handler.objects.get(i);
-            if(temp.getId()==ID.Dante){
+            if(temp.getId()== ID.Dante){
                 camera.tick(handler.objects.get(i));
             }
 
@@ -125,11 +128,11 @@ public class Game extends Canvas implements Runnable {
                 int blue=(pixel) &0xff;
 
                 if(red==255)
-                    handler.addObject(new Box(xx*32,yy*32,ID.Block));
+                    handler.addObject(new Box(xx*32,yy*32, ID.Block));
                 if(blue==255)
-                    handler.addObject(new Dante(xx*32,yy*32,ID.Dante,handler));
+                    handler.addObject(new Dante(xx*32,yy*32, ID.Dante,handler));
                 if (green==255){
-                    handler.addObject(new Enemy(xx*32,yy*32,ID.Enemy,handler));
+                    handler.addObject(new Enemy(xx*32,yy*32, ID.Enemy,handler));
                 }
 
             }

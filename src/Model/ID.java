@@ -1,8 +1,10 @@
+package Model;
+
 public enum ID {
 
     Dante(),
     Block(),
-    Amo(),
+    Ammo(),
     Bullet(),
     Enemy();
 

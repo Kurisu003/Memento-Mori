@@ -1,8 +1,11 @@
+package Model;
+
 import java.awt.*;
 import java.util.Random;
 import java.util.logging.Handler;
+import Controller.*;
 
-public class Enemy extends GameObject{
+public class Enemy extends GameObject {
 
     private Handler1 handler;
 
@@ -10,7 +13,7 @@ public class Enemy extends GameObject{
     int choose=0;
     int hp=100;
 
-    public Enemy(int x, int y, ID id,Handler1 handler) {
+    public Enemy(int x, int y, ID id, Handler1 handler) {
         super(x, y, id);
         this.handler=handler;
     }

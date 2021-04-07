@@ -1,3 +1,5 @@
+package Model;
+
 public class Camera {
     private double x,y;
 
