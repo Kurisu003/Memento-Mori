@@ -5,6 +5,7 @@ import java.awt.*;
 public class Dante extends GameObject {
 
     Controller.Handler1 handler;
+    public static boolean isKeyPressed;
 
     public Dante(int x, int y, ID id, Controller.Handler1 handler1) {
         super(x, y, id);
@@ -17,17 +18,37 @@ public class Dante extends GameObject {
 
         collision();
 
-        if(handler.isUp()) velY=-5;
-        else if(!handler.isDown()) velY=0;
+        if(handler.isUp()){
+            if(!handler.isDown())
+                velY = -5;
+            else if(handler.isDown())
+                velY = 0;
+        }
+        else if(!handler.isDown()) velY = 0;
 
-        if(handler.isDown()) velY=5;
-        else if(!handler.isUp()) velY=0;
+        if(handler.isDown()){
+            if(!handler.isUp())
+                velY = 5;
+            else if(handler.isUp())
+                velY = 0;
+        }
+        else if(!handler.isUp()) velY = 0;
 
-        if(handler.isRight()) velX=5;
-        else if(!handler.isLeft()) velX=0;
+        if(handler.isRight()){
+            if(!handler.isLeft())
+                velX = 5;
+            else if(handler.isLeft())
+                velX = 0;
+        }
+        else if(!handler.isLeft()) velX = 0;
 
-        if(handler.isLeft()) velX=-5;
-        else if(!handler.isRight()) velX=0;
+        if(handler.isLeft()) {
+            if (!handler.isRight())
+                velX = -5;
+            else if (handler.isRight())
+                velX = 0;
+        }
+        else if(!handler.isRight()) velX = 0;
 
 
     }
