@@ -5,6 +5,8 @@ import View.BufferedImageLoader;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+
 import Controller.*;
 
 public class Game extends Canvas implements Runnable {
@@ -13,6 +15,7 @@ public class Game extends Canvas implements Runnable {
     private boolean isRunning=false;
     private Handler1 handler;
     private BufferedImage level = null;
+    private BufferedImage floor=null;
     private Model.Camera camera;
 
     public Game(){
@@ -21,10 +24,11 @@ public class Game extends Canvas implements Runnable {
         handler = new Handler1();
         camera = new Camera(0,0);
         this.addKeyListener(new KeyInput(handler));
-//        this.addMouseListener(new Controller.MouseInput(handler,camera));
+//      this.addMouseListener(new Controller.MouseInput(handler,camera));
 
         BufferedImageLoader loader = new BufferedImageLoader();
-        level = loader.loadImage("../TopDownGame.png");
+        level = loader.loadImage("../Background.png");
+        floor= loader.loadImage("../Tile5.png");
         loadlevel(level);
         //handler.addObject(new Box(100,100,ID.Block));
 
@@ -103,6 +107,12 @@ public class Game extends Canvas implements Runnable {
         g.fillRect(0,0,1000,563);
 
         g2d.translate(-camera.getX(),-camera.getY());
+
+        for(int xx=0;xx<30*72;xx+=64){
+            for(int yy = 0; yy < 30 * 72; yy+=64){
+                g.drawImage(floor,xx,yy,null);
+            }
+        }
 
         handler.render(g);
 
