@@ -15,11 +15,16 @@ public class Game extends Canvas implements Runnable {
     private boolean isRunning=false;
     private Handler1 handler;
     private BufferedImage level = null;
-    private BufferedImage floor=null;
+    private BufferedImage floor = null;
+    private BufferedImage wall = null;
+    private BufferedImage playerDown = null;
+    private BufferedImage playerUp = null;
+    private BufferedImage playerLeft = null;
+    private BufferedImage playerRight = null;
     private Model.Camera camera;
 
     public Game(){
-        new View.Window(960,540,"Memento Mori",this);
+        new View.Window(1104,615,"Memento Mori",this);
         start();
         handler = new Handler1();
         camera = new Camera(0,0);
@@ -27,12 +32,13 @@ public class Game extends Canvas implements Runnable {
 //      this.addMouseListener(new Controller.MouseInput(handler,camera));
 
         BufferedImageLoader loader = new BufferedImageLoader();
-        level = loader.loadImage("../Background.png");
-        floor= loader.loadImage("../Tile5.png");
+        level = loader.loadImage("../Level1.png");
+        floor = loader.loadImage("../Tile5.png");
+        wall = loader.loadImage("../WallTile64x64.png");
+        playerDown = loader.loadImage("../PlayerDown.png");
+        playerUp = loader.loadImage("../PlayerUp.png");
         loadlevel(level);
         //handler.addObject(new Box(100,100,ID.Block));
-
-
     }
 
     private void start(){
@@ -138,9 +144,9 @@ public class Game extends Canvas implements Runnable {
                 int blue=(pixel) &0xff;
 
                 if(red==255)
-                    handler.addObject(new Box(xx*32,yy*32, ID.Block));
+                    handler.addObject(new Box(xx*64,yy*64, ID.Block, wall));
                 if(blue==255)
-                    handler.addObject(new Dante(xx*32,yy*32, ID.Dante,handler));
+                    handler.addObject(new Dante(xx*32,yy*32, ID.Dante,handler, playerDown));
                 if (green==255){
                     handler.addObject(new Enemy(xx*32,yy*32, ID.Enemy,handler));
                 }
