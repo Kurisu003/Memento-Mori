@@ -24,6 +24,10 @@ public class KeyInput extends KeyAdapter {
                 if(key == KeyEvent.VK_A) handler1.setLeft(true);
                 if(key == KeyEvent.VK_D) handler1.setRight(true);
 
+                if(key == KeyEvent.VK_UP) handler1.setShootUp(true);
+                if(key == KeyEvent.VK_DOWN) handler1.setShootDown(true);
+                if(key == KeyEvent.VK_LEFT) handler1.setShootLeft(true);
+                if(key == KeyEvent.VK_RIGHT) handler1.setShootRight(true);
             }
         }
 
@@ -39,6 +43,10 @@ public class KeyInput extends KeyAdapter {
                 if(key == KeyEvent.VK_A) handler1.setLeft(false);
                 if(key == KeyEvent.VK_D) handler1.setRight(false);
 
+                if(key == KeyEvent.VK_UP) handler1.setShootUp(false);
+                if(key == KeyEvent.VK_DOWN) handler1.setShootDown(false);
+                if(key == KeyEvent.VK_LEFT) handler1.setShootLeft(false);
+                if(key == KeyEvent.VK_RIGHT) handler1.setShootRight(false);
             }
         }
     }

@@ -13,6 +13,14 @@ public class Dante extends GameObject {
     private BufferedImage playerLeft = null;
     private BufferedImage playerRight = null;
 
+    private BufferedImage playerDownRight = null;
+    private BufferedImage playerUpRight = null;
+    private BufferedImage playerDownLeft = null;
+    private BufferedImage playerUpLeft = null;
+
+    private int shotCounter = 0;
+    private int fireSpeed = 10;
+
     private BufferedImage bufferedImage;
     Controller.Handler1 handler;
     public static boolean isKeyPressed;
@@ -27,16 +35,24 @@ public class Dante extends GameObject {
         playerUp = loader.loadImage("../PlayerUp.png");
     }
 
+    public void setFireSpeed(int speed){
+        this.fireSpeed = speed;
+    }
+
     public void tick() {
         x+=velX;
         y+=velY;
-
+        int setImgCounter = 0;
         collision();
+        if(++shotCounter % fireSpeed == 0){
+            shoot();
+            shotCounter = 0;
+        }
 
         if(handler.isUp()){
             if(!handler.isDown()) {
                 velY = -5;
-                setImage(0);
+                setImgCounter += 1;
             }
             else if(handler.isDown())
                 velY = 0;
@@ -46,7 +62,7 @@ public class Dante extends GameObject {
         if(handler.isDown()){
             if(!handler.isUp()){
                 velY = 5;
-                setImage(1);
+                setImgCounter += 2;
             }
             else if(handler.isUp())
                 velY = 0;
@@ -56,7 +72,7 @@ public class Dante extends GameObject {
         if(handler.isRight()){
             if(!handler.isLeft()){
                 velX = 5;
-                setImage(2);
+                setImgCounter += 4;
             }
             else if(handler.isLeft())
                 velX = 0;
@@ -66,14 +82,12 @@ public class Dante extends GameObject {
         if(handler.isLeft()) {
             if (!handler.isRight()){
                 velX = -5;
-                setImage(3);
+                setImgCounter += 8;
             }
             else if (handler.isRight())
                 velX = 0;
         }
         else if(!handler.isRight()) velX = 0;
-
-
     }
 
     public void collision(){
@@ -101,14 +115,46 @@ public class Dante extends GameObject {
 
     public void setImage(int position){
         switch (position) {
-            case (0) -> bufferedImage = playerUp;
-            case (1) -> bufferedImage = playerDown;
-            case (2) -> bufferedImage = playerLeft;
-            case (3) -> bufferedImage = playerRight;
+            case (1) -> bufferedImage = playerUp;
+            case (2) -> bufferedImage = playerDown;
+            case (4) -> bufferedImage = playerLeft;
+            case (5) -> bufferedImage = playerUpLeft;
+            case (6) -> bufferedImage = playerDownLeft;
+            case (8) -> bufferedImage = playerRight;
+            case (9) -> bufferedImage = playerUpRight;
+            case (10) -> bufferedImage = playerDownRight;
         }
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x,y,32,48);
+        return new Rectangle(x,y,64,64);
+    }
+
+    public void shoot(){
+        int shotY = y;
+        int shotX = x;
+        int shotYStart = y;
+        int shotXStart = x;
+        if(handler.isShootUp()) {
+            shotY -= 100;
+            shotXStart += 32;
+        }
+        if(handler.isShootDown()) {
+            shotY += 100;
+            shotXStart += 32;
+            shotYStart += 35;
+        }
+        if(handler.isShootLeft()) {
+            shotX -= 100;
+            shotYStart = shotYStart - y < 35 ? shotYStart + 35 : shotYStart;
+        }
+        if(handler.isShootRight()) {
+            shotX += 100;
+            shotXStart = shotXStart - x < 32 ? shotXStart + 50 : shotXStart;
+            shotYStart = shotYStart - y < 35 ? shotYStart + 35 : shotYStart;
+        }
+
+        if(shotY != y|| shotX != x)
+            handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX + 32, shotY + 32));
     }
 }

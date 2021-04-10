@@ -17,6 +17,7 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage level = null;
     private BufferedImage floor = null;
     private BufferedImage wall = null;
+
     private BufferedImage playerDown = null;
     private BufferedImage playerUp = null;
     private BufferedImage playerLeft = null;

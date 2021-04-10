@@ -11,6 +11,42 @@ public class Handler1 {
     // Beispiel: Spieler, Wand, etc.
     public LinkedList<GameObject>objects = new LinkedList<GameObject>();
 
+    private boolean up=false,down=false,right=false,left=false;
+
+    public boolean isShootUp() {
+        return shootUp;
+    }
+
+    public void setShootUp(boolean shootUp) {
+        this.shootUp = shootUp;
+    }
+
+    public boolean isShootDown() {
+        return shootDown;
+    }
+
+    public void setShootDown(boolean shootDown) {
+        this.shootDown = shootDown;
+    }
+
+    public boolean isShootRight() {
+        return shootRight;
+    }
+
+    public void setShootRight(boolean shootRight) {
+        this.shootRight = shootRight;
+    }
+
+    public boolean isShootLeft() {
+        return shootLeft;
+    }
+
+    public void setShootLeft(boolean shootLeft) {
+        this.shootLeft = shootLeft;
+    }
+
+    private boolean shootUp=false,shootDown=false,shootRight=false,shootLeft=false;
+
     public boolean isUp() {
         return up;
     }
@@ -43,7 +79,6 @@ public class Handler1 {
         this.left = left;
     }
 
-    private boolean up=false,down=false,right=false,left=false;
     public void tick(){
         for(int i=0;i<objects.size();i++){
             GameObject temp=objects.get(i);
