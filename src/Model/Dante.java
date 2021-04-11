@@ -78,6 +78,10 @@ public class Dante extends GameObject {
         }
     }
 
+    public Rectangle getBounds() {
+        return new Rectangle(x,y,64,64);
+    }
+    
     public void shoot(){
         int shotY = y;
         int shotX = x;
@@ -171,10 +175,6 @@ public class Dante extends GameObject {
         }
     }
 
-    public Rectangle getBounds() {
-        return new Rectangle(x,y,64,64);
-    }
-
     // Used to render image of player head and body
     public void render(Graphics g) {
         g.drawImage(bufferedBodyImage, x, y, null);
@@ -192,13 +192,13 @@ public class Dante extends GameObject {
 
         // Needed so that shooting is always available when button is pressed
         // and enough time has passed
+        timeSinceLastShot++;
         if  (timeSinceLastShot > fireSpeed &&
                 (handler.isShootUp() || handler.isShootDown() || handler.isShootLeft() || handler.isShootRight())){
             shoot();
             timeSinceLastShot = 0;
         }
 
-        timeSinceLastShot++;
 
         // Used to keep track of which direction the player is looking in
         int setBodyImgCounter = 1;
