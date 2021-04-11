@@ -18,6 +18,12 @@ public class Dante extends GameObject {
     private BufferedImage playerHeadLeft = null;
     private BufferedImage playerHeadRight = null;
 
+    ArrayList<BufferedImage> playerBodyUpAnimation = new ArrayList<>();
+    ArrayList<BufferedImage> playerBodyDownAnimation = new ArrayList<>();
+    ArrayList<BufferedImage> playerBodyLeftAnimation = new ArrayList<>();
+    ArrayList<BufferedImage> playerBodyRightAnimation = new ArrayList<>();
+    ArrayList<BufferedImage> playerIdleAnimation = new ArrayList<>();
+
     private BufferedImage shotType1 = null;
 
     private int timeSinceLastShot = 20;
@@ -26,6 +32,10 @@ public class Dante extends GameObject {
     private int damage = 100;
     private int health = 5;
     private int maxHealth = 5;
+    private int armor = 2;
+
+    private int frameCount = 0;
+    private int animationSteps = 3;
 
     private BufferedImage bufferedBodyImage;
     private BufferedImage bufferedHeadImage;
@@ -38,15 +48,40 @@ public class Dante extends GameObject {
         // Different images according to the direction
         // the player is looking in
         BufferedImageLoader loader = new BufferedImageLoader();
-        playerBodyDown = loader.loadImage("../playerDown.png");
-        playerBodyUp = loader.loadImage("../playerUp.png");
-        playerBodyLeft = loader.loadImage("../playerLeft.png");
-        playerBodyRight = loader.loadImage("../playerRight.png");
+//        playerBodyDown = loader.loadImage("../playerDown.png");
+//        playerBodyUp = loader.loadImage("../playerUp.png");
+//        playerBodyLeft = loader.loadImage("../playerLeft.png");
+//        playerBodyRight = loader.loadImage("../playerRight.png");
 
         playerHeadUp = loader.loadImage("../Tile5.png");
         playerHeadDown = loader.loadImage("../BrickTile32x32.png");
         playerHeadLeft = loader.loadImage("../Tile5.png");
         playerHeadRight = loader.loadImage("../BrickTile32x32.png");
+
+        playerBodyUpAnimation.add(loader.loadImage("../Tile5.png"));
+        playerBodyUpAnimation.add(loader.loadImage("../playerUp.png"));
+        playerBodyUpAnimation.add(loader.loadImage("../playerLeft.png"));
+        playerBodyUpAnimation.add(loader.loadImage("../playerRight.png"));
+
+        playerBodyDownAnimation.add(loader.loadImage("../Tile5.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../playerUp.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../playerLeft.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../playerRight.png"));
+
+        playerBodyLeftAnimation.add(loader.loadImage("../Tile5.png"));
+        playerBodyLeftAnimation.add(loader.loadImage("../playerUp.png"));
+        playerBodyLeftAnimation.add(loader.loadImage("../playerLeft.png"));
+        playerBodyLeftAnimation.add(loader.loadImage("../playerRight.png"));
+
+        playerBodyRightAnimation.add(loader.loadImage("../Tile5.png"));
+        playerBodyRightAnimation.add(loader.loadImage("../playerUp.png"));
+        playerBodyRightAnimation.add(loader.loadImage("../playerLeft.png"));
+        playerBodyRightAnimation.add(loader.loadImage("../playerRight.png"));
+
+        playerIdleAnimation.add(loader.loadImage("../playerDown.png"));
+        playerIdleAnimation.add(loader.loadImage("../playerDown.png"));
+        playerIdleAnimation.add(loader.loadImage("../playerDown.png"));
+        playerIdleAnimation.add(loader.loadImage("../playerDown.png"));
 
         shotType1 = loader.loadImage("../Tile.png");
     }
@@ -65,10 +100,11 @@ public class Dante extends GameObject {
     // so it doesnt have to be checked each tick
     public void setBodyImage(int bodyImageCount){
         switch (bodyImageCount) {
-            case (0) -> bufferedBodyImage = playerBodyUp;
-            case (1) -> bufferedBodyImage = playerBodyDown;
-            case (2) -> bufferedBodyImage = playerBodyRight;
-            case (3) -> bufferedBodyImage = playerBodyLeft;
+            case (0) -> bufferedBodyImage = playerBodyUpAnimation.get(frameCount);
+            case (1) -> bufferedBodyImage = playerBodyDownAnimation.get(frameCount);
+            case (2) -> bufferedBodyImage = playerBodyRightAnimation.get(frameCount);
+            case (3) -> bufferedBodyImage = playerBodyLeftAnimation.get(frameCount);
+            case (4) -> bufferedBodyImage = playerIdleAnimation.get(frameCount);
         }
     }
 
@@ -79,7 +115,6 @@ public class Dante extends GameObject {
             case (2) -> bufferedHeadImage = playerHeadRight;
             case (3) -> bufferedHeadImage = playerHeadLeft;
         }
-        health--;
     }
 
     public Rectangle getBounds() {
@@ -138,7 +173,6 @@ public class Dante extends GameObject {
 
 
 //  Version like the binding of isaac
-
         if(handler.isShootUp()){
             shotY = y - 100;
             shotX = x + 32;
@@ -182,6 +216,13 @@ public class Dante extends GameObject {
             if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())){
                 x+=velX*-1;
                 y+=velY*-1;
+            }
+            if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())){
+                health--;
+                temp.x += temp.velX*-1;
+                temp.y += temp.velY*-1;
+                x += velX*-1;
+                y += velY*-1;
             }
         }
     }
@@ -235,6 +276,16 @@ public class Dante extends GameObject {
         // Needed so that shooting is always available when button is pressed
         // and enough time has passed
         timeSinceLastShot++;
+
+        // Reuses timeSinceLastShot as a sort
+        // of way to keep way of ticks since it
+        // counts up every time. This is needed as we dont
+        // want to up animation counter every time as the
+        // animations are too fast that way
+        if(timeSinceLastShot % 7 == 0){
+            frameCount = ++frameCount % animationSteps;
+        }
+
         if(timeSinceLastShot % 1000 == 0){
             timeSinceLastShot = 30;
         }
@@ -244,10 +295,9 @@ public class Dante extends GameObject {
             timeSinceLastShot = 0;
         }
 
-
         // Used to keep track of which direction the player is looking in
-        int setBodyImgCounter = 1;
-
+        // 4 = Default value used for idle animation
+        int setBodyImgCounter = 4;
         if(handler.isUp() && !handler.isDown()){
             velY = -5;
             setBodyImgCounter = 0;
