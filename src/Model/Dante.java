@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public class Dante extends GameObject {
 
-    private BufferedImage playerBodyDown = null;
-    private BufferedImage playerBodyUp = null;
-    private BufferedImage playerBodyLeft = null;
-    private BufferedImage playerBodyRight = null;
+//    private BufferedImage playerBodyDown = null;
+//    private BufferedImage playerBodyUp = null;
+//    private BufferedImage playerBodyLeft = null;
+//    private BufferedImage playerBodyRight = null;
 
     private BufferedImage playerHeadUp = null;
     private BufferedImage playerHeadDown = null;
