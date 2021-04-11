@@ -6,6 +6,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+// To implement:
+// recoil player and enemy on contact
+// in collision
+
 public class Dante extends GameObject {
 
 //    private BufferedImage playerBodyDown = null;
@@ -124,7 +128,8 @@ public class Dante extends GameObject {
     @Override
     // To do damage to player character
     public void doAction(int action) {
-        health -= action;
+        if(armor == 0) health -= action;
+        else armor -= action;
     }
 
     public void shoot(){
@@ -218,7 +223,9 @@ public class Dante extends GameObject {
                 y+=velY*-1;
             }
             if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())){
-                health--;
+                // To do damage to player
+                doAction(1);
+
                 temp.x += temp.velX*-1;
                 temp.y += temp.velY*-1;
                 x += velX*-1;
@@ -246,13 +253,18 @@ public class Dante extends GameObject {
 
         // Draws white outline
         for(int i = 1; i <= maxHealth; i++)
-            addHealth(g, i);
+            addHealth(g, i, Color.white);
+
+        // Draws Armor outline
+        for(int i = 1; i <= armor; i++)
+            addHealth(g, i, Color.cyan);
+
     }
 
     // Draws white healthbar outlines
-    public void addHealth(Graphics g, int i){
+    public void addHealth(Graphics g, int i, Color color){
         ((Graphics2D) g).setStroke(new BasicStroke(3));
-        g.setColor(Color.white);
+        g.setColor(color);
 
         // Top healthbar line
         g.drawLine((i * 25) , 20, (25 * i) + 25 , 20);
