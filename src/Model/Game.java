@@ -18,10 +18,6 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage floor = null;
     private BufferedImage wall = null;
 
-    private BufferedImage playerDown = null;
-    private BufferedImage playerUp = null;
-    private BufferedImage playerLeft = null;
-    private BufferedImage playerRight = null;
     private Model.Camera camera;
 
     public Game(){
@@ -36,20 +32,18 @@ public class Game extends Canvas implements Runnable {
         level = loader.loadImage("../Level1.png");
         floor = loader.loadImage("../Tile5.png");
         wall = loader.loadImage("../WallTile64x64.png");
-        playerDown = loader.loadImage("../PlayerDown.png");
-        playerUp = loader.loadImage("../PlayerUp.png");
         loadlevel(level);
         //handler.addObject(new Box(100,100,ID.Block));
     }
 
     private void start(){
-        isRunning=true;
-        thread=new Thread(this); //this because we call the run methode
+        isRunning = true;
+        thread = new Thread(this); //this because we call the run methode
         thread.start();
     }
 
     private void stop(){
-        isRunning=false;
+        isRunning = false;
         try {
             thread.join();
         } catch (InterruptedException e) {
@@ -87,15 +81,19 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void tick(){
+//  Old version
+//        for(int i=0;i<handler.objects.size();i++){
+//            GameObject temp= handler.objects.get(i);
+//            if(temp.getId()== ID.Dante){
+//                camera.tick(handler.objects.get(i));
+//            }
+//        }
 
-        for(int i=0;i<handler.objects.size();i++){
-            GameObject temp= handler.objects.get(i);
-            if(temp.getId()== ID.Dante){
-                camera.tick(handler.objects.get(i));
+        for(GameObject temp : handler.objects){
+            if(temp.getId() == ID.Dante){
+                camera.tick(temp);
             }
-
         }
-
         handler.tick();
     }
 
@@ -128,13 +126,11 @@ public class Game extends Canvas implements Runnable {
         g.dispose();
         bs.show();
 
-
-
     }
 
     private void loadlevel(BufferedImage image){
-        int w=image.getWidth();
-        int h=image.getHeight();
+        int w = image.getWidth();
+        int h = image.getHeight();
 
         for(int xx=0;xx<w;xx++){
             for(int yy=0;yy<h;yy++){
@@ -147,9 +143,9 @@ public class Game extends Canvas implements Runnable {
                 if(red==255)
                     handler.addObject(new Box(xx*64,yy*64, ID.Block, wall));
                 if(blue==255)
-                    handler.addObject(new Dante(xx*32,yy*32, ID.Dante,handler, playerDown));
+                    handler.addObject(new Dante(xx*32,yy*32, ID.Dante, handler));
                 if (green==255){
-                    handler.addObject(new Enemy(xx*32,yy*32, ID.Enemy,handler));
+                    handler.addObject(new Enemy(xx*32,yy*32, ID.Enemy, handler));
                 }
 
             }
