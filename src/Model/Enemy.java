@@ -38,18 +38,16 @@ public class Enemy extends GameObject {
                     velY = (r.nextInt(4 - -4) + -4);
                 }
             }
-
-            if(temp.getId() == ID.Bullet) {
-                if(getBounds().intersects(temp.getBounds())) {
-                    hp -= 50;
-                    handler.removeObject(temp);
-                }
-            }
         }
 
         if(hp <= 0) {
             handler.removeObject(this);
         }
+    }
+
+    // to do damage to enemy
+    public void doAction(int action){
+        this.hp -= action;
     }
 
 

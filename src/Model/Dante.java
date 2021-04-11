@@ -4,9 +4,9 @@ import View.BufferedImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Dante extends GameObject {
-
 
     private BufferedImage playerBodyDown = null;
     private BufferedImage playerBodyUp = null;
@@ -23,6 +23,9 @@ public class Dante extends GameObject {
     private int timeSinceLastShot = 20;
     private int fireSpeed = 20;
     private int range = 30;
+    private int damage = 100;
+    private int health = 5;
+    private int maxHealth = 5;
 
     private BufferedImage bufferedBodyImage;
     private BufferedImage bufferedHeadImage;
@@ -76,12 +79,19 @@ public class Dante extends GameObject {
             case (2) -> bufferedHeadImage = playerHeadRight;
             case (3) -> bufferedHeadImage = playerHeadLeft;
         }
+        health--;
     }
 
     public Rectangle getBounds() {
         return new Rectangle(x,y,64,64);
     }
-    
+
+    @Override
+    // To do damage to player character
+    public void doAction(int action) {
+        health -= action;
+    }
+
     public void shoot(){
         int shotY = y;
         int shotX = x;
@@ -128,6 +138,7 @@ public class Dante extends GameObject {
 
 
 //  Version like the binding of isaac
+
         if(handler.isShootUp()){
             shotY = y - 100;
             shotX = x + 32;
@@ -160,7 +171,7 @@ public class Dante extends GameObject {
         }
 
         if(shotY != y|| shotX != x)
-            handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX, shotY, range, shotType1));
+            handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX, shotY, range, damage, shotType1));
     }
 
     public void collision(){
@@ -179,8 +190,40 @@ public class Dante extends GameObject {
     public void render(Graphics g) {
         g.drawImage(bufferedBodyImage, x, y, null);
         g.drawImage(bufferedHeadImage, x, y - 30, null);
+
+        // Sets health to a min value of 0
+        if (health < 0)
+            health = 0;
+
+        // Draws background
+        g.setColor(Color.BLACK);
+        g.fillRect(25, 19, 25 * maxHealth, 23);
+
+        // Draws red healthbar
+        g.setColor(Color.RED);
+        g.fillRect(25, 20, 25 * health, 20);
+
+        // Draws white outline
+        for(int i = 1; i <= maxHealth; i++)
+            addHealth(g, i);
     }
 
+    // Draws white healthbar outlines
+    public void addHealth(Graphics g, int i){
+        ((Graphics2D) g).setStroke(new BasicStroke(3));
+        g.setColor(Color.white);
+
+        // Top healthbar line
+        g.drawLine((i * 25) , 20, (25 * i) + 25 , 20);
+
+        // Bottom healthbar line
+        g.drawLine((i * 25) , 40, (25 * i) + 25 , 40);
+
+        // healthbar starting line
+        g.drawLine((25) , 20, 25 , 40);
+        // healthbar dividing lines
+        g.drawLine(((i + 1) * 25) , 20, ((i + 1) * 25) , 40);
+    }
 
     public void tick() {
         x += velX;
@@ -189,10 +232,12 @@ public class Dante extends GameObject {
         // checks for collision with objects
         collision();
 
-
         // Needed so that shooting is always available when button is pressed
         // and enough time has passed
         timeSinceLastShot++;
+        if(timeSinceLastShot % 1000 == 0){
+            timeSinceLastShot = 30;
+        }
         if  (timeSinceLastShot > fireSpeed &&
                 (handler.isShootUp() || handler.isShootDown() || handler.isShootLeft() || handler.isShootRight())){
             shoot();

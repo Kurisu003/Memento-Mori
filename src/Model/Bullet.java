@@ -11,12 +11,14 @@ public class Bullet extends GameObject {
     private BufferedImage bufferedShotImage = null;
     private int timeAlive = 0;
     private int range = 30;
+    private int damage = 10;
 
-    public Bullet(int x, int y, ID id, Handler1 handler, int mx, int my, int range, BufferedImage shotType) {
+    public Bullet(int x, int y, ID id, Handler1 handler, int mx, int my, int range, int damage, BufferedImage shotType) {
         super(x, y, id);
         this.handler = handler;
         this.range = range;
         this.bufferedShotImage = shotType;
+        this.damage = damage;
 
         velX=(mx-x)/10;
         velY=(my-y)/10;
@@ -35,6 +37,10 @@ public class Bullet extends GameObject {
             GameObject temp = handler.objects.get(i);
             if (temp.getId()== ID.Block && getBounds().intersects(temp.getBounds())){
                 handler.removeObject(this);
+            }
+            if (temp.getId()== ID.Enemy && getBounds().intersects(temp.getBounds())){
+                handler.removeObject(this);
+                temp.doAction(damage);
             }
         }
     }

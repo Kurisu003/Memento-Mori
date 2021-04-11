@@ -87,6 +87,7 @@ public class Handler1 {
     }
 
     public void render(Graphics g){
+
         for (GameObject temp : objects) {
             temp.render(g);
         }
