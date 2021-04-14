@@ -33,7 +33,7 @@ public class Game extends Canvas implements Runnable {
         floor = loader.loadImage("../Tile5.png");
         wall = loader.loadImage("../WallTile64x64.png");
         loadlevel(level);
-        //handler.addObject(new Box(100,100,ID.Block));
+        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
     }
 
     private void start(){
