@@ -22,7 +22,7 @@ public class Game extends Canvas implements Runnable {
 
     public Game(){
         GenerateLevel generatedLevel = new GenerateLevel();
-        new View.Window(1104,615,"Memento Mori",this);
+        new View.Window(64 * 17 + 12,64 * 9 + 35,"Memento Mori",this);
         start();
         handler = new Handler1();
         camera = new Camera(0,0);
