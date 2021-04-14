@@ -226,10 +226,10 @@ public class Dante extends GameObject {
                 // To do damage to player
                 doAction(1);
 
-                temp.x += temp.velX*-1;
-                temp.y += temp.velY*-1;
-                x += velX*-1;
-                y += velY*-1;
+//                temp.x = temp.getX() - 1;
+//                temp.y = temp.getY() - 1;
+//                x += velX*-2;
+//                y += velY*-2;
             }
         }
     }

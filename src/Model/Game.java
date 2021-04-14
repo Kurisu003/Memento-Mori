@@ -21,6 +21,7 @@ public class Game extends Canvas implements Runnable {
     private Model.Camera camera;
 
     public Game(){
+        GenerateLevel generatedLevel = new GenerateLevel();
         new View.Window(1104,615,"Memento Mori",this);
         start();
         handler = new Handler1();
@@ -31,7 +32,7 @@ public class Game extends Canvas implements Runnable {
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("../Level1.png");
         floor = loader.loadImage("../Tile5.png");
-        wall = loader.loadImage("../WallTile64x64.png");
+        wall = loader.loadImage("../Baum.png");
         loadlevel(level);
         handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
     }
