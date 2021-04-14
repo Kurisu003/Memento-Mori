@@ -35,6 +35,7 @@ public class Game extends Canvas implements Runnable {
         wall = loader.loadImage("../Baum.png");
         loadlevel(level);
         handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
+        handler.addObject(new ShotEnemy(150,150,ID.Enemy,handler,floor));
     }
 
     private void start(){
