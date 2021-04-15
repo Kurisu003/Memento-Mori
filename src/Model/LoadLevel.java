@@ -23,11 +23,8 @@ public class LoadLevel {
                 // accordingly
                 if(generatedLevel.getLevel()[i][j] != 0){
 
-                    // Draws background image
-                    g.drawImage(floor, j * 64 * 17, i * 64 * 9, null);
-
                     // Loops 17 times for rows and
-                    // 9 times for colums
+                    // 9 times for columns
                     for(int y = 0; y < 17; y++){
                         for(int x = 0; x < 9; x++){
 
@@ -37,11 +34,34 @@ public class LoadLevel {
                                 // i * 64 * 16 => 64 py * 17 py of the room width
                                 // we used 16 and 8 instead of 17 and 9 so that
                                 // the walls overlap and the walls aren't 2 thick
-                                handler.addObject(new Box(64 * y + (i * 64 * 16), 64 * x + (j * 64 * 8), ID.Block, wall));
+                                if(generatedLevel.getLevel()[i + 1][j] != 0) {
+                                    if (y != 8 && x == 0)
+                                        handler.addObject(new Box(64 * y + (i * 64 * 16), j * 64 * 8,
+                                        ID.Block, wall));
+                                }
+                                if(generatedLevel.getLevel()[i - 1][j] != 0) {
+                                    if(y != 8 && x == 8)
+                                        handler.addObject(new Box(64 * y + (i * 64 * 16), 64 * x + (j * 64 * 8),
+                                        ID.Block, wall));
+                                }
+
+                                if(generatedLevel.getLevel()[i][j + 1] != 0) {
+                                    if (y == 16 && x != 4)
+                                        handler.addObject(new Box(64 * y + (i * 64 * 16), 64 * x + (j * 64 * 8),
+                                        ID.Block, wall));
+                                }
+                                if(generatedLevel.getLevel()[i][j - 1] != 0) {
+                                    if(y == 0 && x != 4)
+                                        handler.addObject(new Box(i * 64 * 16, 64 * x + (j * 64 * 8),
+                                        ID.Block, wall));
+                                }
+
+                                // To add: close walls where theres no room next to it
+
                             }
                         }
                     }
-                };
+                }
             }
         }
 
