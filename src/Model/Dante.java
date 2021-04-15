@@ -44,10 +44,12 @@ public class Dante extends GameObject {
     private BufferedImage bufferedBodyImage;
     private BufferedImage bufferedHeadImage;
     Controller.Handler1 handler;
+    private Camera camera;
 
-    public Dante(int x, int y, ID id, Controller.Handler1 handler1) {
+    public Dante(int x, int y, ID id, Controller.Handler1 handler1, Camera camera) {
         super(x, y, id);
         this.handler = handler1;
+        this.camera = camera;
 
         // Different images according to the direction
         // the player is looking in
@@ -239,7 +241,7 @@ public class Dante extends GameObject {
         g.drawImage(bufferedBodyImage, x, y, null);
         g.drawImage(bufferedHeadImage, x, y - 30, null);
 
-        // Sets health to a min value of 0
+        // Sets healtsh to a min value of 0
         if (health < 0)
             health = 0;
 

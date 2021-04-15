@@ -4,10 +4,11 @@ import java.util.Random;
 
 public class GenerateLevel {
 
+    private int [][] level = new int[6][6];
+
     public GenerateLevel(){
 //        BufferedImage test = this.bufferedImage;
 //        ArrayList<BufferedImage> availableLevels = new ArrayList<>();
-        int [][] level = new int[6][6];
         int roomCount = 2;
 
 //        for(int i = 0; i < bufferedImage.getHeight(); i += 9) {
@@ -46,11 +47,16 @@ public class GenerateLevel {
             }
         }
 
-        for(int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                System.out.print(level[i][j]);
-            }
-            System.out.println("\n");
-        }
+//        for(int i = 0; i < 5; i++) {
+//            for (int j = 0; j < 5; j++) {
+//                System.out.print(level[i][j]);
+//            }
+//            System.out.println("\n");
+//        }
     }
+
+    public int[][] getLevel() {
+        return level;
+    }
+
 }
