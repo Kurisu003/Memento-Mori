@@ -28,17 +28,16 @@ public class LoadLevel {
 
                     // Loops 17 times for rows and
                     // 9 times for colums
-                    for(int x = 0; x < 17; x++){
-                        for(int y = 0; y < 9; y++){
+                    for(int y = 0; y < 17; y++){
+                        for(int x = 0; x < 9; x++){
 
                             // if its the border, draw the wall
-                            if((y == 0 || y == 8) || (x == 0 || x == 16)) {
-                                // 64 * x to draw all the walls
-                                // i * 64 * 16 => 64 px * 17 px of the room width
+                            if((x == 0 || x == 8) || (y == 0 || y == 16)) {
+                                // 64 * y to draw all the walls
+                                // i * 64 * 16 => 64 py * 17 py of the room width
                                 // we used 16 and 8 instead of 17 and 9 so that
                                 // the walls overlap and the walls aren't 2 thick
-                                handler.addObject(new Box(64 * x + (i * 64 * 16), 64 * y + (j * 64 * 8), ID.Block, wall));
-
+                                handler.addObject(new Box(64 * y + (i * 64 * 16), 64 * x + (j * 64 * 8), ID.Block, wall));
                             }
                         }
                     }

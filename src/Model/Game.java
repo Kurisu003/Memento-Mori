@@ -101,7 +101,7 @@ public class Game extends Canvas implements Runnable {
 
     public void render(){
 
-        BufferStrategy bs= this.getBufferStrategy();
+        BufferStrategy bs = this.getBufferStrategy();
         if(bs==null){
             this.createBufferStrategy(3);
             return;
@@ -109,19 +109,23 @@ public class Game extends Canvas implements Runnable {
         Graphics g=bs.getDrawGraphics();
         Graphics2D g2d=(Graphics2D)g;
 
-        g.setColor(Color.black);
-        g.fillRect(0,0,9999,9999);
+//        g.setColor(Color.black);
+//        g.fillRect(0,0,9999,9999);
 
         g2d.translate(-camera.getX(),-camera.getY());
 
 //        for(int xx=0;xx<30*72;xx+=64){
 //            for(int yy = 0; yy < 30 * 72; yy+=64){
-                g.drawImage(floor,0,0,null);
+//                g.drawImage(floor,0,0,null);
 //            }
 //        }
 
-        // TO ADD: Infinitly repeat sprite
-        g.drawImage(floor, 64 * 17 * 2 - 128, 64 * 9 * 2 - 128, null);
+        // Repeats sprites over entire level
+        for(int i = 1; i <= 5; i++){
+            for(int j = 1; j <= 5; j++){
+                g.drawImage(floor, i * 64 * 17 - 128, j * 64 * 9 - 128, null);
+            }
+        }
 
         handler.render(g);
 
@@ -154,7 +158,7 @@ public class Game extends Canvas implements Runnable {
 //                if (green==255){
 //                    handler.addObject(new Enemy(xx*32,yy*32, ID.Enemy, handler));
 //                }
-
+//
 //            }
 //        }
     }
