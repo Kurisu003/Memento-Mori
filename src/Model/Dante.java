@@ -220,10 +220,10 @@ public class Dante extends GameObject {
         // stops player from moving if they're
         // intersecting
         for(GameObject temp : handler.objects){
-            if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())){
-                x+=velX*-1;
-                y+=velY*-1;
-            }
+//            if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())){
+//                x+=velX*-1;
+//                y+=velY*-1;
+//            }
             if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())){
                 // To do damage to player
                 doAction(1);

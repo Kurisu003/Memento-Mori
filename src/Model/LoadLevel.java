@@ -35,12 +35,12 @@ public class LoadLevel {
                                 // we used 16 and 8 instead of 17 and 9 so that
                                 // the walls overlap and the walls aren't 2 thick
                                 if(generatedLevel.getLevel()[i + 1][j] != 0) {
-                                    if (y != 8 && x == 0)
-                                        handler.addObject(new Box(64 * y + (i * 64 * 16), j * 64 * 8,
+                                    if (y != 8 && x == 8)
+                                        handler.addObject(new Box(64 * y + (i * 64 * 16), 64 * x + (j * 64 * 8),
                                         ID.Block, wall));
                                 }
                                 if(generatedLevel.getLevel()[i - 1][j] != 0) {
-                                    if(y != 8 && x == 8)
+                                    if(y != 8 && x == 0)
                                         handler.addObject(new Box(64 * y + (i * 64 * 16), 64 * x + (j * 64 * 8),
                                         ID.Block, wall));
                                 }
@@ -52,7 +52,7 @@ public class LoadLevel {
                                 }
                                 if(generatedLevel.getLevel()[i][j - 1] != 0) {
                                     if(y == 0 && x != 4)
-                                        handler.addObject(new Box(i * 64 * 16, 64 * x + (j * 64 * 8),
+                                        handler.addObject(new Box(64 * y + (i * 64 * 16), 64 * x + (j * 64 * 8),
                                         ID.Block, wall));
                                 }
 
