@@ -124,7 +124,7 @@ public class Dante extends GameObject {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x,y,64,64);
+        return new Rectangle(x,y,50,50);
     }
 
     @Override
@@ -220,10 +220,44 @@ public class Dante extends GameObject {
         // stops player from moving if they're
         // intersecting
         for(GameObject temp : handler.objects){
-//            if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())){
-//                x+=velX*-1;
-//                y+=velY*-1;
-//            }
+            if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())){
+                x+=velX*-1;
+                y+=velY*-1;
+            }
+            if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds())){
+                x+=velX*-1;
+                y+=velY*-1;
+//                temp.getX()
+                // To know if its horizontal
+                // Checks if player is within
+                // a 10 px margin of door vertically
+                if(temp.getY() - 10 < y && temp.getY() + 10 > y){
+                    // If player is to the left
+                    // of a door and wants to
+                    // go to a room to the right
+                    if(x < temp.getX()){
+                        x += 128;
+                        camera.setX(camera.getX() + 64 * 16);
+                    }
+                    // If player is to the right
+                    // of a door and wants to
+                    // go to a room to the left
+                    else{
+                        x -= 128;
+                        camera.setX(camera.getX() - 64 * 16);
+                    }
+                }
+                else if(temp.getX() - 10 < x && temp.getX() + 10 > x){
+                    if(y < temp.getY()){
+                        y += 128;
+                        camera.setY(camera.getY() + 64 * 8);
+                    }
+                    else{
+                        y -= 128;
+                        camera.setY(camera.getY() - 64 * 8);
+                    }
+                }
+            }
             if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())){
                 // To do damage to player
                 doAction(1);

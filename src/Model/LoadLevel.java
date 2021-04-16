@@ -13,6 +13,8 @@ public class LoadLevel {
 
 //        System.out.println(level[0][0]);
         handler.addObject(new Dante(64 * 17 * 2 + (64 * 8), 64 * 9 * 2 + (64 * 4), ID.Dante, handler, camera));
+        camera.setX(64 * 17 * 2 - 128);
+        camera.setY(64 * 9 * 2 - 128);
 
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
@@ -69,7 +71,18 @@ public class LoadLevel {
                                     ID.Door, door));
                                 }
 
+                                if(generatedLevel.getLevel()[i + 1][j] != 0 && y == 8 && x == 8){
+                                    handler.removeLastObject();
+                                    handler.addObject(new Door(64 * x + (j * 64 * 16), 64 * y + (i * 64 * 8),
+                                            ID.Door, door));
+                                }
+
                                 if(generatedLevel.getLevel()[i][j - 1] != 0 && x == 0 && y == 4){
+                                    handler.removeLastObject();
+                                    handler.addObject(new Door(64 * x + (j * 64 * 16), 64 * y + (i * 64 * 8),
+                                    ID.Door, door));
+                                }
+                                if(generatedLevel.getLevel()[i][j + 1] != 0 && x == 16 && y == 4){
                                     handler.removeLastObject();
                                     handler.addObject(new Door(64 * x + (j * 64 * 16), 64 * y + (i * 64 * 8),
                                     ID.Door, door));
