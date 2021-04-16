@@ -12,16 +12,9 @@ public class LoadLevel {
 //        int [][] level = new int[6][6];
 
 //        System.out.println(level[0][0]);
-        handler.addObject(new Dante(64 * 17 * 2 + (64 * 8), 64 * 9 * 2 + (64 * 4), ID.Dante, handler, camera));
+        handler.addObject(new Dante(64 * 17 * 2 + (64 * 8) - 128, 64 * 9 * 2 + (64 * 4) - 128, ID.Dante, handler, camera));
         camera.setX(64 * 17 * 2 - 128);
         camera.setY(64 * 9 * 2 - 128);
-
-        for(int i = 0; i < 7; i++){
-            for(int j = 0; j < 7; j++){
-                System.out.print(generatedLevel.getLevel()[i][j]);
-            }
-            System.out.println();
-        }
 
         // Loops through generated level
         for(int i = 1; i < 6; i++) {
@@ -31,11 +24,6 @@ public class LoadLevel {
                 // a background image get added
                 // accordingly
                 if(generatedLevel.getLevel()[i][j] != 0){
-//                    System.out.println("\n\nMitte: " + generatedLevel.getLevel()[i][j] +
-//                                        "\noben: " + generatedLevel.getLevel()[i - 1][j] +
-//                                        "\nunten: "+ generatedLevel.getLevel()[i + 1][j] +
-//                                        "\nlinks: " + generatedLevel.getLevel()[i][j - 1] +
-//                                        "\nrechts: " + generatedLevel.getLevel()[i][j + 1]);
 
                     // Loops 17 times for rows and
                     // 9 times for columns

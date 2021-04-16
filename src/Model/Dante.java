@@ -247,11 +247,21 @@ public class Dante extends GameObject {
                         camera.setX(camera.getX() - 64 * 16);
                     }
                 }
+
+                // To know if its vertical
+                // Checks if player is within
+                // a 10 px margin of door horizontally
                 else if(temp.getX() - 10 < x && temp.getX() + 10 > x){
+                    // If player is below
+                    // a door and wants to
+                    // go to a room above
                     if(y < temp.getY()){
                         y += 128;
                         camera.setY(camera.getY() + 64 * 8);
                     }
+                    // If player is above
+                    // a door and wants to
+                    // go to a room below
                     else{
                         y -= 128;
                         camera.setY(camera.getY() - 64 * 8);
