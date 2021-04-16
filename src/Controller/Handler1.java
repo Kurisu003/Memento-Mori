@@ -98,6 +98,10 @@ public class Handler1 {
         objects.add(temp);
     }
 
+    public void removeLastObject(){
+        objects.removeLast();
+    }
+
     public void removeObject(GameObject temp){
         objects.remove(temp);
     }

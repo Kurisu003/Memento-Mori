@@ -6,7 +6,8 @@ public enum ID {
     Block(),
     Ammo(),
     Bullet(),
-    Enemy();
+    Enemy(),
+    Door();
 
 
 }

@@ -17,6 +17,7 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage level = null;
     private BufferedImage floor = null;
     private BufferedImage wall = null;
+    private BufferedImage door = null;
 
     private Model.Camera camera;
 
@@ -32,8 +33,9 @@ public class Game extends Canvas implements Runnable {
         level = loader.loadImage("../Level1.png");
         floor = loader.loadImage("../Hintergrund.png");
         wall = loader.loadImage("../Baum.png");
+        door = loader.loadImage("../Door.png");
         render();
-        loadlevel(floor);
+        loadlevel(floor, door);
 //        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
 //        handler.addObject(new ShotEnemy(150,150,ID.Enemy,handler,floor));
     }
@@ -136,9 +138,9 @@ public class Game extends Canvas implements Runnable {
 
     }
 
-    private void loadlevel(BufferedImage floor){
+    private void loadlevel(BufferedImage floor, BufferedImage door){
 
-        LoadLevel level = new LoadLevel(handler, wall, floor, camera, this.getBufferStrategy().getDrawGraphics());
+        LoadLevel level = new LoadLevel(handler, wall, floor, door, camera, this.getBufferStrategy().getDrawGraphics());
 
 //        int w = image.getWidth();
 //        int h = image.getHeight();

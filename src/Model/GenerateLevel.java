@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class GenerateLevel {
 
-    private int [][] level = new int[6][6];
+    private int [][] level = new int[7][7];
 
     public GenerateLevel(){
 //        BufferedImage test = this.bufferedImage;
@@ -17,8 +17,8 @@ public class GenerateLevel {
 //            }
 //        }
 
-        for(int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
+        for(int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
                 level[i][j]=0;
             }
         }
@@ -27,8 +27,8 @@ public class GenerateLevel {
 
         // Roomcount starts at 2
         while(roomCount <= 7){
-            for(int i = 0; i < 6; i++) {
-                for (int j = 0; j < 6; j++) {
+            for(int i = 1; i <= 5; i++) {
+                for (int j = 1; j <= 5; j++) {
                     if(level[i][j] > 0){
 //                        System.out.println("test");
                         Random rn = new Random();
