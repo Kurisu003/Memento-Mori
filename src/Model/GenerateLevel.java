@@ -26,7 +26,7 @@ public class GenerateLevel {
         level[2][2] = 1;
 
         // Roomcount starts at 2
-        while(roomCount <= 7){
+        while(roomCount <= 5){
             for(int i = 1; i <= 5; i++) {
                 for (int j = 1; j <= 5; j++) {
                     if(level[i][j] > 0){
@@ -34,7 +34,7 @@ public class GenerateLevel {
                         Random rn = new Random();
                         int rand = rn.nextInt(4) + 1;
 //                        System.out.println(rand);
-                        if(i > 0 && i < 5 && j > 0 && j < 5) {
+                        if(i > 1 && i < 5 && j > 1 && j < 5) {
                             switch (rand) {
                                 case (1) -> level[i - 1][j] = level[i - 1][j] == 0 ? roomCount++ : level[i - 1][j];
                                 case (2) -> level[i][j + 1] = level[i][j + 1] == 0 ? roomCount++ : level[i][j + 1];
