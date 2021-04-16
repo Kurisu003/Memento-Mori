@@ -33,7 +33,7 @@ public class GenerateLevel {
 //                        System.out.println("test");
                         Random rn = new Random();
                         int rand = rn.nextInt(4) + 1;
-                        System.out.println(rand);
+//                        System.out.println(rand);
                         if(i > 0 && i < 5 && j > 0 && j < 5) {
                             switch (rand) {
                                 case (1) -> level[i - 1][j] = level[i - 1][j] == 0 ? roomCount++ : level[i - 1][j];
