@@ -17,10 +17,10 @@ public class Dante extends GameObject {
 //    private BufferedImage playerBodyLeft = null;
 //    private BufferedImage playerBodyRight = null;
 
-    private BufferedImage playerHeadUp = null;
-    private BufferedImage playerHeadDown = null;
-    private BufferedImage playerHeadLeft = null;
-    private BufferedImage playerHeadRight = null;
+    private BufferedImage playerGunUp = null;
+    private BufferedImage playerGunDown = null;
+    private BufferedImage playerGunLeft = null;
+    private BufferedImage playerGunRight = null;
 
     ArrayList<BufferedImage> playerBodyUpAnimation = new ArrayList<>();
     ArrayList<BufferedImage> playerBodyDownAnimation = new ArrayList<>();
@@ -39,10 +39,10 @@ public class Dante extends GameObject {
     private int armor = 2;
 
     private int frameCount = 0;
-    private int animationSteps = 3;
+    private int animationSteps = 4;
 
     private BufferedImage bufferedBodyImage;
-    private BufferedImage bufferedHeadImage;
+    private BufferedImage bufferedGunImage;
     Controller.Handler1 handler;
     private Camera camera;
 
@@ -59,20 +59,20 @@ public class Dante extends GameObject {
 //        playerBodyLeft = loader.loadImage("../playerLeft.png");
 //        playerBodyRight = loader.loadImage("../playerRight.png");
 
-        playerHeadUp = loader.loadImage("../Tile5.png");
-        playerHeadDown = loader.loadImage("../BrickTile32x32.png");
-        playerHeadLeft = loader.loadImage("../Tile5.png");
-        playerHeadRight = loader.loadImage("../BrickTile32x32.png");
+        playerGunUp = loader.loadImage("../Tile5.png");
+        playerGunDown = loader.loadImage("../BrickTile32x32.png");
+        playerGunLeft = loader.loadImage("../Guns/GalilRight.png");
+        playerGunRight = loader.loadImage("../Guns/GalilLeft.png");
 
-        playerBodyUpAnimation.add(loader.loadImage("../CharBack.png"));
-        playerBodyUpAnimation.add(loader.loadImage("../CharBack.png"));
-        playerBodyUpAnimation.add(loader.loadImage("../CharBack.png"));
-        playerBodyUpAnimation.add(loader.loadImage("../CharBack.png"));
+        playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation1&3.png"));
+        playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation2.png"));
+        playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation1&3.png"));
+        playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation4.png"));
 
-        playerBodyDownAnimation.add(loader.loadImage("../CharFront.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../CharFront.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../CharFront.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../CharFront.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation2.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation4.png"));
 
         playerBodyLeftAnimation.add(loader.loadImage("../CharLeft.png"));
         playerBodyLeftAnimation.add(loader.loadImage("../CharLeft.png"));
@@ -116,10 +116,10 @@ public class Dante extends GameObject {
 
     private void setHeadImage(int headImageCount) {
         switch (headImageCount) {
-            case (0) -> bufferedHeadImage = playerHeadUp;
-            case (1) -> bufferedHeadImage = playerHeadDown;
-            case (2) -> bufferedHeadImage = playerHeadRight;
-            case (3) -> bufferedHeadImage = playerHeadLeft;
+            case (0) -> bufferedGunImage = playerGunUp;
+            case (1) -> bufferedGunImage = playerGunDown;
+            case (2) -> bufferedGunImage = playerGunRight;
+            case (3) -> bufferedGunImage = playerGunLeft;
         }
     }
 
@@ -288,7 +288,7 @@ public class Dante extends GameObject {
     // Used to render image of player head and body
     public void render(Graphics g) {
         g.drawImage(bufferedBodyImage, x, y, null);
-        g.drawImage(bufferedHeadImage, x, y - 30, null);
+        g.drawImage(bufferedGunImage, x + 10, y + 35, null);
 
         // Sets healtsh to a min value of 0
         if (health < 0)
@@ -349,15 +349,6 @@ public class Dante extends GameObject {
             frameCount = ++frameCount % animationSteps;
         }
 
-        if(timeSinceLastShot % 1000 == 0){
-            timeSinceLastShot = 30;
-        }
-        if  (timeSinceLastShot > fireSpeed &&
-                (handler.isShootUp() || handler.isShootDown() || handler.isShootLeft() || handler.isShootRight())){
-            shoot();
-            timeSinceLastShot = 0;
-        }
-
         // Used to keep track of which direction the player is looking in
         // 4 = Default value used for idle animation
         int setBodyImgCounter = 4;
@@ -386,5 +377,14 @@ public class Dante extends GameObject {
         else if (!handler.isRight()) velX = 0;
 
         setBodyImage(setBodyImgCounter);
+
+        if(timeSinceLastShot % 1000 == 0){
+            timeSinceLastShot = 30;
+        }
+        if  (timeSinceLastShot > fireSpeed &&
+                (handler.isShootUp() || handler.isShootDown() || handler.isShootLeft() || handler.isShootRight())){
+            shoot();
+            timeSinceLastShot = 0;
+        }
     }
 }

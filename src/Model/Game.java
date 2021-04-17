@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.util.ArrayList;
 
 import Controller.*;
 
@@ -22,6 +23,8 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage wallLeftRightRow = null;
     private BufferedImage doorHorizontally = null;
     private BufferedImage doorVertically = null;
+
+    private ArrayList<BufferedImage> wallSprites;
 
     private Model.Camera camera;
 
