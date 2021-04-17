@@ -46,8 +46,9 @@ public class Enemy extends GameObject {
     }
 
     // to do damage to enemy
-    public void doAction(int action){
+    public int doAction(int action){
         this.hp -= action;
+        return 0;
     }
 
 

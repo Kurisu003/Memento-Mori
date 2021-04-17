@@ -17,7 +17,11 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage level = null;
     private BufferedImage floor = null;
     private BufferedImage wall = null;
-    private BufferedImage door = null;
+    private BufferedImage wallCorners = null;
+    private BufferedImage wallBottomTopRow = null;
+    private BufferedImage wallLeftRightRow = null;
+    private BufferedImage doorHorizontally = null;
+    private BufferedImage doorVertically = null;
 
     private Model.Camera camera;
 
@@ -31,11 +35,15 @@ public class Game extends Canvas implements Runnable {
 
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("../Level1.png");
-        floor = loader.loadImage("../Hintergrund.png");
-        wall = loader.loadImage("../Baum.png");
-        door = loader.loadImage("../Door.png");
+        floor = loader.loadImage("../ViolenceBackground.png");
+        wall = loader.loadImage("../ViolenceBottomSprite.png");
+        wallCorners = loader.loadImage("../ViolenceBottomLeftSprite.png");
+        wallBottomTopRow = loader.loadImage("../ViolenceBottomTopRow.png");
+        wallLeftRightRow = loader.loadImage("../ViolenceWallLeftRight.png");
+        doorHorizontally = loader.loadImage("../ViolenceDoorBothSidesHorizontally.png");
+        doorVertically = loader.loadImage("../ViolenceDoorBothSidesVertically.png");
         render();
-        loadlevel(floor, door);
+        loadlevel(floor, doorHorizontally, doorVertically);
 //        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
 //        handler.addObject(new ShotEnemy(150,150,ID.Enemy,handler,floor));
     }
@@ -138,9 +146,9 @@ public class Game extends Canvas implements Runnable {
 
     }
 
-    private void loadlevel(BufferedImage floor, BufferedImage door){
+    private void loadlevel(BufferedImage floor, BufferedImage doorHorizontally, BufferedImage doorVertically){
 
-        LoadLevel level = new LoadLevel(handler, wall, floor, door, camera, this.getBufferStrategy().getDrawGraphics());
+        LoadLevel level = new LoadLevel(handler, wall, wallCorners, wallBottomTopRow, wallLeftRightRow, floor, doorHorizontally, doorVertically, camera, this.getBufferStrategy().getDrawGraphics());
 
 //        int w = image.getWidth();
 //        int h = image.getHeight();

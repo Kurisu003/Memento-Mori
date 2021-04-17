@@ -64,30 +64,30 @@ public class Dante extends GameObject {
         playerHeadLeft = loader.loadImage("../Tile5.png");
         playerHeadRight = loader.loadImage("../BrickTile32x32.png");
 
-        playerBodyUpAnimation.add(loader.loadImage("../Tile5.png"));
-        playerBodyUpAnimation.add(loader.loadImage("../playerUp.png"));
-        playerBodyUpAnimation.add(loader.loadImage("../playerLeft.png"));
-        playerBodyUpAnimation.add(loader.loadImage("../playerRight.png"));
+        playerBodyUpAnimation.add(loader.loadImage("../CharBack.png"));
+        playerBodyUpAnimation.add(loader.loadImage("../CharBack.png"));
+        playerBodyUpAnimation.add(loader.loadImage("../CharBack.png"));
+        playerBodyUpAnimation.add(loader.loadImage("../CharBack.png"));
 
-        playerBodyDownAnimation.add(loader.loadImage("../Tile5.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../playerUp.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../playerLeft.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../playerRight.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../CharFront.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../CharFront.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../CharFront.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../CharFront.png"));
 
-        playerBodyLeftAnimation.add(loader.loadImage("../Tile5.png"));
-        playerBodyLeftAnimation.add(loader.loadImage("../playerUp.png"));
-        playerBodyLeftAnimation.add(loader.loadImage("../playerLeft.png"));
-        playerBodyLeftAnimation.add(loader.loadImage("../playerRight.png"));
+        playerBodyLeftAnimation.add(loader.loadImage("../CharLeft.png"));
+        playerBodyLeftAnimation.add(loader.loadImage("../CharLeft.png"));
+        playerBodyLeftAnimation.add(loader.loadImage("../CharLeft.png"));
+        playerBodyLeftAnimation.add(loader.loadImage("../CharLeft.png"));
 
-        playerBodyRightAnimation.add(loader.loadImage("../Tile5.png"));
-        playerBodyRightAnimation.add(loader.loadImage("../playerUp.png"));
-        playerBodyRightAnimation.add(loader.loadImage("../playerLeft.png"));
-        playerBodyRightAnimation.add(loader.loadImage("../playerRight.png"));
+        playerBodyRightAnimation.add(loader.loadImage("../CharRight.png"));
+        playerBodyRightAnimation.add(loader.loadImage("../CharRight.png"));
+        playerBodyRightAnimation.add(loader.loadImage("../CharRight.png"));
+        playerBodyRightAnimation.add(loader.loadImage("../CharRight.png"));
 
-        playerIdleAnimation.add(loader.loadImage("../playerDown.png"));
-        playerIdleAnimation.add(loader.loadImage("../playerDown.png"));
-        playerIdleAnimation.add(loader.loadImage("../playerDown.png"));
-        playerIdleAnimation.add(loader.loadImage("../playerDown.png"));
+        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
+        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
+        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
+        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
 
         shotType1 = loader.loadImage("../Tile.png");
     }
@@ -129,9 +129,10 @@ public class Dante extends GameObject {
 
     @Override
     // To do damage to player character
-    public void doAction(int action) {
+    public int doAction(int action) {
         if(armor == 0) health -= action;
         else armor -= action;
+        return 0;
     }
 
     public void shoot(){
@@ -227,6 +228,7 @@ public class Dante extends GameObject {
             if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds())){
                 x+=velX*-1;
                 y+=velY*-1;
+
 //                temp.getX()
                 // To know if its horizontal
                 // Checks if player is within
@@ -245,6 +247,9 @@ public class Dante extends GameObject {
                     else{
                         x -= 128;
                         camera.setX(camera.getX() - 64 * 16);
+                    }
+                    if(temp.doAction(0) == 1){
+
                     }
                 }
 

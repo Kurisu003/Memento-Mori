@@ -58,8 +58,8 @@ public abstract class GameObject {
         this.velY = velY;
     }
 
-    public void doAction(int action){
-
+    public int doAction(int action){
+        return 0;
     }
 
 
