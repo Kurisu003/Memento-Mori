@@ -15,9 +15,12 @@ public class Window {
         frame.setMinimumSize(new Dimension(width, height));
 
         frame.add(game);//we add the game class to the frame
+
         frame.setResizable(false);//you cannot resize the window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);//frame is in middle of the window
         frame.setVisible(true);//let us see the window
+        frame.toFront();
+        frame.requestFocus();
     }
 }
