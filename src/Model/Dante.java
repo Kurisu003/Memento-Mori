@@ -245,17 +245,14 @@ public class Dante extends GameObject {
                     // go to a room to the right
                     if(x < temp.getX()){
                         x += 256;
-                        camera.setX(camera.getX() + 64 * 17);
+                        camera.setX(camera.getX() + 1088);
                     }
                     // If player is to the right
                     // of a door and wants to
                     // go to a room to the left
                     else{
                         x -= 256;
-                        camera.setX(camera.getX() - 64 * 17);
-                    }
-                    if(temp.doAction(0) == 1){
-
+                        camera.setX(camera.getX() - 1088);
                     }
                 }
 
@@ -268,14 +265,14 @@ public class Dante extends GameObject {
                     // go to a room above
                     if(y < temp.getY()){
                         y += 256;
-                        camera.setY(camera.getY() + 64 * 9);
+                        camera.setY(camera.getY() + 576);
                     }
                     // If player is above
                     // a door and wants to
                     // go to a room below
                     else{
                         y -= 256;
-                        camera.setY(camera.getY() - 64 * 9);
+                        camera.setY(camera.getY() - 576);
                     }
                 }
             }
@@ -302,7 +299,7 @@ public class Dante extends GameObject {
 //        g2.setColor(Color.green);
 //        g2.draw(getBounds());
 
-        // Sets healtsh to a min value of 0
+        // Sets health to a min value of 0
         if (health < 0)
             health = 0;
 
@@ -330,15 +327,15 @@ public class Dante extends GameObject {
         g.setColor(color);
 
         // Top healthbar line
-        g.drawLine((i * 25) , 20, (25 * i) + 25 , 20);
+        g.drawLine(i * 25 , 20, (25 * i) + 25 , 20);
 
         // Bottom healthbar line
-        g.drawLine((i * 25) , 40, (25 * i) + 25 , 40);
+        g.drawLine(i * 25 , 40, (25 * i) + 25 , 40);
 
         // healthbar starting line
-        g.drawLine((25) , 20, 25 , 40);
+        g.drawLine(25 , 20, 25 , 40);
         // healthbar dividing lines
-        g.drawLine(((i + 1) * 25) , 20, ((i + 1) * 25) , 40);
+        g.drawLine((i + 1) * 25 , 20, (i + 1) * 25 , 40);
     }
 
     public void tick() {
