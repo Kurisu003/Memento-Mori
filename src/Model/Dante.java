@@ -182,32 +182,38 @@ public class Dante extends GameObject {
 
 //  Version like the binding of isaac
         if(handler.isShootUp()){
-            shotY = y - 100;
+            shotY = y - 132;
             shotX = x + 32;
 
-            shotXStart = x + 32;
+            shotXStart = x + 30;
+            shotYStart = y - 32;
 
             setGunImage(0);
         }
         if(handler.isShootDown()){
-            shotY = y + 100;
-            shotX = x + 32;
+            shotY = y + 175;
+            shotX = x + 30;
 
-            shotXStart = x + 32;
+            shotXStart = x + 30;
+            shotYStart = y + 75;
 
             setGunImage(1);
         }
         if(handler.isShootLeft()){
-            shotX = x - 100;
-            shotY = y;
+            shotX = x - 130;
+            shotY = y + 40;
+
+            shotXStart = x;
+            shotYStart = y + 40;
 
             setGunImage(2);
         }
         if(handler.isShootRight()){
-            shotX = x + 100 + 32;
-            shotY = y;
+            shotX = x + 164;
+            shotY = y + 40;
 
-            shotXStart = x + 32;
+            shotXStart = x + 64;
+            shotYStart = y + 40;
 
             setGunImage(3);
         }
@@ -288,7 +294,7 @@ public class Dante extends GameObject {
     // Used to render image of player gun and body
     public void render(Graphics g) {
         g.drawImage(bufferedBodyImage, x, y, null);
-        g.drawImage(bufferedGunImage, x - 20, y - 10, null);
+        g.drawImage(bufferedGunImage, x - 20, y - 30, null);
 
 
 //        To draw hitboxes
