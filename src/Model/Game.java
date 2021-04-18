@@ -33,18 +33,17 @@ public class Game extends Canvas implements Runnable {
 //      this.addMouseListener(new Controller.MouseInput(handler,camera));
 
         BufferedImageLoader loader = new BufferedImageLoader();
-        floor = loader.loadImage("../Anger/AngerBackground.png");
-        doorHorizontally = loader.loadImage("../Violence/ViolenceDoorBothSidesHorizontally.png");
-        doorVertically = loader.loadImage("../Violence/ViolenceDoorBothSidesVertically.png");
+//        floor = loader.loadImage("../Anger/AngerBackground.png");
+        floor = loader.loadImage("../Anger/Background.png");
 
-        wallSprites.add(loader.loadImage("../Anger/AngerBLC.png"));
-        wallSprites.add(loader.loadImage("../Anger/AngerBMW.png"));
-        wallSprites.add(loader.loadImage("../Anger/AngerBRC.png"));
-        wallSprites.add(loader.loadImage("../Anger/AngerLMW.png"));
-        wallSprites.add(loader.loadImage("../Anger/AngerRMW.png"));
-        wallSprites.add(loader.loadImage("../Anger/AngerTLC.png"));
-        wallSprites.add(loader.loadImage("../Anger/AngerTMW.png"));
-        wallSprites.add(loader.loadImage("../Anger/AngerTRC.png"));
+        wallSprites.add(loader.loadImage("../Anger/BLC.png"));
+        wallSprites.add(loader.loadImage("../Anger/BMW.png"));
+        wallSprites.add(loader.loadImage("../Anger/BRC.png"));
+        wallSprites.add(loader.loadImage("../Anger/LMW.png"));
+        wallSprites.add(loader.loadImage("../Anger/RMW.png"));
+        wallSprites.add(loader.loadImage("../Anger/TLC.png"));
+        wallSprites.add(loader.loadImage("../Anger/TMW.png"));
+        wallSprites.add(loader.loadImage("../Anger/TRC.png"));
 
         wallSprites.add(loader.loadImage("../Anger/DoorB.png"));
         wallSprites.add(loader.loadImage("../Anger/DoorL.png"));
