@@ -34,68 +34,75 @@ public class LoadLevel {
                             // if its the border, draw the wall
                             if(y == 0 || y == 8 || x == 0 || x == 16) {
                                 // 64 * x to draw all the walls
-                                // i * 64 * 16 => 64 px * 17 px of the room width
-                                // we used 16 and 8 instead of 17 and 9 so that
-                                // the walls overlap and the walls aren't 2 thick
+                                // 64 px * 17 px of the room width
+
+                                // 1088 Refers to 64 * width (aka. 64 * 17)
+                                // 576 Refers to 64 * height (aka. 64 * 9)
 
                                 // To check if its a CORNER's
+                                // TOP LEFT CORNER
                                 if(x == 0 && y == 0){
-                                    handler.addObject(new Box(64 * x + (j * 64 * 16) + 64 * j, 64 * y + (i * 64 * 8) + 64 * i,
+                                    handler.addObject(new Box(64 * x + (j * 1088), 64 * y + (i * 576),
                                     ID.Block, wallSprites.get(5)));
                                 }
+                                // BOTTOM LEFT CORNER
                                 else if(x == 0 && y == 8){
-                                    handler.addObject(new Box(64 * x + (j * 64 * 16) + 64 * j, 64 * y + (i * 64 * 8) + 64 * i,
+                                    handler.addObject(new Box(64 * x + (j * 1088), 64 * y + (i * 576),
                                     ID.Block, wallSprites.get(0)));
                                 }
+                                // TOP RIGHT CORNER
                                 else if(x == 16 && y == 0){
-                                    handler.addObject(new Box(64 * x + (j * 64 * 16) + 64 * j, 64 * y + (i * 64 * 8) + 64 * i,
+                                    handler.addObject(new Box(64 * x + (j * 1088), 64 * y + (i * 576),
                                     ID.Block, wallSprites.get(7)));
                                 }
+                                // BOTTOM RIGHT CORNER
                                 else if(x == 16 && y == 8){
-                                    handler.addObject(new Box(64 * x + (j * 64 * 16) + 64 * j, 64 * y + (i * 64 * 8) + 64 * i,
+                                    handler.addObject(new Box(64 * x + (j * 1088), 64 * y + (i * 576),
                                     ID.Block, wallSprites.get(2)));
                                 }
 
-                                // To check BOTTOM and TOP row
+                                // To check Walls
+                                // TOP WALL
                                 else if(x > 0 && x < 16 && y == 0){
-                                    handler.addObject(new Box(64 * x + (j * 64 * 16) + 64 * j, 64 * y + (i * 64 * 8) + 64 * i,
+                                    handler.addObject(new Box(64 * x + (j * 1088), 64 * y + (i * 576),
                                     ID.Block, wallSprites.get(6)));
                                 }
-                                else if(x > 0 && x < 16 && y == 8){
-                                    handler.addObject(new Box(64 * x + (j * 64 * 16) + 64 * j, 64 * y + (i * 64 * 8) + 64 * i,
+                                // BOTTOM WALL
+                                else if(x > 0 && x < 16){
+                                    handler.addObject(new Box(64 * x + (j * 1088), 64 * y + (i * 576),
                                     ID.Block, wallSprites.get(1)));
                                 }
-
-                                // To check LEFT and RIGHT row
-                                else if(y > 0 && y < 8 && x == 0){
-                                    handler.addObject(new Box(64 * x + (j * 64 * 16) + 64 * j, 64 * y + (i * 64 * 8) + 64 * i,
+                                // LEFT WALL
+                                else if(x == 0){
+                                    handler.addObject(new Box(64 * x + (j * 1088), 64 * y + (i * 576),
                                     ID.Block, wallSprites.get(3)));
                                 }
-                                else if(y > 0 && y < 8 && x == 16){
-                                    handler.addObject(new Box(64 * x + (j * 64 * 16) + 64 * j, 64 * y + (i * 64 * 8) + 64 * i,
+                                // RIGHT WALL
+                                else {
+                                    handler.addObject(new Box(64 * x + (j * 1088), 64 * y + (i * 576),
                                     ID.Block, wallSprites.get(4)));
                                 }
 
                                 if(generatedLevel.getLevel()[i - 1][j] != 0 && y == 0 && x == 8){
                                     handler.removeLastObject();
-                                    handler.addObject(new Door(64 * x + (j * 64 * 16) + 64 * j, 64 * y + (i * 64 * 8) + 64 * i,
+                                    handler.addObject(new Door(64 * x + (j * 1088), 64 * y + (i * 576),
                                     ID.Door, wallSprites.get(11)));
                                 }
 
                                 if(generatedLevel.getLevel()[i + 1][j] != 0 && y == 8 && x == 8){
                                     handler.removeLastObject();
-                                    handler.addObject(new Door(64 * x + (j * 64 * 16) + 64 * j, 64 * y + (i * 64 * 8) + 64 * i,
+                                    handler.addObject(new Door(64 * x + (j * 1088), 64 * y + (i * 576),
                                     ID.Door, wallSprites.get(8)));
                                 }
 
                                 if(generatedLevel.getLevel()[i][j - 1] != 0 && x == 0 && y == 4){
                                     handler.removeLastObject();
-                                    handler.addObject(new Door(64 * x + (j * 64 * 16) + 64 * j, 64 * y + (i * 64 * 8) + 64 * i,
+                                    handler.addObject(new Door(64 * x + (j * 1088), 64 * y + (i * 576),
                                     ID.Door, wallSprites.get(9)));
                                 }
                                 if(generatedLevel.getLevel()[i][j + 1] != 0 && x == 16 && y == 4){
                                     handler.removeLastObject();
-                                    handler.addObject(new Door(64 * x + (j * 64 * 16) + 64 * j, 64 * y + (i * 64 * 8) + 64 * i,
+                                    handler.addObject(new Door(64 * x + (j * 1088), 64 * y + (i * 576),
                                     ID.Door, wallSprites.get(10)));
                                 }
 
