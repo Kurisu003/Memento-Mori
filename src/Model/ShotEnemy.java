@@ -4,12 +4,10 @@ import Controller.Handler1;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.util.logging.Handler;
 
 public class ShotEnemy extends GameObject{
 
-    private Handler1 handler;
+    private final Handler1 handler;
     BufferedImage image;
 
 

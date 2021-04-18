@@ -3,7 +3,6 @@ package Model;
 import Controller.Handler1;
 
 import java.awt.*;
-import java.util.logging.Handler;
 
 public class SmartEnemy extends GameObject{
     private Handler1 handler;

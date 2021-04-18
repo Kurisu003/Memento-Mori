@@ -5,7 +5,6 @@ import View.BufferedImageLoader;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.util.ArrayList;
 
 import Controller.*;
@@ -13,22 +12,17 @@ import Controller.*;
 public class Game extends Canvas implements Runnable {
 
     private Thread thread;
-    private boolean isRunning=false;
+    private boolean isRunning = false;
     private final Handler1 handler;
-    private BufferedImage level = null;
-    private BufferedImage floor = null;
-    private BufferedImage doorHorizontally = null;
-    private BufferedImage doorVertically = null;
+    private final BufferedImage floor;
 
-    private ArrayList<BufferedImage> wallSprites = new ArrayList<>();
-
-    private Model.Camera camera;
+    private final Model.Camera camera;
 
     public Game(){
-        new View.Window(64 * 17 + 12,64 * 9 + 35,"Memento Mori",this);
+        new View.Window(1100,611,"Memento Mori",this);
         start();
         handler = new Handler1();
-        camera = new Camera(64 * 17 * 3,64 * 9 * 2);
+        camera = new Camera(3264,1152);
         this.addKeyListener(new KeyInput(handler));
 //      this.addMouseListener(new Controller.MouseInput(handler,camera));
 
@@ -36,6 +30,7 @@ public class Game extends Canvas implements Runnable {
 //        floor = loader.loadImage("../Anger/AngerBackground.png");
         floor = loader.loadImage("../Anger/Background.png");
 
+        ArrayList<BufferedImage> wallSprites = new ArrayList<>();
         wallSprites.add(loader.loadImage("../Anger/BLC.png"));
         wallSprites.add(loader.loadImage("../Anger/BMW.png"));
         wallSprites.add(loader.loadImage("../Anger/BRC.png"));
@@ -51,7 +46,7 @@ public class Game extends Canvas implements Runnable {
         wallSprites.add(loader.loadImage("../Anger/DoorT.png"));
 
         render();
-        loadlevel(floor);
+        LoadLevel level = new LoadLevel(handler, wallSprites, floor, camera, this.getBufferStrategy().getDrawGraphics());
 //        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
 //        handler.addObject(new ShotEnemy(150,150,ID.Enemy,handler,floor));
     }
@@ -78,7 +73,6 @@ public class Game extends Canvas implements Runnable {
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         long timer = System.currentTimeMillis();
-        int frames = 0;
         while(isRunning) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -89,11 +83,9 @@ public class Game extends Canvas implements Runnable {
                 delta--;
             }
             render();
-            frames++;
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                frames = 0;
                 //updates = 0;
             }
         }
@@ -144,10 +136,6 @@ public class Game extends Canvas implements Runnable {
         g.dispose();
         bs.show();
 
-    }
-
-    private void loadlevel(BufferedImage floor){
-        LoadLevel level = new LoadLevel(handler, wallSprites, floor, camera, this.getBufferStrategy().getDrawGraphics());
     }
 
     public static void main(String[] args) {

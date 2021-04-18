@@ -2,16 +2,15 @@ package Model;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.logging.Handler;
 import Controller.*;
 
 public class Bullet extends GameObject {
 
-    private Controller.Handler1 handler;
-    private BufferedImage bufferedShotImage = null;
+    private final Controller.Handler1 handler;
+    private final BufferedImage bufferedShotImage;
     private int timeAlive = 0;
-    private int range = 30;
-    private int damage = 10;
+    private final int range;
+    private final int damage;
 
     public Bullet(int x, int y, ID id, Handler1 handler, int mx, int my, int range, int damage, BufferedImage shotType) {
         super(x, y, id);
