@@ -244,15 +244,15 @@ public class Dante extends GameObject {
                     // of a door and wants to
                     // go to a room to the right
                     if(x < temp.getX()){
-                        x += 128;
-                        camera.setX(camera.getX() + 64 * 16);
+                        x += 256;
+                        camera.setX(camera.getX() + 64 * 17);
                     }
                     // If player is to the right
                     // of a door and wants to
                     // go to a room to the left
                     else{
-                        x -= 128;
-                        camera.setX(camera.getX() - 64 * 16);
+                        x -= 256;
+                        camera.setX(camera.getX() - 64 * 17);
                     }
                     if(temp.doAction(0) == 1){
 
@@ -267,15 +267,15 @@ public class Dante extends GameObject {
                     // a door and wants to
                     // go to a room above
                     if(y < temp.getY()){
-                        y += 128;
-                        camera.setY(camera.getY() + 64 * 8);
+                        y += 256;
+                        camera.setY(camera.getY() + 64 * 9);
                     }
                     // If player is above
                     // a door and wants to
                     // go to a room below
                     else{
-                        y -= 128;
-                        camera.setY(camera.getY() - 64 * 8);
+                        y -= 256;
+                        camera.setY(camera.getY() - 64 * 9);
                     }
                 }
             }

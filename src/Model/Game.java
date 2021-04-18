@@ -17,14 +17,10 @@ public class Game extends Canvas implements Runnable {
     private final Handler1 handler;
     private BufferedImage level = null;
     private BufferedImage floor = null;
-    private BufferedImage wall = null;
-    private BufferedImage wallCorners = null;
-    private BufferedImage wallBottomTopRow = null;
-    private BufferedImage wallLeftRightRow = null;
     private BufferedImage doorHorizontally = null;
     private BufferedImage doorVertically = null;
 
-    private ArrayList<BufferedImage> wallSprites;
+    private ArrayList<BufferedImage> wallSprites = new ArrayList<>();
 
     private Model.Camera camera;
 
@@ -37,18 +33,24 @@ public class Game extends Canvas implements Runnable {
 //      this.addMouseListener(new Controller.MouseInput(handler,camera));
 
         BufferedImageLoader loader = new BufferedImageLoader();
-        level = loader.loadImage("../Level1.png");
-//        floor = loader.loadImage("../Violence/ViolenceBackground.png");
         floor = loader.loadImage("../Anger/AngerBackground.png");
-        wall = loader.loadImage("../Violence/ViolenceBottomSprite.png");
-//        wallCorners = loader.loadImage("../Violence/ViolenceBottomLeftSprite.png");
-        wallCorners = loader.loadImage("../Anger/AngerWallCornerSprites.png");
-//        wallBottomTopRow = loader.loadImage("../Violence/ViolenceBottomTopRow.png");
-        wallBottomTopRow = loader.loadImage("../Anger/AngerWallBottomTop.png");
-//        wallLeftRightRow = loader.loadImage("../Violence/ViolenceWallLeftRight.png");
-        wallLeftRightRow = loader.loadImage("../Anger/AngerWallLeftRight.png");
         doorHorizontally = loader.loadImage("../Violence/ViolenceDoorBothSidesHorizontally.png");
         doorVertically = loader.loadImage("../Violence/ViolenceDoorBothSidesVertically.png");
+
+        wallSprites.add(loader.loadImage("../Anger/AngerBLC.png"));
+        wallSprites.add(loader.loadImage("../Anger/AngerBMW.png"));
+        wallSprites.add(loader.loadImage("../Anger/AngerBRC.png"));
+        wallSprites.add(loader.loadImage("../Anger/AngerLMW.png"));
+        wallSprites.add(loader.loadImage("../Anger/AngerRMW.png"));
+        wallSprites.add(loader.loadImage("../Anger/AngerTLC.png"));
+        wallSprites.add(loader.loadImage("../Anger/AngerTMW.png"));
+        wallSprites.add(loader.loadImage("../Anger/AngerTRC.png"));
+
+        wallSprites.add(loader.loadImage("../Anger/DoorB.png"));
+        wallSprites.add(loader.loadImage("../Anger/DoorL.png"));
+        wallSprites.add(loader.loadImage("../Anger/DoorR.png"));
+        wallSprites.add(loader.loadImage("../Anger/DoorT.png"));
+
         render();
         loadlevel(floor, doorHorizontally, doorVertically);
 //        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
@@ -138,8 +140,8 @@ public class Game extends Canvas implements Runnable {
 //        }
 
         // Repeats sprites over entire level
-        for(int i = 1; i <= 5; i++){
-            for(int j = 1; j <= 5; j++){
+        for(int i = 1; i <= 6; i++){
+            for(int j = 1; j <= 6; j++){
                 g.drawImage(floor, i * 64 * 17 - 128, j * 64 * 9 - 128, null);
             }
         }
@@ -155,7 +157,7 @@ public class Game extends Canvas implements Runnable {
 
     private void loadlevel(BufferedImage floor, BufferedImage doorHorizontally, BufferedImage doorVertically){
 
-        LoadLevel level = new LoadLevel(handler, wall, wallCorners, wallBottomTopRow, wallLeftRightRow, floor, doorHorizontally, doorVertically, camera, this.getBufferStrategy().getDrawGraphics());
+        LoadLevel level = new LoadLevel(handler, wallSprites, floor, camera, this.getBufferStrategy().getDrawGraphics());
 
 //        int w = image.getWidth();
 //        int h = image.getHeight();
