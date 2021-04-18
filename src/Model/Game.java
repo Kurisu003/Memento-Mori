@@ -38,13 +38,17 @@ public class Game extends Canvas implements Runnable {
 
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("../Level1.png");
-        floor = loader.loadImage("../ViolenceBackground.png");
-        wall = loader.loadImage("../ViolenceBottomSprite.png");
-        wallCorners = loader.loadImage("../ViolenceBottomLeftSprite.png");
-        wallBottomTopRow = loader.loadImage("../ViolenceBottomTopRow.png");
-        wallLeftRightRow = loader.loadImage("../ViolenceWallLeftRight.png");
-        doorHorizontally = loader.loadImage("../ViolenceDoorBothSidesHorizontally.png");
-        doorVertically = loader.loadImage("../ViolenceDoorBothSidesVertically.png");
+//        floor = loader.loadImage("../Violence/ViolenceBackground.png");
+        floor = loader.loadImage("../Anger/AngerBackground.png");
+        wall = loader.loadImage("../Violence/ViolenceBottomSprite.png");
+//        wallCorners = loader.loadImage("../Violence/ViolenceBottomLeftSprite.png");
+        wallCorners = loader.loadImage("../Anger/AngerWallCornerSprites.png");
+//        wallBottomTopRow = loader.loadImage("../Violence/ViolenceBottomTopRow.png");
+        wallBottomTopRow = loader.loadImage("../Anger/AngerWallBottomTop.png");
+//        wallLeftRightRow = loader.loadImage("../Violence/ViolenceWallLeftRight.png");
+        wallLeftRightRow = loader.loadImage("../Anger/AngerWallLeftRight.png");
+        doorHorizontally = loader.loadImage("../Violence/ViolenceDoorBothSidesHorizontally.png");
+        doorVertically = loader.loadImage("../Violence/ViolenceDoorBothSidesVertically.png");
         render();
         loadlevel(floor, doorHorizontally, doorVertically);
 //        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
