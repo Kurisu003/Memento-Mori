@@ -59,10 +59,10 @@ public class Dante extends GameObject {
 //        playerBodyLeft = loader.loadImage("../playerLeft.png");
 //        playerBodyRight = loader.loadImage("../playerRight.png");
 
-        playerGunUp = loader.loadImage("../Tile5.png");
-        playerGunDown = loader.loadImage("../BrickTile32x32.png");
-        playerGunLeft = loader.loadImage("../Guns/GalilRight.png");
-        playerGunRight = loader.loadImage("../Guns/GalilLeft.png");
+        playerGunUp = loader.loadImage("../Guns/M4/M4Up.png");
+        playerGunDown = loader.loadImage("../Guns/M4/M4Down.png");
+        playerGunLeft = loader.loadImage("../Guns/M4/M4Right.png");
+        playerGunRight = loader.loadImage("../Guns/M4/M4Left.png");
 
         playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation1&3.png"));
         playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation2.png"));
@@ -74,15 +74,15 @@ public class Dante extends GameObject {
         playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
         playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation4.png"));
 
-        playerBodyLeftAnimation.add(loader.loadImage("../CharLeft.png"));
-        playerBodyLeftAnimation.add(loader.loadImage("../CharLeft.png"));
-        playerBodyLeftAnimation.add(loader.loadImage("../CharLeft.png"));
-        playerBodyLeftAnimation.add(loader.loadImage("../CharLeft.png"));
+        playerBodyLeftAnimation.add(loader.loadImage("../Character/LeftAnimation1&3.png"));
+        playerBodyLeftAnimation.add(loader.loadImage("../Character/LeftAnimation2.png"));
+        playerBodyLeftAnimation.add(loader.loadImage("../Character/LeftAnimation1&3.png"));
+        playerBodyLeftAnimation.add(loader.loadImage("../Character/LeftAnimation4.png"));
 
-        playerBodyRightAnimation.add(loader.loadImage("../CharRight.png"));
-        playerBodyRightAnimation.add(loader.loadImage("../CharRight.png"));
-        playerBodyRightAnimation.add(loader.loadImage("../CharRight.png"));
-        playerBodyRightAnimation.add(loader.loadImage("../CharRight.png"));
+        playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation1&3.png"));
+        playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation2.png"));
+        playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation1&3.png"));
+        playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation4.png"));
 
         playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
         playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
@@ -114,8 +114,8 @@ public class Dante extends GameObject {
         }
     }
 
-    private void setHeadImage(int headImageCount) {
-        switch (headImageCount) {
+    private void setGunImage(int gunImageCount) {
+        switch (gunImageCount) {
             case (0) -> bufferedGunImage = playerGunUp;
             case (1) -> bufferedGunImage = playerGunDown;
             case (2) -> bufferedGunImage = playerGunRight;
@@ -124,7 +124,7 @@ public class Dante extends GameObject {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x,y,50,50);
+        return new Rectangle(x + 7,y,50,64);
     }
 
     @Override
@@ -187,7 +187,7 @@ public class Dante extends GameObject {
 
             shotXStart = x + 32;
 
-            setHeadImage(0);
+            setGunImage(0);
         }
         if(handler.isShootDown()){
             shotY = y + 100;
@@ -195,13 +195,13 @@ public class Dante extends GameObject {
 
             shotXStart = x + 32;
 
-            setHeadImage(1);
+            setGunImage(1);
         }
         if(handler.isShootLeft()){
             shotX = x - 100;
             shotY = y;
 
-            setHeadImage(2);
+            setGunImage(2);
         }
         if(handler.isShootRight()){
             shotX = x + 100 + 32;
@@ -209,7 +209,7 @@ public class Dante extends GameObject {
 
             shotXStart = x + 32;
 
-            setHeadImage(3);
+            setGunImage(3);
         }
 
         if(shotY != y|| shotX != x)
@@ -285,10 +285,16 @@ public class Dante extends GameObject {
         }
     }
 
-    // Used to render image of player head and body
+    // Used to render image of player gun and body
     public void render(Graphics g) {
         g.drawImage(bufferedBodyImage, x, y, null);
-        g.drawImage(bufferedGunImage, x + 10, y + 35, null);
+        g.drawImage(bufferedGunImage, x - 20, y - 10, null);
+
+
+//        To draw hitboxes
+//        Graphics2D g2 = (Graphics2D)g;
+//        g2.setColor(Color.green);
+//        g2.draw(getBounds());
 
         // Sets healtsh to a min value of 0
         if (health < 0)
@@ -352,6 +358,7 @@ public class Dante extends GameObject {
         // Used to keep track of which direction the player is looking in
         // 4 = Default value used for idle animation
         int setBodyImgCounter = 4;
+
         if(handler.isUp() && !handler.isDown()){
             velY = -5;
             setBodyImgCounter = 0;
@@ -376,13 +383,34 @@ public class Dante extends GameObject {
         }
         else if (!handler.isRight()) velX = 0;
 
+        // Needed so character looks int the
+        // same direction he shoots
+        if(handler.isShootUp()){
+            setBodyImgCounter = 0;
+        }
+        if(handler.isShootDown()){
+            setBodyImgCounter = 1;
+        }
+        if(handler.isShootRight()){
+            setBodyImgCounter = 2;
+        }
+        if(handler.isShootLeft()){
+            setBodyImgCounter = 3;
+        }
+
+        // Needed so that walking animation doesnt play while
+        // shooting and not moving
+        if(!handler.isDown() && !handler.isUp() && !handler.isLeft() && !handler.isRight()){
+            frameCount = 0;
+        }
+
         setBodyImage(setBodyImgCounter);
 
         if(timeSinceLastShot % 1000 == 0){
             timeSinceLastShot = 30;
         }
         if  (timeSinceLastShot > fireSpeed &&
-                (handler.isShootUp() || handler.isShootDown() || handler.isShootLeft() || handler.isShootRight())){
+            (handler.isShootUp() || handler.isShootDown() || handler.isShootLeft() || handler.isShootRight())){
             shoot();
             timeSinceLastShot = 0;
         }
