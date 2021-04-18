@@ -298,9 +298,9 @@ public class Dante extends GameObject {
 
 
 //        To draw hitboxes
-//        Graphics2D g2 = (Graphics2D)g;
-//        g2.setColor(Color.green);
-//        g2.draw(getBounds());
+        Graphics2D g2 = (Graphics2D)g;
+        g2.setColor(Color.green);
+        g2.draw(getBounds());
 
         // Sets healtsh to a min value of 0
         if (health < 0)
