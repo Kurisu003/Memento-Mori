@@ -51,7 +51,7 @@ public class Game extends Canvas implements Runnable {
         wallSprites.add(loader.loadImage("../Anger/DoorT.png"));
 
         render();
-        loadlevel(floor, doorHorizontally, doorVertically);
+        loadlevel(floor);
 //        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
 //        handler.addObject(new ShotEnemy(150,150,ID.Enemy,handler,floor));
     }
@@ -101,14 +101,6 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void tick(){
-//  Old version
-//        for(int i=0;i<handler.objects.size();i++){
-//            GameObject temp= handler.objects.get(i);
-//            if(temp.getId()== ID.Dante){
-//                camera.tick(handler.objects.get(i));
-//            }
-//        }
-
         for(GameObject temp : handler.objects){
             if(temp.getId() == ID.Dante){
                 camera.tick(temp);
@@ -141,7 +133,7 @@ public class Game extends Canvas implements Runnable {
         // Repeats sprites over entire level
         for(int i = 1; i <= 6; i++){
             for(int j = 1; j <= 6; j++){
-                g.drawImage(floor, i * 64 * 17 - 128, j * 64 * 9 - 128, null);
+                g.drawImage(floor, i * 960, j * 448, null);
             }
         }
 
@@ -154,31 +146,8 @@ public class Game extends Canvas implements Runnable {
 
     }
 
-    private void loadlevel(BufferedImage floor, BufferedImage doorHorizontally, BufferedImage doorVertically){
-
+    private void loadlevel(BufferedImage floor){
         LoadLevel level = new LoadLevel(handler, wallSprites, floor, camera, this.getBufferStrategy().getDrawGraphics());
-
-//        int w = image.getWidth();
-//        int h = image.getHeight();
-//
-//        for(int xx=0;xx<w;xx++){
-//            for(int yy=0;yy<h;yy++){
-//                int pixel=image.getRGB(xx,yy);
-//
-//                int red=(pixel>>16) &0xff;
-//                int green=(pixel>>8) &0xff;
-//                int blue=(pixel) &0xff;
-//
-//                if(red==255)
-//                    handler.addObject(new Box(xx*64,yy*64, ID.Block, wall));
-//                if(blue==255)
-//                    handler.addObject(new Dante(xx*32,yy*32, ID.Dante, handler));
-//                if (green==255){
-//                    handler.addObject(new Enemy(xx*32,yy*32, ID.Enemy, handler));
-//                }
-//
-//            }
-//        }
     }
 
     public static void main(String[] args) {
