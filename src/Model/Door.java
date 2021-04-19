@@ -29,7 +29,7 @@ public class Door extends GameObject {
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x,y,64, 64);
+        return new Rectangle(x,y,65, 65);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class Window {
 
         // frame is in middle of the window
         frame.setLocationRelativeTo(null);
-        
+
         // lets us see the window
         frame.setVisible(true);
         frame.toFront();

@@ -225,6 +225,7 @@ public class Dante extends GameObject {
         // stops player from moving if they're
         // intersecting
         for(GameObject temp : handler.objects){
+
             if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())){
                 x+=velX*-1;
                 y+=velY*-1;
@@ -234,10 +235,12 @@ public class Dante extends GameObject {
 //                y+=velY*-1;
 
 //                temp.getX()
+                System.out.println("collision");
+
                 // To know if its horizontal
                 // Checks if player is within
                 // a 10 px margin of door vertically
-                if(temp.getY() - 10 < y && temp.getY() + 10 > y){
+                if(temp.getY() - 20 < y && temp.getY() + 84 > y){
                     // If player is to the left
                     // of a door and wants to
                     // go to a room to the right

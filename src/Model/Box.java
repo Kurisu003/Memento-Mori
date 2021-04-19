@@ -19,13 +19,13 @@ public class Box extends GameObject {
         g.drawImage(bufferedImage, x, y, null);
 
 //        To draw hitboxes
-//        Graphics2D g2 = (Graphics2D)g;
-//        g2.setColor(Color.blue);
-//        g2.draw(getBounds());
+        Graphics2D g2 = (Graphics2D)g;
+        g2.setColor(Color.blue);
+        g2.draw(getBounds());
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x,y,60,60);
+        return new Rectangle(x,y,64,64);
     }
 }
