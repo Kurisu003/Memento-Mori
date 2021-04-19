@@ -134,12 +134,12 @@ public class Game extends Canvas implements Runnable {
         for(GameObject temp : handler.objects){
             if(temp.getId() == ID.Door){
                 g.setColor(Color.green);
-                g.fillRect(temp.getX() - 32, temp.getY(), 10,10);
-                g.fillRect(temp.getX() + 96, temp.getY(), 10,10);
+//                g.fillRect(temp.getX() - 32, temp.getY(), 10,10);
+//                g.fillRect(temp.getX() + 64, temp.getY(), 10,10);
             }
             else if(temp.getId() == ID.Dante){
                 g.setColor(Color.blue);
-                g.fillRect(temp.getX(), temp.getY(), 10,10);
+//                g.fillRect(temp.getX(), temp.getY(), 10,10);
             }
         }
 

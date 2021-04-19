@@ -37,6 +37,7 @@ public class Dante extends GameObject {
     private int armor = 2;
 
     private int frameCount = 0;
+    private int idleAnimationCounter = 0;
 
     private BufferedImage bufferedBodyImage;
     private BufferedImage bufferedGunImage;
@@ -81,10 +82,10 @@ public class Dante extends GameObject {
         playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation1&3.png"));
         playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation4.png"));
 
-        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
-        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
-        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
-        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
+        playerIdleAnimation.add(loader.loadImage("../Idle1.png"));
+        playerIdleAnimation.add(loader.loadImage("../Idle2.png"));
+        playerIdleAnimation.add(loader.loadImage("../Idle3.png"));
+        playerIdleAnimation.add(loader.loadImage("../Idle4.png"));
 
         shotType1 = loader.loadImage("../Tile.png");
     }
@@ -107,7 +108,7 @@ public class Dante extends GameObject {
             case (1) -> bufferedBodyImage = playerBodyDownAnimation.get(frameCount);
             case (2) -> bufferedBodyImage = playerBodyRightAnimation.get(frameCount);
             case (3) -> bufferedBodyImage = playerBodyLeftAnimation.get(frameCount);
-            case (4) -> bufferedBodyImage = playerIdleAnimation.get(frameCount);
+            case (4) -> bufferedBodyImage = playerIdleAnimation.get(idleAnimationCounter);
         }
     }
 
@@ -235,7 +236,7 @@ public class Dante extends GameObject {
 //                y+=velY*-1;
 
 //                temp.getX()
-//                System.out.println("player: " + x + " " + y + "\nDoor: " + temp.getX() + " " + temp.getY());
+                System.out.println("player: " + x + " " + y + "\nDoor: " + temp.getX() + " " + temp.getY());
 
                 // To know if its horizontal
                 // Checks if player is within
@@ -260,7 +261,7 @@ public class Dante extends GameObject {
                 // To know if its vertical
                 // Checks if player is within
                 // a 10 px margin of door horizontally
-                else if(temp.getX() - 32 < x && temp.getX() + 32 > x && (handler.isUp() || handler.isDown())){
+                else if(temp.getX() - 32 < x && temp.getX() + 64 > x && (handler.isUp() || handler.isDown())){
                     // If player is below
                     // a door and wants to
                     // go to a room above
@@ -296,9 +297,9 @@ public class Dante extends GameObject {
 
 
 //        To draw hitboxes
-        Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.green);
-        g2.draw(getBounds());
+//        Graphics2D g2 = (Graphics2D)g;
+//        g2.setColor(Color.green);
+//        g2.draw(getBounds());
 
         // Sets health to a min value of 0
         if (health < 0)
@@ -356,10 +357,12 @@ public class Dante extends GameObject {
         // counts up every time. This is needed as we dont
         // want to up animation counter every time as the
         // animations are too fast that way
+        int animationSteps = 4;
         if(timeSinceLastShot % 7 == 0){
-            int animationSteps = 4;
             frameCount = ++frameCount % animationSteps;
         }
+        if(timeSinceLastShot % 20 == 0)
+            idleAnimationCounter = ++idleAnimationCounter % animationSteps;
 
         // Used to keep track of which direction the player is looking in
         // 4 = Default value used for idle animation
