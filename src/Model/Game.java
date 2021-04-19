@@ -125,7 +125,7 @@ public class Game extends Canvas implements Runnable {
         // Repeats sprites over entire level
         for(int i = 1; i <= 6; i++){
             for(int j = 1; j <= 6; j++){
-                g.drawImage(floor, i * 960, j * 448, null);
+                g.drawImage(floor, i * 1088, j * 576, null);
             }
         }
 
