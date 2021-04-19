@@ -17,10 +17,10 @@ public class Dante extends GameObject {
 //    private BufferedImage playerBodyLeft = null;
 //    private BufferedImage playerBodyRight = null;
 
-    private BufferedImage playerGunUp = null;
-    private BufferedImage playerGunDown = null;
-    private BufferedImage playerGunLeft = null;
-    private BufferedImage playerGunRight = null;
+    private final BufferedImage playerGunUp;
+    private final BufferedImage playerGunDown;
+    private final BufferedImage playerGunLeft;
+    private final BufferedImage playerGunRight;
 
     ArrayList<BufferedImage> playerBodyUpAnimation = new ArrayList<>();
     ArrayList<BufferedImage> playerBodyDownAnimation = new ArrayList<>();
@@ -28,23 +28,20 @@ public class Dante extends GameObject {
     ArrayList<BufferedImage> playerBodyRightAnimation = new ArrayList<>();
     ArrayList<BufferedImage> playerIdleAnimation = new ArrayList<>();
 
-    private BufferedImage shotType1 = null;
+    private final BufferedImage shotType1;
 
     private int timeSinceLastShot = 20;
     private int fireSpeed = 20;
     private int range = 30;
-    private int damage = 100;
     private int health = 5;
-    private int maxHealth = 5;
     private int armor = 2;
 
     private int frameCount = 0;
-    private int animationSteps = 4;
 
     private BufferedImage bufferedBodyImage;
     private BufferedImage bufferedGunImage;
     Controller.Handler1 handler;
-    private Camera camera;
+    private final Camera camera;
 
     public Dante(int x, int y, ID id, Controller.Handler1 handler1, Camera camera) {
         super(x, y, id);
@@ -218,6 +215,7 @@ public class Dante extends GameObject {
             setGunImage(3);
         }
 
+        int damage = 100;
         if(shotY != y|| shotX != x)
             handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX, shotY, range, damage, shotType1));
     }
@@ -305,6 +303,7 @@ public class Dante extends GameObject {
 
         // Draws background
         g.setColor(Color.BLACK);
+        int maxHealth = 5;
         g.fillRect(25, 19, 25 * maxHealth, 23);
 
         // Draws red healthbar
@@ -355,6 +354,7 @@ public class Dante extends GameObject {
         // want to up animation counter every time as the
         // animations are too fast that way
         if(timeSinceLastShot % 7 == 0){
+            int animationSteps = 4;
             frameCount = ++frameCount % animationSteps;
         }
 
