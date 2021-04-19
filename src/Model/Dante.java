@@ -230,8 +230,8 @@ public class Dante extends GameObject {
                 y+=velY*-1;
             }
             if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds())){
-                x+=velX*-1;
-                y+=velY*-1;
+//                x+=velX*-1;
+//                y+=velY*-1;
 
 //                temp.getX()
                 // To know if its horizontal
@@ -293,9 +293,9 @@ public class Dante extends GameObject {
 
 
 //        To draw hitboxes
-//        Graphics2D g2 = (Graphics2D)g;
-//        g2.setColor(Color.green);
-//        g2.draw(getBounds());
+        Graphics2D g2 = (Graphics2D)g;
+        g2.setColor(Color.green);
+        g2.draw(getBounds());
 
         // Sets health to a min value of 0
         if (health < 0)
