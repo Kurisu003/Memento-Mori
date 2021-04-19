@@ -235,12 +235,12 @@ public class Dante extends GameObject {
 //                y+=velY*-1;
 
 //                temp.getX()
-                System.out.println("collision");
+//                System.out.println("player: " + x + " " + y + "\nDoor: " + temp.getX() + " " + temp.getY());
 
                 // To know if its horizontal
                 // Checks if player is within
                 // a 10 px margin of door vertically
-                if(temp.getY() - 20 < y && temp.getY() + 84 > y){
+                if(temp.getY() - 32 < y && temp.getY() + 32 > y && (handler.isLeft() || handler.isRight())){
                     // If player is to the left
                     // of a door and wants to
                     // go to a room to the right
@@ -260,7 +260,7 @@ public class Dante extends GameObject {
                 // To know if its vertical
                 // Checks if player is within
                 // a 10 px margin of door horizontally
-                else if(temp.getX() - 10 < x && temp.getX() + 10 > x){
+                else if(temp.getX() - 32 < x && temp.getX() + 32 > x && (handler.isUp() || handler.isDown())){
                     // If player is below
                     // a door and wants to
                     // go to a room above
