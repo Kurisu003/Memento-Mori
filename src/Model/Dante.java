@@ -241,41 +241,63 @@ public class Dante extends GameObject {
                 // To know if its horizontal
                 // Checks if player is within
                 // a 10 px margin of door vertically
-                if(temp.getY() - 32 < y && temp.getY() + 32 > y && (handler.isLeft() || handler.isRight())){
-                    // If player is to the left
-                    // of a door and wants to
-                    // go to a room to the right
-                    if(x < temp.getX()){
-                        x += 185;
-                        camera.setX(camera.getX() + 1088);
-                    }
-                    // If player is to the right
-                    // of a door and wants to
-                    // go to a room to the left
-                    else{
-                        x -= 185;
-                        camera.setX(camera.getX() - 1088);
-                    }
-                }
+//                if(temp.getY() - 32 < y && temp.getY() + 32 > y && (handler.isLeft() || handler.isRight())){
+//                    // If player is to the left
+//                    // of a door and wants to
+//                    // go to a room to the right
+//                    if(x < temp.getX()){
+//                        x += 185;
+//                        camera.setX(camera.getX() + 1088);
+//                    }
+//                    // If player is to the right
+//                    // of a door and wants to
+//                    // go to a room to the left
+//                    else{
+//                        x -= 185;
+//                        camera.setX(camera.getX() - 1088);
+//                    }
+//                }
+//
+//                // To know if its vertical
+//                // Checks if player is within
+//                // a 10 px margin of door horizontally
+//                else if(temp.getX() - 32 < x && temp.getX() + 64 > x && (handler.isUp() || handler.isDown())){
+//                    // If player is below
+//                    // a door and wants to
+//                    // go to a room above
+//                    if(y < temp.getY()){
+//                        y += 185;
+//                        camera.setY(camera.getY() + 576);
+//                    }
+//                    // If player is above
+//                    // a door and wants to
+//                    // go to a room below
+//                    else{
+//                        y -= 185;
+//                        camera.setY(camera.getY() - 576);
+//                    }
+//                }
 
-                // To know if its vertical
-                // Checks if player is within
-                // a 10 px margin of door horizontally
-                else if(temp.getX() - 32 < x && temp.getX() + 64 > x && (handler.isUp() || handler.isDown())){
-                    // If player is below
-                    // a door and wants to
-                    // go to a room above
-                    if(y < temp.getY()){
-                        y += 185;
-                        camera.setY(camera.getY() + 576);
-                    }
-                    // If player is above
-                    // a door and wants to
-                    // go to a room below
-                    else{
-                        y -= 185;
-                        camera.setY(camera.getY() - 576);
-                    }
+                if( temp.getX() >  x && handler.isRight() && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
+                    !handler.isLeft() && !handler.isDown() && !handler.isUp()){
+                        x += 210;
+                        camera.setX(camera.getX() + 1088);
+                }
+                else if(temp.getX() <  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
+                        handler.isLeft() && !handler.isRight() && !handler.isDown() && !handler.isUp()){
+                    x -= 210;
+                    camera.setX(camera.getX() - 1088);
+                }
+                else if(temp.getY() < y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
+                        handler.isUp() && !handler.isDown() && !handler.isDown() && !handler.isLeft() && !handler.isRight()){
+                    y -= 210;
+                    camera.setY(camera.getY() - 576);
+                }
+                else if(temp.getY() > y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
+                        handler.isDown() && !handler.isUp() && !handler.isLeft() && !handler.isRight()){
+                    y += 210;
+                    camera.setY(camera.getY() + 576);
+                    System.out.println("coll");
                 }
             }
             if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())){
