@@ -34,7 +34,7 @@ public class Bullet extends GameObject {
 
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
-            if (temp.getId()== ID.Block && getBounds().intersects(temp.getBounds())){
+            if ((temp.getId()== ID.Block || temp.getId() == ID.Door) && getBounds().intersects(temp.getBounds())){
                 handler.removeObject(this);
             }
             if (temp.getId()== ID.Enemy && getBounds().intersects(temp.getBounds())){
