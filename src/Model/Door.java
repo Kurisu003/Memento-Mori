@@ -21,9 +21,9 @@ public class Door extends GameObject {
     public void render(Graphics g) {
         g.drawImage(bufferedImage, x, y, null);
 //        To draw hitboxes
-        Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.red);
-        g2.draw(getBounds());
+//        Graphics2D g2 = (Graphics2D)g;
+//        g2.setColor(Color.red);
+//        g2.draw(getBounds());
     }
 
     @Override
