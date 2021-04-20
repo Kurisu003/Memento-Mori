@@ -412,21 +412,21 @@ public class Dante extends GameObject {
 
         // Needed so character looks int the
         // same direction he shoots
-        if(handler.isShootUp()){
+        if(handler.isShootUp() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootLeft()){
             setBodyImgCounter = 0;
             setGunImage(0);
 
         }
-        if(handler.isShootDown()){
+        if(handler.isShootDown() && !handler.isShootRight() && !handler.isShootUp() && !handler.isShootLeft()){
             setBodyImgCounter = 1;
             setGunImage(1);
 
         }
-        if(handler.isShootRight()){
+        if(handler.isShootRight() && !handler.isShootUp() && !handler.isShootDown() && !handler.isShootLeft()){
             setBodyImgCounter = 2;
             setGunImage(2);
         }
-        if(handler.isShootLeft()){
+        if(handler.isShootLeft() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootUp()){
             setBodyImgCounter = 3;
             setGunImage(3);
         }
