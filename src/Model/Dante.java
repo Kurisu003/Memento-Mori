@@ -179,41 +179,33 @@ public class Dante extends GameObject {
 
 
 //  Version like the binding of isaac
-        if(handler.isShootUp()){
+        if(handler.isShootUp() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootLeft()){
             shotY = y - 132;
             shotX = x + 32;
 
             shotXStart = x + 30;
             shotYStart = y - 32;
-
-            //setGunImage(0);
         }
-        if(handler.isShootDown()){
+        else if(handler.isShootDown() && !handler.isShootRight() && !handler.isShootLeft() && !handler.isShootUp()){
             shotY = y + 175;
             shotX = x + 30;
 
             shotXStart = x + 30;
             shotYStart = y + 75;
-
-//            setGunImage(1);
         }
-        if(handler.isShootLeft()){
+        else if(handler.isShootLeft() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootUp()){
             shotX = x - 130;
             shotY = y + 40;
 
             shotXStart = x;
             shotYStart = y + 40;
-
-//            setGunImage(2);
         }
-        if(handler.isShootRight()){
+        else if(handler.isShootRight() && !handler.isShootLeft() && !handler.isShootDown() && !handler.isShootUp()){
             shotX = x + 164;
             shotY = y + 40;
 
             shotXStart = x + 64;
             shotYStart = y + 40;
-
-//            setGunImage(3);
         }
 
         int damage = 100;
