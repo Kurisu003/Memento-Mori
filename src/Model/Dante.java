@@ -279,22 +279,22 @@ public class Dante extends GameObject {
 //                }
 
                 if( temp.getX() >  x && handler.isRight() && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
-                    !handler.isLeft() && !handler.isDown() && !handler.isUp()){
+                        handler.isRight() && !handler.isLeft()){
                     x += 230;
                     camera.setX(camera.getX() + 1088);
                 }
                 else if(temp.getX() <  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
-                        handler.isLeft() && !handler.isRight() && !handler.isDown() && !handler.isUp()){
+                        handler.isLeft() && !handler.isRight()){
                     x -= 230;
                     camera.setX(camera.getX() - 1088);
                 }
                 else if(temp.getY() < y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
-                        handler.isUp() && !handler.isDown() && !handler.isDown() && !handler.isLeft() && !handler.isRight()){
+                        handler.isUp() && !handler.isDown()){
                     y -= 230;
                     camera.setY(camera.getY() - 576);
                 }
                 else if(temp.getY() > y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
-                        handler.isDown() && !handler.isUp() && !handler.isLeft() && !handler.isRight()){
+                        handler.isDown() && !handler.isUp()){
                     y += 230;
                     camera.setY(camera.getY() + 576);
                 }
