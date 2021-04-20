@@ -17,6 +17,10 @@ public class LoadLevel {
         camera.setX(2176);
         camera.setY(1152);
 
+        GenerateLevel level = new GenerateLevel();
+
+        SpawnEnemies.spawnEnemies(10, handler, level);
+
         // Loops through generated level
         for(int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
