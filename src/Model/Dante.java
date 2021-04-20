@@ -297,7 +297,6 @@ public class Dante extends GameObject {
                         handler.isDown() && !handler.isUp() && !handler.isLeft() && !handler.isRight()){
                     y += 210;
                     camera.setY(camera.getY() + 576);
-                    System.out.println("coll");
                 }
             }
             if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())){
