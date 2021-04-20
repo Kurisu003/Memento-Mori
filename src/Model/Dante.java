@@ -133,7 +133,7 @@ public class Dante extends GameObject {
         return 0;
     }
 
-    public void shoot(){
+    public void spawnBulletOnPress(){
         int shotY = y;
         int shotX = x;
         int shotYStart = y;
@@ -445,7 +445,7 @@ public class Dante extends GameObject {
         }
         if  (timeSinceLastShot > fireSpeed &&
             (handler.isShootUp() || handler.isShootDown() || handler.isShootLeft() || handler.isShootRight())){
-            shoot();
+            spawnBulletOnPress();
             timeSinceLastShot = 0;
         }
     }
