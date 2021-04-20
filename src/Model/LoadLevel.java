@@ -47,6 +47,7 @@ public class LoadLevel {
                                 if(x == 0 && y == 0){
                                     handler.addObject(new Box(j * 1088, i * 576, ID.Block, wallSprites.get(5)));
                                 }
+                                // y is always 8 so it can be multiplied
                                 // BOTTOM LEFT CORNER
                                 else if(x == 0 && y == 8){
                                     handler.addObject(new Box(j * 1088, 64 * y + i * 576,
@@ -116,8 +117,5 @@ public class LoadLevel {
                 }
             }
         }
-
-
     }
-
 }

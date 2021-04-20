@@ -34,7 +34,6 @@ public class Enemy extends GameObject {
                     velX *= -1;
                     velY *= -1;
                 } else if(choose == 0) {
-                    // WHAT??????
                     velX = (r.nextInt(4 - -4) + -4);
                     velY = (r.nextInt(4 - -4) + -4);
                 }
@@ -61,7 +60,7 @@ public class Enemy extends GameObject {
     public Rectangle getBounds() {
         return new Rectangle(x,y,32,32);
     }
-
+//  Needed so that enemy doesnt accidentally get stuck on walls
     public Rectangle getBoundsBigger() {
         return new Rectangle(x-16,y-16,64,64);
     }

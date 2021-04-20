@@ -27,7 +27,7 @@ public class GenerateLevel {
 
         level[2][2] = 1;
 
-        // Roomcount starts at 2
+        // Roomcount starts at 1
         while(roomCount <= 5){
             for(int i = 1; i <= 5; i++) {
                 for (int j = 1; j <= 5; j++) {

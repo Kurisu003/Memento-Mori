@@ -217,7 +217,7 @@ public class Dante extends GameObject {
         }
 
         int damage = 100;
-        if(shotY != y|| shotX != x)
+        if(shotY != y || shotX != x)
             handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX, shotY, range, damage, shotType1));
     }
 
@@ -236,7 +236,7 @@ public class Dante extends GameObject {
 //                y+=velY*-1;
 
 //                temp.getX()
-                System.out.println("player: " + x + " " + y + "\nDoor: " + temp.getX() + " " + temp.getY());
+               // System.out.println("player: " + x + " " + y + "\nDoor: " + temp.getX() + " " + temp.getY());
 
                 // To know if its horizontal
                 // Checks if player is within
