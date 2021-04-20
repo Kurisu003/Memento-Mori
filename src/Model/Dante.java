@@ -116,8 +116,8 @@ public class Dante extends GameObject {
         switch (gunImageCount) {
             case (0) -> bufferedGunImage = playerGunUp;
             case (1) -> bufferedGunImage = playerGunDown;
-            case (2) -> bufferedGunImage = playerGunRight;
-            case (3) -> bufferedGunImage = playerGunLeft;
+            case (2) -> bufferedGunImage = playerGunLeft;
+            case (3) -> bufferedGunImage = playerGunRight;
         }
     }
 
@@ -186,7 +186,7 @@ public class Dante extends GameObject {
             shotXStart = x + 30;
             shotYStart = y - 32;
 
-            setGunImage(0);
+            //setGunImage(0);
         }
         if(handler.isShootDown()){
             shotY = y + 175;
@@ -195,7 +195,7 @@ public class Dante extends GameObject {
             shotXStart = x + 30;
             shotYStart = y + 75;
 
-            setGunImage(1);
+//            setGunImage(1);
         }
         if(handler.isShootLeft()){
             shotX = x - 130;
@@ -204,7 +204,7 @@ public class Dante extends GameObject {
             shotXStart = x;
             shotYStart = y + 40;
 
-            setGunImage(2);
+//            setGunImage(2);
         }
         if(handler.isShootRight()){
             shotX = x + 164;
@@ -213,7 +213,7 @@ public class Dante extends GameObject {
             shotXStart = x + 64;
             shotYStart = y + 40;
 
-            setGunImage(3);
+//            setGunImage(3);
         }
 
         int damage = 100;
@@ -367,28 +367,33 @@ public class Dante extends GameObject {
         // Used to keep track of which direction the player is looking in
         // 4 = Default value used for idle animation
         int setBodyImgCounter = 4;
+        setGunImage(1);
 
         if(handler.isUp() && !handler.isDown()){
             velY = -5;
             setBodyImgCounter = 0;
+            setGunImage(0);
         }
         else if(handler.isDown()) velY = 0;
 
         if(handler.isDown() && !handler.isUp()){
             velY = 5;
             setBodyImgCounter = 1;
+            setGunImage(1);
         }
         else if(!handler.isUp()) velY = 0;
 
         if(handler.isRight() && !handler.isLeft()){
             velX = 5;
             setBodyImgCounter = 2;
+            setGunImage(2);
         }
         else if(handler.isLeft()) velX = 0;
 
         if(handler.isLeft() && !handler.isRight()) {
             velX = -5;
             setBodyImgCounter = 3;
+            setGunImage(3);
         }
         else if (!handler.isRight()) velX = 0;
 
@@ -396,15 +401,21 @@ public class Dante extends GameObject {
         // same direction he shoots
         if(handler.isShootUp()){
             setBodyImgCounter = 0;
+            setGunImage(0);
+
         }
         if(handler.isShootDown()){
             setBodyImgCounter = 1;
+            setGunImage(1);
+
         }
         if(handler.isShootRight()){
             setBodyImgCounter = 2;
+            setGunImage(2);
         }
         if(handler.isShootLeft()){
             setBodyImgCounter = 3;
+            setGunImage(3);
         }
 
         // Needed so that walking animation doesnt play while
