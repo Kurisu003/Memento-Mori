@@ -20,14 +20,6 @@ public class SmartEnemy extends GameObject{
     public void tick() {
 
         for(GameObject temp: handler.objects){
-            if(temp.id==ID.Dante){
-               double diffx=x-temp.getX()-32;
-               double diffy=y-temp.getY()-32;
-               double distance=Math.sqrt((x-temp.getX())*(x-temp.getX())+(y-temp.getY())*(y- temp.getY()));
-
-               velX=(double) ((-1.0/distance)*diffx)*2;
-               velY=(double) ((-1.0/distance)*diffy)*2;
-            }
 
             if(temp.getId() == ID.Block) {
                 if (getBoundsBigger().intersects(temp.getBounds())) {
@@ -37,6 +29,17 @@ public class SmartEnemy extends GameObject{
                     velY *= -1;
                 }
             }
+
+            if(temp.id==ID.Dante){
+               double diffx=x-temp.getX()-32;
+               double diffy=y-temp.getY()-32;
+               double distance=Math.sqrt((x-temp.getX())*(x-temp.getX())+(y-temp.getY())*(y- temp.getY()));
+
+               velX=(double) ((-1.0/distance)*diffx)*2;
+               velY=(double) ((-1.0/distance)*diffy)*2;
+            }
+
+
         }
 
         if(hp <= 0) {
