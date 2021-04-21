@@ -214,10 +214,10 @@ public class Dante extends GameObject {
 
         int damage = 100;
         if(shotY != y || shotX != x)
-            handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX, shotY, range, damage, shotType1));
+            handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX, shotY, range, damage, bulletImage));
     }
 
-    public void collision(){
+    public void checkCollision(){
         // Checks for collision with blocks and
         // stops player from moving if they're
         // intersecting
@@ -363,7 +363,7 @@ public class Dante extends GameObject {
         y += velY;
 
         // checks for collision with objects
-        collision();
+        checkCollision();
 
         // Needed so that shooting is always available when button is pressed
         // and enough time has passed
