@@ -34,7 +34,7 @@ public class Door extends GameObject {
     @Override
     public int doAction(int action) {
         int temp = firstTimeEntered;
-        this.firstTimeEntered = action;
+        firstTimeEntered = action;
         return temp;
     }
 }

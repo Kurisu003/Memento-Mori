@@ -1,13 +1,21 @@
 package Model;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Handler;
 import Controller.*;
+import View.BufferedImageLoader;
 
 public class Enemy extends GameObject {
 
     private Handler1 handler;
+    int tickCounter = 0;
+    int animationCounter = 0;
+    BufferedImage displayedImage;
+    ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
 
     Random r= new Random();
     int choose=0;
@@ -16,13 +24,24 @@ public class Enemy extends GameObject {
     public Enemy(int x, int y, ID id, Handler1 handler) {
         super(x, y, id);
         this.handler=handler;
+        BufferedImageLoader loader = new BufferedImageLoader();
+        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
+        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation2.png"));
+        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
+        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation4.png"));
     }
 
     public void tick() {
         x += velX;
         y += velY;
 
-        choose = r.nextInt(10);
+        if (++tickCounter % 5 == 0){
+            displayedImage = enemyAnimation.get(animationCounter);
+            animationCounter = (animationCounter + 1) % 4;
+        }
+
+
+        choose = r.nextInt(50);
 
         for(int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
@@ -53,8 +72,7 @@ public class Enemy extends GameObject {
 
 
     public void render(Graphics g) {
-        g.setColor(Color.DARK_GRAY);
-        g.fillRect(x,y,32,32);
+        g.drawImage(displayedImage, x, y, null);
     }
 
     public Rectangle getBounds() {

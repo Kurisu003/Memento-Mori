@@ -1,9 +1,11 @@
 package Model;
 
+import Controller.Handler1;
 import View.BufferedImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 // To implement:
@@ -22,13 +24,17 @@ public class Dante extends GameObject {
     private final BufferedImage playerGunLeft;
     private final BufferedImage playerGunRight;
 
-    ArrayList<BufferedImage> playerBodyUpAnimation = new ArrayList<>();
-    ArrayList<BufferedImage> playerBodyDownAnimation = new ArrayList<>();
-    ArrayList<BufferedImage> playerBodyLeftAnimation = new ArrayList<>();
-    ArrayList<BufferedImage> playerBodyRightAnimation = new ArrayList<>();
-    ArrayList<BufferedImage> playerIdleAnimation = new ArrayList<>();
+    private final ArrayList<BufferedImage> playerBodyUpAnimation = new ArrayList<>();
+    private final ArrayList<BufferedImage> playerBodyDownAnimation = new ArrayList<>();
+    private final ArrayList<BufferedImage> playerBodyLeftAnimation = new ArrayList<>();
+    private final ArrayList<BufferedImage> playerBodyRightAnimation = new ArrayList<>();
+    private final ArrayList<BufferedImage> playerIdleAnimation = new ArrayList<>();
 
-    private final BufferedImage shotType1;
+    private BufferedImage bulletImage;
+
+    private int roomXCoordinate;
+    private int roomYCoordinate;
+    private int [][] wherePlayerIsAt = new int[7][7];
 
     private int timeSinceLastShot = 20;
     private int fireSpeed = 20;
@@ -48,6 +54,9 @@ public class Dante extends GameObject {
         super(x, y, id);
         this.handler = handler1;
         this.camera = camera;
+
+        roomXCoordinate = 3;
+        roomYCoordinate = 3;
 
         // Different images according to the direction
         // the player is looking in
@@ -82,12 +91,12 @@ public class Dante extends GameObject {
         playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation1&3.png"));
         playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation4.png"));
 
-        playerIdleAnimation.add(loader.loadImage("../Idle1.png"));
-        playerIdleAnimation.add(loader.loadImage("../Idle2.png"));
-        playerIdleAnimation.add(loader.loadImage("../Idle3.png"));
-        playerIdleAnimation.add(loader.loadImage("../Idle4.png"));
+        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
+        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
+        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
+        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
 
-        shotType1 = loader.loadImage("../Tile.png");
+        bulletImage = loader.loadImage("../Tile.png");
     }
 
     // to set firespeed of weapon
@@ -98,6 +107,10 @@ public class Dante extends GameObject {
     // to set range of Weapon
     public void setRange(int range){
         this.range = range;
+    }
+
+    public void setBulletImage(BufferedImage bulletImage){
+        this.bulletImage = bulletImage;
     }
 
     // preferably to be fixed with array
@@ -133,7 +146,7 @@ public class Dante extends GameObject {
         return 0;
     }
 
-    public void spawnBulletOnPress(){
+    private void spawnBulletOnPress(){
         int shotY = y;
         int shotX = x;
         int shotYStart = y;
@@ -210,10 +223,10 @@ public class Dante extends GameObject {
 
         int damage = 100;
         if(shotY != y || shotX != x)
-            handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX, shotY, range, damage, shotType1));
+            handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX, shotY, range, damage, bulletImage));
     }
 
-    public void collision(){
+    private void checkCollision(){
         // Checks for collision with blocks and
         // stops player from moving if they're
         // intersecting
@@ -224,72 +237,43 @@ public class Dante extends GameObject {
                 y+=velY*-1;
             }
             if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds())){
-//                x+=velX*-1;
-//                y+=velY*-1;
 
-//                temp.getX()
-               // System.out.println("player: " + x + " " + y + "\nDoor: " + temp.getX() + " " + temp.getY());
-
-                // To know if its horizontal
-                // Checks if player is within
-                // a 10 px margin of door vertically
-//                if(temp.getY() - 32 < y && temp.getY() + 32 > y && (handler.isLeft() || handler.isRight())){
-//                    // If player is to the left
-//                    // of a door and wants to
-//                    // go to a room to the right
-//                    if(x < temp.getX()){
-//                        x += 185;
-//                        camera.setX(camera.getX() + 1088);
-//                    }
-//                    // If player is to the right
-//                    // of a door and wants to
-//                    // go to a room to the left
-//                    else{
-//                        x -= 185;
-//                        camera.setX(camera.getX() - 1088);
-//                    }
-//                }
-//
-//                // To know if its vertical
-//                // Checks if player is within
-//                // a 10 px margin of door horizontally
-//                else if(temp.getX() - 32 < x && temp.getX() + 64 > x && (handler.isUp() || handler.isDown())){
-//                    // If player is below
-//                    // a door and wants to
-//                    // go to a room above
-//                    if(y < temp.getY()){
-//                        y += 185;
-//                        camera.setY(camera.getY() + 576);
-//                    }
-//                    // If player is above
-//                    // a door and wants to
-//                    // go to a room below
-//                    else{
-//                        y -= 185;
-//                        camera.setY(camera.getY() - 576);
-//                    }
-//                }
+                if(wherePlayerIsAt[roomXCoordinate][roomYCoordinate] == 0){
+                    SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 64 * 17, roomXCoordinate * 64 * 9, 10, ID.Enemy, handler);
+                }
 
                 if( temp.getX() >  x && handler.isRight() && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
                         handler.isRight() && !handler.isLeft()){
                     x += 230;
                     camera.setX(camera.getX() + 1088);
-                    System.out.println("coll");
+                    roomYCoordinate++;
                 }
                 else if(temp.getX() <  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
                         handler.isLeft() && !handler.isRight()){
                     x -= 230;
                     camera.setX(camera.getX() - 1088);
+                    roomYCoordinate--;
                 }
                 else if(temp.getY() < y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
                         handler.isUp() && !handler.isDown()){
                     y -= 230;
                     camera.setY(camera.getY() - 576);
+                    roomXCoordinate--;
                 }
                 else if(temp.getY() > y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
                         handler.isDown() && !handler.isUp()){
                     y += 230;
                     camera.setY(camera.getY() + 576);
+                    roomXCoordinate++;
+                }
+                wherePlayerIsAt[roomXCoordinate][roomYCoordinate] = 1;
+
+                System.out.println("\n\n\n\n\n\n");
+                for(int i = 0; i < 7; i++) {
+                    for (int j = 0; j < 7; j++) {
+                        System.out.print(wherePlayerIsAt[i][j]);
+                    }
+                    System.out.println();
                 }
             }
             if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())){
@@ -360,7 +344,7 @@ public class Dante extends GameObject {
         y += velY;
 
         // checks for collision with objects
-        collision();
+        checkCollision();
 
         // Needed so that shooting is always available when button is pressed
         // and enough time has passed
