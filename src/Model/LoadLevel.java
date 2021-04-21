@@ -18,13 +18,13 @@ public class LoadLevel {
 
         GenerateLevel generatedLevel = new GenerateLevel();
 
-        for(int i = 0; i < 7; i++){
-            for (int j = 0; j < 7; j++){
-                if(generatedLevel.getLevel()[i][j] > 0){
-                    SpawnEnemiesInRoom.spawnEnemies(i * 64 * 17, j * 64 * 9, 10, ID.Enemy, handler);
-                }
-            }
-        }
+//        for(int i = 0; i < 7; i++){
+//            for (int j = 0; j < 7; j++){
+//                if(generatedLevel.getLevel()[i][j] > 0){
+//
+//                }
+//            }
+//        }
 
         // Loops through generated level
         for(int i = 1; i < 6; i++) {
