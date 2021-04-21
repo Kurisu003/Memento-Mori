@@ -7,6 +7,8 @@ public enum ID {
     Ammo(),
     Bullet(),
     Enemy(),
+    SmartEnemy(),
+    ShotEnemy(),
     Door();
 
 
