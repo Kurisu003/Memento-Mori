@@ -28,7 +28,7 @@ public class Dante extends GameObject {
     ArrayList<BufferedImage> playerBodyRightAnimation = new ArrayList<>();
     ArrayList<BufferedImage> playerIdleAnimation = new ArrayList<>();
 
-    private final BufferedImage shotType1;
+    private BufferedImage bulletImage;
 
     private int timeSinceLastShot = 20;
     private int fireSpeed = 20;
@@ -87,7 +87,7 @@ public class Dante extends GameObject {
         playerIdleAnimation.add(loader.loadImage("../Idle1.png"));
         playerIdleAnimation.add(loader.loadImage("../Idle1.png"));
 
-        shotType1 = loader.loadImage("../Tile.png");
+        bulletImage = loader.loadImage("../Tile.png");
     }
 
     // to set firespeed of weapon
@@ -98,6 +98,10 @@ public class Dante extends GameObject {
     // to set range of Weapon
     public void setRange(int range){
         this.range = range;
+    }
+
+    public void setBulletImage(BufferedImage bulletImage){
+        this.bulletImage = bulletImage;
     }
 
     // preferably to be fixed with array
