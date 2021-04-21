@@ -11,15 +11,19 @@ public class LoadLevel {
     public LoadLevel(Handler1 handler, ArrayList<BufferedImage> wallSprites, BufferedImage floor, Camera camera, Graphics g){
         GenerateLevel generatedLevel = new GenerateLevel();
 
+//        for(int i=0;i<7;i++){
+//            for (int j = 0; j < 7; j++){
+//                System.out.print(generatedLevel.getLevel()[i][j]);
+//            }
+//            System.out.println();
+//        }
         // Spawns player and camera in middle room
         // which always gets generated
         handler.addObject(new Dante(2688, 1408, ID.Dante, handler, camera));
         camera.setX(2176);
         camera.setY(1152);
 
-        GenerateLevel level = new GenerateLevel();
-
-        SpawnEnemies.spawnEnemies(10, handler, level);
+        SpawnEnemies.spawnEnemies(10, handler, generatedLevel);
 
         // Loops through generated level
         for(int i = 1; i < 6; i++) {

@@ -83,9 +83,9 @@ public class Dante extends GameObject {
         playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation4.png"));
 
         playerIdleAnimation.add(loader.loadImage("../Idle1.png"));
-        playerIdleAnimation.add(loader.loadImage("../Idle2.png"));
-        playerIdleAnimation.add(loader.loadImage("../Idle3.png"));
-        playerIdleAnimation.add(loader.loadImage("../Idle4.png"));
+        playerIdleAnimation.add(loader.loadImage("../Idle1.png"));
+        playerIdleAnimation.add(loader.loadImage("../Idle1.png"));
+        playerIdleAnimation.add(loader.loadImage("../Idle1.png"));
 
         shotType1 = loader.loadImage("../Tile.png");
     }
@@ -274,7 +274,6 @@ public class Dante extends GameObject {
                         handler.isRight() && !handler.isLeft()){
                     x += 230;
                     camera.setX(camera.getX() + 1088);
-                    System.out.println("coll");
                 }
                 else if(temp.getX() <  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
                         handler.isLeft() && !handler.isRight()){
