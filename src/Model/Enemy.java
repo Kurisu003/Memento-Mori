@@ -22,7 +22,7 @@ public class Enemy extends GameObject {
         x += velX;
         y += velY;
 
-        choose = r.nextInt(10);
+        choose = r.nextInt(50);
 
         for(int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
