@@ -19,13 +19,13 @@ public class GenerateLevel {
 //            }
 //        }
 
-        for(int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                level[i][j]=0;
-            }
-        }
+//        for(int i = 0; i < 7; i++) {
+//            for (int j = 0; j < 7; j++) {
+//                level[i][j]=0;
+//            }
+//        }
 
-        level[2][2] = 1;
+        level[3][3] = 1;
 
         // Roomcount starts at 1
         while(roomCount <= 5){
