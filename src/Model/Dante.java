@@ -72,16 +72,17 @@ public class Dante extends GameObject {
         playerGunDown = loader.loadImage("../Guns/M4/M4Down.png");
         playerGunLeft = loader.loadImage("../Guns/M4/M4Right.png");
         playerGunRight = loader.loadImage("../Guns/M4/M4Left.png");
+        playerGunIdle = loader.loadImage("../Guns/M4/M4Left.png");
 
         playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation1&3.png"));
         playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation2.png"));
         playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation1&3.png"));
         playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation4.png"));
 
-        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation2.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation4.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontDown.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontDown.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontDown.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontDown.png"));
 
         playerBodyLeftAnimation.add(loader.loadImage("../Character/LeftAnimation1&3.png"));
         playerBodyLeftAnimation.add(loader.loadImage("../Character/LeftAnimation2.png"));
@@ -93,7 +94,7 @@ public class Dante extends GameObject {
         playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation1&3.png"));
         playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation4.png"));
 
-        playerIdle = loader.loadImage("../IdleWithWeapon.png");
+        playerIdle = loader.loadImage("../IdleWithoutWeapon.png");
 
         bulletImage = loader.loadImage("../Tile.png");
         fullHeart = loader.loadImage("../Assets/FullHeart.png");
