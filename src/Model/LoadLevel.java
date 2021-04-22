@@ -12,9 +12,7 @@ public class LoadLevel {
 
         // Spawns player and camera in middle room
         // which always gets generated
-        handler.addObject(new Dante(3500, 1800, ID.Dante, handler, camera));
-        camera.setX(3264);
-        camera.setY(1728);
+
 
         GenerateLevel generatedLevel = new GenerateLevel();
 

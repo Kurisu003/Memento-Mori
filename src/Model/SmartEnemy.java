@@ -28,9 +28,7 @@ public class SmartEnemy extends GameObject{
                     velX *= -1;
                     velY *= -1;
                 }
-            }
-
-            if(temp.id==ID.Dante){
+            }else if(temp.id==ID.Dante){
                double diffx=x-temp.getX()-32;
                double diffy=y-temp.getY()-32;
                double distance=Math.sqrt((x-temp.getX())*(x-temp.getX())+(y-temp.getY())*(y- temp.getY()));
