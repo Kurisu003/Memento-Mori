@@ -34,7 +34,7 @@ public class Dante extends GameObject {
 
     private int roomXCoordinate;
     private int roomYCoordinate;
-    private int [][] wherePlayerIsAt = new int[7][7];
+    private int [][] wherePlayerHasBeen = new int[7][7];
 
     private int timeSinceLastShot = 20;
     private int fireSpeed = 20;
@@ -57,6 +57,8 @@ public class Dante extends GameObject {
 
         roomXCoordinate = 3;
         roomYCoordinate = 3;
+        
+        //wherePlayerHasBeen
 
         // Different images according to the direction
         // the player is looking in
@@ -230,6 +232,7 @@ public class Dante extends GameObject {
         // Checks for collision with blocks and
         // stops player from moving if they're
         // intersecting
+        boolean shouldSpawnEnemy = false;
         for(GameObject temp : handler.objects){
 
             if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())){
@@ -237,41 +240,39 @@ public class Dante extends GameObject {
                 y+=velY*-1;
             }
             if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds())){
-
-                if(wherePlayerIsAt[roomXCoordinate][roomYCoordinate] == 0){
-                    SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 64 * 17, roomXCoordinate * 64 * 9, 10, ID.Enemy, handler);
-                }
-
-                if( temp.getX() >  x && handler.isRight() && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
+                if( temp.getX() >  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
                         handler.isRight() && !handler.isLeft()){
                     x += 230;
                     camera.setX(camera.getX() + 1088);
-                    roomYCoordinate++;
+                    roomXCoordinate++;
                 }
                 else if(temp.getX() <  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
                         handler.isLeft() && !handler.isRight()){
                     x -= 230;
                     camera.setX(camera.getX() - 1088);
-                    roomYCoordinate--;
+                    roomXCoordinate--;
                 }
                 else if(temp.getY() < y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
                         handler.isUp() && !handler.isDown()){
                     y -= 230;
                     camera.setY(camera.getY() - 576);
-                    roomXCoordinate--;
+                    roomYCoordinate--;
                 }
                 else if(temp.getY() > y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
                         handler.isDown() && !handler.isUp()){
                     y += 230;
                     camera.setY(camera.getY() + 576);
-                    roomXCoordinate++;
+                    roomYCoordinate++;
                 }
-                wherePlayerIsAt[roomXCoordinate][roomYCoordinate] = 1;
+                if(wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] == 0){
+                    shouldSpawnEnemy = true;
+                }
+                wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] = 1;
 
                 System.out.println("\n\n\n\n\n\n");
                 for(int i = 0; i < 7; i++) {
                     for (int j = 0; j < 7; j++) {
-                        System.out.print(wherePlayerIsAt[i][j]);
+                        System.out.print(wherePlayerHasBeen[i][j]);
                     }
                     System.out.println();
                 }
@@ -285,6 +286,12 @@ public class Dante extends GameObject {
 //                x += velX*-2;
 //                y += velY*-2;
             }
+        }
+
+        if(shouldSpawnEnemy){
+            System.out.println(roomXCoordinate + "  " + roomYCoordinate);
+            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 64 * 17, roomYCoordinate * 64 * 9, 1, ID.Enemy, handler);
+            shouldSpawnEnemy = false;
         }
     }
 
