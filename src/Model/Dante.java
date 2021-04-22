@@ -239,7 +239,7 @@ public class Dante extends GameObject {
         // Used because object cant be added
         // to list within a loop
         if(shouldSpawnEnemy){
-            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088, roomYCoordinate * 576, 10, ID.ShotEnemy, handler);
+            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088, roomYCoordinate * 576, 10, ID.SmartEnemy, handler);
         }
     }
 
