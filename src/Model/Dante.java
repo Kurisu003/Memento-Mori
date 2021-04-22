@@ -52,11 +52,14 @@ public class Dante extends GameObject {
     private final Camera camera;
     private int levelCounter;
 
-    public Dante(int x, int y, ID id, Controller.Handler1 handler1, Camera camera) {
+    private final Graphics g;
+
+    public Dante(int x, int y, ID id, Controller.Handler1 handler1, Camera camera, Graphics g) {
         super(x, y, id);
         this.handler = handler1;
         this.camera = camera;
         this.levelCounter=0;
+        this.g = g;
 
         roomXCoordinate = 3;
         roomYCoordinate = 3;
@@ -196,6 +199,7 @@ public class Dante extends GameObject {
     // Checks for collision
     private void checkCollision(){
         boolean shouldSpawnEnemy = false;
+        boolean shouldChangeLevel = false;
         for(GameObject temp : handler.objects){
 
             if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())){
@@ -238,7 +242,7 @@ public class Dante extends GameObject {
             }
             if(temp.getId() == ID.Portal && getBounds().intersects(temp.getBounds())){
                 ++levelCounter;
-                Game.changeLevel(levelCounter);
+                shouldChangeLevel = true;
             }
         }
 
@@ -247,6 +251,11 @@ public class Dante extends GameObject {
         if(shouldSpawnEnemy){
             SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088, roomYCoordinate * 576, 10, ID.SmartEnemy, handler);
         }
+        if(shouldChangeLevel){
+            Game.changeLevel(levelCounter, handler, g);
+            shouldChangeLevel = false;
+        }
+        System.out.println(handler.objects.indexOf(this));
     }
 
     // Used to render image of player gun and body

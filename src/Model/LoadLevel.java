@@ -8,13 +8,14 @@ import java.util.ArrayList;
 
 public class LoadLevel {
 
-    public LoadLevel(Handler1 handler, ArrayList<BufferedImage> wallSprites, BufferedImage floor, Camera camera, Graphics g){
+    public static void loadLevel(Handler1 handler, ArrayList<BufferedImage> wallSprites, Graphics g){
 
         GenerateLevel generatedLevel = new GenerateLevel();
         for(int i=handler.objects.size() - 1;i>0;i--){
-            //GameObject temp=handler.objects.get(i);
-            //handler.removeObject(temp);
-            handler.removeLastObject();
+            if(handler.objects.get(i).getId() != ID.Dante) {
+                GameObject temp = handler.objects.get(i);
+                handler.removeObject(temp);
+            }
         }
         // Loops through generated level
         for(int i = 1; i < 6; i++) {
