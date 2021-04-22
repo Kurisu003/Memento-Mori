@@ -58,7 +58,7 @@ public class Dante extends GameObject {
         roomXCoordinate = 3;
         roomYCoordinate = 3;
         
-        //wherePlayerHasBeen
+        wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] = 1;
 
         // Different images according to the direction
         // the player is looking in
@@ -269,13 +269,13 @@ public class Dante extends GameObject {
                 }
                 wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] = 1;
 
-                System.out.println("\n\n\n\n\n\n");
-                for(int i = 0; i < 7; i++) {
-                    for (int j = 0; j < 7; j++) {
-                        System.out.print(wherePlayerHasBeen[i][j]);
-                    }
-                    System.out.println();
-                }
+//                System.out.println("\n\n\n\n\n\n");
+//                for(int i = 0; i < 7; i++) {
+//                    for (int j = 0; j < 7; j++) {
+//                        System.out.print(wherePlayerHasBeen[i][j]);
+//                    }
+//                    System.out.println();
+//                }
             }
             if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())){
                 // To do damage to player
@@ -288,9 +288,10 @@ public class Dante extends GameObject {
             }
         }
 
+        // Used because object cant be added
+        // to list within a loop
         if(shouldSpawnEnemy){
-            System.out.println(roomXCoordinate + "  " + roomYCoordinate);
-            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 64 * 17, roomYCoordinate * 64 * 9, 1, ID.Enemy, handler);
+            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088, roomYCoordinate * 576, 10, ID.Enemy, handler);
             shouldSpawnEnemy = false;
         }
     }
@@ -326,7 +327,6 @@ public class Dante extends GameObject {
         // Draws Armor outline
         for(int i = 1; i <= armor; i++)
             addHealth(g, i, Color.cyan);
-
     }
 
     // Draws white healthbar outlines
