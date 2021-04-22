@@ -26,7 +26,7 @@ public class Dante extends GameObject {
     private final ArrayList<BufferedImage> playerBodyDownAnimation = new ArrayList<>();
     private final ArrayList<BufferedImage> playerBodyLeftAnimation = new ArrayList<>();
     private final ArrayList<BufferedImage> playerBodyRightAnimation = new ArrayList<>();
-    private final ArrayList<BufferedImage> playerIdleAnimation = new ArrayList<>();
+    private final BufferedImage playerIdle;
 
     private final BufferedImage fullHeart;
     private final BufferedImage fullArmor;
@@ -44,7 +44,6 @@ public class Dante extends GameObject {
     private int armor = 2;
 
     private int frameCount = 0;
-    private int idleAnimationCounter = 0;
 
     private BufferedImage bufferedBodyImage;
     private BufferedImage bufferedGunImage;
@@ -94,10 +93,7 @@ public class Dante extends GameObject {
         playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation1&3.png"));
         playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation4.png"));
 
-        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
-        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
-        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
-        playerIdleAnimation.add(loader.loadImage("../CharFront.png"));
+        playerIdle = loader.loadImage("../IdleWithWeapon.png");
 
         bulletImage = loader.loadImage("../Tile.png");
         fullHeart = loader.loadImage("../Assets/FullHeart.png");
@@ -126,7 +122,7 @@ public class Dante extends GameObject {
             case (1) -> bufferedBodyImage = playerBodyDownAnimation.get(frameCount);
             case (2) -> bufferedBodyImage = playerBodyRightAnimation.get(frameCount);
             case (3) -> bufferedBodyImage = playerBodyLeftAnimation.get(frameCount);
-            case (4) -> bufferedBodyImage = playerIdleAnimation.get(idleAnimationCounter);
+            case (4) -> bufferedBodyImage = playerIdle;
         }
     }
 
@@ -375,8 +371,6 @@ public class Dante extends GameObject {
         if(timeSinceLastShot % 7 == 0){
             frameCount = ++frameCount % animationSteps;
         }
-        if(timeSinceLastShot % 20 == 0)
-            idleAnimationCounter = ++idleAnimationCounter % animationSteps;
 
         // Used to keep track of which direction the player is looking in
         // 4 = Default value used for idle animation
