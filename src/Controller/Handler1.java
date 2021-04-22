@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.GameObject;
+import Model.ID;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -80,7 +81,7 @@ public class Handler1 {
     }
 
     public void tick(){
-        for(int i=0;i<objects.size();i++){
+        for(int i = 0; i < objects.size(); i++){
             GameObject temp=objects.get(i);
             temp.tick();
         }
@@ -88,9 +89,16 @@ public class Handler1 {
 
     public void render(Graphics g){
 
-        for(int i=objects.size() - 1;i>=0;i--){
+        boolean renderedDante = false;
+        for(int i=0; i < objects.size(); i++){
             GameObject temp=objects.get(i);
-            temp.render(g);
+            if(temp.getId().equals(ID.Dante) && !renderedDante) {
+                temp.render(g);
+                renderedDante = true;
+                i = 0;
+            }
+            if(renderedDante)
+                temp.render(g);
         }
     }
 

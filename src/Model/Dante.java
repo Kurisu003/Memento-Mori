@@ -254,6 +254,12 @@ public class Dante extends GameObject {
         if(shouldChangeLevel){
             Game.changeLevel(levelCounter, handler, g);
             shouldChangeLevel = false;
+            for(int i = 0; i < 7; i++){
+                for(int j = 0; j < 7; j++){
+                    wherePlayerHasBeen[i][j] = 0;
+                }
+            }
+            wherePlayerHasBeen[3][3] = 1;
         }
     }
 
