@@ -255,7 +255,6 @@ public class Dante extends GameObject {
             Game.changeLevel(levelCounter, handler, g);
             shouldChangeLevel = false;
         }
-        System.out.println(handler.objects.indexOf(this));
     }
 
     // Used to render image of player gun and body

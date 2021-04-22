@@ -25,8 +25,6 @@ public class Bullet extends GameObject {
 
         velX= (mx-x)/10;
         velY= (my-y)/10;
-
-        System.out.println(velX);
     }
 
     @Override
