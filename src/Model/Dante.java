@@ -21,6 +21,7 @@ public class Dante extends GameObject {
     private final BufferedImage playerGunDown;
     private final BufferedImage playerGunLeft;
     private final BufferedImage playerGunRight;
+    private final BufferedImage playerGunIdle;
 
     private final ArrayList<BufferedImage> playerBodyUpAnimation = new ArrayList<>();
     private final ArrayList<BufferedImage> playerBodyDownAnimation = new ArrayList<>();
@@ -72,7 +73,7 @@ public class Dante extends GameObject {
         playerGunDown = loader.loadImage("../Guns/M4/M4Down.png");
         playerGunLeft = loader.loadImage("../Guns/M4/M4Right.png");
         playerGunRight = loader.loadImage("../Guns/M4/M4Left.png");
-        playerGunIdle = loader.loadImage("../Guns/M4/M4Left.png");
+        playerGunIdle = loader.loadImage("../Guns/M4/M4Idle.png");
 
         playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation1&3.png"));
         playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation2.png"));
@@ -133,6 +134,7 @@ public class Dante extends GameObject {
             case (1) -> bufferedGunImage = playerGunDown;
             case (2) -> bufferedGunImage = playerGunLeft;
             case (3) -> bufferedGunImage = playerGunRight;
+            case (4) -> bufferedGunImage = playerGunIdle;
         }
     }
 
