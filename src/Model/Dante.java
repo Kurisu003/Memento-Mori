@@ -1,11 +1,9 @@
 package Model;
 
-import Controller.Handler1;
 import View.BufferedImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 // To implement:
@@ -34,7 +32,7 @@ public class Dante extends GameObject {
 
     private int roomXCoordinate;
     private int roomYCoordinate;
-    private int [][] wherePlayerHasBeen = new int[7][7];
+    private final int [][] wherePlayerHasBeen = new int[7][7];
 
     private int timeSinceLastShot = 20;
     private int fireSpeed = 20;
@@ -292,7 +290,6 @@ public class Dante extends GameObject {
         // to list within a loop
         if(shouldSpawnEnemy){
             SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088, roomYCoordinate * 576, 10, ID.Enemy, handler);
-            shouldSpawnEnemy = false;
         }
     }
 
@@ -312,39 +309,39 @@ public class Dante extends GameObject {
             health = 0;
 
         // Draws background
-        g.setColor(Color.BLACK);
-        int maxHealth = 5;
-        g.fillRect(25, 19, 25 * maxHealth, 23);
-
-        // Draws red healthbar
-        g.setColor(Color.RED);
-        g.fillRect(25, 20, 25 * health, 20);
-
-        // Draws white outline
-        for(int i = 1; i <= maxHealth; i++)
-            addHealth(g, i, Color.white);
-
-        // Draws Armor outline
-        for(int i = 1; i <= armor; i++)
-            addHealth(g, i, Color.cyan);
+//        g.setColor(Color.BLACK);
+//        int maxHealth = 5;
+//        g.fillRect(25, 19, 25 * maxHealth, 23);
+//
+//        // Draws red healthbar
+//        g.setColor(Color.RED);
+//        g.fillRect(25, 20, 25 * health, 20);
+//
+//        // Draws white outline
+//        for(int i = 1; i <= maxHealth; i++)
+//            addHealth(g, i, Color.white);
+//
+//        // Draws Armor outline
+//        for(int i = 1; i <= armor; i++)
+//            addHealth(g, i, Color.cyan);
     }
 
     // Draws white healthbar outlines
-    public void addHealth(Graphics g, int i, Color color){
-        ((Graphics2D) g).setStroke(new BasicStroke(3));
-        g.setColor(color);
-
-        // Top healthbar line
-        g.drawLine(i * 25 , 20, (25 * i) + 25 , 20);
-
-        // Bottom healthbar line
-        g.drawLine(i * 25 , 40, (25 * i) + 25 , 40);
-
-        // healthbar starting line
-        g.drawLine(25 , 20, 25 , 40);
-        // healthbar dividing lines
-        g.drawLine((i + 1) * 25 , 20, (i + 1) * 25 , 40);
-    }
+//    public void addHealth(Graphics g, int i, Color color){
+//        ((Graphics2D) g).setStroke(new BasicStroke(3));
+//        g.setColor(color);
+//
+//        // Top healthbar line
+//        g.drawLine(i * 25 , 20, (25 * i) + 25 , 20);
+//
+//        // Bottom healthbar line
+//        g.drawLine(i * 25 , 40, (25 * i) + 25 , 40);
+//
+//        // healthbar starting line
+//        g.drawLine(25 , 20, 25 , 40);
+//        // healthbar dividing lines
+//        g.drawLine((i + 1) * 25 , 20, (i + 1) * 25 , 40);
+//    }
 
     public void tick() {
         x += velX;
