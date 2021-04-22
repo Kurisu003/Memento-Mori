@@ -10,11 +10,11 @@ public class SpawnEnemiesInRoom {
         for (int i = 0; i < amountOfEnemies; i++){
             Random rn = new Random();
             if(typeOfEnemy.equals(ID.Enemy))
-                handler.addObject(new Enemy(roomStartX + (rn.nextInt(960) + 128),
-                                    roomStartY + (rn.nextInt(448) + 128), ID.Enemy, handler));
+                handler.addObject(new Enemy(roomStartX + (rn.nextInt(900) + 64),
+                                    roomStartY + (rn.nextInt(410) + 64), ID.Enemy, handler));
             else if(typeOfEnemy.equals(ID.SmartEnemy))
-                handler.addObject(new SmartEnemy(roomStartX + (rn.nextInt(960) + 128),
-                                roomStartY + (rn.nextInt(448) + 128), ID.SmartEnemy, handler));
+                handler.addObject(new SmartEnemy(roomStartX + (rn.nextInt(900) + 64),
+                                roomStartY + (rn.nextInt(410) + 64), ID.SmartEnemy, handler));
         }
     }
 }
