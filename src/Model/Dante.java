@@ -50,11 +50,13 @@ public class Dante extends GameObject {
     private BufferedImage bufferedGunImage;
     Controller.Handler1 handler;
     private final Camera camera;
+    private int levelCounter;
 
     public Dante(int x, int y, ID id, Controller.Handler1 handler1, Camera camera) {
         super(x, y, id);
         this.handler = handler1;
         this.camera = camera;
+        this.levelCounter=0;
 
         roomXCoordinate = 3;
         roomYCoordinate = 3;
@@ -233,6 +235,10 @@ public class Dante extends GameObject {
             if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())){
                 // To do damage to player
                 doAction(1);
+            }
+            if(temp.getId() == ID.Portal && getBounds().intersects(temp.getBounds())){
+                ++levelCounter;
+                Game.changeLevel(levelCounter);
             }
         }
 
