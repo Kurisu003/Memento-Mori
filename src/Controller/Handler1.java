@@ -88,7 +88,7 @@ public class Handler1 {
 
     public void render(Graphics g){
 
-        for(int i=0;i<objects.size();i++){
+        for(int i=objects.size() - 1;i>=0;i--){
             GameObject temp=objects.get(i);
             temp.render(g);
         }
