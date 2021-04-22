@@ -142,8 +142,8 @@ public class Dante extends GameObject {
         return new Rectangle(x + 7,y,50,64);
     }
 
-    @Override
     // To do damage to player character
+    @Override
     public int doAction(int action) {
         if(armor == 0) health -= action;
         else armor -= action;
@@ -156,46 +156,7 @@ public class Dante extends GameObject {
         int shotYStart = y;
         int shotXStart = x;
 
-//  Version with side shooting
-//        if(handler.isShootUp()) {
-//            shotY -= 100;
-//            shotXStart += 32;
-//        }
-//        if(handler.isShootDown()) {
-//            shotY += 100;
-//            shotXStart += 32;
-//            shotYStart += 35;
-//        }
-//        if(handler.isShootLeft()) {
-//            shotX -= 100;
-//            shotYStart = shotYStart - y < 35 ? shotYStart + 35 : shotYStart;
-//        }
-//        if(handler.isShootRight()) {
-//            shotX += 100;
-//            shotXStart = shotXStart - x < 32 ? shotXStart + 50 : shotXStart;
-//            shotYStart = shotYStart - y < 35 ? shotYStart + 35 : shotYStart;
-//        }
-
-//  Version where shooting stops if other key is pressed
-//        if(handler.isShootUp() && !handler.isShootDown() && !handler.isShootLeft() && !handler.isShootRight()){
-//            shotY = y - 100;
-//            shotX = x;
-//        }
-//        if(handler.isShootDown() && !handler.isShootUp() && !handler.isShootLeft() && !handler.isShootRight()){
-//            shotY = y + 100;
-//            shotX = x;
-//        }
-//        if(handler.isShootLeft() && !handler.isShootDown() && !handler.isShootUp() && !handler.isShootRight()){
-//            shotX = x - 100;
-//            shotY = y;
-//        }
-//        if(handler.isShootRight() && !handler.isShootDown() && !handler.isShootLeft() && !handler.isShootUp()){
-//            shotX = x + 100;
-//            shotY = y;
-//        }
-
-
-//  Version like the binding of isaac
+        // Version like the binding of isaac
         if(handler.isShootUp() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootLeft()){
             shotY = y - 132;
             shotX = x + 32;
@@ -230,10 +191,8 @@ public class Dante extends GameObject {
             handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX, shotY, range, damage, bulletImage));
     }
 
+    // Checks for collision
     private void checkCollision(){
-        // Checks for collision with blocks and
-        // stops player from moving if they're
-        // intersecting
         boolean shouldSpawnEnemy = false;
         for(GameObject temp : handler.objects){
 
@@ -266,27 +225,14 @@ public class Dante extends GameObject {
                     camera.setY(camera.getY() + 576);
                     roomYCoordinate++;
                 }
-                if(wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] == 0){
+                if(wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] == 0)
                     shouldSpawnEnemy = true;
-                }
-                wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] = 1;
 
-//                System.out.println("\n\n\n\n\n\n");
-//                for(int i = 0; i < 7; i++) {
-//                    for (int j = 0; j < 7; j++) {
-//                        System.out.print(wherePlayerHasBeen[i][j]);
-//                    }
-//                    System.out.println();
-//                }
+                wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] = 1;
             }
             if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())){
                 // To do damage to player
                 doAction(1);
-
-//                temp.x = temp.getX() - 1;
-//                temp.y = temp.getY() - 1;
-//                x += velX*-2;
-//                y += velY*-2;
             }
         }
 
@@ -311,48 +257,13 @@ public class Dante extends GameObject {
         if (health < 0)
             health = 0;
 
-        for(int i = 0; i < health; i++){
+        for(int i = 0; i < health; i++)
             g.drawImage(fullHeart, (int)camera.getX() + i * 35 + 10, (int)camera.getY() + 10, null);
-        }
 
-        for(int i = 0; i < armor; i++){
+        for(int i = 0; i < armor; i++)
             g.drawImage(fullArmor, (int)camera.getX() + i * 35 + 10 + health * 35, (int)camera.getY() + 10, null);
-        }
 
-        // Draws background
-//        g.setColor(Color.BLACK);
-//        int maxHealth = 5;
-//        g.fillRect(25, 19, 25 * maxHealth, 23);
-//
-//        // Draws red healthbar
-//        g.setColor(Color.RED);
-//        g.fillRect(25, 20, 25 * health, 20);
-//
-//        // Draws white outline
-//        for(int i = 1; i <= maxHealth; i++)
-//            addHealth(g, i, Color.white);
-//
-//        // Draws Armor outline
-//        for(int i = 1; i <= armor; i++)
-//            addHealth(g, i, Color.cyan);
     }
-
-    // Draws white healthbar outlines
-//    public void addHealth(Graphics g, int i, Color color){
-//        ((Graphics2D) g).setStroke(new BasicStroke(3));
-//        g.setColor(color);
-//
-//        // Top healthbar line
-//        g.drawLine(i * 25 , 20, (25 * i) + 25 , 20);
-//
-//        // Bottom healthbar line
-//        g.drawLine(i * 25 , 40, (25 * i) + 25 , 40);
-//
-//        // healthbar starting line
-//        g.drawLine(25 , 20, 25 , 40);
-//        // healthbar dividing lines
-//        g.drawLine((i + 1) * 25 , 20, (i + 1) * 25 , 40);
-//    }
 
     public void tick() {
         x += velX;
