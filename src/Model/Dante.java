@@ -80,10 +80,10 @@ public class Dante extends GameObject {
         playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation1&3.png"));
         playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation4.png"));
 
-        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontDown.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontDown.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontDown.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontDown.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation2.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
+        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation4.png"));
 
         playerBodyLeftAnimation.add(loader.loadImage("../Character/LeftAnimation1&3.png"));
         playerBodyLeftAnimation.add(loader.loadImage("../Character/LeftAnimation2.png"));
@@ -378,7 +378,7 @@ public class Dante extends GameObject {
         // Used to keep track of which direction the player is looking in
         // 4 = Default value used for idle animation
         int setBodyImgCounter = 4;
-        setGunImage(1);
+        setGunImage(4);
 
         if(handler.isUp() && !handler.isDown()){
             if (handler.isRight()||handler.isLeft()){
