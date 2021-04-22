@@ -21,6 +21,7 @@ public class SpawnEnemiesInRoom {
                 handler.addObject(new ShotEnemy(roomStartX + (rn.nextInt(960) + 128),
                         roomStartY + (rn.nextInt(448) + 128), ID.SmartEnemy,handler));
             }
+
         }
     }
 }
