@@ -45,6 +45,10 @@ public class Game extends Canvas implements Runnable {
         wallSprites.add(loader.loadImage("../Anger/DoorR.png"));
         wallSprites.add(loader.loadImage("../Anger/DoorT.png"));
 
+        handler.addObject(new Dante(3500, 1800, ID.Dante, handler, camera));
+        camera.setX(3264);
+        camera.setY(1728);
+
         render();
         LoadLevel level = new LoadLevel(handler, wallSprites, floor, camera, this.getBufferStrategy().getDrawGraphics());
 //        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
@@ -130,6 +134,9 @@ public class Game extends Canvas implements Runnable {
         }
 
         handler.render(g);
+
+
+
 
 //        for(GameObject temp : handler.objects){
 //            if(temp.getId() == ID.Door){

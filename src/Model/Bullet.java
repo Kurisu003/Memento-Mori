@@ -41,14 +41,19 @@ public class Bullet extends GameObject {
                 handler.removeObject(this);
                 temp.doAction(damage);
             }
+
+            if (temp.getId()== ID.SmartEnemy && getBounds().intersects(temp.getBounds())){
+                handler.removeObject(this);
+                temp.doAction(damage);
+            }
         }
     }
 
     @Override
     public void render(Graphics g) {
-//        g.setColor(Color.CYAN);
-//        g.fillOval(x,y,20,20);
-        g.drawImage(bufferedShotImage, x, y, null);
+       g.setColor(Color.CYAN);
+       g.fillOval(x,y,20,20);
+        //g.drawImage(bufferedShotImage, x, y, null);
     }
 
     @Override

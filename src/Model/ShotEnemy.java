@@ -11,10 +11,10 @@ public class ShotEnemy extends GameObject{
     BufferedImage image;
 
 
-    public ShotEnemy(int x, int y, ID id,Handler1 handler,BufferedImage image) {
+    public ShotEnemy(int x, int y, ID id,Handler1 handler) {
         super(x, y, id);
         this.handler=handler;
-        this.image=image;
+        //this.image=image;
     }
 
     @Override

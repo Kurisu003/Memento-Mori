@@ -242,25 +242,25 @@ public class Dante extends GameObject {
             if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds())){
                 if( temp.getX() >  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
                         handler.isRight() && !handler.isLeft()){
-                    x += 230;
+                    x += 200;
                     camera.setX(camera.getX() + 1088);
                     roomXCoordinate++;
                 }
                 else if(temp.getX() <  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
                         handler.isLeft() && !handler.isRight()){
-                    x -= 230;
+                    x -= 200;
                     camera.setX(camera.getX() - 1088);
                     roomXCoordinate--;
                 }
                 else if(temp.getY() < y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
                         handler.isUp() && !handler.isDown()){
-                    y -= 230;
+                    y -= 210;
                     camera.setY(camera.getY() - 576);
                     roomYCoordinate--;
                 }
                 else if(temp.getY() > y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
                         handler.isDown() && !handler.isUp()){
-                    y += 230;
+                    y += 210;
                     camera.setY(camera.getY() + 576);
                     roomYCoordinate++;
                 }
@@ -290,7 +290,7 @@ public class Dante extends GameObject {
 
         if(shouldSpawnEnemy){
             System.out.println(roomXCoordinate + "  " + roomYCoordinate);
-            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 64 * 17, roomYCoordinate * 64 * 9, 1, ID.Enemy, handler);
+            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 64 * 17, roomYCoordinate * 64 * 9, 1, ID.SmartEnemy, handler);
             shouldSpawnEnemy = false;
         }
     }
@@ -375,28 +375,45 @@ public class Dante extends GameObject {
         setGunImage(1);
 
         if(handler.isUp() && !handler.isDown()){
-            velY = -5;
+            if (handler.isRight()||handler.isLeft()){
+                velY=-3;
+            }else{
+                velY = -5;
+            }
+
             setBodyImgCounter = 0;
             setGunImage(0);
         }
         else if(handler.isDown()) velY = 0;
 
         if(handler.isDown() && !handler.isUp()){
-            velY = 5;
+            if (handler.isRight()||handler.isLeft()){
+                velY=3;
+            }else{
+                velY = 5;
+            }
             setBodyImgCounter = 1;
             setGunImage(1);
         }
         else if(!handler.isUp()) velY = 0;
 
         if(handler.isRight() && !handler.isLeft()){
-            velX = 5;
+            if (handler.isUp()||handler.isDown()){
+                velX=3;
+            }else{
+                velX = 5;
+            }
             setBodyImgCounter = 2;
             setGunImage(2);
         }
         else if(handler.isLeft()) velX = 0;
 
         if(handler.isLeft() && !handler.isRight()) {
-            velX = -5;
+            if (handler.isUp()||handler.isDown()){
+                velX=-3;
+            }else{
+                velX = -5;
+            }
             setBodyImgCounter = 3;
             setGunImage(3);
         }
