@@ -95,7 +95,7 @@ public class Dante extends GameObject {
         playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation1&3.png"));
         playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation4.png"));
 
-        playerIdle = loader.loadImage("../IdleWithoutWeapon.png");
+        playerIdle = loader.loadImage("../Character/IdleWithoutWeapon.png");
 
         bulletImage = loader.loadImage("../Tile.png");
         fullHeart = loader.loadImage("../Assets/FullHeart.png");
