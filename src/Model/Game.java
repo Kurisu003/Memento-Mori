@@ -31,7 +31,7 @@ public class Game extends Canvas implements Runnable {
         camera = new Camera(3264,1152);
         this.addKeyListener(new KeyInput(handler));
 //      this.addMouseListener(new Controller.MouseInput(handler,camera));
-        folder="Anger";
+        folder="Lust";
         BufferedImageLoader loader = new BufferedImageLoader();
         render();
 
