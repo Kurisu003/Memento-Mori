@@ -89,17 +89,20 @@ public class Handler1 {
 
     public void render(Graphics g){
 
-        boolean renderedDante = false;
-        for(int i=0; i < objects.size(); i++){
-            GameObject temp=objects.get(i);
-            if(temp.getId().equals(ID.Dante) && !renderedDante) {
-                temp.render(g);
-                renderedDante = true;
-                i = 0;
+//      Always renders Dante last so its on top of everything
+        int test = 0;
+        for(int i=0; i < objects.size(); i++) {
+            GameObject temp = objects.get(i);
+            if (temp.getId().equals(ID.Dante)) {
+                test = i;
+                continue;
             }
-            if(renderedDante)
-                temp.render(g);
+            temp.render(g);
         }
+        // To avoid array being accessed
+        // if nothing has been added to it yet
+        if(test > 0)
+            objects.get(test).render(g);
     }
 
     public void addObject(GameObject temp){
