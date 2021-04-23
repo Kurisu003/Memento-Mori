@@ -4,12 +4,13 @@ public enum ID {
 
     Dante(),
     Block(),
-    Ammo(),
+    Portal(),
     Bullet(),
     Enemy(),
     SmartEnemy(),
     ShotEnemy(),
     Door();
+
 
 
 }

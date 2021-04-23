@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.GameObject;
+import Model.ID;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -80,7 +81,7 @@ public class Handler1 {
     }
 
     public void tick(){
-        for(int i=0;i<objects.size();i++){
+        for(int i = 0; i < objects.size(); i++){
             GameObject temp=objects.get(i);
             temp.tick();
         }
@@ -88,10 +89,20 @@ public class Handler1 {
 
     public void render(Graphics g){
 
-        for(int i=0;i<objects.size();i++){
-            GameObject temp=objects.get(i);
+//      Always renders Dante last so its on top of everything
+        int test = 0;
+        for(int i=0; i < objects.size(); i++) {
+            GameObject temp = objects.get(i);
+            if (temp.getId().equals(ID.Dante)) {
+                test = i;
+                continue;
+            }
             temp.render(g);
         }
+        // To avoid array being accessed
+        // if nothing has been added to it yet
+        if(test > 0)
+            objects.get(test).render(g);
     }
 
     public void addObject(GameObject temp){

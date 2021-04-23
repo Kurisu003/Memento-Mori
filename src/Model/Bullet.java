@@ -2,6 +2,8 @@ package Model;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
+
 import Controller.*;
 
 public class Bullet extends GameObject {
@@ -12,6 +14,8 @@ public class Bullet extends GameObject {
     private final int range;
     private final int damage;
 
+    Random r= new Random();
+
     public Bullet(int x, int y, ID id, Handler1 handler, int mx, int my, int range, int damage, BufferedImage shotType) {
         super(x, y, id);
         this.handler = handler;
@@ -19,8 +23,8 @@ public class Bullet extends GameObject {
         this.bufferedShotImage = shotType;
         this.damage = damage;
 
-        velX=(mx-x)/10;
-        velY=(my-y)/10;
+        velX= (mx-x)/10;
+        velY= (my-y)/10;
     }
 
     @Override
@@ -41,14 +45,19 @@ public class Bullet extends GameObject {
                 handler.removeObject(this);
                 temp.doAction(damage);
             }
+
+            if (temp.getId()== ID.SmartEnemy && getBounds().intersects(temp.getBounds())){
+                handler.removeObject(this);
+                temp.doAction(damage);
+            }
         }
     }
 
     @Override
     public void render(Graphics g) {
-//        g.setColor(Color.CYAN);
-//        g.fillOval(x,y,20,20);
-        g.drawImage(bufferedShotImage, x, y, null);
+       g.setColor(Color.CYAN);
+       g.fillOval(x,y,20,20);
+        //g.drawImage(bufferedShotImage, x, y, null);
     }
 
     @Override

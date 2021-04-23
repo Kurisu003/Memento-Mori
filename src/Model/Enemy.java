@@ -53,8 +53,24 @@ public class Enemy extends GameObject {
                     velX *= -1;
                     velY *= -1;
                 } else if(choose == 0) {
-                    velX = (r.nextInt(4 - -4) + -4);
-                    velY = (r.nextInt(4 - -4) + -4);
+                    velX = (r.nextInt(2 - -2) + -2);
+                    velY = (r.nextInt(2 - -2) + -2);
+
+                    if (velX!=0){
+                        if (velY<0){
+                            velY+=1;
+                        }else {
+                            velY-=1;
+                        }
+                    }
+
+                    if (velY!=0){
+                        if (velX>0){
+                            velX-=1;
+                        }else {
+                            velX+=1;
+                        }
+                    }
                 }
             }
         }

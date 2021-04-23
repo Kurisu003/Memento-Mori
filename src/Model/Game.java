@@ -14,9 +14,15 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private boolean isRunning = false;
     private final Handler1 handler;
-    private final BufferedImage floor;
+    private static BufferedImage floor;
+
+    private static ArrayList<BufferedImage> wallSprites = new ArrayList<>();
+    
+    private static String folder;
 
     private final Model.Camera camera;
+
+    private Graphics g;
 
     public Game(){
         new View.Window(1100,611,"Memento Mori",this);
@@ -25,30 +31,51 @@ public class Game extends Canvas implements Runnable {
         camera = new Camera(3264,1152);
         this.addKeyListener(new KeyInput(handler));
 //      this.addMouseListener(new Controller.MouseInput(handler,camera));
-
+        folder="Anger";
         BufferedImageLoader loader = new BufferedImageLoader();
-//        floor = loader.loadImage("../Anger/AngerBackground.png");
-        floor = loader.loadImage("../Anger/Background.png");
-
-        ArrayList<BufferedImage> wallSprites = new ArrayList<>();
-        wallSprites.add(loader.loadImage("../Anger/BLC.png"));
-        wallSprites.add(loader.loadImage("../Anger/BMW.png"));
-        wallSprites.add(loader.loadImage("../Anger/BRC.png"));
-        wallSprites.add(loader.loadImage("../Anger/LMW.png"));
-        wallSprites.add(loader.loadImage("../Anger/RMW.png"));
-        wallSprites.add(loader.loadImage("../Anger/TLC.png"));
-        wallSprites.add(loader.loadImage("../Anger/TMW.png"));
-        wallSprites.add(loader.loadImage("../Anger/TRC.png"));
-
-        wallSprites.add(loader.loadImage("../Anger/DoorB.png"));
-        wallSprites.add(loader.loadImage("../Anger/DoorL.png"));
-        wallSprites.add(loader.loadImage("../Anger/DoorR.png"));
-        wallSprites.add(loader.loadImage("../Anger/DoorT.png"));
-
         render();
-        LoadLevel level = new LoadLevel(handler, wallSprites, floor, camera, this.getBufferStrategy().getDrawGraphics());
+
+//        floor = loader.loadImage("../Anger/AngerBackground.png");
+        loadsprites(handler, this.getBufferStrategy().getDrawGraphics());
+
+        handler.addObject(new Dante(3500, 1800, ID.Dante, handler, camera, g));
+        handler.addObject(new Box(3*64*17+128,3*64*9+128, ID.Portal,loader.loadImage("../Limbo/BLC.png")));
+        camera.setX(3264);
+        camera.setY(1728);
+
+//        LoadLevel.loadLevel(handler, wallSprites, this.getBufferStrategy().getDrawGraphics());
+
+
 //        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
 //        handler.addObject(new ShotEnemy(150,150,ID.Enemy,handler,floor));
+    }
+
+    private static void loadsprites(Handler1 handler, Graphics g){
+
+        wallSprites.clear();
+
+        BufferedImageLoader loader = new BufferedImageLoader();
+
+
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,192,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,192,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(128,192,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,128,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(128,128,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,0,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,0,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(128,0,64,64));
+
+
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,128,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,64,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(128,64,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,64,64,64));
+
+        floor = loader.loadImage("../" + folder + "/Background.png");
+
+        LoadLevel.clearAndLoadLevel(handler, wallSprites, g);
+
     }
 
     private void start(){
@@ -108,7 +135,7 @@ public class Game extends Canvas implements Runnable {
             this.createBufferStrategy(3);
             return;
         }
-        Graphics g=bs.getDrawGraphics();
+        g=bs.getDrawGraphics();
         Graphics2D g2d=(Graphics2D)g;
 
 //        g.setColor(Color.black);
@@ -122,6 +149,8 @@ public class Game extends Canvas implements Runnable {
 //            }
 //        }
 
+
+
         // Repeats sprites over entire level
         for(int i = 1; i <= 6; i++){
             for(int j = 1; j <= 6; j++){
@@ -130,6 +159,9 @@ public class Game extends Canvas implements Runnable {
         }
 
         handler.render(g);
+
+
+
 
 //        for(GameObject temp : handler.objects){
 //            if(temp.getId() == ID.Door){
@@ -148,6 +180,15 @@ public class Game extends Canvas implements Runnable {
         g.dispose();
         bs.show();
 
+    }
+    
+    public static void changeLevel(int levelCounter, Handler1 handler, Graphics g){
+
+        switch (levelCounter) {
+            case 1 -> folder = "Violence";
+        }
+        loadsprites(handler, g);
+        
     }
 
     public static void main(String[] args) {
