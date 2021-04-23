@@ -56,23 +56,25 @@ public class Game extends Canvas implements Runnable {
 
         BufferedImageLoader loader = new BufferedImageLoader();
 
-        wallSprites.add(loader.loadImage("../" + folder + "/BLC.png"));
-        wallSprites.add(loader.loadImage("../" + folder + "/BMW.png"));
-        wallSprites.add(loader.loadImage("../" + folder + "/BRC.png"));
-        wallSprites.add(loader.loadImage("../" + folder + "/LMW.png"));
-        wallSprites.add(loader.loadImage("../" + folder + "/RMW.png"));
-        wallSprites.add(loader.loadImage("../" + folder + "/TLC.png"));
-        wallSprites.add(loader.loadImage("../" + folder + "/TMW.png"));
-        wallSprites.add(loader.loadImage("../" + folder + "/TRC.png"));
 
-        wallSprites.add(loader.loadImage("../" + folder + "/DoorB.png"));
-        wallSprites.add(loader.loadImage("../" + folder + "/DoorL.png"));
-        wallSprites.add(loader.loadImage("../" + folder + "/DoorR.png"));
-        wallSprites.add(loader.loadImage("../" + folder + "/DoorT.png"));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,192,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,192,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(128,192,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,128,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(128,128,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,0,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,0,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(128,0,64,64));
+
+
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,128,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,64,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(128,64,64,64));
+        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,64,64,64));
 
         floor = loader.loadImage("../" + folder + "/Background.png");
 
-        LoadLevel.loadLevel(handler, wallSprites, g);
+        LoadLevel.clearAndLoadLevel(handler, wallSprites, g);
 
     }
 

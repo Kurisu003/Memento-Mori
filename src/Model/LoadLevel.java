@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class LoadLevel {
 
-    public static void loadLevel(Handler1 handler, ArrayList<BufferedImage> wallSprites, Graphics g){
+    public static void clearAndLoadLevel(Handler1 handler, ArrayList<BufferedImage> wallSprites, Graphics g){
 
         GenerateLevel generatedLevel = new GenerateLevel();
         for(int i=handler.objects.size() - 1;i>0;i--){
