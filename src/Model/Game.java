@@ -33,6 +33,8 @@ public class Game extends Canvas implements Runnable {
 //      this.addMouseListener(new Controller.MouseInput(handler,camera));
         folder="Lust";
         BufferedImageLoader loader = new BufferedImageLoader();
+
+        new Thread(new Music()).start();
         render();
 
 //        floor = loader.loadImage("../Anger/AngerBackground.png");
