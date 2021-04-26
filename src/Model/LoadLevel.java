@@ -11,6 +11,7 @@ public class LoadLevel {
     public static void clearAndLoadLevel(Handler1 handler, ArrayList<BufferedImage> wallSprites, Graphics g){
 
         GenerateLevel generatedLevel = new GenerateLevel();
+        // Clears list from all objects that aren't player Character
         for(int i=handler.objects.size() - 1;i>0;i--){
             if(handler.objects.get(i).getId() != ID.Dante) {
                 GameObject temp = handler.objects.get(i);
@@ -112,8 +113,6 @@ public class LoadLevel {
                             }
                         }
                     }
-//                    i = 7;
-//                    j = 20;
                 }
             }
         }
