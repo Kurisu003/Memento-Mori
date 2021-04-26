@@ -28,7 +28,7 @@ public class Game extends Canvas implements Runnable {
         new View.Window(1100,611,"Memento Mori",this);
         start();
         handler = new Handler1();
-        camera = new Camera(3264,1152);
+        camera = new Camera(3264,1728);
         this.addKeyListener(new KeyInput(handler));
 //      this.addMouseListener(new Controller.MouseInput(handler,camera));
         folder="Lust";
@@ -40,8 +40,8 @@ public class Game extends Canvas implements Runnable {
 
         handler.addObject(new Dante(3500, 1800, ID.Dante, handler, camera, g));
         handler.addObject(new Box(3*64*17+128,3*64*9+128, ID.Portal,loader.loadImage("../Limbo/BLC.png")));
-        camera.setX(3264);
-        camera.setY(1728);
+//        camera.setX(3264);
+//        camera.setY(1728);
 
 //        LoadLevel.loadLevel(handler, wallSprites, this.getBufferStrategy().getDrawGraphics());
 

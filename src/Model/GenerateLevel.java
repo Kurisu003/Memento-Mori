@@ -13,18 +13,6 @@ public class GenerateLevel {
     public GenerateLevel(){
         int roomCount = 1;
 
-//        for(int i = 0; i < bufferedImage.getHeight(); i += 9) {
-//            for (int j = 0; j < bufferedImage.getWidth(); j += 17) {
-//                availableLevels.add(bufferedImage.getSubimage(j, i, 17, 9));
-//            }
-//        }
-
-//        for(int i = 0; i < 7; i++) {
-//            for (int j = 0; j < 7; j++) {
-//                level[i][j]=0;
-//            }
-//        }
-
         level[3][3] = 1;
 
         // Roomcount starts at 1
