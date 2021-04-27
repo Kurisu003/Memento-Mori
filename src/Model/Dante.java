@@ -33,6 +33,7 @@ public class Dante extends GameObject {
     private final BufferedImage fullArmor;
 
     private BufferedImage bulletImage;
+    private BufferedImage miniMapFull;
 
     private int roomXCoordinate;
     private int roomYCoordinate;
@@ -63,6 +64,7 @@ public class Dante extends GameObject {
 
         roomXCoordinate = 3;
         roomYCoordinate = 3;
+
         
         wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] = 1;
 
@@ -73,6 +75,9 @@ public class Dante extends GameObject {
 //        playerBodyUp = loader.loadImage("../playerUp.png");
 //        playerBodyLeft = loader.loadImage("../playerLeft.png");
 //        playerBodyRight = loader.loadImage("../playerRight.png");
+
+
+        miniMapFull = loader.loadImage("../Minimap/FullMinimap.png");
 
         playerGunUp = loader.loadImage("../Guns/M4/M4Up.png");
         playerGunDown = loader.loadImage("../Guns/M4/M4Down.png");
@@ -263,10 +268,23 @@ public class Dante extends GameObject {
         }
     }
 
+    private void drawMinimap(Graphics g){
+        for(int i = 0; i < 7; i++){
+            for (int j = 0; j < 7; j++){
+                if(wherePlayerHasBeen[i][j] == 1){
+//                    g.drawImage(miniMapFull, (int)camera.getX() + 64 * 12 + i * 45 + 45, (int)camera.getY() + j * 25 - 20, null);
+                }
+                g.drawImage(miniMapFull, (int)camera.getX() + 64 * 12 + ((int)camera.getX() / 64 / 17) * 45 + 45,
+                        (int)camera.getY() + ((int)camera.getY() / 64 / 17) * 25 - 20, null);
+            }
+        }
+    }
+
     // Used to render image of player gun and body
     public void render(Graphics g) {
         g.drawImage(bufferedBodyImage, x, y, null);
         g.drawImage(bufferedGunImage, x - 20, y - 30, null);
+        drawMinimap(g);
 
 //        To draw hitboxes
 //        Graphics2D g2 = (Graphics2D)g;
