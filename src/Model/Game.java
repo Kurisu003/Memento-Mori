@@ -34,7 +34,7 @@ public class Game extends Canvas implements Runnable {
         folder="Anger";
         BufferedImageLoader loader = new BufferedImageLoader();
 
-        new Thread(new Music()).start();
+        new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
         render();
 
 //        floor = loader.loadImage("../Anger/AngerBackground.png");
