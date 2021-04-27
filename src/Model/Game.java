@@ -31,7 +31,7 @@ public class Game extends Canvas implements Runnable {
         camera = new Camera(3264,1728);
         this.addKeyListener(new KeyInput(handler));
 //      this.addMouseListener(new Controller.MouseInput(handler,camera));
-        folder="Lust";
+        folder="Anger";
         BufferedImageLoader loader = new BufferedImageLoader();
 
         new Thread(new Music()).start();
@@ -57,7 +57,6 @@ public class Game extends Canvas implements Runnable {
         wallSprites.clear();
 
         BufferedImageLoader loader = new BufferedImageLoader();
-
 
         wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,192,64,64));
         wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,192,64,64));
