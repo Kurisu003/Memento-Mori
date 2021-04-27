@@ -9,7 +9,9 @@ public enum ID {
     Enemy(),
     SmartEnemy(),
     ShotEnemy(),
-    Door();
+    Door(),
+    BG_music(),
+    ShootingSound();
 
 
 

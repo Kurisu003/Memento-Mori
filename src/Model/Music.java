@@ -6,10 +6,17 @@ import java.io.IOException;
 import javax.sound.sampled.*;
 
 public class Music implements LineListener, Runnable {
+    private final String audioFilePath;
+    private final ID id;
 
-    boolean playCompleted;
-    void playMusic(String audioFilePath) {
-        File audioFile = new File(audioFilePath);
+    public Music(String audioFilePath, ID id){
+        this.audioFilePath = audioFilePath;
+        this.id = id;
+    }
+
+    boolean playCompleted = false;
+    void playMusic() {
+        File audioFile = new File(this.audioFilePath);
 
         try {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
@@ -33,8 +40,7 @@ public class Music implements LineListener, Runnable {
                     ex.printStackTrace();
                 }
             }
-
-            //audioClip.close();
+            audioClip.close();
 
         } catch (UnsupportedAudioFileException ex) {
             System.out.println("The specified audio file is not supported.");
@@ -53,17 +59,18 @@ public class Music implements LineListener, Runnable {
     public void update(LineEvent event) {
         LineEvent.Type type = event.getType();
 
-        if (type == LineEvent.Type.START) {
-            System.out.println("Playback started.");
-
-        } else if (type == LineEvent.Type.STOP) {
-            playMusic("music/bg_music1.wav");
+        if (this.id == ID.BG_music && (type == LineEvent.Type.STOP)) {
+            playMusic();
         }
+        else if(this.id == ID.ShootingSound && type == LineEvent.Type.STOP){
+            this.playCompleted = true;
+            System.out.println("STOP");
+        }
+
     }
 
     @Override
     public void run() {
-        Music music = new Music();
-        music.playMusic("music/bg_music.wav");
+        this.playMusic();
     }
 }
