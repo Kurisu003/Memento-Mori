@@ -155,45 +155,24 @@ public class Dante extends GameObject {
         return 0;
     }
 
-    private void spawnBulletOnPress(){
-        int shotY = y;
-        int shotX = x;
-        int shotYStart = y;
-        int shotXStart = x;
-
-        // Version like the binding of isaac
-        if(handler.isShootUp() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootLeft()){
-            shotY = y - 132;
-            shotX = x + 32;
-
-            shotXStart = x + 30;
-            shotYStart = y - 32;
-        }
-        else if(handler.isShootDown() && !handler.isShootRight() && !handler.isShootLeft() && !handler.isShootUp()){
-            shotY = y + 175;
-            shotX = x + 30;
-
-            shotXStart = x + 30;
-            shotYStart = y + 75;
-        }
-        else if(handler.isShootLeft() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootUp()){
-            shotX = x - 130;
-            shotY = y + 40;
-
-            shotXStart = x;
-            shotYStart = y + 40;
-        }
-        else if(handler.isShootRight() && !handler.isShootLeft() && !handler.isShootDown() && !handler.isShootUp()){
-            shotX = x + 164;
-            shotY = y + 40;
-
-            shotXStart = x + 64;
-            shotYStart = y + 40;
-        }
-
+    private void spawnBulletOnPress(int shotY, int shotYStart, int shotX, int shotXStart){
         int damage = 100;
-        if(shotY != y || shotX != x)
+        if(shotY != y || shotX != x){
             handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX, shotY, range, damage, bulletImage));
+            new Thread(new Music("res/Sounds/Guns/M4/GunSound.wav", ID.ShootingSound)).start();
+        }
+    }
+
+    private void checkBulletDirection(){
+        // Version like the binding of isaac
+        if(handler.isShootUp() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootLeft())
+            spawnBulletOnPress(y-132, y-32, x+32, x+30);
+        else if(handler.isShootDown() && !handler.isShootRight() && !handler.isShootLeft() && !handler.isShootUp())
+            spawnBulletOnPress(y+175, y+75, x+30, x+30);
+        else if(handler.isShootLeft() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootUp())
+            spawnBulletOnPress(y+40, y+40, x-130, x);
+        else if(handler.isShootRight() && !handler.isShootLeft() && !handler.isShootDown() && !handler.isShootUp())
+            spawnBulletOnPress(y+40, y+40, x+164, x+64);
     }
 
     // Checks for collision
@@ -390,7 +369,7 @@ public class Dante extends GameObject {
         }
         if  (timeSinceLastShot > fireSpeed &&
             (handler.isShootUp() || handler.isShootDown() || handler.isShootLeft() || handler.isShootRight())){
-            spawnBulletOnPress();
+            checkBulletDirection();
             timeSinceLastShot = 0;
         }
     }
