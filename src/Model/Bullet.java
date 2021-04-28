@@ -46,22 +46,6 @@ public class Bullet extends GameObject {
                 if (temp.getId() == ID.Block || temp.getId() == ID.Door)
                     handler.removeObject(this);
             }
-            /*
-            if ((temp.getId() == ID.Block || temp.getId() == ID.Door) && getBounds().intersects(temp.getBounds())) {
-                handler.removeObject(this);
-            }
-                if (temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())) {
-                    handler.removeObject(this);
-                    temp.doAction(damage);
-                }
-
-                if (temp.getId() == ID.SmartEnemy && getBounds().intersects(temp.getBounds())) {
-                    handler.removeObject(this);
-                    temp.doAction(damage);
-                }
-            }
-
-             */
         }
     }
 
