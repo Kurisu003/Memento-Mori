@@ -16,6 +16,8 @@ public class Game extends Canvas implements Runnable {
     private final Handler1 handler;
     private static BufferedImage floor;
 
+    private GameState state= GameState.Game;
+
     private static ArrayList<BufferedImage> wallSprites = new ArrayList<>();
     
     private static String folder;
@@ -141,8 +143,8 @@ public class Game extends Canvas implements Runnable {
 
 //        g.setColor(Color.black);
 //        g.fillRect(0,0,9999,9999);
-
-        g2d.translate(-camera.getX(),-camera.getY());
+        if(state==GameState.Game) {
+            g2d.translate(-camera.getX(), -camera.getY());
 
 //        for(int xx=0;xx<30*72;xx+=64){
 //            for(int yy = 0; yy < 30 * 72; yy+=64){
@@ -151,17 +153,14 @@ public class Game extends Canvas implements Runnable {
 //        }
 
 
-
-        // Repeats sprites over entire level
-        for(int i = 1; i <= 6; i++){
-            for(int j = 1; j <= 6; j++){
-                g.drawImage(floor, i * 1088, j * 576, null);
+            // Repeats sprites over entire level
+            for (int i = 1; i <= 6; i++) {
+                for (int j = 1; j <= 6; j++) {
+                    g.drawImage(floor, i * 1088, j * 576, null);
+                }
             }
-        }
 
-        handler.render(g);
-
-
+            handler.render(g);
 
 
 //        for(GameObject temp : handler.objects){
@@ -176,8 +175,10 @@ public class Game extends Canvas implements Runnable {
 //            }
 //        }
 
-        g2d.translate(camera.getX(),camera.getY());
-
+            g2d.translate(camera.getX(), camera.getY());
+        } else if(state==GameState.MainMenu){
+            g.fillRect(0,0,9999,9999);
+        }
         g.dispose();
         bs.show();
 
