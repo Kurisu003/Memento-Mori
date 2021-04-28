@@ -16,7 +16,7 @@ public class Game extends Canvas implements Runnable {
     private final Handler1 handler;
     private static BufferedImage floor;
 
-    private GameState state= GameState.Game;
+    private GameState state = GameState.MainMenu;
 
     private static ArrayList<BufferedImage> wallSprites = new ArrayList<>();
     
@@ -26,11 +26,15 @@ public class Game extends Canvas implements Runnable {
 
     private Graphics g;
 
+    private MainMenu mainMenu;
+
     public Game(){
         new View.Window(1100,611,"Memento Mori",this);
         start();
         handler = new Handler1();
         camera = new Camera(3264,1728);
+        mainMenu = new MainMenu();
+        mainMenu.init();
         this.addKeyListener(new KeyInput(handler));
 //      this.addMouseListener(new Controller.MouseInput(handler,camera));
         folder="Lust";
@@ -43,7 +47,7 @@ public class Game extends Canvas implements Runnable {
         loadsprites(handler, this.getBufferStrategy().getDrawGraphics());
 
         handler.addObject(new Dante(3500, 1800, ID.Dante, handler, camera, g));
-        handler.addObject(new Box(3*64*17+128,3*64*9+128, ID.Portal,loader.loadImage("../Limbo/BLC.png")));
+        handler.addObject(new Box(3392,1856, ID.Portal,loader.loadImage("../Limbo/BLC.png")));
 //        camera.setX(3264);
 //        camera.setY(1728);
 
@@ -141,17 +145,8 @@ public class Game extends Canvas implements Runnable {
         g=bs.getDrawGraphics();
         Graphics2D g2d=(Graphics2D)g;
 
-//        g.setColor(Color.black);
-//        g.fillRect(0,0,9999,9999);
         if(state==GameState.Game) {
             g2d.translate(-camera.getX(), -camera.getY());
-
-//        for(int xx=0;xx<30*72;xx+=64){
-//            for(int yy = 0; yy < 30 * 72; yy+=64){
-//                g.drawImage(floor,0,0,null);
-//            }
-//        }
-
 
             // Repeats sprites over entire level
             for (int i = 1; i <= 6; i++) {
@@ -162,22 +157,9 @@ public class Game extends Canvas implements Runnable {
 
             handler.render(g);
 
-
-//        for(GameObject temp : handler.objects){
-//            if(temp.getId() == ID.Door){
-//                g.setColor(Color.green);
-//                g.fillRect(temp.getX() - 32, temp.getY(), 10,10);
-//                g.fillRect(temp.getX() + 64, temp.getY(), 10,10);
-//            }
-//            else if(temp.getId() == ID.Dante){
-//                g.setColor(Color.blue);
-//                g.fillRect(temp.getX(), temp.getY(), 10,10);
-//            }
-//        }
-
             g2d.translate(camera.getX(), camera.getY());
         } else if(state==GameState.MainMenu){
-            g.fillRect(0,0,9999,9999);
+            mainMenu.render(g);
         }
         g.dispose();
         bs.show();

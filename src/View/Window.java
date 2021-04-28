@@ -9,8 +9,6 @@ import java.awt.*;
 
 public class Window {
 
-
-
     public Window(int width, int height, String title, Game game){
         JFrame frame = new JFrame(title);
         // Setting the size of the window
