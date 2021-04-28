@@ -1,11 +1,15 @@
 package View;
 
 import Model.Game;
+import Model.GameState;
 
 import javax.swing.*;
+import javax.swing.plaf.nimbus.State;
 import java.awt.*;
 
 public class Window {
+
+
 
     public Window(int width, int height, String title, Game game){
         JFrame frame = new JFrame(title);
@@ -15,6 +19,7 @@ public class Window {
         frame.setMinimumSize(new Dimension(width, height));
 
         // we add the game class to the frame
+
         frame.add(game);
 
         // you cannot resize the window
