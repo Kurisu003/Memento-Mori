@@ -166,10 +166,11 @@ public class Dante extends GameObject {
         int damage = 100;
         if(shotY != y || shotX != x){
             handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX, shotY, range, damage, bulletImage));
-            new Thread(new Music("res/Sounds/Guns/M4/GunSound.wav", ID.ShootingSound)).start();
+            new Thread(new Music("res/Sounds/Guns/M4/GunSound1.wav", ID.ShootingSound)).start();
         }
     }
 
+    //Checks shooting direction
     private void checkBulletDirection(){
         // Version like the binding of isaac
         if(handler.isShootUp() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootLeft())
