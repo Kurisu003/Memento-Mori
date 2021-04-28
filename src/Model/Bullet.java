@@ -38,6 +38,15 @@ public class Bullet extends GameObject {
 
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
+            if (getBounds().intersects(temp.getBounds())) {
+                if (temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy) {
+                    handler.removeObject(this);
+                    temp.doAction(damage);
+                }
+                if (temp.getId() == ID.Block || temp.getId() == ID.Door)
+                    handler.removeObject(this);
+            }
+            /*
             if ((temp.getId() == ID.Block || temp.getId() == ID.Door) && getBounds().intersects(temp.getBounds())) {
                 handler.removeObject(this);
             }
@@ -51,7 +60,10 @@ public class Bullet extends GameObject {
                     temp.doAction(damage);
                 }
             }
+
+             */
         }
+    }
 
     @Override
     public void render(Graphics g) {
