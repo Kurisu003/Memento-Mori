@@ -29,19 +29,22 @@ public class Bullet extends GameObject {
 
     @Override
     public void tick() {
-        x+=velX;
-        y+=velY;
+        x += velX;
+        y += velY;
 
-        if(++timeAlive > range){
+        if (++timeAlive > range) {
             handler.removeObject(this);
         }
 
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
-            if(getBounds().intersects(temp.getBounds())){
-                if(temp.getId() == ID.Enemy || temp.getId()==ID.SmartEnemy)
+            if (getBounds().intersects(temp.getBounds())) {
+                if (temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy) {
+                    handler.removeObject(this);
                     temp.doAction(damage);
-                handler.removeObject(this);
+                }
+                if (temp.getId() == ID.Block || temp.getId() == ID.Door)
+                    handler.removeObject(this);
             }
         }
     }

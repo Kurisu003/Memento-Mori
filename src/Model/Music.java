@@ -8,6 +8,8 @@ import javax.sound.sampled.*;
 public class Music implements LineListener, Runnable {
     private final String audioFilePath;
     private final ID id;
+    private float musicVolume = -20.0f;
+    private float soundVolume = -20.0f;
 
     public Music(String audioFilePath, ID id){
         this.audioFilePath = audioFilePath;
@@ -30,6 +32,12 @@ public class Music implements LineListener, Runnable {
             audioClip.addLineListener(this);
 
             audioClip.open(audioStream);
+            FloatControl gainControl = (FloatControl)audioClip.getControl(FloatControl.Type.MASTER_GAIN);
+            if(this.id == ID.BG_music)
+                gainControl.setValue(musicVolume);
+            else if(this.id == ID.ShootingSound)
+                gainControl.setValue(soundVolume);
+
 
             audioClip.start();
 
@@ -70,5 +78,21 @@ public class Music implements LineListener, Runnable {
     @Override
     public void run() {
         this.playMusic();
+    }
+
+    public void setMusicVolume(float musicVolume) {
+        this.musicVolume = musicVolume;
+    }
+
+    public float getMusicVolume() {
+        return musicVolume;
+    }
+
+    public void setSoundVolume(float soundVolume) {
+        this.soundVolume = soundVolume;
+    }
+
+    public float getSoundVolume() {
+        return soundVolume;
     }
 }

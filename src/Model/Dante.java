@@ -260,7 +260,6 @@ public class Dante extends GameObject {
             }
         }
         g.drawImage(miniMapPlayerLocation, (int)camera.getX() + 768 + (int)camera.getX() / (64 * 17) * 45 + 45,(int)camera.getY() + (int)camera.getY() / (64 * 9) * 25 - 16, null);
-
     }
 
     // Used to render image of player gun and body
