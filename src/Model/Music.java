@@ -62,10 +62,8 @@ public class Music implements LineListener, Runnable {
         if (this.id == ID.BG_music && (type == LineEvent.Type.STOP)) {
             playMusic();
         }
-        else if(this.id == ID.ShootingSound && type == LineEvent.Type.STOP){
+        else if(this.id == ID.ShootingSound && type == LineEvent.Type.STOP)
             this.playCompleted = true;
-            System.out.println("STOP");
-        }
 
     }
 
