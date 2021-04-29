@@ -5,6 +5,7 @@ import View.BufferedImageLoader;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 // To implement:
 // recoil player and enemy on contact
@@ -35,6 +36,7 @@ public class Dante extends GameObject {
     private BufferedImage bulletImage;
     private BufferedImage miniMapFull;
     private BufferedImage miniMapPlayerLocation;
+    private BufferedImage minibossHealth;
 
     private int roomXCoordinate;
     private int roomYCoordinate;
@@ -112,6 +114,7 @@ public class Dante extends GameObject {
         bulletImage = loader.loadImage("../Tile.png");
         fullHeart = loader.loadImage("../Assets/FullHeart.png");
         fullArmor = loader.loadImage("../Assets/FullShield.png");
+        minibossHealth = loader.loadImage("../Assets/redRec.png");
     }
 
     // to set firespeed of weapon
@@ -187,7 +190,9 @@ public class Dante extends GameObject {
     private void checkCollision(){
         boolean shouldSpawnEnemy = false;
         boolean shouldChangeLevel = false;
-        for(GameObject temp : handler.objects){
+
+        for(Iterator<GameObject> iterator = handler.objects.iterator(); iterator.hasNext();){
+            GameObject temp = iterator.next();
 
             if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())){
                 x+=velX*-1;
@@ -236,7 +241,7 @@ public class Dante extends GameObject {
         // Used because object cant be added
         // to list within a loop
         if(shouldSpawnEnemy){
-            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088, roomYCoordinate * 576, 10, ID.SmartEnemy, handler);
+            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088, roomYCoordinate * 576, 2, ID.SmartEnemy, handler);
         }
         if(shouldChangeLevel){
             Game.changeLevel(levelCounter, handler, g);
@@ -282,6 +287,7 @@ public class Dante extends GameObject {
 
         for(int i = 0; i < armor; i++)
             g.drawImage(fullArmor, (int)camera.getX() + i * 35 + 10 + health * 35, (int)camera.getY() + 10, null);
+
 
     }
 

@@ -24,6 +24,8 @@ public class MainMenu extends MouseAdapter {
     private BufferedImage gameVolume;
     private BufferedImage soundBarEmpty;
     private BufferedImage soundBarFull;
+    private BufferedImage backspace;
+
 
     private int desiredCameraX;
     private int desiredCameraY;
@@ -36,18 +38,25 @@ public class MainMenu extends MouseAdapter {
 
         if(mx > 1098 && mx < 1598) {
             if (my > 300 && my < 350) {
-                camera.setX(camera.getX()+1088);
+                desiredCameraX += 1088;
             } else if (my > 375 && my < 425) {
-                camera.setX(camera.getX()-1088);
+                desiredCameraX = 0;
             } else if (my > 450 && my < 500) {
-                camera.setY(camera.getY()+576);
+                desiredCameraY = 576;
             }
+        }
+        if(!(camera.getX() == 1088 && camera.getY() == 0) && (mx - camera.getX() > 20 && mx - camera.getX() < 273) &&
+            (my - camera.getY() > 20 && my - camera.getY() < 70)){
+            desiredCameraX = 1088;
+            desiredCameraY = 0;
         }
     }
 
     public void init(){
         this.camera = new Camera(1088,0);
 
+        desiredCameraX = (int) camera.getX();
+        desiredCameraY = (int) camera.getY();
 
         BufferedImageLoader loader = new BufferedImageLoader();
         background = loader.loadImage("../Screen.png");
@@ -61,6 +70,8 @@ public class MainMenu extends MouseAdapter {
         gameVolume = loader.loadImage("../GameVolume.png");
         soundBarEmpty = loader.loadImage("../GameSoundbarEmpty.png");
         soundBarFull = loader.loadImage("../GameSoundbarFiller.png");
+        backspace = loader.loadImage("../Backspace.png");
+
     }
 
     public void render(Graphics g){
@@ -73,12 +84,25 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(startNewGame, 10 + 1088, 300, null);
         g.drawImage(continueGame, 10 + 1088, 375, null);
         g.drawImage(settings, 10 + 1088, 450, null);
+
         //g.drawImage(saveIcon, 10 + 1088, 750, null);
         g.drawImage(musicVolume, 10 + 1088, 743, null);
         g.drawImage(gameVolume, 10 + 1088, 937, null);
         g.drawImage(soundBarFull, 530 + 1088, 743, null);
         g.drawImage(soundBarFull, 530 + 1088, 937, null);
 
+        System.out.println(camera.getX());
+        if(!(camera.getX() > 1088 - 20 && camera.getX() < 1088 + 20 && camera.getY() == 0))
+            g.drawImage(backspace,  (int)camera.getX() + 20, (int)camera.getY() + 20, null);
+
+        if(desiredCameraX < camera.getX() && desiredCameraX + 20 < camera.getX()){
+            camera.setX(camera.getX() - 20);
+        }else if(desiredCameraX > camera.getX()){
+            camera.setX(camera.getX() + 20);
+        }
+        else if(desiredCameraY > camera.getY()){
+            camera.setY(camera.getY() + 20);
+        }
         g2d.translate(camera.getX(), camera.getY());
     }
 }
