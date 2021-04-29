@@ -47,7 +47,7 @@ public class Enemy extends GameObject {
             GameObject temp = handler.objects.get(i);
 
             if(temp.getId() == ID.Block) {
-                if(getBoundsBigger().intersects(temp.getBounds())) {
+                if(getBoundsBigger().intersects(temp.getBounds())||(temp.getId()==ID.Enemy && temp.hashCode()!=this.hashCode())) {
                     x += (velX * 4) * -1;
                     y += (velY * 4) * -1;
                     velX *= -1;
