@@ -31,12 +31,12 @@ public class Game extends Canvas implements Runnable {
     public Game(){
         new View.Window(1100,611,"Memento Mori",this);
         start();
-        handler = new Handler1();
+        handler = Handler1.getInstance();
         camera = new Camera(3264,1728);
         mainMenu = new MainMenu();
         mainMenu.init();
         this.addKeyListener(new KeyInput(handler));
-//      this.addMouseListener(new Controller.MouseInput(handler,camera));
+        this.addMouseListener(mainMenu);
         folder="Gluttony";
         BufferedImageLoader loader = new BufferedImageLoader();
 
