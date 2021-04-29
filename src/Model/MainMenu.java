@@ -91,6 +91,7 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(soundBarEmpty, 530 + 1088, 743, null);
         g.drawImage(soundBarEmpty, 530 + 1088, 937, null);
 
+
         if(!(camera.getX() >= 1088 - 20 && camera.getX() <= 1088 + 20 && camera.getY() >= -20 && camera.getY() <= 20))
             g.drawImage(backspace,  (int)camera.getX() + 20, (int)camera.getY() + 20, null);
 
