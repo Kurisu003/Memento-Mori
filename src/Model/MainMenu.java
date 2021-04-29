@@ -11,6 +11,7 @@ public class MainMenu {
     private BufferedImage background;
     private BufferedImage title;
 
+    private BufferedImage mainMenu;
     private BufferedImage startNewGame;
     private BufferedImage continueGame;
     private BufferedImage settings;
@@ -19,12 +20,12 @@ public class MainMenu {
     }
 
     public void init(){
-        this.camera = new Camera(0,0);
+        this.camera = new Camera(1088,576);
 
         BufferedImageLoader loader = new BufferedImageLoader();
-        background = loader.loadImage("../Background.png");
-        background = loader.loadImage("../Title.png");
+        background = loader.loadImage("../Screen.png");
 
+        title = loader.loadImage("../Title.png");
         startNewGame = loader.loadImage("../StartNewGame.png");
         continueGame = loader.loadImage("../ContinueGame.png");
         settings = loader.loadImage("../Settings.png");
@@ -35,15 +36,11 @@ public class MainMenu {
         Graphics2D g2d=(Graphics2D)g;
         g2d.translate(-camera.getX(), -camera.getY());
         g.drawImage(background, 0, 0, null);
-        g.drawImage(title, 10, 0, null);
 
-        g.drawImage(startNewGame, 10, 300, null);
-        g.drawImage(continueGame, 10, 375, null);
-        g.drawImage(settings, 10, 450, null);
-
-//        g.drawImage(startNewGame, 90, 300, null);
-//        g.drawImage(continueGame, 50, 375, null);
-//        g.drawImage(settings, 10, 450, null);
+        g.drawImage(title, 90 + 1088, 10, null);
+        g.drawImage(startNewGame, 10 + 1088, 300, null);
+        g.drawImage(continueGame, 10 + 1088, 375, null);
+        g.drawImage(settings, 10 + 1088, 450, null);
 
         g2d.translate(camera.getX(), camera.getY());
     }
