@@ -16,13 +16,13 @@ public class Game extends Canvas implements Runnable {
     private final Handler1 handler;
     private static BufferedImage floor;
 
-    private GameState state = GameState.MainMenu;
+    private GameState state = GameState.Game;
 
     private static ArrayList<BufferedImage> wallSprites = new ArrayList<>();
     
     private static String folder;
 
-    private final Model.Camera camera;
+    private static Model.Camera camera;
 
     private Graphics g;
 
@@ -173,6 +173,10 @@ public class Game extends Canvas implements Runnable {
         }
         loadsprites(handler, g);
         
+    }
+
+    public static Camera getCamera() {
+        return camera;
     }
 
     public static void main(String[] args) {

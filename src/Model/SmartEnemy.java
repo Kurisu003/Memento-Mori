@@ -13,7 +13,6 @@ public class SmartEnemy extends GameObject{
         super(x, y, id);
         this.handler=handler;
 
-
     }
 
     @Override
