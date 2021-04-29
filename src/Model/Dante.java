@@ -5,6 +5,7 @@ import View.BufferedImageLoader;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 // To implement:
 // recoil player and enemy on contact
@@ -189,7 +190,9 @@ public class Dante extends GameObject {
     private void checkCollision(){
         boolean shouldSpawnEnemy = false;
         boolean shouldChangeLevel = false;
-        for(GameObject temp : handler.objects){
+
+        for(Iterator<GameObject> iterator = handler.objects.iterator(); iterator.hasNext();){
+            GameObject temp = iterator.next();
 
             if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())){
                 x+=velX*-1;
