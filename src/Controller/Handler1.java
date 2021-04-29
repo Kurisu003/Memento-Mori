@@ -5,6 +5,7 @@ import Model.ID;
 
 import java.awt.*;
 import java.util.LinkedList;
+import java.util.logging.Handler;
 
 public class Handler1 {
 
@@ -13,6 +14,17 @@ public class Handler1 {
     public LinkedList<GameObject>objects = new LinkedList<GameObject>();
 
     private boolean up=false,down=false,right=false,left=false;
+
+    private static Handler1 instance = null;
+
+    private Handler1(){}
+
+    public static Handler1 getInstance(){
+        if(instance == null){
+            instance = new Handler1();
+        }
+        return instance;
+    }
 
     public boolean isShootUp() {
         return shootUp;

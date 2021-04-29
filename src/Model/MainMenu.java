@@ -1,11 +1,15 @@
 package Model;
 
+import Controller.Handler1;
+import Controller.MouseInput;
 import View.BufferedImageLoader;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-public class MainMenu {
+public class MainMenu extends MouseAdapter {
 
     private Camera camera;
     private BufferedImage background;
@@ -21,11 +25,29 @@ public class MainMenu {
     private BufferedImage gameSoundBar;
     private BufferedImage musicSoundBar;
 
-    public MainMenu(){
+    private int desiredCameraX;
+    private int desiredCameraY;
+
+    public MainMenu(){}
+
+    public void mousePressed(MouseEvent e) {
+        int mx = (int) (e.getX() + camera.getX());
+        int my = (int) (e.getY() + camera.getY());
+
+        if(mx > 1098 && mx < 1598) {
+            if (my > 300 && my < 350) {
+                camera.setX(camera.getX()+1088);
+            } else if (my > 375 && my < 425) {
+                camera.setX(camera.getX()-1088);
+            } else if (my > 450 && my < 500) {
+                camera.setY(camera.getY()+576);
+            }
+        }
     }
 
     public void init(){
-        this.camera = new Camera(1088,576);
+        this.camera = new Camera(1088,0);
+
 
         BufferedImageLoader loader = new BufferedImageLoader();
         background = loader.loadImage("../Screen.png");
