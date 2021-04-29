@@ -35,6 +35,7 @@ public class Dante extends GameObject {
     private BufferedImage bulletImage;
     private BufferedImage miniMapFull;
     private BufferedImage miniMapPlayerLocation;
+    private BufferedImage minibossHealth;
 
     private int roomXCoordinate;
     private int roomYCoordinate;
@@ -112,6 +113,7 @@ public class Dante extends GameObject {
         bulletImage = loader.loadImage("../Tile.png");
         fullHeart = loader.loadImage("../Assets/FullHeart.png");
         fullArmor = loader.loadImage("../Assets/FullShield.png");
+        minibossHealth = loader.loadImage("../Assets/redRec.png");
     }
 
     // to set firespeed of weapon
@@ -282,6 +284,7 @@ public class Dante extends GameObject {
 
         for(int i = 0; i < armor; i++)
             g.drawImage(fullArmor, (int)camera.getX() + i * 35 + 10 + health * 35, (int)camera.getY() + 10, null);
+
 
     }
 

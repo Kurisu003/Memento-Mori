@@ -22,8 +22,8 @@ public class MainMenu extends MouseAdapter {
     private BufferedImage saveIcon;
     private BufferedImage musicVolume;
     private BufferedImage gameVolume;
-    private BufferedImage gameSoundBar;
-    private BufferedImage musicSoundBar;
+    private BufferedImage soundBarEmpty;
+    private BufferedImage soundBarFull;
 
     private int desiredCameraX;
     private int desiredCameraY;
@@ -59,8 +59,8 @@ public class MainMenu extends MouseAdapter {
         saveIcon = loader.loadImage("../SaveIcon.png");
         musicVolume = loader.loadImage("../MusicVolume.png");
         gameVolume = loader.loadImage("../GameVolume.png");
-        musicSoundBar = loader.loadImage("../GameVolume.png");
-        gameSoundBar = loader.loadImage("../GameVolume.png");
+        soundBarEmpty = loader.loadImage("../GameSoundbarEmpty.png");
+        soundBarFull = loader.loadImage("../GameSoundbarFiller.png");
     }
 
     public void render(Graphics g){
@@ -76,6 +76,8 @@ public class MainMenu extends MouseAdapter {
         //g.drawImage(saveIcon, 10 + 1088, 750, null);
         g.drawImage(musicVolume, 10 + 1088, 743, null);
         g.drawImage(gameVolume, 10 + 1088, 937, null);
+        g.drawImage(soundBarEmpty, 530 + 1088, 743, null);
+        g.drawImage(soundBarEmpty, 530 + 1088, 937, null);
 
         g2d.translate(camera.getX(), camera.getY());
     }

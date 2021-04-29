@@ -39,7 +39,7 @@ public class Bullet extends GameObject {
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
             if (getBounds().intersects(temp.getBounds())) {
-                if (temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy) {
+                if (temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy || temp.getId() == ID.Miniboss) {
                     handler.removeObject(this);
                     temp.doAction(damage);
                 }
