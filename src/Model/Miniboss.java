@@ -7,10 +7,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Miniboss extends SmartEnemy {
-    private Handler1 handler;
+    private final Handler1 handler;
     int hp = 1000;
 
-    private BufferedImage hpImage, noHpImage;
+    private final BufferedImage hpImage;
+    private final BufferedImage noHpImage;
 
     public Miniboss(int x, int y, ID id, Handler1 handler) {
         super(x, y, id, handler);
@@ -49,6 +50,7 @@ public class Miniboss extends SmartEnemy {
         g.setColor(Color.green);
         g.fillRect(x, y, 128, 128);
 
+        //Draw hp bar
         for(int i = 0; i < 10; i++)
             if(i < this.hp/100)
                 g.drawImage(hpImage, (int)Game.getCamera().getX()+i*40+344, (int)Game.getCamera().getY()+10, null);
