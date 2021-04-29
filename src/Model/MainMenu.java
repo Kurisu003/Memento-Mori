@@ -76,8 +76,8 @@ public class MainMenu extends MouseAdapter {
         //g.drawImage(saveIcon, 10 + 1088, 750, null);
         g.drawImage(musicVolume, 10 + 1088, 743, null);
         g.drawImage(gameVolume, 10 + 1088, 937, null);
-        g.drawImage(soundBarEmpty, 530 + 1088, 743, null);
-        g.drawImage(soundBarEmpty, 530 + 1088, 937, null);
+        g.drawImage(soundBarFull, 530 + 1088, 743, null);
+        g.drawImage(soundBarFull, 530 + 1088, 937, null);
 
         g2d.translate(camera.getX(), camera.getY());
     }
