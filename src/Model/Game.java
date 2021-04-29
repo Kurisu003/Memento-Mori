@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import Controller.*;
 
@@ -127,7 +128,8 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void tick(){
-        for(GameObject temp : handler.objects){
+        for(Iterator<GameObject> iterator = handler.objects.iterator(); iterator.hasNext();){
+            GameObject temp = iterator.next();
             if(temp.getId() == ID.Dante){
                 camera.tick(temp);
             }
