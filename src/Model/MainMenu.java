@@ -99,8 +99,20 @@ public class MainMenu extends MouseAdapter {
         //g.drawImage(saveIcon, 10 + 1088, 750, null);
         g.drawImage(musicVolume, 60 + 1088, 743, null);
         g.drawImage(gameVolume, 60 + 1088, 937, null);
-        g.drawImage(soundBarEmpty, 560 + 1088, 743, null);
-        g.drawImage(soundBarEmpty, 560 + 1088, 937, null);
+
+        for(int i = 0; i < Music.getMusicVolume() + 120; i++){
+            g.drawImage(soundBarFull, 550 + 1088 + ( i / 20 ) * 50, 743, null);
+            g.drawImage(soundBarFull, 550 + 1088, 937, null);
+
+        }
+
+        for(int i = 0; i < 5; i++){
+            g.drawImage(soundBarEmpty, 550 + 1088 + i * 50, 743, null);
+            g.drawImage(soundBarEmpty, 550 + 1088 + i * 50, 937, null);
+        }
+
+
+
 
 
         if(!(camera.getX() >= 1088 - 50 && camera.getX() <= 1088 + 50 && camera.getY() >= -50 && camera.getY() <= 50))
