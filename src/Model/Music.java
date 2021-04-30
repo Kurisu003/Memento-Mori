@@ -80,19 +80,27 @@ public class Music implements LineListener, Runnable {
         this.playMusic();
     }
 
-    public static void setMusicVolume(float musicVolume) {
-        musicVolume = musicVolume;
+    public static void setMusicVolume(float musicVolumePar) {
+        if(musicVolumePar < -120)
+            musicVolumePar = -120;
+        else if(musicVolumePar > -20)
+            musicVolumePar = -20;
+        musicVolume = musicVolumePar;
     }
 
     public static float getMusicVolume() {
         return musicVolume;
     }
 
-    public void setSoundVolume(float soundVolume) {
-        this.soundVolume = soundVolume;
+    public static void setSoundVolume(float soundVolumePar) {
+        if(soundVolumePar < -120)
+            soundVolumePar = -120;
+        else if(soundVolumePar > -20)
+            soundVolumePar = -20;
+        soundVolume = soundVolumePar;
     }
 
-    public float getSoundVolume() {
+    public static float getSoundVolume() {
         return soundVolume;
     }
 }

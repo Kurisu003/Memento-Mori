@@ -20,11 +20,15 @@ public class MainMenu extends MouseAdapter {
     private BufferedImage continueGame;
     private BufferedImage settings;
     private BufferedImage saveIcon;
-    private BufferedImage musicVolume;
-    private BufferedImage gameVolume;
+
     private BufferedImage soundBarEmpty;
     private BufferedImage soundBarFull;
+    private BufferedImage musicVolume;
+    private BufferedImage gameVolume;
+
     private BufferedImage backspace;
+    private BufferedImage plus;
+    private BufferedImage minus;
 
 
     private int desiredCameraX;
@@ -50,6 +54,24 @@ public class MainMenu extends MouseAdapter {
             desiredCameraX = 1088;
             desiredCameraY = 0;
         }
+
+//        g.drawImage(plus, 480+1080, 743, null);
+//        g.drawImage(plus, 480+1080, 937, null);
+//
+//        g.drawImage(minus, 330+1080, 743, null);
+//        g.drawImage(minus, 330+1080, 937, null);
+        // To check for Music Volume
+        if(mx >= 480 + 1080 && mx <= 480 + 1080 + 50 && my >= 743 && my <= 743 + 50)
+            Music.setMusicVolume(Music.getMusicVolume() + 20);
+        if(mx >= 330 + 1080 && mx <= 330 + 1080 + 50 && my >= 743 && my <= 743 + 50)
+            Music.setMusicVolume(Music.getMusicVolume() - 20);
+
+        // To check for Sound volume
+        if(mx >= 480 + 1080 && mx <= 480 + 1080 + 50 && my >= 943 && my <= 943 + 50)
+            Music.setSoundVolume(Music.getSoundVolume() + 20);
+        if(mx >= 330 + 1080 && mx <= 330 + 1080 + 50 && my >= 943 && my <= 943 + 50)
+            Music.setSoundVolume(Music.getSoundVolume() - 20);
+
     }
 
     public void init(){
@@ -65,12 +87,17 @@ public class MainMenu extends MouseAdapter {
         startNewGame = loader.loadImage("../StartNewGame.png");
         continueGame = loader.loadImage("../ContinueGame.png");
         settings = loader.loadImage("../Settings.png");
+
         saveIcon = loader.loadImage("../SaveIcon.png");
+
         musicVolume = loader.loadImage("../MusicVolume.png");
         gameVolume = loader.loadImage("../GameVolume.png");
         soundBarEmpty = loader.loadImage("../GameSoundbarEmpty.png");
         soundBarFull = loader.loadImage("../GameSoundbarFiller.png");
+
         backspace = loader.loadImage("../Backspace.png");
+        plus = loader.loadImage("../Plus.png");
+        minus = loader.loadImage("../Minus.png");
 
     }
 
@@ -96,14 +123,15 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(continueGame, 60 + 1088, 375, null);
         g.drawImage(settings, 60 + 1088, 450, null);
 
-        //g.drawImage(saveIcon, 10 + 1088, 750, null);
         g.drawImage(musicVolume, 60 + 1088, 743, null);
         g.drawImage(gameVolume, 60 + 1088, 937, null);
 
-        for(int i = 0; i < Music.getMusicVolume() + 120; i++){
+        for(int i = 0; i < Music.getMusicVolume() + 120; i += 20){
             g.drawImage(soundBarFull, 550 + 1088 + ( i / 20 ) * 50, 743, null);
-            g.drawImage(soundBarFull, 550 + 1088, 937, null);
+        }
 
+        for(int i = 0; i < Music.getSoundVolume() + 120; i += 20){
+            g.drawImage(soundBarFull, 550 + 1088 + ( i / 20 ) * 50, 937, null);
         }
 
         for(int i = 0; i < 5; i++){
@@ -111,7 +139,11 @@ public class MainMenu extends MouseAdapter {
             g.drawImage(soundBarEmpty, 550 + 1088 + i * 50, 937, null);
         }
 
+        g.drawImage(plus, 480+1080, 743, null);
+        g.drawImage(plus, 480+1080, 937, null);
 
+        g.drawImage(minus, 330+1080, 743, null);
+        g.drawImage(minus, 330+1080, 937, null);
 
 
 
