@@ -74,6 +74,17 @@ public class MainMenu extends MouseAdapter {
 
     }
 
+    public void calculations(){
+        if(desiredCameraX < camera.getX() && desiredCameraX + 50 < camera.getX())
+            camera.setX(camera.getX() - 50);
+        else if(desiredCameraX > camera.getX())
+            camera.setX(camera.getX() + 50);
+        else if(desiredCameraY > camera.getY() && desiredCameraY - 50 > camera.getY())
+            camera.setY(camera.getY() + 50);
+        else if(desiredCameraY < camera.getY())
+            camera.setY(camera.getY() - 50);
+    }
+
     public void render(Graphics g){
 
         Graphics2D g2d=(Graphics2D)g;
@@ -81,28 +92,21 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(background, 0, 0, null);
 
         g.drawImage(title, 110 + 1088, 10, null);
-        g.drawImage(startNewGame, 30 + 1088, 300, null);
-        g.drawImage(continueGame, 30 + 1088, 375, null);
-        g.drawImage(settings, 30 + 1088, 450, null);
+        g.drawImage(startNewGame, 60 + 1088, 300, null);
+        g.drawImage(continueGame, 60 + 1088, 375, null);
+        g.drawImage(settings, 60 + 1088, 450, null);
 
         //g.drawImage(saveIcon, 10 + 1088, 750, null);
-        g.drawImage(musicVolume, 30 + 1088, 743, null);
-        g.drawImage(gameVolume, 30 + 1088, 937, null);
-        g.drawImage(soundBarEmpty, 530 + 1088, 743, null);
-        g.drawImage(soundBarEmpty, 530 + 1088, 937, null);
+        g.drawImage(musicVolume, 60 + 1088, 743, null);
+        g.drawImage(gameVolume, 60 + 1088, 937, null);
+        g.drawImage(soundBarEmpty, 560 + 1088, 743, null);
+        g.drawImage(soundBarEmpty, 560 + 1088, 937, null);
 
 
-        if(!(camera.getX() >= 1088 - 20 && camera.getX() <= 1088 + 20 && camera.getY() >= -20 && camera.getY() <= 20))
+        if(!(camera.getX() >= 1088 - 50 && camera.getX() <= 1088 + 50 && camera.getY() >= -50 && camera.getY() <= 50))
             g.drawImage(backspace,  (int)camera.getX() + 20, (int)camera.getY() + 20, null);
 
-        if(desiredCameraX < camera.getX() && desiredCameraX + 20 < camera.getX())
-            camera.setX(camera.getX() - 20);
-        else if(desiredCameraX > camera.getX())
-            camera.setX(camera.getX() + 20);
-        else if(desiredCameraY > camera.getY() && desiredCameraY - 20 > camera.getY())
-            camera.setY(camera.getY() + 20);
-        else if(desiredCameraY < camera.getY())
-            camera.setY(camera.getY() - 20);
+
 
         g2d.translate(camera.getX(), camera.getY());
     }
