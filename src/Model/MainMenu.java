@@ -55,22 +55,17 @@ public class MainMenu extends MouseAdapter {
             desiredCameraY = 0;
         }
 
-//        g.drawImage(plus, 480+1080, 743, null);
-//        g.drawImage(plus, 480+1080, 937, null);
-//
-//        g.drawImage(minus, 330+1080, 743, null);
-//        g.drawImage(minus, 330+1080, 937, null);
         // To check for Music Volume
         if(mx >= 480 + 1080 && mx <= 480 + 1080 + 50 && my >= 743 && my <= 743 + 50)
-            Music.setMusicVolume(Music.getMusicVolume() + 20);
+            Music.setMusicVolume(Music.getMusicVolume() + 10);
         if(mx >= 330 + 1080 && mx <= 330 + 1080 + 50 && my >= 743 && my <= 743 + 50)
-            Music.setMusicVolume(Music.getMusicVolume() - 20);
+            Music.setMusicVolume(Music.getMusicVolume() - 10);
 
         // To check for Sound volume
         if(mx >= 480 + 1080 && mx <= 480 + 1080 + 50 && my >= 943 && my <= 943 + 50)
-            Music.setSoundVolume(Music.getSoundVolume() + 20);
+            Music.setSoundVolume(Music.getSoundVolume() + 10);
         if(mx >= 330 + 1080 && mx <= 330 + 1080 + 50 && my >= 943 && my <= 943 + 50)
-            Music.setSoundVolume(Music.getSoundVolume() - 20);
+            Music.setSoundVolume(Music.getSoundVolume() - 10);
 
     }
 
@@ -126,12 +121,14 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(musicVolume, 60 + 1088, 743, null);
         g.drawImage(gameVolume, 60 + 1088, 937, null);
 
-        for(int i = 0; i < Music.getMusicVolume() + 120; i += 20){
-            g.drawImage(soundBarFull, 550 + 1088 + ( i / 20 ) * 50, 743, null);
+        for(int i = 0; i < Music.getMusicVolume() + 70; i += 10){
+            g.drawImage(soundBarFull, 550 + 1088 + ( i / 10 ) * 50, 743, null);
         }
 
-        for(int i = 0; i < Music.getSoundVolume() + 120; i += 20){
-            g.drawImage(soundBarFull, 550 + 1088 + ( i / 20 ) * 50, 937, null);
+        System.out.println(Music.getMusicVolume());
+
+        for(int i = 0; i < Music.getSoundVolume() + 70; i += 10){
+            g.drawImage(soundBarFull, 550 + 1088 + ( i / 10 ) * 50, 937, null);
         }
 
         for(int i = 0; i < 5; i++){

@@ -8,8 +8,8 @@ import javax.sound.sampled.*;
 public class Music implements LineListener, Runnable {
     private final String audioFilePath;
     private final ID id;
-    private static float musicVolume = -80.0f;
-    private static float soundVolume = -20.0f;
+    private static float musicVolume = -40.0f;
+    private static float soundVolume = -40.0f;
 
     public Music(String audioFilePath, ID id){
         this.audioFilePath = audioFilePath;
@@ -33,17 +33,17 @@ public class Music implements LineListener, Runnable {
 
             audioClip.open(audioStream);
             FloatControl gainControl = (FloatControl)audioClip.getControl(FloatControl.Type.MASTER_GAIN);
-            if(this.id == ID.BG_music)
-                gainControl.setValue(musicVolume);
-            else if(this.id == ID.ShootingSound)
-                gainControl.setValue(soundVolume);
 
 
             audioClip.start();
 
             while (!playCompleted) {
+                if(this.id == ID.BG_music)
+                    gainControl.setValue(musicVolume);
+                else if(this.id == ID.ShootingSound)
+                    gainControl.setValue(soundVolume);
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(1);
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
@@ -81,8 +81,8 @@ public class Music implements LineListener, Runnable {
     }
 
     public static void setMusicVolume(float musicVolumePar) {
-        if(musicVolumePar < -120)
-            musicVolumePar = -120;
+        if(musicVolumePar < -80)
+            musicVolumePar = -80;
         else if(musicVolumePar > -20)
             musicVolumePar = -20;
         musicVolume = musicVolumePar;
@@ -93,8 +93,8 @@ public class Music implements LineListener, Runnable {
     }
 
     public static void setSoundVolume(float soundVolumePar) {
-        if(soundVolumePar < -120)
-            soundVolumePar = -120;
+        if(soundVolumePar < -80)
+            soundVolumePar = -80;
         else if(soundVolumePar > -20)
             soundVolumePar = -20;
         soundVolume = soundVolumePar;
