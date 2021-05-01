@@ -17,7 +17,15 @@ public class Game extends Canvas implements Runnable {
     private final Handler1 handler;
     private static BufferedImage floor;
 
-    private GameState state = GameState.MainMenu;
+    public static GameState getState() {
+        return state;
+    }
+
+    public static void setState(GameState state) {
+        Game.state = state;
+    }
+
+    private static GameState state = GameState.MainMenu;
 
     private static ArrayList<BufferedImage> wallSprites = new ArrayList<>();
     

@@ -56,16 +56,26 @@ public class MainMenu extends MouseAdapter {
         }
 
         // To check for Music Volume
-        if(mx >= 480 + 1080 && mx <= 480 + 1080 + 50 && my >= 743 && my <= 743 + 50)
+        if(mx >= 2626 && mx <= 2676 && my >= 743 && my <= 793)
             Music.setMusicVolume(Music.getMusicVolume() + 10);
-        if(mx >= 330 + 1080 && mx <= 330 + 1080 + 50 && my >= 743 && my <= 743 + 50)
+        if(mx >= 330 + 1088 && mx <= 330 + 1088 + 50 && my >= 743 && my <= 743 + 50)
             Music.setMusicVolume(Music.getMusicVolume() - 10);
 
         // To check for Sound volume
-        if(mx >= 480 + 1080 && mx <= 480 + 1080 + 50 && my >= 943 && my <= 943 + 50)
+        if(mx >= 450 + 1088 && mx <= 450 + 1088 + 50 && my >= 943 && my <= 943 + 50)
             Music.setSoundVolume(Music.getSoundVolume() + 10);
-        if(mx >= 330 + 1080 && mx <= 330 + 1080 + 50 && my >= 943 && my <= 943 + 50)
+        if(mx >= 330 + 1088 && mx <= 330 + 1088 + 50 && my >= 943 && my <= 943 + 50)
             Music.setSoundVolume(Music.getSoundVolume() - 10);
+
+        // NEW GAME
+        // To check for click on save icons
+        if(mx >= 2176 + 81 && mx <= 2176 + 281 && my >= 97 && my <= 297)
+            Game.setState(GameState.Game);
+        if(mx >= 2176 + 442 && mx <= 2176 + 442 + 200 && my >= 97 && my <= 297)
+            Game.setState(GameState.Game);
+        if(mx >= 2176 + 805 && mx <= 2176 + 200 + 805 && my >= 97 && my <= 297)
+            Game.setState(GameState.Game);
+
 
     }
 
@@ -83,7 +93,7 @@ public class MainMenu extends MouseAdapter {
         continueGame = loader.loadImage("../ContinueGame.png");
         settings = loader.loadImage("../Settings.png");
 
-        saveIcon = loader.loadImage("../SaveIcon.png");
+        saveIcon = loader.loadImage("../SaveTest2.png");
 
         musicVolume = loader.loadImage("../MusicVolume.png");
         gameVolume = loader.loadImage("../GameVolume.png");
@@ -113,39 +123,45 @@ public class MainMenu extends MouseAdapter {
         g2d.translate(-camera.getX(), -camera.getY());
         g.drawImage(background, 0, 0, null);
 
-        g.drawImage(title, 110 + 1088, 10, null);
+        g.drawImage(title, 100 + 1088, 10, null);
         g.drawImage(startNewGame, 30 + 1088, 300, null);
         g.drawImage(continueGame, 30 + 1088, 375, null);
         g.drawImage(settings, 30 + 1088, 450, null);
 
+        // Save Icons for new Game
+        g.drawImage(saveIcon, 2176, 0, null);
+        // Save Icons for continue Game
+        g.drawImage(saveIcon, 0, 0, null);
+
         g.drawImage(musicVolume, 30 + 1088, 743, null);
         g.drawImage(gameVolume, 30 + 1088, 937, null);
 
-        for(int i = 0; i < Music.getMusicVolume() + 70; i += 10){
+        if(!(camera.getX() >= 1088 && camera.getX() <= 1088 && camera.getY() == 0))
+            g.drawImage(backspace,  (int)camera.getX() + 20, (int)camera.getY() + 20, null);
+
+        // To render full Soundbars
+        for(int i = 0; i < Music.getMusicVolume() + 70; i += 10)
             g.drawImage(soundBarFull, 550 + 1088 + ( i / 10 ) * 50, 743, null);
-        }
 
-        System.out.println(Music.getMusicVolume());
-
-        for(int i = 0; i < Music.getSoundVolume() + 70; i += 10){
+        for(int i = 0; i < Music.getSoundVolume() + 70; i += 10)
             g.drawImage(soundBarFull, 550 + 1088 + ( i / 10 ) * 50, 937, null);
-        }
 
+        // To render empty soundbars
         for(int i = 0; i < 5; i++){
             g.drawImage(soundBarEmpty, 550 + 1088 + i * 50, 743, null);
             g.drawImage(soundBarEmpty, 550 + 1088 + i * 50, 937, null);
         }
 
-        g.drawImage(plus, 480+1080, 743, null);
-        g.drawImage(plus, 480+1080, 937, null);
+        // To render plus and minus signs to change volume
+        g.drawImage(plus, 450+1088, 743, null);
+        g.drawImage(plus, 450+1088, 937, null);
+        g.drawImage(minus, 330+1088, 743, null);
+        g.drawImage(minus, 330+1088, 937, null);
 
-        g.drawImage(minus, 330+1080, 743, null);
-        g.drawImage(minus, 330+1080, 937, null);
 
 
 
-        if(!(camera.getX() >= 1088 && camera.getX() <= 1088 && camera.getY() == 0))
-            g.drawImage(backspace,  (int)camera.getX() + 20, (int)camera.getY() + 20, null);
+
 
 
 
