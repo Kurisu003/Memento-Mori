@@ -48,7 +48,7 @@ public class Game extends Canvas implements Runnable {
 //        mainMenu.init();
         this.addKeyListener(new KeyInput(handler));
         this.addMouseListener(mainMenu);
-        folder=Levels.Anger.name();
+        folder=Levels.Limbo.name();
         loader = new BufferedImageLoader();
 
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
@@ -95,8 +95,15 @@ public class Game extends Canvas implements Runnable {
 
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
-        LoadLevel.clearAndLoadLevel(handler, wallSprites, g);
+        LoadLevel.clearAndLoadLevel(wallSprites, g);
 
+    }
+
+    public static void removePortal() {
+        for(int i = 0; i < Handler1.getInstance().objects.size(); i++){
+            if(Handler1.getInstance().objects.get(i).getId().equals(ID.Portal))
+                Handler1.getInstance().objects.remove(Handler1.getInstance().objects.get(i));
+        }
     }
 
     private void start(){

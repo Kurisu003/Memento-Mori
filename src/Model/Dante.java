@@ -55,7 +55,6 @@ public class Dante extends GameObject {
     private BufferedImage bufferedGunImage;
     Controller.Handler1 handler;
     private final Camera camera;
-    private int levelCounter;
 
     private final Graphics g;
 
@@ -65,7 +64,6 @@ public class Dante extends GameObject {
         super(x, y, id);
         this.handler = handler1;
         this.camera = camera;
-        this.levelCounter=0;
         this.g = g;
 
         roomXCoordinate = 3;
@@ -235,7 +233,6 @@ public class Dante extends GameObject {
                 doAction(1);
             }
             if(temp.getId() == ID.Portal && getBounds().intersects(temp.getBounds())){
-                ++levelCounter;
                 shouldChangeLevel = true;
             }
         }
@@ -246,6 +243,7 @@ public class Dante extends GameObject {
             SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088, roomYCoordinate * 576, 2, ID.SmartEnemy, handler);
         }
         if(shouldChangeLevel){
+            Game.removePortal();
             shouldChangeLevel = false;
             changeToNextLevel();
         }
@@ -265,6 +263,7 @@ public class Dante extends GameObject {
 
     private void changeToNextLevel(){
         currentLevel = currentLevel.next();
+        System.out.println(currentLevel);
         Game.changeLevel(currentLevel.name(), Handler1.getInstance(), g);
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
