@@ -27,7 +27,7 @@ public class Game extends Canvas implements Runnable {
 
     private static GameState state = GameState.MainMenu;
 
-    private static ArrayList<BufferedImage> wallSprites = new ArrayList<>();
+    private static final ArrayList<BufferedImage> wallSprites = new ArrayList<>();
     
     private static String folder;
 
@@ -35,7 +35,7 @@ public class Game extends Canvas implements Runnable {
 
     private Graphics g;
 
-    private MainMenu mainMenu;
+    private final MainMenu mainMenu;
 
     private static BufferedImageLoader loader;
 

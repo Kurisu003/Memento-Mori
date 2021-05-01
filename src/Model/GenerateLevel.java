@@ -8,9 +8,9 @@ public class GenerateLevel {
     // left and right and you don't get errors
     // when trying to do something like
     // level[i - 1]
-    private final int [][] level = new int[7][7];
+    private static int [][] level = new int[7][7];
 
-    public GenerateLevel(){
+    public static void generateLevel(){
         int roomCount = 1;
 
         level[3][3] = 1;
@@ -37,16 +37,19 @@ public class GenerateLevel {
                 }
             }
         }
-
-//        for(int i = 0; i < 7; i++){
-//            for (int j = 0; j < 7; j++){
-//                level[i][j] = 1;
-//            }
-//        }
     }
 
-    public int[][] getLevel() {
+    public static int[][] getLevel() {
         return level;
+    }
+
+    public static void printLevel(){
+        for(int i = 0; i < 7; i++){
+            for (int j = 0; j < 7; j++){
+                System.out.print(level[i][j]);
+            }
+            System.out.println();
+        }
     }
 
 }

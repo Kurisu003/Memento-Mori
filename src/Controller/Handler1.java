@@ -13,7 +13,7 @@ public class Handler1 {
     // Beispiel: Spieler, Wand, etc.
     public LinkedList<GameObject>objects = new LinkedList<GameObject>();
 
-    private boolean up=false,down=false,right=false,left=false;
+    private boolean up=false, down=false, right=false, left=false;
 
     private static Handler1 instance = null;
 

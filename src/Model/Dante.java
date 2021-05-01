@@ -36,6 +36,8 @@ public class Dante extends GameObject {
 
     private BufferedImage bulletImage;
     private BufferedImage miniMapFull;
+    private BufferedImage miniMapUndiscovered;
+    private BufferedImage minimapStartRoom;
     private BufferedImage miniMapPlayerLocation;
     private BufferedImage minibossHealth;
 
@@ -82,6 +84,8 @@ public class Dante extends GameObject {
 
         miniMapFull = loader.loadImage("../Minimap/FullMinimap.png");
         miniMapPlayerLocation = loader.loadImage("../Minimap/MinimapPlayerLocation.png");
+        miniMapUndiscovered = loader.loadImage("../Minimap/MiniMapUndiscovered.png");
+        minimapStartRoom = loader.loadImage("../Minimap/StartRoom.png");
 
         playerGunUp = loader.loadImage("../Guns/M4/M4Up.png");
         playerGunDown = loader.loadImage("../Guns/M4/M4Down.png");
@@ -253,9 +257,19 @@ public class Dante extends GameObject {
 
         for(int i = 0; i < 7; i++){
             for (int j = 0; j < 7; j++){
-                if(wherePlayerHasBeen[i][j] == 1){
-                    g.drawImage(miniMapFull, (int)camera.getX() + 64 * 12 + i * 45 + 45, (int)camera.getY() + j * 25 - 20 + 4, null);
+                if(i == 3 && j == 3){
+                    g.drawImage(minimapStartRoom, (int)camera.getX() + 64 * 12 + 3 * 45 + 45,
+                            (int)camera.getY() + 3 * 25 - 20 + 4, null);
                 }
+                else if(wherePlayerHasBeen[i][j] == 1){
+                    g.drawImage(miniMapFull, (int)camera.getX() + 64 * 12 + i * 45 + 45,
+                            (int)camera.getY() + j * 25 - 20 + 4, null);
+                }
+                else if(wherePlayerHasBeen[i][j] == 0 && GenerateLevel.getLevel()[j][i] > 0){
+                    g.drawImage(miniMapUndiscovered,(int)camera.getX() + 64 * 12 + i * 45 + 45,
+                            (int)camera.getY() + j * 25 - 20 + 4, null);
+                }
+
             }
         }
         g.drawImage(miniMapPlayerLocation, (int)camera.getX() + 768 + (int)camera.getX() / (64 * 17) * 45 + 45,(int)camera.getY() + (int)camera.getY() / (64 * 9) * 25 - 16, null);

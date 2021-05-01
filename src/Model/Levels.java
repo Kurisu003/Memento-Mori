@@ -10,7 +10,6 @@ public enum Levels {
     Violence,
     Fraud;
 
-
     private static final Levels[] vals = values();
     public Levels next(){
         return vals[(this.ordinal()+1) % vals.length];
