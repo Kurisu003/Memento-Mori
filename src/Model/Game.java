@@ -48,7 +48,7 @@ public class Game extends Canvas implements Runnable {
 //        mainMenu.init();
         this.addKeyListener(new KeyInput(handler));
         this.addMouseListener(mainMenu);
-        folder="Gluttony";
+        folder=Levels.Anger.name();
         loader = new BufferedImageLoader();
 
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
@@ -69,7 +69,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void addPortal(int x, int y){
-        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Limbo/BLC.png")));
+        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Levels/Limbo/BLC.png")));
     }
 
     private static void loadsprites(Handler1 handler, Graphics g){
@@ -78,22 +78,22 @@ public class Game extends Canvas implements Runnable {
 
         BufferedImageLoader loader = new BufferedImageLoader();
 
-        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,192,64,64));
-        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,192,64,64));
-        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(128,192,64,64));
-        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,128,64,64));
-        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(128,128,64,64));
-        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,0,64,64));
-        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,0,64,64));
-        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(128,0,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(0,192,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(64,192,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(128,192,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(0,128,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(128,128,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(0,0,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(64,0,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(128,0,64,64));
 
 
-        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,128,64,64));
-        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(0,64,64,64));
-        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(128,64,64,64));
-        wallSprites.add(loader.loadImage("../" + folder + "/SpriteSheet.png").getSubimage(64,64,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(64,128,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(0,64,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(128,64,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(64,64,64,64));
 
-        floor = loader.loadImage("../" + folder + "/Background.png");
+        floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
         LoadLevel.clearAndLoadLevel(handler, wallSprites, g);
 
@@ -182,11 +182,9 @@ public class Game extends Canvas implements Runnable {
 
     }
     
-    public static void changeLevel(int levelCounter, Handler1 handler, Graphics g){
+    public static void changeLevel(String level, Handler1 handler, Graphics g){
 
-        switch (levelCounter) {
-            case 1 -> folder = "Violence";
-        }
+        folder = level;
         loadsprites(handler, g);
         
     }

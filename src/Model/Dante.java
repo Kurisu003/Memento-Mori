@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Handler1;
 import View.BufferedImageLoader;
 
 import java.awt.*;
@@ -245,14 +246,8 @@ public class Dante extends GameObject {
             SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088, roomYCoordinate * 576, 2, ID.SmartEnemy, handler);
         }
         if(shouldChangeLevel){
-            Game.changeLevel(levelCounter, handler, g);
             shouldChangeLevel = false;
-            for(int i = 0; i < 7; i++){
-                for(int j = 0; j < 7; j++){
-                    wherePlayerHasBeen[i][j] = 0;
-                }
-            }
-            wherePlayerHasBeen[3][3] = 1;
+            changeToNextLevel();
         }
     }
 
@@ -266,6 +261,17 @@ public class Dante extends GameObject {
             }
         }
         g.drawImage(miniMapPlayerLocation, (int)camera.getX() + 768 + (int)camera.getX() / (64 * 17) * 45 + 45,(int)camera.getY() + (int)camera.getY() / (64 * 9) * 25 - 16, null);
+    }
+
+    private void changeToNextLevel(){
+        currentLevel = currentLevel.next();
+        Game.changeLevel(currentLevel.name(), Handler1.getInstance(), g);
+        for(int i = 0; i < 7; i++){
+            for(int j = 0; j < 7; j++){
+                wherePlayerHasBeen[i][j] = 0;
+            }
+        }
+        wherePlayerHasBeen[3][3] = 1;
     }
 
     // Used to render image of player gun and body
