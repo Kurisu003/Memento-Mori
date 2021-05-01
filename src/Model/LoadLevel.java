@@ -18,6 +18,9 @@ public class LoadLevel {
                 handler.removeObject(temp);
             }
         }
+
+        Game.addPortal(3392,1856);
+
         // Loops through generated level
         for(int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
@@ -109,7 +112,6 @@ public class LoadLevel {
                                     handler.addObject(new Door(64 * x + j * 1088, 64 * y + i * 576,
                                     ID.Door, wallSprites.get(10)));
                                 }
-
                             }
                         }
                     }

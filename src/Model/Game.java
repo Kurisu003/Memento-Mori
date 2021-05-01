@@ -37,6 +37,8 @@ public class Game extends Canvas implements Runnable {
 
     private MainMenu mainMenu;
 
+    private static BufferedImageLoader loader;
+
     public Game(){
         mainMenu = new MainMenu();
         new View.Window(1100,611,"Memento Mori",this);
@@ -47,7 +49,7 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(handler));
         this.addMouseListener(mainMenu);
         folder="Gluttony";
-        BufferedImageLoader loader = new BufferedImageLoader();
+        loader = new BufferedImageLoader();
 
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
         render();
@@ -56,7 +58,6 @@ public class Game extends Canvas implements Runnable {
         loadsprites(handler, this.getBufferStrategy().getDrawGraphics());
 
         handler.addObject(new Dante(3500, 1800, ID.Dante, handler, camera, g));
-        handler.addObject(new Box(3392,1856, ID.Portal,loader.loadImage("../Limbo/BLC.png")));
 //        camera.setX(3264);
 //        camera.setY(1728);
 
@@ -65,6 +66,10 @@ public class Game extends Canvas implements Runnable {
 
 //        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
 //        handler.addObject(new ShotEnemy(150,150,ID.Enemy,handler,floor));
+    }
+
+    public static void addPortal(int x, int y){
+        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Limbo/BLC.png")));
     }
 
     private static void loadsprites(Handler1 handler, Graphics g){

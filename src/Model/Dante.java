@@ -58,6 +58,8 @@ public class Dante extends GameObject {
 
     private final Graphics g;
 
+    private Levels currentLevel = Levels.Limbo;
+
     public Dante(int x, int y, ID id, Controller.Handler1 handler1, Camera camera, Graphics g) {
         super(x, y, id);
         this.handler = handler1;
@@ -68,7 +70,6 @@ public class Dante extends GameObject {
         roomXCoordinate = 3;
         roomYCoordinate = 3;
 
-        
         wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] = 1;
 
         // Different images according to the direction
