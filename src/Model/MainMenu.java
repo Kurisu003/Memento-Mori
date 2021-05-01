@@ -58,24 +58,32 @@ public class MainMenu extends MouseAdapter {
         // To check for Music Volume
         if(mx >= 2626 && mx <= 2676 && my >= 743 && my <= 793)
             Music.setMusicVolume(Music.getMusicVolume() + 10);
-        if(mx >= 330 + 1088 && mx <= 330 + 1088 + 50 && my >= 743 && my <= 743 + 50)
+        if(mx >= 1418 && mx <= 1468 && my >= 743 && my <= 793)
             Music.setMusicVolume(Music.getMusicVolume() - 10);
 
         // To check for Sound volume
-        if(mx >= 450 + 1088 && mx <= 450 + 1088 + 50 && my >= 943 && my <= 943 + 50)
+        if(mx >= 1538 && mx <= 1588 && my >= 943 && my <= 993)
             Music.setSoundVolume(Music.getSoundVolume() + 10);
-        if(mx >= 330 + 1088 && mx <= 330 + 1088 + 50 && my >= 943 && my <= 943 + 50)
+        if(mx >= 1418 && mx <= 1468 && my >= 943 && my <= 993)
             Music.setSoundVolume(Music.getSoundVolume() - 10);
 
         // NEW GAME
         // To check for click on save icons
-        if(mx >= 2176 + 81 && mx <= 2176 + 281 && my >= 97 && my <= 297)
+        if(mx >= 2257 && mx <= 2457 && my >= 153 && my <= 353)
             Game.setState(GameState.Game);
-        if(mx >= 2176 + 442 && mx <= 2176 + 442 + 200 && my >= 97 && my <= 297)
+        if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353)
             Game.setState(GameState.Game);
-        if(mx >= 2176 + 805 && mx <= 2176 + 200 + 805 && my >= 97 && my <= 297)
+        if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353)
             Game.setState(GameState.Game);
 
+        // CONTINUE GAME
+        // To check for click on save icons
+        if(mx >= 81 && mx <= 281 && my >= 153 && my <= 353)
+            Game.setState(GameState.Game);
+        if(mx >= 442 && mx <= 642 && my >= 153 && my <= 353)
+            Game.setState(GameState.Game);
+        if(mx >= 805 && mx <= 1005 && my >= 153 && my <= 353)
+            Game.setState(GameState.Game);
 
     }
 
