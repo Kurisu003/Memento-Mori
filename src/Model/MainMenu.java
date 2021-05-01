@@ -8,11 +8,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class MainMenu extends MouseAdapter {
 
     private Camera camera;
-    private BufferedImage background;
+    private ArrayList<BufferedImage> background;
     private BufferedImage title;
 
     private BufferedImage mainMenu;
@@ -34,7 +35,43 @@ public class MainMenu extends MouseAdapter {
     private int desiredCameraX;
     private int desiredCameraY;
 
-    public MainMenu(){}
+    private int frameCounter;
+    private int animationCounter;
+
+    public MainMenu(){
+        this.camera = new Camera(1088,0);
+
+        desiredCameraX = (int) camera.getX();
+        desiredCameraY = (int) camera.getY();
+
+        BufferedImageLoader loader = new BufferedImageLoader();
+        background = new ArrayList<>();
+        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (1).png"));
+        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (2).png"));
+        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (3).png"));
+        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (4).png"));
+        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (5).png"));
+        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (6).png"));
+        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (7).png"));
+        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (8).png"));
+
+        title = loader.loadImage("../MainMenuAssets/Title.png");
+        startNewGame = loader.loadImage("../MainMenuAssets/StartNewGame.png");
+        continueGame = loader.loadImage("../MainMenuAssets/ContinueGame.png");
+        settings = loader.loadImage("../MainMenuAssets/Settings.png");
+
+        saveIcon = loader.loadImage("../MainMenuAssets/SaveIcons.png");
+
+        musicVolume = loader.loadImage("../MainMenuAssets/MusicVolume.png");
+        gameVolume = loader.loadImage("../MainMenuAssets/GameVolume.png");
+        soundBarEmpty = loader.loadImage("../MainMenuAssets/GameSoundbarEmpty.png");
+        soundBarFull = loader.loadImage("../MainMenuAssets/GameSoundbarFiller.png");
+
+        backspace = loader.loadImage("../MainMenuAssets/Backspace.png");
+        plus = loader.loadImage("../MainMenuAssets/Plus.png");
+        minus = loader.loadImage("../MainMenuAssets/Minus.png");
+
+    }
 
     public void mousePressed(MouseEvent e) {
         int mx = (int) (e.getX() + camera.getX());
@@ -56,7 +93,7 @@ public class MainMenu extends MouseAdapter {
         }
 
         // To check for Music Volume
-        if(mx >= 2626 && mx <= 2676 && my >= 743 && my <= 793)
+        if(mx >= 1538 && mx <= 1588 && my >= 743 && my <= 793)
             Music.setMusicVolume(Music.getMusicVolume() + 10);
         if(mx >= 1418 && mx <= 1468 && my >= 743 && my <= 793)
             Music.setMusicVolume(Music.getMusicVolume() - 10);
@@ -87,33 +124,6 @@ public class MainMenu extends MouseAdapter {
 
     }
 
-    public void init(){
-        this.camera = new Camera(1088,0);
-
-        desiredCameraX = (int) camera.getX();
-        desiredCameraY = (int) camera.getY();
-
-        BufferedImageLoader loader = new BufferedImageLoader();
-        background = loader.loadImage("../Screen.png");
-
-        title = loader.loadImage("../Title.png");
-        startNewGame = loader.loadImage("../StartNewGame.png");
-        continueGame = loader.loadImage("../ContinueGame.png");
-        settings = loader.loadImage("../Settings.png");
-
-        saveIcon = loader.loadImage("../SaveTest2.png");
-
-        musicVolume = loader.loadImage("../MusicVolume.png");
-        gameVolume = loader.loadImage("../GameVolume.png");
-        soundBarEmpty = loader.loadImage("../GameSoundbarEmpty.png");
-        soundBarFull = loader.loadImage("../GameSoundbarFiller.png");
-
-        backspace = loader.loadImage("../Backspace.png");
-        plus = loader.loadImage("../Plus.png");
-        minus = loader.loadImage("../Minus.png");
-
-    }
-
     public void calculations(){
         if(desiredCameraX < camera.getX())
             camera.setX(camera.getX() - 64);
@@ -123,13 +133,21 @@ public class MainMenu extends MouseAdapter {
             camera.setY(camera.getY() + 64);
         else if(desiredCameraY < camera.getY())
             camera.setY(camera.getY() - 64);
+
+        frameCounter = (frameCounter + 1) % 20;
+        if(frameCounter % 10 == 0){
+            animationCounter = (animationCounter + 1) % 8;
+        }
+
     }
 
     public void render(Graphics g){
 
         Graphics2D g2d=(Graphics2D)g;
         g2d.translate(-camera.getX(), -camera.getY());
-        g.drawImage(background, 0, 0, null);
+
+
+        g.drawImage(background.get(animationCounter), 0, -150, null);
 
         g.drawImage(title, 100 + 1088, 10, null);
         g.drawImage(startNewGame, 30 + 1088, 300, null);
@@ -165,13 +183,6 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(plus, 450+1088, 937, null);
         g.drawImage(minus, 330+1088, 743, null);
         g.drawImage(minus, 330+1088, 937, null);
-
-
-
-
-
-
-
 
         g2d.translate(camera.getX(), camera.getY());
     }

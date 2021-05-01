@@ -111,7 +111,7 @@ public class Dante extends GameObject {
 
         playerIdle = loader.loadImage("../Character/IdleWithoutWeapon.png");
 
-        bulletImage = loader.loadImage("../Tile.png");
+//        bulletImage = loader.loadImage("../Tile.png");
         fullHeart = loader.loadImage("../Assets/FullHeart.png");
         fullArmor = loader.loadImage("../Assets/FullShield.png");
         minibossHealth = loader.loadImage("../Assets/redRec.png");

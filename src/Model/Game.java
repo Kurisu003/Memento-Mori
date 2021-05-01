@@ -38,12 +38,12 @@ public class Game extends Canvas implements Runnable {
     private MainMenu mainMenu;
 
     public Game(){
+        mainMenu = new MainMenu();
         new View.Window(1100,611,"Memento Mori",this);
         start();
         handler = Handler1.getInstance();
         camera = new Camera(3264,1728);
-        mainMenu = new MainMenu();
-        mainMenu.init();
+//        mainMenu.init();
         this.addKeyListener(new KeyInput(handler));
         this.addMouseListener(mainMenu);
         folder="Gluttony";
