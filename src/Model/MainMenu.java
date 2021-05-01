@@ -97,14 +97,14 @@ public class MainMenu extends MouseAdapter {
     }
 
     public void calculations(){
-        if(desiredCameraX < camera.getX() && desiredCameraX + 50 < camera.getX())
-            camera.setX(camera.getX() - 50);
+        if(desiredCameraX < camera.getX())
+            camera.setX(camera.getX() - 64);
         else if(desiredCameraX > camera.getX())
-            camera.setX(camera.getX() + 50);
-        else if(desiredCameraY > camera.getY() && desiredCameraY - 50 > camera.getY())
-            camera.setY(camera.getY() + 50);
+            camera.setX(camera.getX() + 64);
+        else if(desiredCameraY > camera.getY())
+            camera.setY(camera.getY() + 64);
         else if(desiredCameraY < camera.getY())
-            camera.setY(camera.getY() - 50);
+            camera.setY(camera.getY() - 64);
     }
 
     public void render(Graphics g){
@@ -114,12 +114,12 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(background, 0, 0, null);
 
         g.drawImage(title, 110 + 1088, 10, null);
-        g.drawImage(startNewGame, 60 + 1088, 300, null);
-        g.drawImage(continueGame, 60 + 1088, 375, null);
-        g.drawImage(settings, 60 + 1088, 450, null);
+        g.drawImage(startNewGame, 30 + 1088, 300, null);
+        g.drawImage(continueGame, 30 + 1088, 375, null);
+        g.drawImage(settings, 30 + 1088, 450, null);
 
-        g.drawImage(musicVolume, 60 + 1088, 743, null);
-        g.drawImage(gameVolume, 60 + 1088, 937, null);
+        g.drawImage(musicVolume, 30 + 1088, 743, null);
+        g.drawImage(gameVolume, 30 + 1088, 937, null);
 
         for(int i = 0; i < Music.getMusicVolume() + 70; i += 10){
             g.drawImage(soundBarFull, 550 + 1088 + ( i / 10 ) * 50, 743, null);
@@ -144,7 +144,7 @@ public class MainMenu extends MouseAdapter {
 
 
 
-        if(!(camera.getX() >= 1088 - 50 && camera.getX() <= 1088 + 50 && camera.getY() >= -50 && camera.getY() <= 50))
+        if(!(camera.getX() >= 1088 && camera.getX() <= 1088 && camera.getY() == 0))
             g.drawImage(backspace,  (int)camera.getX() + 20, (int)camera.getY() + 20, null);
 
 
