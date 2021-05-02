@@ -254,25 +254,24 @@ public class Dante extends GameObject {
     }
 
     private void drawMinimap(Graphics g){
-
         for(int i = 0; i < 7; i++){
             for (int j = 0; j < 7; j++){
                 if(i == 3 && j == 3){
-                    g.drawImage(minimapStartRoom, (int)camera.getX() + 64 * 12 + 3 * 45 + 45,
-                            (int)camera.getY() + 3 * 25 - 20 + 4, null);
+                    g.drawImage(minimapStartRoom, (int)camera.getX() + 948,
+                            (int)camera.getY() + 59, null);
                 }
                 else if(wherePlayerHasBeen[i][j] == 1){
-                    g.drawImage(miniMapFull, (int)camera.getX() + 64 * 12 + i * 45 + 45,
-                            (int)camera.getY() + j * 25 - 20 + 4, null);
+                    g.drawImage(miniMapFull, (int)camera.getX() + 831 + i * 45,
+                            (int)camera.getY() + j * 25 - 16, null);
                 }
                 else if(wherePlayerHasBeen[i][j] == 0 && GenerateLevel.getLevel()[j][i] > 0){
-                    g.drawImage(miniMapUndiscovered,(int)camera.getX() + 64 * 12 + i * 45 + 45,
-                            (int)camera.getY() + j * 25 - 20 + 4, null);
+                    g.drawImage(miniMapUndiscovered,(int)camera.getX() + 831 + i * 45,
+                            (int)camera.getY() + j * 25 - 16, null);
                 }
-
             }
         }
-        g.drawImage(miniMapPlayerLocation, (int)camera.getX() + 768 + (int)camera.getX() / (64 * 17) * 45 + 45,(int)camera.getY() + (int)camera.getY() / (64 * 9) * 25 - 16, null);
+        g.drawImage(miniMapPlayerLocation,  (int)camera.getX() + 768 + (int)camera.getX() / 1088 * 45 + 45,
+                                            (int)camera.getY() + (int)camera.getY() / 576 * 25 - 16, null);
     }
 
     private void changeToNextLevel(){
@@ -338,11 +337,8 @@ public class Dante extends GameObject {
         setGunImage(4);
 
         if(handler.isUp() && !handler.isDown()){
-            if (handler.isRight()||handler.isLeft()){
-                velY=-3;
-            }else{
-                velY = -5;
-            }
+            if (handler.isRight()||handler.isLeft()) velY=-3;
+            else velY = -5;
 
             setBodyImgCounter = 0;
             setGunImage(0);
@@ -350,33 +346,27 @@ public class Dante extends GameObject {
         else if(handler.isDown()) velY = 0;
 
         if(handler.isDown() && !handler.isUp()){
-            if (handler.isRight()||handler.isLeft()){
-                velY=3;
-            }else{
-                velY = 5;
-            }
+            if (handler.isRight()||handler.isLeft()) velY=3;
+            else velY = 5;
+
             setBodyImgCounter = 1;
             setGunImage(1);
         }
         else if(!handler.isUp()) velY = 0;
 
         if(handler.isRight() && !handler.isLeft()){
-            if (handler.isUp()||handler.isDown()){
-                velX=3;
-            }else{
-                velX = 5;
-            }
+            if (handler.isUp()||handler.isDown()) velX=3;
+            else velX = 5;
+
             setBodyImgCounter = 2;
             setGunImage(2);
         }
         else if(handler.isLeft()) velX = 0;
 
         if(handler.isLeft() && !handler.isRight()) {
-            if (handler.isUp()||handler.isDown()){
-                velX=-3;
-            }else{
-                velX = -5;
-            }
+            if (handler.isUp()||handler.isDown()) velX=-3;
+            else velX = -5;
+
             setBodyImgCounter = 3;
             setGunImage(3);
         }
@@ -387,12 +377,10 @@ public class Dante extends GameObject {
         if(handler.isShootUp() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootLeft()){
             setBodyImgCounter = 0;
             setGunImage(0);
-
         }
         if(handler.isShootDown() && !handler.isShootRight() && !handler.isShootUp() && !handler.isShootLeft()){
             setBodyImgCounter = 1;
             setGunImage(1);
-
         }
         if(handler.isShootRight() && !handler.isShootUp() && !handler.isShootDown() && !handler.isShootLeft()){
             setBodyImgCounter = 2;
