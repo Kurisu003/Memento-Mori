@@ -95,7 +95,7 @@ public class Game extends Canvas implements Runnable {
 
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
-        LoadLevel.clearAndLoadLevel(wallSprites, g);
+        LoadLevel.clearAndLoadLevel(wallSprites, g, 5);
 
     }
 

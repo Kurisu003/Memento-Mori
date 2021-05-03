@@ -9,11 +9,11 @@ import java.util.Random;
 
 public class LoadLevel {
 
-    public static void clearAndLoadLevel(ArrayList<BufferedImage> wallSprites, Graphics g){
+    public static void clearAndLoadLevel(ArrayList<BufferedImage> wallSprites, Graphics g, int amoutRoomsGenerated){
 
         // Clears list from all objects that aren't player Character
         GenerateLevel.clearLevel();
-        GenerateLevel.generateLevel();
+        GenerateLevel.generateLevel(amoutRoomsGenerated);
 
 //        GenerateLevel.printLevel();
         for(int i = 0;i < Handler1.getInstance().objects.size();i++){

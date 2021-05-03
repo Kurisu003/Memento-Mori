@@ -10,13 +10,13 @@ public class GenerateLevel {
     // level[i - 1]
     private static int [][] level = new int[7][7];
 
-    public static void generateLevel(){
+    public static void generateLevel(int amountRoomsGenerated){
         int roomCount = 1;
 
         level[3][3] = 1;
 
         // Roomcount starts at 1
-        while(roomCount <= 5){
+        while(roomCount <= amountRoomsGenerated){
             for(int i = 1; i <= 5; i++) {
                 for (int j = 1; j <= 5; j++) {
 
