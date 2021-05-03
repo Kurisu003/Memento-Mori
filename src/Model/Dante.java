@@ -257,16 +257,16 @@ public class Dante extends GameObject {
         for(int i = 0; i < 7; i++){
             for (int j = 0; j < 7; j++){
                 if(i == 3 && j == 3){
-                    g.drawImage(minimapStartRoom, (int)camera.getX() + 948,
-                            (int)camera.getY() + 59, null);
+                    g.drawImage(minimapStartRoom, (int)camera.getX() + 64 * 12 + 3 * 45 + 45,
+                            (int)camera.getY() + 3 * 25 - 20 + 4, null);
                 }
                 else if(wherePlayerHasBeen[i][j] == 1){
-                    g.drawImage(miniMapFull, (int)camera.getX() + 831 + i * 45,
-                            (int)camera.getY() + j * 25 - 16, null);
+                    g.drawImage(miniMapFull, (int)camera.getX() + 64 * 12 + i * 45 + 45,
+                            (int)camera.getY() + j * 25 - 20 + 4, null);
                 }
                 else if(wherePlayerHasBeen[i][j] == 0 && GenerateLevel.getLevel()[j][i] > 0){
-                    g.drawImage(miniMapUndiscovered,(int)camera.getX() + 831 + i * 45,
-                            (int)camera.getY() + j * 25 - 16, null);
+                    g.drawImage(miniMapUndiscovered,(int)camera.getX() + 64 * 12 + i * 45 + 45,
+                            (int)camera.getY() + j * 25 - 20 + 4, null);
                 }
             }
         }
