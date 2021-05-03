@@ -19,6 +19,7 @@ public class GenerateLevel {
         while(roomCount <= 5){
             for(int i = 1; i <= 5; i++) {
                 for (int j = 1; j <= 5; j++) {
+
                     if(level[i][j] > 0){
                         Random rn = new Random();
                         int rand = rn.nextInt(4) + 1;
@@ -39,17 +40,16 @@ public class GenerateLevel {
         }
     }
 
-    public static int[][] getLevel() {
-        return level;
+    public static void clearLevel(){
+        for(int i = 0; i <= level.length - 1; i++) {
+            for (int j = 0; j <= level.length - 1; j++) {
+                level[i][j] = 0;
+            }
+        }
     }
 
-    public static void printLevel(){
-        for(int i = 0; i < 7; i++){
-            for (int j = 0; j < 7; j++){
-                System.out.print(level[i][j]);
-            }
-            System.out.println();
-        }
+    public static int[][] getLevel() {
+        return level;
     }
 
 }

@@ -276,8 +276,8 @@ public class Dante extends GameObject {
 
     private void changeToNextLevel(){
         currentLevel = currentLevel.next();
-        System.out.println(currentLevel);
         Game.changeLevel(currentLevel.name(), Handler1.getInstance(), g);
+
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
                 wherePlayerHasBeen[i][j] = 0;
