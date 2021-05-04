@@ -8,6 +8,10 @@ public abstract class GameObject {
     protected double velX=0, velY=0;
     protected ID id;
 
+    public GameObject() {
+
+    }
+
     public ID getId() {
         return id;
     }

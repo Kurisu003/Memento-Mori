@@ -63,7 +63,6 @@ public class Enemy extends GameObject {
                             velY-=1;
                         }
                     }
-
                     if (velY!=0){
                         if (velX>0){
                             velX-=1;
