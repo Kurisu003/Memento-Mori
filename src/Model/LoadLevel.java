@@ -53,7 +53,8 @@ public class LoadLevel {
                                 // To check if its a CORNER's
                                 // TOP LEFT CORNER
                                 if(x == 0 && y == 0){
-                                    Handler1.getInstance().addObject(new Box(j * 1088, i * 576, ID.Block, wallSprites.get(5)));
+                                    Handler1.getInstance().addObject(new Box(j * 1088, i * 576, ID.Block,
+                                            wallSprites.get(5)));
                                 }
                                 // y is always 8 so it can be multiplied
                                 // BOTTOM LEFT CORNER
