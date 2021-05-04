@@ -14,7 +14,6 @@ public class SmartEnemy extends GameObject{
     public SmartEnemy(int x, int y, ID id, Handler1 handler) {
         super(x, y, id);
         this.handler=handler;
-
     }
 
     @Override

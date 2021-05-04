@@ -91,7 +91,6 @@ public class ShotEnemy extends GameObject{
     public void render(Graphics g) {
         g.setColor(Color.green);
         g.fillRect(x,y,32,32);
-
     }
 
     @Override
