@@ -29,28 +29,21 @@ public class SmartEnemy extends GameObject{
                     velY *= -1;
                 }
             }else if(temp.getId()==ID.Dante){
+                double diffX = x - temp.getX() - 32;
+                double diffY = y - temp.getY() - 32;
+                double distance = Math.sqrt((x - temp.getX()) * (x - temp.getX()) + (y - temp.getY()) * (y - temp.getY()));
 
-                    if(!(this.getBoundsBigger().intersects(temp.getBounds()))) {
-                        if (frameCounter%50==0) {
-                            double diffx = x - temp.getX() - 32;
-                            double diffy = y - temp.getY() - 32;
-                            double distance = Math.sqrt((x - temp.getX()) * (x - temp.getX()) + (y - temp.getY()) * (y - temp.getY()));
+                velX = ((-1.0 / distance) * diffX);
+                velY = ((-1.0 / distance) * diffY);
 
-                            velX = (double) ((-1.0 / distance) * diffx) * 2;
-                            velY = (double) ((-1.0 / distance) * diffy) * 2;
+                if(!(this.getBoundsBigger().intersects(temp.getBounds()))) {
+                    if (frameCounter%50==0) {
+                        velX *= 2;
+                        velY *= 2;
 
-                            frameCounter=0;
-                        }
-                    }else{
-
-                        double diffx = x - temp.getX() - 32;
-                        double diffy = y - temp.getY() - 32;
-                        double distance = Math.sqrt((x - temp.getX()) * (x - temp.getX()) + (y - temp.getY()) * (y - temp.getY()));
-
-                        velX = (double) ((-1.0 / distance) * diffx);
-                        velY = (double) ((-1.0 / distance) * diffy);
-
+                        frameCounter=0;
                     }
+                }
             }else if(temp.getId()== ID.SmartEnemy && temp.hashCode() != this.hashCode()){
                 if(frameCounter%20==0) {
                     if (getBoundsBigger().intersects(temp.getBounds())) {

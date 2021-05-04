@@ -190,6 +190,19 @@ public class Dante extends GameObject {
             spawnBulletOnPress(y+40, y+40, x+164, x+64);
     }
 
+    private void setNewCoordinates(int newCoordinate, int newCameraCoordinate, int newRoomCoordinate, boolean isX){
+        if(isX){
+            x += newCoordinate;
+            camera.setX(camera.getX() + newCameraCoordinate);
+            roomXCoordinate += newRoomCoordinate;
+        }
+        else{
+            y += newCoordinate;
+            camera.setY(camera.getY() + newCameraCoordinate);
+            roomYCoordinate += newRoomCoordinate;
+        }
+    }
+
     // Checks for collision
     private void checkCollision(){
         boolean shouldSpawnEnemy = false;
@@ -204,29 +217,17 @@ public class Dante extends GameObject {
             }
             if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds())){
                 if( temp.getX() >  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
-                        handler.isRight() && !handler.isLeft()){
-                    x += 200;
-                    camera.setX(camera.getX() + 1088);
-                    roomXCoordinate++;
-                }
+                        handler.isRight() && !handler.isLeft())
+                    setNewCoordinates(200, 1088, 1, true);
                 else if(temp.getX() <  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
-                        handler.isLeft() && !handler.isRight()){
-                    x -= 200;
-                    camera.setX(camera.getX() - 1088);
-                    roomXCoordinate--;
-                }
+                        handler.isLeft() && !handler.isRight())
+                    setNewCoordinates(-200, -1088, -1, true);
                 else if(temp.getY() < y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
-                        handler.isUp() && !handler.isDown()){
-                    y -= 210;
-                    camera.setY(camera.getY() - 576);
-                    roomYCoordinate--;
-                }
+                        handler.isUp() && !handler.isDown())
+                    setNewCoordinates(-210, -576, -1, false);
                 else if(temp.getY() > y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
-                        handler.isDown() && !handler.isUp()){
-                    y += 210;
-                    camera.setY(camera.getY() + 576);
-                    roomYCoordinate++;
-                }
+                        handler.isDown() && !handler.isUp())
+                    setNewCoordinates(210, 576, 1, false);
                 if(wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] == 0)
                     shouldSpawnEnemy = true;
 

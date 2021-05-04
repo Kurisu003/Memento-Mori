@@ -6,6 +6,10 @@ import View.BufferedImageLoader;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * This is the "miniboss" in the fourth level. It can pass walls and doors and follows the main character wherever
+ * it is going until it's defeated.
+ */
 public class Miniboss extends SmartEnemy {
     private final Handler1 handler;
     int hp = 1000;
