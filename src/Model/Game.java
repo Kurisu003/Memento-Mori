@@ -162,14 +162,14 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void tick(){
-        for(Iterator<GameObject> iterator = handler.objects.iterator(); iterator.hasNext();){
+        for(ListIterator<GameObject> iterator = handler.objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
             if(temp.getId() == ID.Dante){
                 camera.tick(temp);
             }
         }
         boolean enemiesLeft = false;
-        for(Iterator<GameObject> iterator = handler.objects.iterator(); iterator.hasNext();){
+        for(ListIterator<GameObject> iterator = handler.objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
             if(temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy || temp.getId() == ID.ShotEnemy){
                 enemiesLeft = true;
@@ -233,10 +233,8 @@ public class Game extends Canvas implements Runnable {
     }
     
     public static void changeLevel(String level, Handler1 handler, Graphics g){
-
         folder = level;
         loadsprites(handler, g);
-        
     }
 
     public static Camera getCamera() {

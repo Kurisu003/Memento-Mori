@@ -3,6 +3,7 @@ package Controller;
 import Controller.Handler1;
 import Model.Game;
 import Model.GameObject;
+import Model.GameState;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -30,7 +31,7 @@ public class KeyInput extends KeyAdapter {
                 if(key == KeyEvent.VK_LEFT) handler1.setShootLeft(true);
                 if(key == KeyEvent.VK_RIGHT) handler1.setShootRight(true);
                 if(key == KeyEvent.VK_X) handler1.setHitbox(!Game.showHitbox);
-
+                if(key == KeyEvent.VK_ESCAPE) Game.setState(GameState.MainMenu);
             }
         }
 

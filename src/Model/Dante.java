@@ -3,10 +3,10 @@ package Model;
 import Controller.Handler1;
 import View.BufferedImageLoader;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ListIterator;
 
 // To implement:
@@ -36,11 +36,11 @@ public class Dante extends GameObject {
     private final BufferedImage fullArmor;
 
     private BufferedImage bulletImage;
-    private BufferedImage miniMapFull;
-    private BufferedImage miniMapUndiscovered;
-    private BufferedImage minimapStartRoom;
-    private BufferedImage miniMapPlayerLocation;
-    private BufferedImage minibossHealth;
+    private final BufferedImage miniMapFull;
+    private final BufferedImage miniMapUndiscovered;
+    private final BufferedImage minimapStartRoom;
+    private final BufferedImage miniMapPlayerLocation;
+    private final BufferedImage minibossHealth;
 
     private int roomXCoordinate;
     private int roomYCoordinate;
