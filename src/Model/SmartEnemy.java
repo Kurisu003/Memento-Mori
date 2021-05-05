@@ -116,12 +116,12 @@ public class SmartEnemy extends GameObject{
         g2.setColor(Color.green);
         g2.draw(getBoundsBigger());
 
-        g.drawImage(displayedImage, x - 10, y - 32, null);
+        g.drawImage(displayedImage, x, y - 32, null);
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x,y,32,32);
+        return new Rectangle(x,y - 5,32,37);
     }
 
     public Rectangle getBoundsBigger(){
