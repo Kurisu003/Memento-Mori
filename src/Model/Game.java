@@ -17,6 +17,8 @@ public class Game extends Canvas implements Runnable {
     private final Handler1 handler;
     private static BufferedImage floor;
 
+    int updates = 0;
+
     public static GameState getState() {
         return state;
     }
@@ -128,6 +130,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void run(){
+
         this.requestFocus();
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
@@ -141,14 +144,15 @@ public class Game extends Canvas implements Runnable {
             while(delta >= 1) {
                 tick();
                 mainMenu.calculations();
-                //updates++;
+                updates++;
                 delta--;
             }
             render();
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                //updates = 0;
+                System.out.println(updates);
+                updates = 0;
             }
         }
         stop();
@@ -202,6 +206,7 @@ public class Game extends Canvas implements Runnable {
         g=bs.getDrawGraphics();
         Graphics2D g2d=(Graphics2D)g;
 
+
         if(state==GameState.Game) {
             g2d.translate(-camera.getX(), -camera.getY());
 
@@ -218,6 +223,7 @@ public class Game extends Canvas implements Runnable {
         } else if(state==GameState.MainMenu){
             mainMenu.render(g);
         }
+
         g.dispose();
         bs.show();
 

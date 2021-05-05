@@ -252,7 +252,7 @@ public class Dante extends GameObject {
         // to list within a loop
         if(shouldSpawnEnemy){
             //Types of enemies can be put in ID[]{...} for a random spawn of each of them
-            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088, roomYCoordinate * 576, 2, new ID[]{ID.SmartEnemy, ID.ShotEnemy}, handler);
+            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088 + 64, roomYCoordinate * 576 + 64, 2, new ID[]{ID.SmartEnemy, ID.ShotEnemy}, handler);
         }
         if(shouldChangeLevel){
             Game.removePortal();
@@ -314,6 +314,7 @@ public class Dante extends GameObject {
 
         for(int i = 0; i < armor; i++)
             g.drawImage(fullArmor, (int)camera.getX() + i * 35 + 10 + health * 35, (int)camera.getY() + 10, null);
+
     }
 
     public void tick() {

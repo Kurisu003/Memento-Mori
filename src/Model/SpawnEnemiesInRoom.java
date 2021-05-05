@@ -13,16 +13,16 @@ public class SpawnEnemiesInRoom {
             int pos = 0;
             pos = rn.nextInt(typesOfEnemy.length);
             if(typesOfEnemy[pos].equals(ID.SmartEnemy))
-                handler.addObject(new SmartEnemy(roomStartX + (rn.nextInt(960)+128),roomStartY + (rn.nextInt(448)+128), typesOfEnemy[pos], handler));
+                handler.addObject(new SmartEnemy(roomStartX + (rn.nextInt(960)),roomStartY + (rn.nextInt(448)), typesOfEnemy[pos], handler));
             else if (typesOfEnemy[pos].equals(ID.ShotEnemy))
-                handler.addObject(new ShotEnemy(roomStartX + (rn.nextInt(960)+128),roomStartY + (rn.nextInt(448)+128), typesOfEnemy[pos], handler));
+                handler.addObject(new ShotEnemy(roomStartX + (rn.nextInt(960)),roomStartY + (rn.nextInt(448)), typesOfEnemy[pos], handler));
             else if(typesOfEnemy[pos].equals(ID.Enemy)) {
-                handler.addObject(new Enemy(roomStartX + (rn.nextInt(960) + 128),
-                        roomStartY + (rn.nextInt(448) + 128), ID.Enemy, handler));
+                handler.addObject(new Enemy(roomStartX + (rn.nextInt(960)),
+                        roomStartY + (rn.nextInt(448)), ID.Enemy, handler));
             }
             else if(typesOfEnemy[pos].equals(ID.Miniboss)){
                 if(minibosses == 0){
-                    handler.addObject(new Miniboss(roomStartX+(rn.nextInt(960)+128), roomStartY+(rn.nextInt(448)+128), ID.Miniboss,handler));
+                    handler.addObject(new Miniboss(roomStartX+(rn.nextInt(960)), roomStartY+(rn.nextInt(448)), ID.Miniboss,handler));
                     minibosses = 1;
                 }
             }
