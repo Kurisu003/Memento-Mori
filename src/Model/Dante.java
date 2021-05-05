@@ -234,7 +234,8 @@ public class Dante extends GameObject {
 
                 wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] = 1;
             }
-            else if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds()) && ((Door) temp).isLocked()){
+            else if(temp.getId() == ID.Door && getBounds().intersects(((Door) temp).getSmallerBounds()) &&
+                    ((Door) temp).isLocked()){
                 x+=velX*-1;
                 y+=velY*-1;
             }

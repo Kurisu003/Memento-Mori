@@ -36,6 +36,10 @@ public class Door extends GameObject {
         return new Rectangle(x - 20,y - 20,104, 104);
     }
 
+    public Rectangle getSmallerBounds() {
+        return new Rectangle(x,y,64, 64);
+    }
+
     public void lockDoor(){
         displayedImage = closedDoorImage;
         isLocked = true;
