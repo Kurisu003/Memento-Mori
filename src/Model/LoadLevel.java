@@ -98,24 +98,24 @@ public class LoadLevel {
                                 if(GenerateLevel.getLevel()[i - 1][j] != 0 && y == 0 && x == 8){
                                     Handler1.getInstance().removeLastObject();
                                     Handler1.getInstance().addObject(new Door(64 * x + j * 1088, i * 576,
-                                    ID.Door, wallSprites.get(11)));
+                                    ID.Door, wallSprites.get(11), wallSprites.get(15)));
                                 }
 
                                 if(GenerateLevel.getLevel()[i + 1][j] != 0 && y == 8 && x == 8){
                                     Handler1.getInstance().removeLastObject();
                                     Handler1.getInstance().addObject(new Door(64 * x + j * 1088, 64 * y + i * 576,
-                                    ID.Door, wallSprites.get(8)));
+                                    ID.Door, wallSprites.get(8), wallSprites.get(12)));
                                 }
 
                                 if(GenerateLevel.getLevel()[i][j - 1] != 0 && x == 0 && y == 4){
                                     Handler1.getInstance().removeLastObject();
                                     Handler1.getInstance().addObject(new Door(j * 1088, 64 * y + i * 576,
-                                    ID.Door, wallSprites.get(9)));
+                                    ID.Door, wallSprites.get(9), wallSprites.get(13)));
                                 }
                                 if(GenerateLevel.getLevel()[i][j + 1] != 0 && x == 16 && y == 4){
                                     Handler1.getInstance().removeLastObject();
                                     Handler1.getInstance().addObject(new Door(64 * x + j * 1088, 64 * y + i * 576,
-                                    ID.Door, wallSprites.get(10)));
+                                    ID.Door, wallSprites.get(10), wallSprites.get(14)));
                                 }
                             }
                         }

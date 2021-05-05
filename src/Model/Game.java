@@ -48,7 +48,7 @@ public class Game extends Canvas implements Runnable {
 //        mainMenu.init();
         this.addKeyListener(new KeyInput(handler));
         this.addMouseListener(mainMenu);
-        folder=Levels.Limbo.name();
+        folder = Levels.Limbo.name();
         loader = new BufferedImageLoader();
 
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
@@ -92,6 +92,12 @@ public class Game extends Canvas implements Runnable {
         wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(0,64,64,64));
         wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(128,64,64,64));
         wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(64,64,64,64));
+
+
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(192,192,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(192,64,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(192,128,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(192,0,64,64));
 
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
@@ -155,7 +161,35 @@ public class Game extends Canvas implements Runnable {
                 camera.tick(temp);
             }
         }
+        boolean enemiesLeft = false;
+        for(Iterator<GameObject> iterator = handler.objects.iterator(); iterator.hasNext();){
+            GameObject temp = iterator.next();
+            if(temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy || temp.getId() == ID.ShotEnemy){
+                enemiesLeft = true;
+            }
+        }
+        if(enemiesLeft)
+            changeDoors(1);
+        else
+            changeDoors(0);
+
+
+
         handler.tick();
+    }
+
+    private void changeDoors(int state){
+        for(Iterator<GameObject> iterator = handler.objects.iterator(); iterator.hasNext();){
+            GameObject temp = iterator.next();
+            if(temp.getId() == ID.Door && state == 1){
+                ((Door) temp).lockDoor();
+            }
+            else if(temp.getId() == ID.Door && state == 0){
+                ((Door) temp).unlockDoor();
+
+            }
+
+        }
     }
 
     public void render(){

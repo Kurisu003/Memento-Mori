@@ -215,23 +215,28 @@ public class Dante extends GameObject {
                 x+=velX*-1;
                 y+=velY*-1;
             }
-            if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds())){
+            if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds()) && !((Door) temp).isLocked()){
+
                 if( temp.getX() >  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
                         handler.isRight() && !handler.isLeft())
-                    setNewCoordinates(200, 1088, 1, true);
+                    setNewCoordinates(250, 1088, 1, true);
                 else if(temp.getX() <  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
                         handler.isLeft() && !handler.isRight())
-                    setNewCoordinates(-200, -1088, -1, true);
+                    setNewCoordinates(-250, -1088, -1, true);
                 else if(temp.getY() < y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
                         handler.isUp() && !handler.isDown())
-                    setNewCoordinates(-210, -576, -1, false);
+                    setNewCoordinates(-260, -576, -1, false);
                 else if(temp.getY() > y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
                         handler.isDown() && !handler.isUp())
-                    setNewCoordinates(210, 576, 1, false);
+                    setNewCoordinates(260, 576, 1, false);
                 if(wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] == 0)
                     shouldSpawnEnemy = true;
 
                 wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] = 1;
+            }
+            else if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds()) && ((Door) temp).isLocked()){
+                x+=velX*-1;
+                y+=velY*-1;
             }
             if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())){
                 // To do damage to player
@@ -308,8 +313,6 @@ public class Dante extends GameObject {
 
         for(int i = 0; i < armor; i++)
             g.drawImage(fullArmor, (int)camera.getX() + i * 35 + 10 + health * 35, (int)camera.getY() + 10, null);
-
-
     }
 
     public void tick() {
