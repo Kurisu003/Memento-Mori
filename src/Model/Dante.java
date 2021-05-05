@@ -47,10 +47,13 @@ public class Dante extends GameObject {
     private final int [][] wherePlayerHasBeen = new int[7][7];
 
     private int timeSinceLastShot = 20;
+    private int timeSinceLastDamage = 20;
     private int fireSpeed = 20;
     private int range = 30;
-    private int health = 5;
-    private int armor = 2;
+    private static int health = 5;
+    private static int armor = 2;
+
+    private static GameObject instance;
 
     private int frameCount = 0;
 
@@ -68,6 +71,8 @@ public class Dante extends GameObject {
         this.handler = handler1;
         this.camera = camera;
         this.g = g;
+
+        instance = this;
 
         roomXCoordinate = 3;
         roomYCoordinate = 3;
@@ -122,6 +127,10 @@ public class Dante extends GameObject {
         minibossHealth = loader.loadImage("../Assets/redRec.png");
     }
 
+    public static GameObject getInstance() {
+        return instance;
+    }
+
     // to set firespeed of weapon
     public void setFireSpeed(int speed){
         this.fireSpeed = speed;
@@ -163,10 +172,14 @@ public class Dante extends GameObject {
     }
 
     // To do damage to player character
-    @Override
     public int doAction(int action) {
-        if(armor == 0) health -= action;
-        else armor -= action;
+        // Needed so that damage doesn't get dealt
+        // every frame, but only every 30th frame
+        if(timeSinceLastDamage > 30) {
+            if (armor == 0) health -= action;
+            else armor -= action;
+            timeSinceLastDamage = 0;
+        }
         return 0;
     }
 
@@ -328,9 +341,14 @@ public class Dante extends GameObject {
         // Needed so that shooting is always available when button is pressed
         // and enough time has passed
         timeSinceLastShot++;
+        timeSinceLastDamage++;
+
+        // Needed so that timeSinceLastDamage doesn't overflow
+        if(timeSinceLastDamage % 9999 == 0)
+            timeSinceLastDamage = 0;
 
         // Reuses timeSinceLastShot as a sort
-        // of way to keep way of ticks since it
+        // of way to keep track of ticks since it
         // counts up every time. This is needed as we dont
         // want to up animation counter every time as the
         // animations are too fast that way
