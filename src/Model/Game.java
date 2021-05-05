@@ -7,6 +7,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 import Controller.*;
 
@@ -179,7 +180,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void changeDoors(int state){
-        for(Iterator<GameObject> iterator = handler.objects.iterator(); iterator.hasNext();){
+        for(ListIterator<GameObject> iterator = handler.objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
             if(temp.getId() == ID.Door && state == 1){
                 ((Door) temp).lockDoor();
