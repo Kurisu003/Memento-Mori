@@ -42,6 +42,8 @@ public class Game extends Canvas implements Runnable {
 
     private static BufferedImageLoader loader;
 
+    public static boolean showHitbox = true;
+
     public Game(){
         mainMenu = new MainMenu();
         new View.Window(1100,611,"Memento Mori",this);

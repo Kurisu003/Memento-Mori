@@ -51,8 +51,10 @@ public class Miniboss extends SmartEnemy {
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.green);
-        g.fillRect(x, y, 128, 128);
+        if(Game.showHitbox) {
+            g.setColor(Color.green);
+            g.fillRect(x, y, 128, 128);
+        }
 
         //Draw hp bar
         for(int i = 0; i < 10; i++)

@@ -51,8 +51,10 @@ public class Bullet extends GameObject {
 
     @Override
     public void render(Graphics g) {
-       g.setColor(Color.CYAN);
-       g.fillOval(x,y,20,20);
+        if(Game.showHitbox) {
+            g.setColor(Color.CYAN);
+            g.drawOval(x,y,20,20);
+        }
         //g.drawImage(bufferedShotImage, x, y, null);
     }
 

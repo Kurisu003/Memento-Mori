@@ -19,9 +19,11 @@ public class Box extends GameObject {
         g.drawImage(bufferedImage, x, y, null);
 
 //        To draw hitboxes
-//        Graphics2D g2 = (Graphics2D)g;
-//        g2.setColor(Color.blue);
-//        g2.draw(getBounds());
+        if(Game.showHitbox) {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setColor(Color.blue);
+            g2.draw(getBounds());
+        }
     }
 
     @Override

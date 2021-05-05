@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Game;
 import Model.GameObject;
 import Model.ID;
 
@@ -129,4 +130,7 @@ public class Handler1 {
         objects.remove(temp);
     }
 
+    public void setHitbox(boolean b) {
+        Game.showHitbox = b;
+    }
 }

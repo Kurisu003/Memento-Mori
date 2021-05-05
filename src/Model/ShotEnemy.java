@@ -103,9 +103,11 @@ public class ShotEnemy extends GameObject{
         g.setColor(Color.green);
         g.fillRect(x,y,32,32);
 
-        Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.red);
-        g2.draw(getBounds());
+        if(Game.showHitbox) {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setColor(Color.red);
+            g2.draw(getBounds());
+        }
     }
 
     @Override
