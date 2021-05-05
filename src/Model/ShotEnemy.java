@@ -15,6 +15,7 @@ public class ShotEnemy extends GameObject{
 
     int tickCounter = 0;
     int animationCounter = 0;
+    int hp = 200;
 
     Random r= new Random();
     Random r2= new Random();
@@ -84,18 +85,32 @@ public class ShotEnemy extends GameObject{
                     handler.addObject(new Bullet(x, y, ID.Bullet, handler, temp.getX() +(r.nextInt( 11+11) -11), temp.getY()+(r.nextInt(11 +11) -11), 30, 1, image));
                 }
             }
+
+            if(hp <= 0) {
+                handler.removeObject(this);
+            }
         }
+    }
+
+    // to do damage to enemy
+    public int doAction(int action){
+        this.hp -= action;
+        return 0;
     }
 
     @Override
     public void render(Graphics g) {
         g.setColor(Color.green);
         g.fillRect(x,y,32,32);
+
+        Graphics2D g2 = (Graphics2D)g;
+        g2.setColor(Color.red);
+        g2.draw(getBounds());
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x-16,y-16,32,32);
+        return new Rectangle(x-8,y-8,40,40);
     }
 
     public Rectangle getBoundsBigger() {
