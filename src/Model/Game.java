@@ -42,7 +42,7 @@ public class Game extends Canvas implements Runnable {
 
     private static BufferedImageLoader loader;
 
-    public static boolean showHitbox = true;
+    public static boolean showHitbox = false;
 
     public Game(){
         mainMenu = new MainMenu();
