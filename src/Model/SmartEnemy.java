@@ -1,19 +1,31 @@
 package Model;
 
 import Controller.Handler1;
+import View.BufferedImageLoader;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class SmartEnemy extends GameObject{
     private Handler1 handler;
     int hp=200;
+    private BufferedImage displayedImage;
+    private ArrayList<BufferedImage> sprites;
 
     int frameCounter=0;
-
+    int animationCounter=0;
 
     public SmartEnemy(int x, int y, ID id, Handler1 handler) {
         super(x, y, id);
         this.handler=handler;
+        sprites = new ArrayList<BufferedImage>();
+
+        BufferedImageLoader loader = new BufferedImageLoader();
+        for(int i=0; i <= 10; i++)
+            sprites.add(loader.loadImage("../Enemies/SmartEnemy/EnemySwing" + i + ".png"));
+
+        displayedImage = sprites.get(0);
     }
 
     @Override
@@ -40,20 +52,23 @@ public class SmartEnemy extends GameObject{
                     if (frameCounter%50==0) {
                         velX *= 2;
                         velY *= 2;
-
                         frameCounter=0;
                     }
                 }
-            }else if(temp.getId()== ID.SmartEnemy && temp.hashCode() != this.hashCode()){
-                if(frameCounter%20==0) {
-                    if (getBoundsBigger().intersects(temp.getBounds())) {
-                        x += (velX * 2) * -1;
-                        y += (velY * 2) * -1;
+
+                // For hitting animation
+                if (this.getBounds().intersects(temp.getBounds())) {
+                    animationCounter++;
+                    displayedImage = sprites.get((animationCounter / 11) % 11);
+                }
+                }else if(temp.getId()== ID.SmartEnemy && temp.hashCode() != this.hashCode()){
+                    if(frameCounter%20==0) {
+                        if (getBoundsBigger().intersects(temp.getBounds())) {
+                            x += (velX * 2) * -1;
+                            y += (velY * 2) * -1;
+                        }
                     }
                 }
-
-            }
-
         }
 
         x+=velX;
@@ -62,9 +77,6 @@ public class SmartEnemy extends GameObject{
         if(hp <= 0) {
             handler.removeObject(this);
         }
-
-
-
     }
 
     // to do damage to enemy
@@ -75,13 +87,14 @@ public class SmartEnemy extends GameObject{
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.red);
-        g.fillRect(x,y,32,32);
+//        g.setColor(Color.red);
+//        g.fillRect(x,y,32,32);
 
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.green);
-       g2.draw(getBoundsBigger());
+        g2.draw(getBoundsBigger());
 
+        g.drawImage(displayedImage, x - 10, y - 32, null);
     }
 
     @Override
