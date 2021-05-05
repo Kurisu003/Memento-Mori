@@ -74,7 +74,7 @@ public class SmartEnemy extends GameObject{
                         animationCounter = 0;
                     }
                     // Needed to time when damage needs to be done to player
-                    if(animationCounter >= 40 && animationCounter <= 70){
+                    if(animationCounter >= 40 && animationCounter <= 70 && this.getBounds().intersects(temp.getBounds())){
                         Dante.getInstance().doAction(1);
                     }
                 }
