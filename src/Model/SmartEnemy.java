@@ -12,9 +12,12 @@ public class SmartEnemy extends GameObject{
     int hp=200;
     private BufferedImage displayedImage;
     private ArrayList<BufferedImage> sprites;
+    private int directionalOffsetForAnimationX;
+    private int directionalOffsetForAnimationY;
 
     int frameCounter=0;
-    int animationCounter=0;
+    int hittingAnimationCounter=0;
+    int walkingAnimationCounter=0;
     boolean isAnimating = false;
 
     public SmartEnemy(int x, int y, ID id, Handler1 handler) {
@@ -23,15 +26,31 @@ public class SmartEnemy extends GameObject{
         sprites = new ArrayList<BufferedImage>();
 
         BufferedImageLoader loader = new BufferedImageLoader();
+        // Adds hitting animation right
         for(int i = 1; i <= 20; i++)
             sprites.add(loader.loadImage("../Enemies/SmartEnemy/Sprite (" + i + ").png").getSubimage(130, 22,80,72));
+        // Adds hitting animation left
+        for(int i = 1; i <= 20; i++)
+            sprites.add(loader.loadImage("../Enemies/SmartEnemy/Sprite (" + i + ").png").getSubimage(94, 246 ,80,72));
+
+        // Adds walking animation right
+        for(int i = 1; i <= 14; i++)
+            sprites.add(loader.loadImage("../Enemies/SmartEnemy/Sprite (" + i + ").png").getSubimage(224, 28,44,66));
+        // Adds walking animation left
+        for(int i = 1; i <= 14; i++)
+            sprites.add(loader.loadImage("../Enemies/SmartEnemy/Sprite (" + i + ").png").getSubimage(36, 254,44,66));
+
 
         displayedImage = sprites.get(0);
     }
 
     @Override
     public void tick() {
+        directionalOffsetForAnimationX = 0;
+        directionalOffsetForAnimationY = 0;
+
         frameCounter++;
+        walkingAnimationCounter = (walkingAnimationCounter + 1) % 42;
 
         for(GameObject temp: handler.objects){
 
@@ -57,11 +76,36 @@ public class SmartEnemy extends GameObject{
                         frameCounter=0;
                     }
                 }
+                // For walking animation
+                // needs to play before hitting animation
+                // so it can be overwritten.
+                // 40 needs to be added as there is 20 sprites before it
+                // from the hitting animation
+                if(Dante.getInstance().getX() > x) {
+                    if (hittingAnimationCounter / 3 == 0)
+                        displayedImage = sprites.get(walkingAnimationCounter / 3 + 40);
+                    directionalOffsetForAnimationY = 5;
+                }
+                else{
+                    if (hittingAnimationCounter / 3 == 0)
+                        displayedImage = sprites.get(walkingAnimationCounter / 3 + 54);
+                    directionalOffsetForAnimationY = 7;
+                    directionalOffsetForAnimationX = -20;
+                }
 
                 // For hitting animation
                 if (this.getBounds().intersects(temp.getBounds()) || isAnimating) {
-                    animationCounter++;
-                    displayedImage = sprites.get((animationCounter / 5) % 20);
+                    hittingAnimationCounter++;
+
+                    if(Dante.getInstance().getX() > x) {
+                        displayedImage = sprites.get((hittingAnimationCounter / 5) % 20);
+                        directionalOffsetForAnimationY = 0;
+                    }
+                    else{
+                        displayedImage = sprites.get((hittingAnimationCounter / 5) % 20 + 20);
+                        directionalOffsetForAnimationX = -33;
+                        directionalOffsetForAnimationY = 0;
+                    }
                     // isAnimating is needed so that animation finishes playing
                     // if player steps out of hitbox
                     isAnimating = true;
@@ -69,18 +113,18 @@ public class SmartEnemy extends GameObject{
                     velX += velX * -1;
                     velY += velY * -1;
 
-                    // Needed so animationcounter doesn't overflow
-                    if(animationCounter >= 100){
-                        animationCounter = 0;
+                    // Needed so hittingAnimationCounter doesn't overflow
+                    if(hittingAnimationCounter >= 100){
+                        hittingAnimationCounter = 0;
                     }
                     // Needed to time when damage needs to be done to player
-                    if(animationCounter >= 40 && animationCounter <= 70 && this.getBounds().intersects(temp.getBounds())){
+                    if(hittingAnimationCounter >= 40 && hittingAnimationCounter <= 70 && this.getBounds().intersects(temp.getBounds())){
                         Dante.getInstance().doAction(1);
                     }
                 }
-                // If animationcounter has reached its finish,
+                // If hittingAnimationCounter has reached its finish,
                 // is animating is set to false
-                if(((animationCounter / 5)  % 20) == 0){
+                if(((hittingAnimationCounter / 5)  % 20) == 0){
                     isAnimating = false;
                 }
                 }else if(temp.getId() == ID.SmartEnemy && temp.hashCode() != this.hashCode()){
@@ -118,7 +162,7 @@ public class SmartEnemy extends GameObject{
             g2.draw(getBoundsBigger());
         }
 
-        g.drawImage(displayedImage, x, y - 32, null);
+        g.drawImage(displayedImage, x + directionalOffsetForAnimationX, y - 32 + directionalOffsetForAnimationY, null);
     }
 
     @Override
