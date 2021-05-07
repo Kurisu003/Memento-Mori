@@ -3,11 +3,11 @@ package Model;
 import Controller.Handler1;
 import View.BufferedImageLoader;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Random;
 
 // To implement:
 // recoil player and enemy on contact
@@ -56,6 +56,7 @@ public class Dante extends GameObject {
     private static GameObject instance;
 
     private int frameCount = 0;
+    private boolean portalExists;
 
     private BufferedImage bufferedBodyImage;
     private BufferedImage bufferedGunImage;
@@ -71,6 +72,7 @@ public class Dante extends GameObject {
         this.handler = handler1;
         this.camera = camera;
         this.g = g;
+        portalExists = false;
 
         instance = this;
 
@@ -217,6 +219,34 @@ public class Dante extends GameObject {
         }
     }
 
+    private boolean levelIsComplete(){
+
+        boolean levelIsDone = true;
+
+        for(int i = 0; i < 7; i++){
+            for(int j = 0; j < 7; j++){
+                if(GenerateLevel.getLevel()[i][j] > 0)
+                    if(wherePlayerHasBeen[j][i] == 0){
+                        levelIsDone = false;
+                    }
+            }
+        }
+
+//        System.out.println(levelIsDone);
+
+//        GenerateLevel.printLevel();
+//        System.out.println("----------------");
+//        for(int i = 0; i <= wherePlayerHasBeen.length - 1; i++) {
+//            for (int j = 0; j <= wherePlayerHasBeen.length - 1; j++) {
+//                System.out.print(wherePlayerHasBeen[i][j]);
+//            }
+//            System.out.println();
+//        }
+//        System.out.println("*****************");
+
+        return levelIsDone;
+    }
+
     // Checks for collision
     private void checkCollision(){
         boolean shouldSpawnEnemy = false;
@@ -270,7 +300,9 @@ public class Dante extends GameObject {
         }
         if(shouldChangeLevel){
             Game.removePortal();
-            shouldChangeLevel = false;
+            x += 20;
+            y += 20;
+            portalExists = false;
             changeToNextLevel();
         }
     }
@@ -336,6 +368,11 @@ public class Dante extends GameObject {
     public void tick() {
         x += velX;
         y += velY;
+
+        if(levelIsComplete() && !portalExists) {
+            Game.addPortal(3392 + 64, 1856 + 64);
+            portalExists = true;
+        }
 
         // checks for collision with objects
         checkCollision();
@@ -436,4 +473,5 @@ public class Dante extends GameObject {
             timeSinceLastShot = 0;
         }
     }
+
 }

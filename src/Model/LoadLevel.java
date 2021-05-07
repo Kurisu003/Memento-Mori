@@ -14,16 +14,7 @@ public class LoadLevel {
         // Clears list from all objects that aren't player Character
         GenerateLevel.clearLevel();
         GenerateLevel.generateLevel(amoutRoomsGenerated);
-
-//        GenerateLevel.printLevel();
-        for(int i = 0;i < Handler1.getInstance().objects.size();i++){
-            if(Handler1.getInstance().objects.get(i).getId() != ID.Dante) {
-                Handler1.getInstance().objects.remove(Handler1.getInstance().objects.get(i));
-            }
-        }
-
-        Random r = new Random();
-        Game.addPortal(3392 + 64 * r.nextInt(5),1856 + 64 * r.nextInt(5));
+        Handler1.getInstance().objects.removeIf(temp -> !temp.getId().equals(ID.Dante));
 
         // Loops through generated level
         for(int i = 1; i < 6; i++) {

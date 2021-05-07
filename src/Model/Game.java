@@ -107,13 +107,14 @@ public class Game extends Canvas implements Runnable {
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
         LoadLevel.clearAndLoadLevel(wallSprites, g, 5);
-
     }
 
     public static void removePortal() {
         for(int i = 0; i < Handler1.getInstance().objects.size(); i++){
-            if(Handler1.getInstance().objects.get(i).getId().equals(ID.Portal))
+            if(Handler1.getInstance().objects.get(i).getId() == ID.Portal) {
                 Handler1.getInstance().objects.remove(Handler1.getInstance().objects.get(i));
+                System.out.println();
+            }
         }
     }
 

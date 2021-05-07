@@ -48,6 +48,15 @@ public class GenerateLevel {
         }
     }
 
+    public static void printLevel(){
+        for(int i = 0; i <= level.length - 1; i++) {
+            for (int j = 0; j <= level.length - 1; j++) {
+                System.out.print(level[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
     public static int[][] getLevel() {
         return level;
     }
