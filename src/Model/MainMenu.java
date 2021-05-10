@@ -31,9 +31,8 @@ public class MainMenu extends MouseAdapter {
     private BufferedImage plus;
     private BufferedImage minus;
 
-
-    private int desiredCameraX;
-    private int desiredCameraY;
+    private static int desiredCameraX;
+    private static int desiredCameraY;
 
     private int frameCounter;
     private int animationCounter;
@@ -146,7 +145,6 @@ public class MainMenu extends MouseAdapter {
         Graphics2D g2d=(Graphics2D)g;
         g2d.translate(-camera.getX(), -camera.getY());
 
-
         g.drawImage(background.get(animationCounter), 0, -150, null);
 
         g.drawImage(title, 100 + 1088, 10, null);
@@ -185,5 +183,10 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(minus, 330+1088, 937, null);
 
         g2d.translate(camera.getX(), camera.getY());
+    }
+
+    public static void setCamera(int x, int y){
+        desiredCameraX = x;
+        desiredCameraY = y;
     }
 }

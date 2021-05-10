@@ -4,6 +4,7 @@ import Controller.Handler1;
 import Model.Game;
 import Model.GameObject;
 import Model.GameState;
+import Model.MainMenu;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -32,10 +33,10 @@ public class KeyInput extends KeyAdapter {
                 if(key == KeyEvent.VK_RIGHT) handler1.setShootRight(true);
                 if(key == KeyEvent.VK_X) handler1.setHitbox(!Game.showHitbox);
 
-                if(key == KeyEvent.VK_ESCAPE) Game.setState(GameState.MainMenu);
+                if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.Game)) Game.setState(GameState.EscMenu);
+                if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.MainMenu)) MainMenu.setCamera(1088, 0);
             }
         }
-
     }
 
     public void keyReleased(KeyEvent e){
