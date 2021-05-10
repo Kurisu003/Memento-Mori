@@ -12,7 +12,8 @@ public enum ID {
     Door(),
     BG_music(),
     ShootingSound(),
-    Miniboss();
+    Miniboss(),
+    Dialog();
 
 
 

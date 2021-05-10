@@ -63,6 +63,7 @@ public class Game extends Canvas implements Runnable {
         loadsprites(handler, this.getBufferStrategy().getDrawGraphics());
 
         handler.addObject(new Dante(3500, 1800, ID.Dante, handler, camera, g));
+        handler.addObject(new Dialog(200, 50, ID.Dialog, folder));
 //        camera.setX(3264);
 //        camera.setY(1728);
 
