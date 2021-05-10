@@ -9,7 +9,7 @@ import Controller.*;
 public class Bullet extends GameObject {
 
     private final Controller.Handler1 handler;
-    private final BufferedImage bufferedShotImage;
+    private transient final BufferedImage bufferedShotImage;
     private int timeAlive = 0;
     private final int range;
     private final int damage;

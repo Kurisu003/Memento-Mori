@@ -15,32 +15,32 @@ import java.util.Random;
 
 public class Dante extends GameObject {
 
-//    private BufferedImage playerBodyDown = null;
-//    private BufferedImage playerBodyUp = null;
-//    private BufferedImage playerBodyLeft = null;
-//    private BufferedImage playerBodyRight = null;
+//    private transient BufferedImage playerBodyDown = null;
+//    private transient BufferedImage playerBodyUp = null;
+//    private transient BufferedImage playerBodyLeft = null;
+//    private transient BufferedImage playerBodyRight = null;
 
-    private final BufferedImage playerGunUp;
-    private final BufferedImage playerGunDown;
-    private final BufferedImage playerGunLeft;
-    private final BufferedImage playerGunRight;
-    private final BufferedImage playerGunIdle;
+    private transient final BufferedImage playerGunUp;
+    private transient final BufferedImage playerGunDown;
+    private transient final BufferedImage playerGunLeft;
+    private transient final BufferedImage playerGunRight;
+    private transient final BufferedImage playerGunIdle;
 
-    private final ArrayList<BufferedImage> playerBodyUpAnimation = new ArrayList<>();
-    private final ArrayList<BufferedImage> playerBodyDownAnimation = new ArrayList<>();
-    private final ArrayList<BufferedImage> playerBodyLeftAnimation = new ArrayList<>();
-    private final ArrayList<BufferedImage> playerBodyRightAnimation = new ArrayList<>();
-    private final BufferedImage playerIdle;
+    private transient final ArrayList<BufferedImage> playerBodyUpAnimation = new ArrayList<>();
+    private transient final ArrayList<BufferedImage> playerBodyDownAnimation = new ArrayList<>();
+    private transient final ArrayList<BufferedImage> playerBodyLeftAnimation = new ArrayList<>();
+    private transient final ArrayList<BufferedImage> playerBodyRightAnimation = new ArrayList<>();
+    private transient final BufferedImage playerIdle;
 
-    private final BufferedImage fullHeart;
-    private final BufferedImage fullArmor;
+    private transient final BufferedImage fullHeart;
+    private transient final BufferedImage fullArmor;
 
-    private BufferedImage bulletImage;
-    private final BufferedImage miniMapFull;
-    private final BufferedImage miniMapUndiscovered;
-    private final BufferedImage minimapStartRoom;
-    private final BufferedImage miniMapPlayerLocation;
-    private final BufferedImage minibossHealth;
+    private transient BufferedImage bulletImage;
+    private transient final BufferedImage miniMapFull;
+    private transient final BufferedImage miniMapUndiscovered;
+    private transient final BufferedImage minimapStartRoom;
+    private transient final BufferedImage miniMapPlayerLocation;
+    private transient final BufferedImage minibossHealth;
 
     private int roomXCoordinate;
     private int roomYCoordinate;
@@ -58,12 +58,12 @@ public class Dante extends GameObject {
     private int frameCount = 0;
     private boolean portalExists;
 
-    private BufferedImage bufferedBodyImage;
-    private BufferedImage bufferedGunImage;
-    Controller.Handler1 handler;
-    private final Camera camera;
+    private transient BufferedImage bufferedBodyImage;
+    private transient BufferedImage bufferedGunImage;
+    transient Controller.Handler1 handler;
+    private transient final Camera camera;
 
-    private final Graphics g;
+    private transient final Graphics g;
 
     private Levels currentLevel = Levels.Limbo;
 
@@ -348,9 +348,9 @@ public class Dante extends GameObject {
 
 //        To draw hitboxes
         if(Game.showHitbox) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(Color.green);
-            g2.draw(getBounds());
+            //Graphics2D g2 = (Graphics2D) g;
+            //g2.setColor(Color.green);
+            //g2.draw(getBounds());
         }
 
         // Sets health to a min value of 0

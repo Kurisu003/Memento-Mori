@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class SmartEnemy extends GameObject{
     private Handler1 handler;
     int hp=200;
-    private BufferedImage displayedImage;
+    private transient BufferedImage displayedImage;
     private ArrayList<BufferedImage> sprites;
     private int directionalOffsetForAnimationX;
     private int directionalOffsetForAnimationY;

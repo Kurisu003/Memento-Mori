@@ -14,8 +14,8 @@ public class Miniboss extends SmartEnemy {
     private final Handler1 handler;
     int hp = 1000;
 
-    private final BufferedImage hpImage;
-    private final BufferedImage noHpImage;
+    private transient final BufferedImage hpImage;
+    private transient final BufferedImage noHpImage;
 
     public Miniboss(int x, int y, ID id, Handler1 handler) {
         super(x, y, id, handler);

@@ -1,6 +1,8 @@
 package Model;
 
-public class Camera {
+import java.io.Serializable;
+
+public class Camera implements Serializable {
     private double x,y;
 
     public Camera(double x,double y){

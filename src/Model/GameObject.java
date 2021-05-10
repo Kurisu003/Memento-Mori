@@ -1,8 +1,9 @@
 package Model;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class GameObject {
+public abstract class GameObject implements Serializable {
 
     protected int x,y;
     protected double velX=0, velY=0;
@@ -27,7 +28,7 @@ public abstract class GameObject {
     }
 
     public abstract void tick();//to uptade every objects
-    public abstract void render(Graphics g);//every pbeject has to be drawn to
+    public abstract void render( Graphics g);//every pbeject has to be drawn to
     public abstract Rectangle getBounds();
 
     public int getX() {

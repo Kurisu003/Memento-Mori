@@ -5,9 +5,9 @@ import java.awt.image.BufferedImage;
 
 public class Door extends GameObject {
 
-    private BufferedImage openDoorImage;
-    private BufferedImage closedDoorImage;
-    private BufferedImage displayedImage;
+    private transient BufferedImage openDoorImage;
+    private transient BufferedImage closedDoorImage;
+    private transient BufferedImage displayedImage;
     private int firstTimeEntered = 1;
     private boolean isLocked = false;
 

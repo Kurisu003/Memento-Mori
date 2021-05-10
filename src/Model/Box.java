@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Box extends GameObject {
-    private final BufferedImage bufferedImage;
+    private transient final BufferedImage bufferedImage;
     public Box(int x, int y, ID id, BufferedImage bufferedImage) {
         super(x, y,id);
         this.bufferedImage = bufferedImage;

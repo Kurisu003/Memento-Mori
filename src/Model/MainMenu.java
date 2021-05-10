@@ -8,28 +8,32 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class MainMenu extends MouseAdapter {
 
     private Camera camera;
     private ArrayList<BufferedImage> background;
-    private BufferedImage title;
+    private transient BufferedImage title;
 
-    private BufferedImage mainMenu;
-    private BufferedImage startNewGame;
-    private BufferedImage continueGame;
-    private BufferedImage settings;
-    private BufferedImage saveIcon;
+    private transient BufferedImage mainMenu;
+    private transient BufferedImage startNewGame;
+    private transient BufferedImage continueGame;
+    private transient BufferedImage settings;
+    private transient BufferedImage saveIcon;
 
-    private BufferedImage soundBarEmpty;
-    private BufferedImage soundBarFull;
-    private BufferedImage musicVolume;
-    private BufferedImage gameVolume;
+    private transient BufferedImage soundBarEmpty;
+    private transient BufferedImage soundBarFull;
+    private transient BufferedImage musicVolume;
+    private transient BufferedImage gameVolume;
 
-    private BufferedImage backspace;
-    private BufferedImage plus;
-    private BufferedImage minus;
+    private transient BufferedImage backspace;
+    private transient BufferedImage plus;
+    private transient BufferedImage minus;
 
     private static int desiredCameraX;
     private static int desiredCameraY;
@@ -105,8 +109,31 @@ public class MainMenu extends MouseAdapter {
 
         // NEW GAME
         // To check for click on save icons
-        if(mx >= 2257 && mx <= 2457 && my >= 153 && my <= 353)
+        if(mx >= 2257 && mx <= 2457 && my >= 153 && my <= 353){
             Game.setState(GameState.Game);
+
+            try {
+                FileOutputStream out = new FileOutputStream("out.ser");
+                ObjectOutputStream out1= new ObjectOutputStream(out);
+                for (int i =0;i<Handler1.getInstance().objects.size(); i++) {
+                    System.out.println(Handler1.getInstance().objects.get(i).id);
+                    System.out.println(i);
+                    if (!(Handler1.getInstance().objects.get(i).id== ID.Dante)){
+                        out1.writeObject(Handler1.getInstance().objects.get(i));
+                    }else{
+                        out1.writeObject(Handler1.getInstance().objects.get(i));
+                    }
+                }
+                out1.flush();
+
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+        }
+
         if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353)
             Game.setState(GameState.Game);
         if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353)

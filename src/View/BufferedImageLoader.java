@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class BufferedImageLoader {
 
-    private BufferedImage image;
+    private transient BufferedImage image;
 
     public BufferedImage loadImage(String path){
         try {
