@@ -11,7 +11,6 @@ import View.BufferedImageLoader;
 
 public class Enemy extends GameObject {
 
-    private Handler1 handler;
     int tickCounter = 0;
     int animationCounter = 0;
     BufferedImage displayedImage;
@@ -21,9 +20,8 @@ public class Enemy extends GameObject {
     int choose=0;
     int hp=100;
 
-    public Enemy(int x, int y, ID id, Handler1 handler) {
+    public Enemy(int x, int y, ID id) {
         super(x, y, id);
-        this.handler=handler;
         BufferedImageLoader loader = new BufferedImageLoader();
         enemyAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
         enemyAnimation.add(loader.loadImage("../Character/FrontAnimation2.png"));
@@ -43,8 +41,8 @@ public class Enemy extends GameObject {
 
         choose = r.nextInt(50);
 
-        for(int i = 0; i < handler.objects.size(); i++) {
-            GameObject temp = handler.objects.get(i);
+        for(int i = 0; i < Handler1.getInstance().objects.size(); i++) {
+            GameObject temp = Handler1.getInstance().objects.get(i);
 
             if(temp.getId() == ID.Block) {
                 if(getBoundsBigger().intersects(temp.getBounds())||(temp.getId()==ID.Enemy && temp.hashCode()!=this.hashCode())) {
@@ -75,7 +73,7 @@ public class Enemy extends GameObject {
         }
 
         if(hp <= 0) {
-            handler.removeObject(this);
+            Handler1.getInstance().removeObject(this);
         }
     }
 

@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ListIterator;
 
 import Controller.*;
@@ -60,15 +59,15 @@ public class Game extends Canvas implements Runnable {
         render();
 
 //        floor = loader.loadImage("../Anger/AngerBackground.png");
-        loadsprites(handler, this.getBufferStrategy().getDrawGraphics());
+        loadsprites();
 
-        handler.addObject(new Dante(3500, 1800, ID.Dante, handler, camera, g));
-        handler.addObject(new Dialog(200, 50, ID.Dialog, folder));
+        handler.addObject(new Dante(3500, 1800, ID.Dante, camera));
+//        handler.addObject(new Dialog(200, 50, ID.Dialog, folder));
+
 //        camera.setX(3264);
 //        camera.setY(1728);
 
 //        LoadLevel.loadLevel(handler, wallSprites, this.getBufferStrategy().getDrawGraphics());
-
 
 //        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
 //        handler.addObject(new ShotEnemy(150,150,ID.Enemy,handler,floor));
@@ -78,7 +77,7 @@ public class Game extends Canvas implements Runnable {
         Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Levels/Limbo/BLC.png")));
     }
 
-    private static void loadsprites(Handler1 handler, Graphics g){
+    private static void loadsprites(){
 
         wallSprites.clear();
 
@@ -107,7 +106,7 @@ public class Game extends Canvas implements Runnable {
 
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
-        LoadLevel.clearAndLoadLevel(wallSprites, g, 5);
+        LoadLevel.clearAndLoadLevel(wallSprites, 5);
     }
 
     public static void removePortal() {
@@ -234,9 +233,9 @@ public class Game extends Canvas implements Runnable {
 
     }
     
-    public static void changeLevel(String level, Handler1 handler, Graphics g){
+    public static void changeLevel(String level, Handler1 handler){
         folder = level;
-        loadsprites(handler, g);
+        loadsprites();
     }
 
     public static Camera getCamera() {

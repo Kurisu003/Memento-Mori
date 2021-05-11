@@ -15,32 +15,18 @@ import java.util.Random;
 
 public class Dante extends GameObject {
 
-//    private transient BufferedImage playerBodyDown = null;
-//    private transient BufferedImage playerBodyUp = null;
-//    private transient BufferedImage playerBodyLeft = null;
-//    private transient BufferedImage playerBodyRight = null;
-
-    private transient final BufferedImage playerGunUp;
-    private transient final BufferedImage playerGunDown;
-    private transient final BufferedImage playerGunLeft;
-    private transient final BufferedImage playerGunRight;
-    private transient final BufferedImage playerGunIdle;
-
-    private transient final ArrayList<BufferedImage> playerBodyUpAnimation = new ArrayList<>();
-    private transient final ArrayList<BufferedImage> playerBodyDownAnimation = new ArrayList<>();
-    private transient final ArrayList<BufferedImage> playerBodyLeftAnimation = new ArrayList<>();
-    private transient final ArrayList<BufferedImage> playerBodyRightAnimation = new ArrayList<>();
-    private transient final BufferedImage playerIdle;
+    private transient final ArrayList<BufferedImage> playerAnimations = new ArrayList<>();
+    private transient final ArrayList<BufferedImage> playerGun = new ArrayList<>();
+    private transient final ArrayList<BufferedImage> minimapSprites = new ArrayList<>();
 
     private transient final BufferedImage fullHeart;
     private transient final BufferedImage fullArmor;
 
     private transient BufferedImage bulletImage;
-    private transient final BufferedImage miniMapFull;
-    private transient final BufferedImage miniMapUndiscovered;
-    private transient final BufferedImage minimapStartRoom;
-    private transient final BufferedImage miniMapPlayerLocation;
     private transient final BufferedImage minibossHealth;
+
+    private Levels currentLevel = Levels.Limbo;
+    private static GameObject instance;
 
     private int roomXCoordinate;
     private int roomYCoordinate;
@@ -53,77 +39,62 @@ public class Dante extends GameObject {
     private static int health = 5;
     private static int armor = 2;
 
-    private static GameObject instance;
-
     private int frameCount = 0;
     private boolean portalExists;
 
     private transient BufferedImage bufferedBodyImage;
     private transient BufferedImage bufferedGunImage;
-    transient Controller.Handler1 handler;
     private transient final Camera camera;
 
-    private transient final Graphics g;
-
-    private Levels currentLevel = Levels.Limbo;
-
-    public Dante(int x, int y, ID id, Controller.Handler1 handler1, Camera camera, Graphics g) {
+    public Dante(int x, int y, ID id, Camera camera) {
         super(x, y, id);
-        this.handler = handler1;
-        this.camera = camera;
-        this.g = g;
-        portalExists = false;
-
+        BufferedImageLoader loader = new BufferedImageLoader();
         instance = this;
+        portalExists = false;
 
         roomXCoordinate = 3;
         roomYCoordinate = 3;
-
         wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] = 1;
 
-        // Different images according to the direction
-        // the player is looking in
-        BufferedImageLoader loader = new BufferedImageLoader();
-//        playerBodyDown = loader.loadImage("../playerDown.png");
-//        playerBodyUp = loader.loadImage("../playerUp.png");
-//        playerBodyLeft = loader.loadImage("../playerLeft.png");
-//        playerBodyRight = loader.loadImage("../playerRight.png");
+        this.camera = camera;
 
+        // Gun images
+        playerGun.add(loader.loadImage("../Guns/M4/M4Up.png"));
+        playerGun.add(loader.loadImage("../Guns/M4/M4Down.png"));
+        playerGun.add(loader.loadImage("../Guns/M4/M4Right.png"));
+        playerGun.add(loader.loadImage("../Guns/M4/M4Left.png"));
+        playerGun.add(loader.loadImage("../Guns/M4/M4Idle.png"));
 
-        miniMapFull = loader.loadImage("../Minimap/FullMinimap.png");
-        miniMapPlayerLocation = loader.loadImage("../Minimap/MinimapPlayerLocation.png");
-        miniMapUndiscovered = loader.loadImage("../Minimap/MiniMapUndiscovered.png");
-        minimapStartRoom = loader.loadImage("../Minimap/StartRoom.png");
+        // Minimap images
+        minimapSprites.add(loader.loadImage("../Minimap/FullMinimap.png"));
+        minimapSprites.add(loader.loadImage("../Minimap/MinimapPlayerLocation.png"));
+        minimapSprites.add(loader.loadImage("../Minimap/MiniMapUndiscovered.png"));
+        minimapSprites.add(loader.loadImage("../Minimap/StartRoom.png"));
 
-        playerGunUp = loader.loadImage("../Guns/M4/M4Up.png");
-        playerGunDown = loader.loadImage("../Guns/M4/M4Down.png");
-        playerGunLeft = loader.loadImage("../Guns/M4/M4Right.png");
-        playerGunRight = loader.loadImage("../Guns/M4/M4Left.png");
-        playerGunIdle = loader.loadImage("../Guns/M4/M4Idle.png");
+        // Player Images
+        // 4 Back, Front, Left, Right and 1 Idle
+        playerAnimations.add(loader.loadImage("../Character/BackAnimation1&3.png"));
+        playerAnimations.add(loader.loadImage("../Character/BackAnimation2.png"));
+        playerAnimations.add(loader.loadImage("../Character/BackAnimation1&3.png"));
+        playerAnimations.add(loader.loadImage("../Character/BackAnimation4.png"));
 
-        playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation1&3.png"));
-        playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation2.png"));
-        playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation1&3.png"));
-        playerBodyUpAnimation.add(loader.loadImage("../Character/BackAnimation4.png"));
+        playerAnimations.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
+        playerAnimations.add(loader.loadImage("../Character/FrontAnimation2.png"));
+        playerAnimations.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
+        playerAnimations.add(loader.loadImage("../Character/FrontAnimation4.png"));
 
-        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation2.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
-        playerBodyDownAnimation.add(loader.loadImage("../Character/FrontAnimation4.png"));
+        playerAnimations.add(loader.loadImage("../Character/LeftAnimation1&3.png"));
+        playerAnimations.add(loader.loadImage("../Character/LeftAnimation2.png"));
+        playerAnimations.add(loader.loadImage("../Character/LeftAnimation1&3.png"));
+        playerAnimations.add(loader.loadImage("../Character/LeftAnimation4.png"));
 
-        playerBodyLeftAnimation.add(loader.loadImage("../Character/LeftAnimation1&3.png"));
-        playerBodyLeftAnimation.add(loader.loadImage("../Character/LeftAnimation2.png"));
-        playerBodyLeftAnimation.add(loader.loadImage("../Character/LeftAnimation1&3.png"));
-        playerBodyLeftAnimation.add(loader.loadImage("../Character/LeftAnimation4.png"));
+        playerAnimations.add(loader.loadImage("../Character/RightAnimation1&3.png"));
+        playerAnimations.add(loader.loadImage("../Character/RightAnimation2.png"));
+        playerAnimations.add(loader.loadImage("../Character/RightAnimation1&3.png"));
+        playerAnimations.add(loader.loadImage("../Character/RightAnimation4.png"));
 
-        playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation1&3.png"));
-        playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation2.png"));
-        playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation1&3.png"));
-        playerBodyRightAnimation.add(loader.loadImage("../Character/RightAnimation4.png"));
+        playerAnimations.add(loader.loadImage("../Character/IdleWithoutWeapon.png"));
 
-        playerIdle = loader.loadImage("../Character/IdleWithoutWeapon.png");
-
-//        bulletImage = loader.loadImage("../Tile.png");
         fullHeart = loader.loadImage("../Assets/FullHeart.png");
         fullArmor = loader.loadImage("../Assets/FullShield.png");
         minibossHealth = loader.loadImage("../Assets/redRec.png");
@@ -151,21 +122,21 @@ public class Dante extends GameObject {
     // so it doesnt have to be checked each tick
     public void setBodyImage(int bodyImageCount){
         switch (bodyImageCount) {
-            case (0) -> bufferedBodyImage = playerBodyUpAnimation.get(frameCount);
-            case (1) -> bufferedBodyImage = playerBodyDownAnimation.get(frameCount);
-            case (2) -> bufferedBodyImage = playerBodyRightAnimation.get(frameCount);
-            case (3) -> bufferedBodyImage = playerBodyLeftAnimation.get(frameCount);
-            case (4) -> bufferedBodyImage = playerIdle;
+            case (0) -> bufferedBodyImage = playerAnimations.get(frameCount);
+            case (1) -> bufferedBodyImage = playerAnimations.get(frameCount + 4);
+            case (2) -> bufferedBodyImage = playerAnimations.get(frameCount + 12);
+            case (3) -> bufferedBodyImage = playerAnimations.get(frameCount + 8);
+            case (4) -> bufferedBodyImage = playerAnimations.get(16);
         }
     }
 
     private void setGunImage(int gunImageCount) {
         switch (gunImageCount) {
-            case (0) -> bufferedGunImage = playerGunUp;
-            case (1) -> bufferedGunImage = playerGunDown;
-            case (2) -> bufferedGunImage = playerGunLeft;
-            case (3) -> bufferedGunImage = playerGunRight;
-            case (4) -> bufferedGunImage = playerGunIdle;
+            case (0) -> bufferedGunImage = playerGun.get(0);
+            case (1) -> bufferedGunImage = playerGun.get(1);
+            case (2) -> bufferedGunImage = playerGun.get(2);
+            case (3) -> bufferedGunImage = playerGun.get(3);
+            case (4) -> bufferedGunImage = playerGun.get(4);
         }
     }
 
@@ -188,7 +159,7 @@ public class Dante extends GameObject {
     private void spawnBulletOnPress(int shotY, int shotYStart, int shotX, int shotXStart){
         int damage = 100;
         if(shotY != y || shotX != x){
-            handler.addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, handler, shotX, shotY, range, damage, bulletImage));
+            Handler1.getInstance().addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, shotX, shotY, range, damage, bulletImage));
             new Thread(new Music("res/Sounds/Guns/M4/GunSound1.wav", ID.ShootingSound)).start();
         }
     }
@@ -196,13 +167,13 @@ public class Dante extends GameObject {
     //Checks shooting direction
     private void checkBulletDirection(){
         // Version like the binding of isaac
-        if(handler.isShootUp() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootLeft())
+        if(Handler1.getInstance().isShootUp() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootLeft())
             spawnBulletOnPress(y-132, y-32, x+32, x+30);
-        else if(handler.isShootDown() && !handler.isShootRight() && !handler.isShootLeft() && !handler.isShootUp())
+        else if(Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootUp())
             spawnBulletOnPress(y+175, y+75, x+30, x+30);
-        else if(handler.isShootLeft() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootUp())
+        else if(Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp())
             spawnBulletOnPress(y+40, y+40, x-130, x);
-        else if(handler.isShootRight() && !handler.isShootLeft() && !handler.isShootDown() && !handler.isShootUp())
+        else if(Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp())
             spawnBulletOnPress(y+40, y+40, x+164, x+64);
     }
 
@@ -252,7 +223,7 @@ public class Dante extends GameObject {
         boolean shouldSpawnEnemy = false;
         boolean shouldChangeLevel = false;
 
-        for(ListIterator<GameObject> iterator = handler.objects.listIterator(); iterator.hasNext();){
+        for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
 
             if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())){
@@ -262,16 +233,16 @@ public class Dante extends GameObject {
             if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds()) && !((Door) temp).isLocked()){
 
                 if( temp.getX() >  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
-                        handler.isRight() && !handler.isLeft())
+                        Handler1.getInstance().isRight() && !Handler1.getInstance().isLeft())
                     setNewCoordinates(250, 1088, 1, true);
                 else if(temp.getX() <  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
-                        handler.isLeft() && !handler.isRight())
+                        Handler1.getInstance().isLeft() && !Handler1.getInstance().isRight())
                     setNewCoordinates(-250, -1088, -1, true);
                 else if(temp.getY() < y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
-                        handler.isUp() && !handler.isDown())
+                        Handler1.getInstance().isUp() && !Handler1.getInstance().isDown())
                     setNewCoordinates(-260, -576, -1, false);
                 else if(temp.getY() > y && (x + 32 > temp.getX() && x + 32 < temp.getX() + 64) &&
-                        handler.isDown() && !handler.isUp())
+                        Handler1.getInstance().isDown() && !Handler1.getInstance().isUp())
                     setNewCoordinates(260, 576, 1, false);
                 if(wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] == 0)
                     shouldSpawnEnemy = true;
@@ -296,7 +267,8 @@ public class Dante extends GameObject {
         // to list within a loop
         if(shouldSpawnEnemy){
             //Types of enemies can be put in ID[]{...} for a random spawn of each of them
-            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088 + 64, roomYCoordinate * 576 + 64, 2, new ID[]{ID.SmartEnemy, ID.ShotEnemy}, handler);
+            SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088 + 64, roomYCoordinate * 576 + 64,
+                            2, new ID[]{ID.SmartEnemy, ID.ShotEnemy});
         }
         if(shouldChangeLevel){
             Game.removePortal();
@@ -311,26 +283,26 @@ public class Dante extends GameObject {
         for(int i = 0; i < 7; i++){
             for (int j = 0; j < 7; j++){
                 if(i == 3 && j == 3){
-                    g.drawImage(minimapStartRoom, (int)camera.getX() + 948,
+                    g.drawImage(minimapSprites.get(3), (int)camera.getX() + 948,
                             (int)camera.getY() + 59, null);
                 }
                 else if(wherePlayerHasBeen[i][j] == 1){
-                    g.drawImage(miniMapFull, (int)camera.getX() + 813 + i * 45,
+                    g.drawImage(minimapSprites.get(0), (int)camera.getX() + 813 + i * 45,
                             (int)camera.getY() + j * 25 - 16, null);
                 }
                 else if(wherePlayerHasBeen[i][j] == 0 && GenerateLevel.getLevel()[j][i] > 0){
-                    g.drawImage(miniMapUndiscovered,(int)camera.getX() + 813 + i * 45,
+                    g.drawImage(minimapSprites.get(2),(int)camera.getX() + 813 + i * 45,
                             (int)camera.getY() + j * 25 - 16, null);
                 }
             }
         }
-        g.drawImage(miniMapPlayerLocation,  (int)camera.getX() + (int)camera.getX() / 1088 * 45 + 813 ,
+        g.drawImage(minimapSprites.get(1),  (int)camera.getX() + (int)camera.getX() / 1088 * 45 + 813 ,
                                             (int)camera.getY() + (int)camera.getY() / 576 * 25 - 16, null);
     }
 
     private void changeToNextLevel(){
         currentLevel = currentLevel.next();
-        Game.changeLevel(currentLevel.name(), Handler1.getInstance(), g);
+        Game.changeLevel(currentLevel.name(), Handler1.getInstance());
 
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
@@ -401,64 +373,64 @@ public class Dante extends GameObject {
         int setBodyImgCounter = 4;
         setGunImage(4);
 
-        if(handler.isUp() && !handler.isDown()){
-            if (handler.isRight()||handler.isLeft()) velY=-3;
+        if(Handler1.getInstance().isUp() && !Handler1.getInstance().isDown()){
+            if (Handler1.getInstance().isRight()||Handler1.getInstance().isLeft()) velY=-3;
             else velY = -5;
 
             setBodyImgCounter = 0;
             setGunImage(0);
         }
-        else if(handler.isDown()) velY = 0;
+        else if(Handler1.getInstance().isDown()) velY = 0;
 
-        if(handler.isDown() && !handler.isUp()){
-            if (handler.isRight()||handler.isLeft()) velY=3;
+        if(Handler1.getInstance().isDown() && !Handler1.getInstance().isUp()){
+            if (Handler1.getInstance().isRight()||Handler1.getInstance().isLeft()) velY=3;
             else velY = 5;
 
             setBodyImgCounter = 1;
             setGunImage(1);
         }
-        else if(!handler.isUp()) velY = 0;
+        else if(!Handler1.getInstance().isUp()) velY = 0;
 
-        if(handler.isRight() && !handler.isLeft()){
-            if (handler.isUp()||handler.isDown()) velX=3;
+        if(Handler1.getInstance().isRight() && !Handler1.getInstance().isLeft()){
+            if (Handler1.getInstance().isUp()||Handler1.getInstance().isDown()) velX=3;
             else velX = 5;
 
             setBodyImgCounter = 2;
             setGunImage(2);
         }
-        else if(handler.isLeft()) velX = 0;
+        else if(Handler1.getInstance().isLeft()) velX = 0;
 
-        if(handler.isLeft() && !handler.isRight()) {
-            if (handler.isUp()||handler.isDown()) velX=-3;
+        if(Handler1.getInstance().isLeft() && !Handler1.getInstance().isRight()) {
+            if (Handler1.getInstance().isUp()||Handler1.getInstance().isDown()) velX=-3;
             else velX = -5;
 
             setBodyImgCounter = 3;
             setGunImage(3);
         }
-        else if (!handler.isRight()) velX = 0;
+        else if (!Handler1.getInstance().isRight()) velX = 0;
 
         // Needed so character looks int the
         // same direction he shoots
-        if(handler.isShootUp() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootLeft()){
+        if(Handler1.getInstance().isShootUp() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootLeft()){
             setBodyImgCounter = 0;
             setGunImage(0);
         }
-        if(handler.isShootDown() && !handler.isShootRight() && !handler.isShootUp() && !handler.isShootLeft()){
+        if(Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootUp() && !Handler1.getInstance().isShootLeft()){
             setBodyImgCounter = 1;
             setGunImage(1);
         }
-        if(handler.isShootRight() && !handler.isShootUp() && !handler.isShootDown() && !handler.isShootLeft()){
+        if(Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootUp() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootLeft()){
             setBodyImgCounter = 2;
             setGunImage(2);
         }
-        if(handler.isShootLeft() && !handler.isShootRight() && !handler.isShootDown() && !handler.isShootUp()){
+        if(Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp()){
             setBodyImgCounter = 3;
             setGunImage(3);
         }
 
         // Needed so that walking animation doesnt play while
         // shooting and not moving
-        if(!handler.isDown() && !handler.isUp() && !handler.isLeft() && !handler.isRight()){
+        if(!Handler1.getInstance().isDown() && !Handler1.getInstance().isUp() && !Handler1.getInstance().isLeft() && !Handler1.getInstance().isRight()){
             frameCount = 0;
         }
 
@@ -468,7 +440,7 @@ public class Dante extends GameObject {
             timeSinceLastShot = 30;
         }
         if  (timeSinceLastShot > fireSpeed &&
-            (handler.isShootUp() || handler.isShootDown() || handler.isShootLeft() || handler.isShootRight())){
+            (Handler1.getInstance().isShootUp() || Handler1.getInstance().isShootDown() || Handler1.getInstance().isShootLeft() || Handler1.getInstance().isShootRight())){
             checkBulletDirection();
             timeSinceLastShot = 0;
         }
