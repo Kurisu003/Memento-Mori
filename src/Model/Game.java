@@ -14,7 +14,6 @@ public class Game extends Canvas implements Runnable {
 
     private Thread thread;
     private boolean isRunning = false;
-    private final Handler1 handler;
     private static BufferedImage floor;
 
     int updates = 0;
@@ -47,10 +46,9 @@ public class Game extends Canvas implements Runnable {
         mainMenu = new MainMenu();
         new View.Window(1100,611,"Memento Mori",this);
         start();
-        handler = Handler1.getInstance();
         camera = new Camera(3264,1728);
 //        mainMenu.init();
-        this.addKeyListener(new KeyInput(handler));
+        this.addKeyListener(new KeyInput(Handler1.getInstance()));
         this.addMouseListener(mainMenu);
         folder = Levels.Limbo.name();
         loader = new BufferedImageLoader();
@@ -61,7 +59,7 @@ public class Game extends Canvas implements Runnable {
 //        floor = loader.loadImage("../Anger/AngerBackground.png");
         loadsprites();
 
-        handler.addObject(new Dante(3500, 1800, ID.Dante, camera));
+        Handler1.getInstance().addObject(new Dante(3500, 1800, ID.Dante, camera));
 //        handler.addObject(new Dialog(200, 50, ID.Dialog, folder));
 
 //        camera.setX(3264);
@@ -163,14 +161,14 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void tick(){
-        for(ListIterator<GameObject> iterator = handler.objects.listIterator(); iterator.hasNext();){
+        for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
             if(temp.getId() == ID.Dante){
                 camera.tick(temp);
             }
         }
         boolean enemiesLeft = false;
-        for(ListIterator<GameObject> iterator = handler.objects.listIterator(); iterator.hasNext();){
+        for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
             if(temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy || temp.getId() == ID.ShotEnemy){
                 enemiesLeft = true;
@@ -183,11 +181,11 @@ public class Game extends Canvas implements Runnable {
 
 
 
-        handler.tick();
+        Handler1.getInstance().tick();
     }
 
     private void changeDoors(int state){
-        for(ListIterator<GameObject> iterator = handler.objects.listIterator(); iterator.hasNext();){
+        for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
             if(temp.getId() == ID.Door && state == 1){
                 ((Door) temp).lockDoor();
@@ -221,7 +219,7 @@ public class Game extends Canvas implements Runnable {
                 }
             }
 
-            handler.render(g);
+            Handler1.getInstance().render(g);
 
             g2d.translate(camera.getX(), camera.getY());
         } else if(state==GameState.MainMenu){
