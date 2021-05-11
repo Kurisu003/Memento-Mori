@@ -8,10 +8,10 @@ import javax.sound.sampled.*;
 public class Music implements LineListener, Runnable {
     private final String audioFilePath;
     private final ID id;
-    private static float musicVolume = -40.0f;
-    private static float soundVolume = -40.0f;
-    private static int simpleMusicVolume = 2;
-    private static int simpleGameVolume = 2;
+    private static float musicVolume = -29.89f;
+    private static float soundVolume = -29.89f;
+    private static int simpleMusicVolume = 3;
+    private static int simpleGameVolume = 3;
 
     public Music(String audioFilePath, ID id){
         this.audioFilePath = audioFilePath;
@@ -35,6 +35,8 @@ public class Music implements LineListener, Runnable {
     }
 
     public static void setSimpleGameVolume(int simpleGameVolume) {
+        simpleGameVolume = Math.max(simpleGameVolume, 0);
+        simpleGameVolume = Math.min(simpleGameVolume, 5);
         Music.simpleGameVolume = simpleGameVolume;
     }
 
@@ -104,6 +106,7 @@ public class Music implements LineListener, Runnable {
     public static void setMusicVolume(float musicVolumePar) {
         musicVolumePar = musicVolumePar < -64 ? (float) -64.50 : musicVolumePar;
         musicVolumePar = musicVolumePar > -20 ? (float) -20 : musicVolumePar;
+        System.out.println(musicVolumePar);
         musicVolume = musicVolumePar;
     }
 
@@ -112,10 +115,8 @@ public class Music implements LineListener, Runnable {
     }
 
     public static void setSoundVolume(float soundVolumePar) {
-        if(soundVolumePar < -54.5)
-            soundVolumePar = (float) -54.5;
-        else if(soundVolumePar > -20)
-            soundVolumePar = -20;
+        soundVolumePar = soundVolumePar < -64 ? (float) -64.50 : soundVolumePar;
+        soundVolumePar = soundVolumePar > -20 ? (float) -20 : soundVolumePar;
         soundVolume = soundVolumePar;
     }
 

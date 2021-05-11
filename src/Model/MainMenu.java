@@ -104,11 +104,14 @@ public class MainMenu extends MouseAdapter {
         }
 
         // To check for Sound volume
-        if(mx >= 1538 && mx <= 1588 && my >= 943 && my <= 993)
-            Music.setSoundVolume(Music.getSoundVolume() + 5);
-        if(mx >= 1418 && mx <= 1468 && my >= 943 && my <= 993)
-            Music.setSoundVolume(Music.getSoundVolume() - 5);
-
+        if(mx >= 1538 && mx <= 1588 && my >= 943 && my <= 993) {
+            Music.setSoundVolume((float) (Music.getSoundVolume() + Math.log(Math.abs(Music.getSoundVolume())) * 2.5));
+            Music.setSimpleGameVolume(Music.getSimpleGameVolume() + 1);
+        }
+        if(mx >= 1418 && mx <= 1468 && my >= 943 && my <= 993) {
+            Music.setSoundVolume((float) (Music.getSoundVolume() - Math.log(Math.abs(Music.getSoundVolume())) * 2.5));
+            Music.setSimpleGameVolume(Music.getSimpleGameVolume() - 1);
+        }
         // NEW GAME
         // To check for click on save icons
         if(mx >= 2257 && mx <= 2457 && my >= 153 && my <= 353){
@@ -260,7 +263,7 @@ public class MainMenu extends MouseAdapter {
         for(int i = 0; i < Music.getSimpleMusicVolume() * 10; i += 10)
             g.drawImage(soundBarFull, 550 + 1088 + ( i / 10 ) * 50, 743, null);
 
-        for(int i = 0; i < Music.getSoundVolume() + 70; i += 10)
+        for(int i = 0; i < Music.getSimpleGameVolume() * 10; i += 10)
             g.drawImage(soundBarFull, 550 + 1088 + ( i / 10 ) * 50, 937, null);
 
         // To render empty soundbars
