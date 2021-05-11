@@ -94,15 +94,15 @@ public class MainMenu extends MouseAdapter {
 
         // To check for Music Volume
         if(mx >= 1538 && mx <= 1588 && my >= 743 && my <= 793)
-            Music.setMusicVolume(Music.getMusicVolume() + 10);
+            Music.setMusicVolume(Music.getMusicVolume() + 5);
         if(mx >= 1418 && mx <= 1468 && my >= 743 && my <= 793)
-            Music.setMusicVolume(Music.getMusicVolume() - 10);
+            Music.setMusicVolume(Music.getMusicVolume() - 5);
 
         // To check for Sound volume
         if(mx >= 1538 && mx <= 1588 && my >= 943 && my <= 993)
-            Music.setSoundVolume(Music.getSoundVolume() + 10);
+            Music.setSoundVolume(Music.getSoundVolume() + 5);
         if(mx >= 1418 && mx <= 1468 && my >= 943 && my <= 993)
-            Music.setSoundVolume(Music.getSoundVolume() - 10);
+            Music.setSoundVolume(Music.getSoundVolume() - 5);
 
         // NEW GAME
         // To check for click on save icons

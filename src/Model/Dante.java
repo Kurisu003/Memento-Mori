@@ -195,9 +195,8 @@ public class Dante extends GameObject {
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
                 if(GenerateLevel.getLevel()[i][j] > 0)
-                    if(wherePlayerHasBeen[j][i] == 0){
+                    if(wherePlayerHasBeen[j][i] == 0)
                         levelIsDone = false;
-                    }
             }
         }
 
