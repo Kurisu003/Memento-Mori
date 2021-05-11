@@ -8,10 +8,10 @@ import javax.sound.sampled.*;
 public class Music implements LineListener, Runnable {
     private final String audioFilePath;
     private final ID id;
-    private static float musicVolume = -29.89f;
-    private static float soundVolume = -29.89f;
-    private static int simpleMusicVolume = 3;
-    private static int simpleGameVolume = 3;
+    private static float musicVolume = -27.489f;
+    private static float soundVolume = -27.489f;
+    private static int simpleMusicVolume = 4;
+    private static int simpleGameVolume = 4;
 
     public Music(String audioFilePath, ID id){
         this.audioFilePath = audioFilePath;
@@ -106,7 +106,6 @@ public class Music implements LineListener, Runnable {
     public static void setMusicVolume(float musicVolumePar) {
         musicVolumePar = musicVolumePar < -64 ? (float) -64.50 : musicVolumePar;
         musicVolumePar = musicVolumePar > -20 ? (float) -20 : musicVolumePar;
-        System.out.println(musicVolumePar);
         musicVolume = musicVolumePar;
     }
 
