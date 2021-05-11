@@ -15,6 +15,7 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private boolean isRunning = false;
     private static BufferedImage floor;
+    private final ArrayList<BufferedImage> enemySprites = new ArrayList<>();
 
     int updates = 0;
 
@@ -63,8 +64,6 @@ public class Game extends Canvas implements Runnable {
         new View.Window(1100,611,"Memento Mori",this);
         start();
         Camera.getInstance().setX(1088);
-        Camera.getInstance().setY(0);
-//        mainMenu.init();
         this.addKeyListener(new KeyInput(Handler1.getInstance()));
         this.addMouseListener(mainMenu);
         folder = Levels.Limbo.name();
@@ -72,20 +71,28 @@ public class Game extends Canvas implements Runnable {
 
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
         render();
-
-//        floor = loader.loadImage("../Anger/AngerBackground.png");
         loadsprites();
 
         Handler1.getInstance().addObject(new Dante(3500, 1800, ID.Dante));
 //        handler.addObject(new Dialog(200, 50, ID.Dialog, folder));
-//        camera.setX(3264);
-//        camera.setY(1728);
 
-//        LoadLevel.loadLevel(handler, wallSprites, this.getBufferStrategy().getDrawGraphics());
+        // Adds hitting animation right
+        for(int i = 1; i <= 20; i++)
+            enemySprites.add(loader.loadImage("../Enemies/SmartEnemy/Sprite (" + i + ").png").getSubimage(130, 22,80,72));
+        // Adds hitting animation left
+        for(int i = 1; i <= 20; i++)
+            enemySprites.add(loader.loadImage("../Enemies/SmartEnemy/Sprite (" + i + ").png").getSubimage(94, 246 ,80,72));
 
+        // Adds walking animation right
+        for(int i = 1; i <= 14; i++)
+            enemySprites.add(loader.loadImage("../Enemies/SmartEnemy/Sprite (" + i + ").png").getSubimage(224, 28,44,66));
+        // Adds walking animation left
+        for(int i = 1; i <= 14; i++)
+            enemySprites.add(loader.loadImage("../Enemies/SmartEnemy/Sprite (" + i + ").png").getSubimage(36, 254,44,66));
+    }
 
-//        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
-//        handler.addObject(new ShotEnemy(150,150,ID.Enemy,handler,floor));
+    public ArrayList<BufferedImage> getEnemySprites(){
+        return enemySprites;
     }
 
     public static void addPortal(int x, int y){
