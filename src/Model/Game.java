@@ -34,6 +34,10 @@ public class Game extends Canvas implements Runnable {
 
     private static Model.Camera camera;
 
+    public Graphics getG() {
+        return g;
+    }
+
     private Graphics g;
 
     private final MainMenu mainMenu;
@@ -42,11 +46,21 @@ public class Game extends Canvas implements Runnable {
 
     public static boolean showHitbox = false;
 
-    public Game(){
+    private static Game instance = null;
+
+    public static Game getInstance(){
+        if(instance == null){
+            instance = new Game();
+        }
+        return instance;
+    }
+
+    private Game(){
         mainMenu = new MainMenu();
         new View.Window(1100,611,"Memento Mori",this);
         start();
-        camera = new Camera(3264,1728);
+        camera.setX(3264);
+        camera.setY(1728);
 //        mainMenu.init();
         this.addKeyListener(new KeyInput(Handler1.getInstance()));
         this.addMouseListener(mainMenu);
@@ -59,8 +73,16 @@ public class Game extends Canvas implements Runnable {
 //        floor = loader.loadImage("../Anger/AngerBackground.png");
         loadsprites();
 
-        Handler1.getInstance().addObject(new Dante(3500, 1800, ID.Dante, camera));
+        Handler1.getInstance().addObject(new Dante(3500, 1800, ID.Dante));
 //        handler.addObject(new Dialog(200, 50, ID.Dialog, folder));
+//        camera.setX(3264);
+//        camera.setY(1728);
+
+//        LoadLevel.loadLevel(handler, wallSprites, this.getBufferStrategy().getDrawGraphics());
+
+
+//        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
+//        handler.addObject(new ShotEnemy(150,150,ID.Enemy,handler,floor));
     }
 
     public static void addPortal(int x, int y){
@@ -232,6 +254,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void main(String[] args) {
-        new Game();
+
+        Game.getInstance();
     }
 }

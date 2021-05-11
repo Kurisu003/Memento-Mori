@@ -44,19 +44,17 @@ public class Dante extends GameObject {
 
     private transient BufferedImage bufferedBodyImage;
     private transient BufferedImage bufferedGunImage;
-    private transient final Camera camera;
 
-    public Dante(int x, int y, ID id, Camera camera) {
+    public Dante(int x, int y, ID id) {
         super(x, y, id);
         BufferedImageLoader loader = new BufferedImageLoader();
+
         instance = this;
         portalExists = false;
 
         roomXCoordinate = 3;
         roomYCoordinate = 3;
         wherePlayerHasBeen[roomXCoordinate][roomYCoordinate] = 1;
-
-        this.camera = camera;
 
         // Gun images
         playerGun.add(loader.loadImage("../Guns/M4/M4Up.png"));
@@ -180,12 +178,12 @@ public class Dante extends GameObject {
     private void setNewCoordinates(int newCoordinate, int newCameraCoordinate, int newRoomCoordinate, boolean isX){
         if(isX){
             x += newCoordinate;
-            camera.setX(camera.getX() + newCameraCoordinate);
+            Camera.getInstance().setX(Camera.getInstance().getX() + newCameraCoordinate);
             roomXCoordinate += newRoomCoordinate;
         }
         else{
             y += newCoordinate;
-            camera.setY(camera.getY() + newCameraCoordinate);
+            Camera.getInstance().setY(Camera.getInstance().getY() + newCameraCoordinate);
             roomYCoordinate += newRoomCoordinate;
         }
     }
@@ -283,21 +281,21 @@ public class Dante extends GameObject {
         for(int i = 0; i < 7; i++){
             for (int j = 0; j < 7; j++){
                 if(i == 3 && j == 3){
-                    g.drawImage(minimapSprites.get(3), (int)camera.getX() + 948,
-                            (int)camera.getY() + 59, null);
+                    g.drawImage(minimapSprites.get(3), (int)Camera.getInstance().getX() + 948,
+                            (int)Camera.getInstance().getY() + 59, null);
                 }
                 else if(wherePlayerHasBeen[i][j] == 1){
-                    g.drawImage(minimapSprites.get(0), (int)camera.getX() + 813 + i * 45,
-                            (int)camera.getY() + j * 25 - 16, null);
+                    g.drawImage(minimapSprites.get(0), (int)Camera.getInstance().getX() + 813 + i * 45,
+                            (int)Camera.getInstance().getY() + j * 25 - 16, null);
                 }
                 else if(wherePlayerHasBeen[i][j] == 0 && GenerateLevel.getLevel()[j][i] > 0){
-                    g.drawImage(minimapSprites.get(2),(int)camera.getX() + 813 + i * 45,
-                            (int)camera.getY() + j * 25 - 16, null);
+                    g.drawImage(minimapSprites.get(2),(int)Camera.getInstance().getX() + 813 + i * 45,
+                            (int)Camera.getInstance().getY() + j * 25 - 16, null);
                 }
             }
         }
-        g.drawImage(minimapSprites.get(1),  (int)camera.getX() + (int)camera.getX() / 1088 * 45 + 813 ,
-                                            (int)camera.getY() + (int)camera.getY() / 576 * 25 - 16, null);
+        g.drawImage(minimapSprites.get(1),  (int)Camera.getInstance().getX() + (int)Camera.getInstance().getX() / 1088 * 45 + 813 ,
+                                            (int)Camera.getInstance().getY() + (int)Camera.getInstance().getY() / 576 * 25 - 16, null);
     }
 
     private void changeToNextLevel(){
@@ -330,10 +328,10 @@ public class Dante extends GameObject {
             health = 0;
 
         for(int i = 0; i < health; i++)
-            g.drawImage(fullHeart, (int)camera.getX() + i * 35 + 10, (int)camera.getY() + 10, null);
+            g.drawImage(fullHeart, (int)Camera.getInstance().getX() + i * 35 + 10, (int)Camera.getInstance().getY() + 10, null);
 
         for(int i = 0; i < armor; i++)
-            g.drawImage(fullArmor, (int)camera.getX() + i * 35 + 10 + health * 35, (int)camera.getY() + 10, null);
+            g.drawImage(fullArmor, (int)Camera.getInstance().getX() + i * 35 + 10 + health * 35, (int)Camera.getInstance().getY() + 10, null);
 
     }
 

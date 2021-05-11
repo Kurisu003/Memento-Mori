@@ -8,10 +8,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 public class MainMenu extends MouseAdapter {
@@ -42,7 +39,9 @@ public class MainMenu extends MouseAdapter {
     private int animationCounter;
 
     public MainMenu(){
-        this.camera = new Camera(1088,0);
+        this.camera = Camera.getInstance();
+        camera.setX(1088);
+        camera.setY(0);
 
         desiredCameraX = (int) camera.getX();
         desiredCameraY = (int) camera.getY();
@@ -116,16 +115,9 @@ public class MainMenu extends MouseAdapter {
                 FileOutputStream out = new FileOutputStream("out.ser");
                 ObjectOutputStream out1= new ObjectOutputStream(out);
                 for (int i =0;i<Handler1.getInstance().objects.size(); i++) {
-                    System.out.println(Handler1.getInstance().objects.get(i).id);
-                    System.out.println(i);
-                    if (!(Handler1.getInstance().objects.get(i).id== ID.Dante)){
-                        out1.writeObject(Handler1.getInstance().objects.get(i));
-                    }else{
-                        out1.writeObject(Handler1.getInstance().objects.get(i));
-                    }
+                    out1.writeObject(Handler1.getInstance().objects.get(i));
                 }
                 out1.flush();
-
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             } catch (IOException ioException) {
@@ -134,15 +126,84 @@ public class MainMenu extends MouseAdapter {
 
         }
 
-        if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353)
+        if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353) {
             Game.setState(GameState.Game);
-        if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353)
+
+            try {
+                FileOutputStream out = new FileOutputStream("out.ser");
+                ObjectOutputStream out1 = new ObjectOutputStream(out);
+                for (int i = 0; i < Handler1.getInstance().objects.size(); i++) {
+                    out1.writeObject(Handler1.getInstance().objects.get(i));
+                }
+                out1.flush();
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+
+        if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353) {
             Game.setState(GameState.Game);
+
+            try {
+                FileOutputStream out = new FileOutputStream("out.ser");
+                ObjectOutputStream out1 = new ObjectOutputStream(out);
+                for (int i = 0; i < Handler1.getInstance().objects.size(); i++) {
+                    out1.writeObject(Handler1.getInstance().objects.get(i));
+                }
+                out1.flush();
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
 
         // CONTINUE GAME
         // To check for click on save icons
-        if(mx >= 81 && mx <= 281 && my >= 153 && my <= 353)
+        if(mx >= 81 && mx <= 281 && my >= 153 && my <= 353) {
             Game.setState(GameState.Game);
+
+            try {
+                FileInputStream out = new FileInputStream("out.ser");
+                ObjectInputStream out1 = new ObjectInputStream(out);
+
+                Handler1.getInstance().objects.clear();
+                for (int i = 0; i < Handler1.getInstance().objects.size(); i++) {
+                    Object d1 = out1.readObject();
+                    if (d1 instanceof Dante) {
+                        //Handler1.getInstance().objects.add(new Dante(((Dante) d1).x,((Dante)d1).y, ID.Dante,Handler1.getInstance(),Camera.getInstance,Game.getInstance().getG());
+                    } else if (d1 instanceof Box){
+                        Handler1.getInstance().objects.add((Box)d1);
+                    }else if (d1 instanceof Enemy){
+                        Handler1.getInstance().objects.add((Enemy)d1);
+                    }else if (d1 instanceof SmartEnemy){
+                        Handler1.getInstance().objects.add((SmartEnemy)d1);
+                    }else if (d1 instanceof ShotEnemy){
+                        Handler1.getInstance().objects.add((ShotEnemy)d1);
+                    }else if (d1 instanceof Enemy){
+                        Handler1.getInstance().objects.add((Enemy)d1);
+                    }else if (d1 instanceof Miniboss){
+                        Handler1.getInstance().objects.add((Miniboss)d1);
+                    }else if (d1 instanceof Door){
+                        Handler1.getInstance().objects.add((Door)d1);
+                    }
+                }
+
+                for (int i = 0; i <Handler1.getInstance().objects.size(); i++){
+                    System.out.println(Handler1.getInstance().objects.get(i).id);
+                }
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (ClassNotFoundException classNotFoundException) {
+                classNotFoundException.printStackTrace();
+            }
+
+        }
+
         if(mx >= 442 && mx <= 642 && my >= 153 && my <= 353)
             Game.setState(GameState.Game);
         if(mx >= 805 && mx <= 1005 && my >= 153 && my <= 353)
