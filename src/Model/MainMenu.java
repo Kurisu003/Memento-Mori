@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class MainMenu extends MouseAdapter {
 
-    private Camera camera;
     private ArrayList<BufferedImage> background;
     private transient BufferedImage title;
 
@@ -39,12 +38,11 @@ public class MainMenu extends MouseAdapter {
     private int animationCounter;
 
     public MainMenu(){
-        this.camera = Camera.getInstance();
-        camera.setX(1088);
-        camera.setY(0);
+        Camera.getInstance().setX(1088);
+        Camera.getInstance().setY(0);
 
-        desiredCameraX = (int) camera.getX();
-        desiredCameraY = (int) camera.getY();
+        desiredCameraX = (int) Camera.getInstance().getX();
+        desiredCameraY = (int) Camera.getInstance().getY();
 
         BufferedImageLoader loader = new BufferedImageLoader();
         background = new ArrayList<>();
@@ -76,8 +74,8 @@ public class MainMenu extends MouseAdapter {
     }
 
     public void mousePressed(MouseEvent e) {
-        int mx = (int) (e.getX() + camera.getX());
-        int my = (int) (e.getY() + camera.getY());
+        int mx = (int) (e.getX() + Camera.getInstance().getX());
+        int my = (int) (e.getY() + Camera.getInstance().getY());
 
         if(mx > 1098 && mx < 1598) {
             if (my > 300 && my < 350) {
@@ -88,8 +86,8 @@ public class MainMenu extends MouseAdapter {
                 desiredCameraY = 576;
             }
         }
-        if((mx - camera.getX() >= 20 && mx - camera.getX() <= 273) &&
-            (my - camera.getY() >= 20 && my - camera.getY() <= 70)){
+        if((mx - Camera.getInstance().getX() >= 20 && mx - Camera.getInstance().getX() <= 273) &&
+            (my - Camera.getInstance().getY() >= 20 && my - Camera.getInstance().getY() <= 70)){
             desiredCameraX = 1088;
             desiredCameraY = 0;
         }
@@ -212,18 +210,20 @@ public class MainMenu extends MouseAdapter {
     }
 
     public void calculations(){
-        if(desiredCameraX < camera.getX())
-            camera.setX(camera.getX() - 64);
-        else if(desiredCameraX > camera.getX())
-            camera.setX(camera.getX() + 64);
-        else if(desiredCameraY > camera.getY())
-            camera.setY(camera.getY() + 64);
-        else if(desiredCameraY < camera.getY())
-            camera.setY(camera.getY() - 64);
+        if(Game.getState().equals(GameState.MainMenu)) {
+            if (desiredCameraX < Camera.getInstance().getX())
+                Camera.getInstance().setX(Camera.getInstance().getX() - 64);
+            else if (desiredCameraX > Camera.getInstance().getX())
+                Camera.getInstance().setX(Camera.getInstance().getX() + 64);
+            else if (desiredCameraY > Camera.getInstance().getY())
+                Camera.getInstance().setY(Camera.getInstance().getY() + 64);
+            else if (desiredCameraY < Camera.getInstance().getY())
+                Camera.getInstance().setY(Camera.getInstance().getY() - 64);
 
-        frameCounter = (frameCounter + 1) % 20;
-        if(frameCounter % 10 == 0){
-            animationCounter = (animationCounter + 1) % 8;
+            frameCounter = (frameCounter + 1) % 20;
+            if (frameCounter % 10 == 0) {
+                animationCounter = (animationCounter + 1) % 8;
+            }
         }
 
     }
@@ -231,7 +231,7 @@ public class MainMenu extends MouseAdapter {
     public void render(Graphics g){
 
         Graphics2D g2d=(Graphics2D)g;
-        g2d.translate(-camera.getX(), -camera.getY());
+        g2d.translate(-Camera.getInstance().getX(), -Camera.getInstance().getY());
 
         g.drawImage(background.get(animationCounter), 0, -150, null);
 
@@ -248,8 +248,8 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(musicVolume, 30 + 1088, 743, null);
         g.drawImage(gameVolume, 30 + 1088, 937, null);
 
-        if(!(camera.getX() >= 1088 && camera.getX() <= 1088 && camera.getY() == 0))
-            g.drawImage(backspace,  (int)camera.getX() + 20, (int)camera.getY() + 20, null);
+        if(!(Camera.getInstance().getX() >= 1088 && Camera.getInstance().getX() <= 1088 && Camera.getInstance().getY() == 0))
+            g.drawImage(backspace,  (int)Camera.getInstance().getX() + 20, (int)Camera.getInstance().getY() + 20, null);
 
         // To render full Soundbars
         for(int i = 0; i < Music.getMusicVolume() + 70; i += 10)
@@ -270,7 +270,7 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(minus, 330+1088, 743, null);
         g.drawImage(minus, 330+1088, 937, null);
 
-        g2d.translate(camera.getX(), camera.getY());
+        g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
     }
 
     public static void setCamera(int x, int y){

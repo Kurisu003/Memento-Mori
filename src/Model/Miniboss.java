@@ -58,11 +58,11 @@ public class Miniboss extends SmartEnemy {
         //Draw hp bar
         for(int i = 0; i < 10; i++)
             if(i < this.hp/100)
-                g.drawImage(hpImage, (int)Game.getInstance().getCamera().getX()+i*40+344,
-                            (int)Game.getInstance().getCamera().getY()+10, null);
+                g.drawImage(hpImage, (int)Camera.getInstance().getX()+i*40+344,
+                            (int)Camera.getInstance().getY()+10, null);
             else
-                g.drawImage(noHpImage,(int)Game.getInstance().getCamera().getX()+i*40+344,
-                            (int)Game.getInstance().getCamera().getY()+10, null);
+                g.drawImage(noHpImage,(int)Camera.getInstance().getX()+i*40+344,
+                            (int)Camera.getInstance().getY()+10, null);
     }
 
     @Override

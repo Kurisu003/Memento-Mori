@@ -23,6 +23,11 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void setState(GameState state) {
+        if(state.equals(GameState.Game)) {
+            Camera.getInstance().setX(3264);
+            Camera.getInstance().setY(1728);
+
+        }
         Game.state = state;
     }
 
@@ -31,8 +36,6 @@ public class Game extends Canvas implements Runnable {
     private static final ArrayList<BufferedImage> wallSprites = new ArrayList<>();
     
     private static String folder;
-
-    private static Model.Camera camera;
 
     public Graphics getG() {
         return g;
@@ -59,8 +62,8 @@ public class Game extends Canvas implements Runnable {
         mainMenu = new MainMenu();
         new View.Window(1100,611,"Memento Mori",this);
         start();
-        camera.setX(3264);
-        camera.setY(1728);
+        Camera.getInstance().setX(1088);
+        Camera.getInstance().setY(0);
 //        mainMenu.init();
         this.addKeyListener(new KeyInput(Handler1.getInstance()));
         this.addMouseListener(mainMenu);
@@ -178,7 +181,7 @@ public class Game extends Canvas implements Runnable {
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
             if(temp.getId() == ID.Dante){
-                camera.tick(temp);
+                Camera.getInstance().tick(temp);
             }
         }
         boolean enemiesLeft = false;
@@ -224,7 +227,7 @@ public class Game extends Canvas implements Runnable {
 
 
         if(state==GameState.Game) {
-            g2d.translate(-camera.getX(), -camera.getY());
+            g2d.translate(-Camera.getInstance().getX(), -Camera.getInstance().getY());
 
             // Repeats sprites over entire level
             for (int i = 1; i <= 6; i++) {
@@ -235,7 +238,7 @@ public class Game extends Canvas implements Runnable {
 
             Handler1.getInstance().render(g);
 
-            g2d.translate(camera.getX(), camera.getY());
+            g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
         } else if(state==GameState.MainMenu){
             mainMenu.render(g);
         }
@@ -247,10 +250,6 @@ public class Game extends Canvas implements Runnable {
     public void changeLevel(String level, Handler1 handler){
         folder = level;
         loadsprites();
-    }
-
-    public Camera getCamera() {
-        return camera;
     }
 
     public static void main(String[] args) {
