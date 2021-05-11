@@ -25,7 +25,8 @@ public class Dialog extends GameObject {
 
              */
             g.setFont(new Font("TimesRoman", Font.PLAIN, 100));
-            g.drawString("Limbo",(int)Game.getCamera().getX()+10*35+30, (int)Game.getCamera().getY()+300);
+            g.drawString("Limbo",(int)Game.getInstance().getCamera().getX()+10*35+30,
+                        (int)Game.getInstance().getCamera().getY()+300);
         }
     }
 

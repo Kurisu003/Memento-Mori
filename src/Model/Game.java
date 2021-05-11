@@ -61,14 +61,6 @@ public class Game extends Canvas implements Runnable {
 
         Handler1.getInstance().addObject(new Dante(3500, 1800, ID.Dante, camera));
 //        handler.addObject(new Dialog(200, 50, ID.Dialog, folder));
-
-//        camera.setX(3264);
-//        camera.setY(1728);
-
-//        LoadLevel.loadLevel(handler, wallSprites, this.getBufferStrategy().getDrawGraphics());
-
-//        handler.addObject(new SmartEnemy(100,100,ID.Enemy,handler));
-//        handler.addObject(new ShotEnemy(150,150,ID.Enemy,handler,floor));
     }
 
     public static void addPortal(int x, int y){
@@ -228,15 +220,14 @@ public class Game extends Canvas implements Runnable {
 
         g.dispose();
         bs.show();
-
     }
     
-    public static void changeLevel(String level, Handler1 handler){
+    public void changeLevel(String level, Handler1 handler){
         folder = level;
         loadsprites();
     }
 
-    public static Camera getCamera() {
+    public Camera getCamera() {
         return camera;
     }
 

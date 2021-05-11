@@ -9,7 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class MouseInput extends MouseAdapter {
-    
+
     private Camera camera;
 
     public MouseInput(Camera camera){

@@ -302,7 +302,7 @@ public class Dante extends GameObject {
 
     private void changeToNextLevel(){
         currentLevel = currentLevel.next();
-        Game.changeLevel(currentLevel.name(), Handler1.getInstance());
+        Game.getInstance().changeLevel(currentLevel.name(), Handler1.getInstance());
 
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
