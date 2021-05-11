@@ -95,11 +95,11 @@ public class MainMenu extends MouseAdapter {
         // To check for Music Volume
         System.out.println();
         if(mx >= 1538 && mx <= 1588 && my >= 743 && my <= 793) {
-            Music.setMusicVolume((float) (Music.getMusicVolume() + Math.log(Math.abs(Music.getMusicVolume())) * 2));
+            Music.setMusicVolume((float) (Music.getMusicVolume() + Math.log(Math.abs(Music.getMusicVolume())) * 2.5));
             Music.setSimpleMusicVolume(Music.getSimpleMusicVolume() + 1);
         }
         if(mx >= 1418 && mx <= 1468 && my >= 743 && my <= 793) {
-            Music.setMusicVolume((float) (Music.getMusicVolume() - Math.log(Math.abs(Music.getMusicVolume())) * 2));
+            Music.setMusicVolume((float) (Music.getMusicVolume() - Math.log(Math.abs(Music.getMusicVolume())) * 2.5));
             Music.setSimpleMusicVolume(Music.getSimpleMusicVolume() - 1);
         }
 

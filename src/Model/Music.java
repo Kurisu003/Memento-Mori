@@ -102,10 +102,8 @@ public class Music implements LineListener, Runnable {
     }
 
     public static void setMusicVolume(float musicVolumePar) {
-        if(musicVolumePar < -54.5)
-            musicVolumePar = (float) -54.5;
-        else if(musicVolumePar > -20)
-            musicVolumePar = -20;
+        musicVolumePar = musicVolumePar < -64 ? (float) -64.50 : musicVolumePar;
+        musicVolumePar = musicVolumePar > -20 ? (float) -20 : musicVolumePar;
         musicVolume = musicVolumePar;
     }
 
