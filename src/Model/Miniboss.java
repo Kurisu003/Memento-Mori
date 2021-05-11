@@ -11,15 +11,14 @@ import java.awt.image.BufferedImage;
  * it is going until it's defeated.
  */
 public class Miniboss extends SmartEnemy {
-    private final Handler1 handler;
+
     int hp = 1000;
 
     private transient final BufferedImage hpImage;
     private transient final BufferedImage noHpImage;
 
-    public Miniboss(int x, int y, ID id, Handler1 handler) {
-        super(x, y, id, handler);
-        this.handler = handler;
+    public Miniboss(int x, int y, ID id) {
+        super(x, y, id);
 
         BufferedImageLoader loader = new BufferedImageLoader();
         hpImage = loader.loadImage("../Assets/redRec.png");
@@ -27,7 +26,7 @@ public class Miniboss extends SmartEnemy {
     }
     @Override
     public void tick(){
-        for(GameObject temp: handler.objects){
+        for(GameObject temp: Handler1.getInstance().objects){
             if(temp.id==ID.Dante){
                 double diffx=x-temp.getX()-32;
                 double diffy=y-temp.getY()-32;
@@ -38,7 +37,7 @@ public class Miniboss extends SmartEnemy {
             }
         }
         if(hp <= 0) {
-            handler.removeObject(this);
+            Handler1.getInstance().removeObject(this);
         }
         x+=velX;
         y+=velY;
@@ -59,9 +58,11 @@ public class Miniboss extends SmartEnemy {
         //Draw hp bar
         for(int i = 0; i < 10; i++)
             if(i < this.hp/100)
-                g.drawImage(hpImage, (int)Game.getCamera().getX()+i*40+344, (int)Game.getCamera().getY()+10, null);
+                g.drawImage(hpImage, (int)Game.getInstance().getCamera().getX()+i*40+344,
+                            (int)Game.getInstance().getCamera().getY()+10, null);
             else
-                g.drawImage(noHpImage,(int)Game.getCamera().getX()+i*40+344, (int)Game.getCamera().getY()+10, null);
+                g.drawImage(noHpImage,(int)Game.getInstance().getCamera().getX()+i*40+344,
+                            (int)Game.getInstance().getCamera().getY()+10, null);
     }
 
     @Override

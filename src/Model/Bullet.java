@@ -8,7 +8,6 @@ import Controller.*;
 
 public class Bullet extends GameObject {
 
-    private final Controller.Handler1 handler;
     private transient final BufferedImage bufferedShotImage;
     private int timeAlive = 0;
     private final int range;
@@ -16,9 +15,8 @@ public class Bullet extends GameObject {
 
     Random r= new Random();
 
-    public Bullet(int x, int y, ID id, Handler1 handler, int mx, int my, int range, int damage, BufferedImage shotType) {
+    public Bullet(int x, int y, ID id, int mx, int my, int range, int damage, BufferedImage shotType) {
         super(x, y, id);
-        this.handler = handler;
         this.range = range;
         this.bufferedShotImage = shotType;
         this.damage = damage;
@@ -33,18 +31,18 @@ public class Bullet extends GameObject {
         y += velY;
 
         if (++timeAlive > range) {
-            handler.removeObject(this);
+            Handler1.getInstance().removeObject(this);
         }
 
-        for (int i = 0; i < handler.objects.size(); i++) {
-            GameObject temp = handler.objects.get(i);
+        for (int i = 0; i < Handler1.getInstance().objects.size(); i++) {
+            GameObject temp = Handler1.getInstance().objects.get(i);
             if (getBounds().intersects(temp.getBounds())) {
                 if (temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy || temp.getId() == ID.Miniboss || temp.getId() == ID.ShotEnemy) {
-                    handler.removeObject(this);
+                    Handler1.getInstance().removeObject(this);
                     temp.doAction(damage);
                 }
                 if (temp.getId() == ID.Block || temp.getId() == ID.Door)
-                    handler.removeObject(this);
+                    Handler1.getInstance().removeObject(this);
             }
         }
     }

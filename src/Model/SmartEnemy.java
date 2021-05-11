@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class SmartEnemy extends GameObject{
-    private Handler1 handler;
     int hp=200;
     private transient BufferedImage displayedImage;
     private ArrayList<BufferedImage> sprites;
@@ -20,9 +19,8 @@ public class SmartEnemy extends GameObject{
     int walkingAnimationCounter=0;
     boolean isAnimating = false;
 
-    public SmartEnemy(int x, int y, ID id, Handler1 handler) {
+    public SmartEnemy(int x, int y, ID id) {
         super(x, y, id);
-        this.handler=handler;
         sprites = new ArrayList<BufferedImage>();
 
         BufferedImageLoader loader = new BufferedImageLoader();
@@ -52,7 +50,7 @@ public class SmartEnemy extends GameObject{
         frameCounter++;
         walkingAnimationCounter = (walkingAnimationCounter + 1) % 42;
 
-        for(GameObject temp: handler.objects){
+        for(GameObject temp: Handler1.getInstance().objects){
 
             if(temp.getId() == ID.Block) {
                 if (getBoundsBigger().intersects(temp.getBounds())) {
@@ -141,7 +139,7 @@ public class SmartEnemy extends GameObject{
         y+=velY;
 
         if(hp <= 0) {
-            handler.removeObject(this);
+            Handler1.getInstance().removeObject(this);
         }
     }
 

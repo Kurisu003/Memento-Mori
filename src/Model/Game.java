@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ListIterator;
 
 import Controller.*;
@@ -15,7 +14,6 @@ public class Game extends Canvas implements Runnable {
 
     private Thread thread;
     private boolean isRunning = false;
-    private final Handler1 handler;
     private static BufferedImage floor;
 
     int updates = 0;
@@ -36,6 +34,10 @@ public class Game extends Canvas implements Runnable {
 
     private static Model.Camera camera;
 
+    public Graphics getG() {
+        return g;
+    }
+
     private Graphics g;
 
     private final MainMenu mainMenu;
@@ -44,14 +46,23 @@ public class Game extends Canvas implements Runnable {
 
     public static boolean showHitbox = false;
 
-    public Game(){
+    private static Game instance = null;
+
+    public static Game getInstance(){
+        if(instance == null){
+            instance = new Game();
+        }
+        return instance;
+    }
+
+    private Game(){
         mainMenu = new MainMenu();
         new View.Window(1100,611,"Memento Mori",this);
         start();
-        handler = Handler1.getInstance();
-        camera = new Camera(3264,1728);
+        camera.setX(3264);
+        camera.setY(1728);
 //        mainMenu.init();
-        this.addKeyListener(new KeyInput(handler));
+        this.addKeyListener(new KeyInput(Handler1.getInstance()));
         this.addMouseListener(mainMenu);
         folder = Levels.Limbo.name();
         loader = new BufferedImageLoader();
@@ -60,10 +71,10 @@ public class Game extends Canvas implements Runnable {
         render();
 
 //        floor = loader.loadImage("../Anger/AngerBackground.png");
-        loadsprites(handler, this.getBufferStrategy().getDrawGraphics());
+        loadsprites();
 
-        handler.addObject(new Dante(3500, 1800, ID.Dante, handler, camera, g));
-        handler.addObject(new Dialog(200, 50, ID.Dialog, folder));
+        Handler1.getInstance().addObject(new Dante(3500, 1800, ID.Dante));
+//        handler.addObject(new Dialog(200, 50, ID.Dialog, folder));
 //        camera.setX(3264);
 //        camera.setY(1728);
 
@@ -78,7 +89,7 @@ public class Game extends Canvas implements Runnable {
         Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Levels/Limbo/BLC.png")));
     }
 
-    private static void loadsprites(Handler1 handler, Graphics g){
+    private static void loadsprites(){
 
         wallSprites.clear();
 
@@ -107,7 +118,7 @@ public class Game extends Canvas implements Runnable {
 
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
-        LoadLevel.clearAndLoadLevel(wallSprites, g, 5);
+        LoadLevel.clearAndLoadLevel(wallSprites, 5);
     }
 
     public static void removePortal() {
@@ -164,14 +175,14 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void tick(){
-        for(ListIterator<GameObject> iterator = handler.objects.listIterator(); iterator.hasNext();){
+        for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
             if(temp.getId() == ID.Dante){
                 camera.tick(temp);
             }
         }
         boolean enemiesLeft = false;
-        for(ListIterator<GameObject> iterator = handler.objects.listIterator(); iterator.hasNext();){
+        for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
             if(temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy || temp.getId() == ID.ShotEnemy){
                 enemiesLeft = true;
@@ -184,11 +195,11 @@ public class Game extends Canvas implements Runnable {
 
 
 
-        handler.tick();
+        Handler1.getInstance().tick();
     }
 
     private void changeDoors(int state){
-        for(ListIterator<GameObject> iterator = handler.objects.listIterator(); iterator.hasNext();){
+        for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
             if(temp.getId() == ID.Door && state == 1){
                 ((Door) temp).lockDoor();
@@ -222,7 +233,7 @@ public class Game extends Canvas implements Runnable {
                 }
             }
 
-            handler.render(g);
+            Handler1.getInstance().render(g);
 
             g2d.translate(camera.getX(), camera.getY());
         } else if(state==GameState.MainMenu){
@@ -231,19 +242,19 @@ public class Game extends Canvas implements Runnable {
 
         g.dispose();
         bs.show();
-
     }
     
-    public static void changeLevel(String level, Handler1 handler, Graphics g){
+    public void changeLevel(String level, Handler1 handler){
         folder = level;
-        loadsprites(handler, g);
+        loadsprites();
     }
 
-    public static Camera getCamera() {
+    public Camera getCamera() {
         return camera;
     }
 
     public static void main(String[] args) {
-        new Game();
+
+        Game.getInstance();
     }
 }

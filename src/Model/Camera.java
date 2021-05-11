@@ -1,15 +1,25 @@
 package Model;
 
+import Controller.Handler1;
+
 import java.io.Serializable;
 
 public class Camera implements Serializable {
     private double x,y;
 
-    public Camera(double x,double y){
-        this.x=x;
-        this.y=y;
+    private Camera(){
+        this.x = x;
+        this.y = y;
     }
 
+    private static Camera instance = null;
+
+    public static Camera getInstance(){
+        if(instance == null){
+            instance = new Camera();
+        }
+        return instance;
+    }
     public double getX() {
         return x;
     }

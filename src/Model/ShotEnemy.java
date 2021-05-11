@@ -10,7 +10,6 @@ import java.util.Random;
 
 public class ShotEnemy extends GameObject{
 
-    private final Handler1 handler;
     BufferedImage image;
 
     int tickCounter = 0;
@@ -25,9 +24,8 @@ public class ShotEnemy extends GameObject{
     ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
 
 
-    public ShotEnemy(int x, int y, ID id,Handler1 handler) {
+    public ShotEnemy(int x, int y, ID id) {
         super(x, y, id);
-        this.handler=handler;
 
         BufferedImageLoader loader = new BufferedImageLoader();
         enemyAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
@@ -50,8 +48,8 @@ public class ShotEnemy extends GameObject{
 
         choose = r.nextInt(50);
 
-        for(int i = 0; i < handler.objects.size(); i++) {
-            GameObject temp = handler.objects.get(i);
+        for(int i = 0; i < Handler1.getInstance().objects.size(); i++) {
+            GameObject temp = Handler1.getInstance().objects.get(i);
 
             if(temp.getId() == ID.Block||temp.getId()==ID.Door) {
                 if(getBoundsBigger().intersects(temp.getBounds())) {
@@ -82,12 +80,12 @@ public class ShotEnemy extends GameObject{
             }
             if(temp.id==ID.Dante){
                 if (++tickCounter % (r.nextInt(250 - 200) + 200) == 0) {
-                    handler.addObject(new Bullet(x, y, ID.Bullet, handler, temp.getX() +(r.nextInt( 11+11) -11), temp.getY()+(r.nextInt(11 +11) -11), 30, 1, image));
+                    Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet, temp.getX() +(r.nextInt( 11+11) -11), temp.getY()+(r.nextInt(11 +11) -11), 30, 1, image));
                 }
             }
 
             if(hp <= 0) {
-                handler.removeObject(this);
+                Handler1.getInstance().removeObject(this);
             }
         }
     }
