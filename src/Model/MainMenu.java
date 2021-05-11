@@ -256,8 +256,9 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(musicVolume, 30 + 1088, 743, null);
         g.drawImage(gameVolume, 30 + 1088, 937, null);
 
-        if(!(Camera.getInstance().getX() >= 1088 && Camera.getInstance().getX() <= 1088 && Camera.getInstance().getY() == 0))
-            g.drawImage(backspace,  (int)Camera.getInstance().getX() + 20, (int)Camera.getInstance().getY() + 20, null);
+        g.drawImage(backspace,  2196, 20, null);
+        g.drawImage(backspace,  20, 20, null);
+        g.drawImage(backspace,  1108, 596, null);
 
         // To render full Soundbars
         for(int i = 0; i < Music.getSimpleMusicVolume() * 10; i += 10)
