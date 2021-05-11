@@ -10,6 +10,8 @@ public class Music implements LineListener, Runnable {
     private final ID id;
     private static float musicVolume = -40.0f;
     private static float soundVolume = -40.0f;
+    private static int simpleMusicVolume = 2;
+    private static int simpleGameVolume = 2;
 
     public Music(String audioFilePath, ID id){
         this.audioFilePath = audioFilePath;
@@ -17,6 +19,25 @@ public class Music implements LineListener, Runnable {
     }
 
     boolean playCompleted = false;
+
+    public static int getSimpleMusicVolume() {
+        return simpleMusicVolume;
+    }
+
+    public static void setSimpleMusicVolume(int simpleMusicVolume) {
+        simpleMusicVolume = Math.max(simpleMusicVolume, 0);
+        simpleMusicVolume = Math.min(simpleMusicVolume, 5);
+        Music.simpleMusicVolume = simpleMusicVolume;
+    }
+
+    public static int getSimpleGameVolume() {
+        return simpleGameVolume;
+    }
+
+    public static void setSimpleGameVolume(int simpleGameVolume) {
+        Music.simpleGameVolume = simpleGameVolume;
+    }
+
     void playMusic() {
         File audioFile = new File(this.audioFilePath);
 
@@ -81,8 +102,8 @@ public class Music implements LineListener, Runnable {
     }
 
     public static void setMusicVolume(float musicVolumePar) {
-        if(musicVolumePar < -80)
-            musicVolumePar = -80;
+        if(musicVolumePar < -54.5)
+            musicVolumePar = (float) -54.5;
         else if(musicVolumePar > -20)
             musicVolumePar = -20;
         musicVolume = musicVolumePar;
@@ -93,8 +114,8 @@ public class Music implements LineListener, Runnable {
     }
 
     public static void setSoundVolume(float soundVolumePar) {
-        if(soundVolumePar < -80)
-            soundVolumePar = -80;
+        if(soundVolumePar < -54.5)
+            soundVolumePar = (float) -54.5;
         else if(soundVolumePar > -20)
             soundVolumePar = -20;
         soundVolume = soundVolumePar;

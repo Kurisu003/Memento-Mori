@@ -94,10 +94,14 @@ public class MainMenu extends MouseAdapter {
 
         // To check for Music Volume
         System.out.println();
-        if(mx >= 1538 && mx <= 1588 && my >= 743 && my <= 793)
+        if(mx >= 1538 && mx <= 1588 && my >= 743 && my <= 793) {
             Music.setMusicVolume((float) (Music.getMusicVolume() + Math.log(Math.abs(Music.getMusicVolume())) * 2));
-        if(mx >= 1418 && mx <= 1468 && my >= 743 && my <= 793)
+            Music.setSimpleMusicVolume(Music.getSimpleMusicVolume() + 1);
+        }
+        if(mx >= 1418 && mx <= 1468 && my >= 743 && my <= 793) {
             Music.setMusicVolume((float) (Music.getMusicVolume() - Math.log(Math.abs(Music.getMusicVolume())) * 2));
+            Music.setSimpleMusicVolume(Music.getSimpleMusicVolume() - 1);
+        }
 
         // To check for Sound volume
         if(mx >= 1538 && mx <= 1588 && my >= 943 && my <= 993)
@@ -253,7 +257,7 @@ public class MainMenu extends MouseAdapter {
             g.drawImage(backspace,  (int)Camera.getInstance().getX() + 20, (int)Camera.getInstance().getY() + 20, null);
 
         // To render full Soundbars
-        for(int i = 0; i < Music.getMusicVolume() + 70; i += 10)
+        for(int i = 0; i < Music.getSimpleMusicVolume() * 10; i += 10)
             g.drawImage(soundBarFull, 550 + 1088 + ( i / 10 ) * 50, 743, null);
 
         for(int i = 0; i < Music.getSoundVolume() + 70; i += 10)
