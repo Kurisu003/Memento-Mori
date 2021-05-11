@@ -27,9 +27,12 @@ public class MainMenu extends MouseAdapter {
     private transient BufferedImage musicVolume;
     private transient BufferedImage gameVolume;
 
-    private transient BufferedImage backspace;
     private transient BufferedImage plus;
     private transient BufferedImage minus;
+
+    private transient BufferedImage backspaceLeft;
+    private transient BufferedImage backspaceRight;
+    private transient BufferedImage backspaceUp;
 
     private static int desiredCameraX;
     private static int desiredCameraY;
@@ -67,10 +70,12 @@ public class MainMenu extends MouseAdapter {
         soundBarEmpty = loader.loadImage("../MainMenuAssets/GameSoundbarEmpty.png");
         soundBarFull = loader.loadImage("../MainMenuAssets/GameSoundbarFiller.png");
 
-        backspace = loader.loadImage("../MainMenuAssets/Backspace.png");
         plus = loader.loadImage("../MainMenuAssets/Plus.png");
         minus = loader.loadImage("../MainMenuAssets/Minus.png");
 
+        backspaceLeft = loader.loadImage("../MainMenuAssets/BackspaceLeft.png");
+        backspaceRight = loader.loadImage("../MainMenuAssets/BackspaceRight.png");
+        backspaceUp = loader.loadImage("../MainMenuAssets/BackspaceUp.png");
     }
 
     public void mousePressed(MouseEvent e) {
@@ -256,9 +261,9 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(musicVolume, 30 + 1088, 743, null);
         g.drawImage(gameVolume, 30 + 1088, 937, null);
 
-        g.drawImage(backspace,  2196, 20, null);
-        g.drawImage(backspace,  20, 20, null);
-        g.drawImage(backspace,  1108, 596, null);
+        g.drawImage(backspaceLeft,  2196, 20, null);
+        g.drawImage(backspaceRight,  20, 20, null);
+        g.drawImage(backspaceUp,  1108, 596, null);
 
         // To render full Soundbars
         for(int i = 0; i < Music.getSimpleMusicVolume() * 10; i += 10)
