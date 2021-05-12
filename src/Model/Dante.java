@@ -266,9 +266,10 @@ public class Dante extends GameObject {
         // Used because object cant be added
         // to list within a loop
         if(shouldSpawnEnemy){
+            Random rand = new Random();
             //Types of enemies can be put in ID[]{...} for a random spawn of each of them
             SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088 + 64, roomYCoordinate * 576 + 64,
-                            2, new ID[]{ID.SmartEnemy, ID.ShotEnemy});
+                    2 + rand.nextInt(currentLevel.ordinal()+1), new ID[]{ID.SmartEnemy, ID.ShotEnemy});
         }
         if(shouldChangeLevel){
             Game.removePortal();

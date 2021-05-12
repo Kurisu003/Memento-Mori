@@ -20,7 +20,7 @@ public class SpawnEnemiesInRoom {
                                             roomStartY + 64 + (rn.nextInt(320)), typesOfEnemy[pos]));
             else if(typesOfEnemy[pos].equals(ID.Enemy)) {
                 Handler1.getInstance().addObject(new Enemy(roomStartX + 64 + (rn.nextInt(832)),
-                                                roomStartY + 64 + (rn.nextInt(320)), ID.Enemy));
+                                            roomStartY + 64 + (rn.nextInt(320)), ID.Enemy));
             }
             else if(typesOfEnemy[pos].equals(ID.Miniboss)){
                 if(minibosses == 0){
