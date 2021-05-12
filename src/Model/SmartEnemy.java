@@ -150,6 +150,6 @@ public class SmartEnemy extends GameObject{
     }
 
     public Rectangle getBoundsBigger(){
-        return new Rectangle(x,y,40,40);
+        return new Rectangle(x,y - 10,30,50);
     }
 }
