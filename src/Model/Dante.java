@@ -96,6 +96,8 @@ public class Dante extends GameObject {
         fullHeart = loader.loadImage("../Assets/FullHeart.png");
         fullArmor = loader.loadImage("../Assets/FullShield.png");
         minibossHealth = loader.loadImage("../Assets/redRec.png");
+
+        bulletImage = loader.loadImage("../Assets/Bullet.png");
     }
 
     public static GameObject getInstance() {
@@ -157,7 +159,8 @@ public class Dante extends GameObject {
     private void spawnBulletOnPress(int shotY, int shotYStart, int shotX, int shotXStart){
         int damage = 100;
         if(shotY != y || shotX != x){
-            Handler1.getInstance().addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, shotX, shotY, range, damage, bulletImage));
+            Handler1.getInstance().addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, shotX, shotY,
+                                            range, damage, bulletImage));
             new Thread(new Music("res/Sounds/Guns/M4/GunSound1.wav", ID.ShootingSound)).start();
         }
     }
@@ -166,9 +169,9 @@ public class Dante extends GameObject {
     private void checkBulletDirection(){
         // Version like the binding of isaac
         if(Handler1.getInstance().isShootUp() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootLeft())
-            spawnBulletOnPress(y-132, y-32, x+32, x+30);
+            spawnBulletOnPress(y-132, y-32, x+25, x+25);
         else if(Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootUp())
-            spawnBulletOnPress(y+175, y+75, x+30, x+30);
+            spawnBulletOnPress(y+175, y+50, x+25, x+25);
         else if(Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp())
             spawnBulletOnPress(y+40, y+40, x-130, x);
         else if(Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp())
