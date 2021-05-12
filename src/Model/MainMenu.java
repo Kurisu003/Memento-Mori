@@ -13,22 +13,24 @@ import java.util.ArrayList;
 
 public class MainMenu extends MouseAdapter {
 
-    private ArrayList<BufferedImage> background;
-    private transient BufferedImage title;
+    private final ArrayList<BufferedImage> background;
+    private final transient BufferedImage title;
 
     private transient BufferedImage mainMenu;
-    private transient BufferedImage startNewGame;
-    private transient BufferedImage continueGame;
-    private transient BufferedImage settings;
-    private transient BufferedImage saveIcon;
+    private final transient BufferedImage startNewGame;
+    private final transient BufferedImage continueGame;
+    private final transient BufferedImage settings;
+    private final transient BufferedImage saveIcon;
 
-    private transient BufferedImage soundBarEmpty;
-    private transient BufferedImage soundBarFull;
-    private transient BufferedImage musicVolume;
-    private transient BufferedImage gameVolume;
+    private final transient BufferedImage soundBarEmpty;
+    private final transient BufferedImage soundBarFull;
+    private final transient BufferedImage musicVolume;
+    private final transient BufferedImage gameVolume;
+
 
     private transient BufferedImage plus;
     private transient BufferedImage minus;
+
 
     private transient BufferedImage backspaceLeft;
     private transient BufferedImage backspaceRight;
@@ -128,6 +130,7 @@ public class MainMenu extends MouseAdapter {
                 for (int i =0;i<Handler1.getInstance().objects.size(); i++) {
                     out1.writeObject(Handler1.getInstance().objects.get(i));
                 }
+                out1.writeObject(Camera.getInstance());
                 out1.flush();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
@@ -179,31 +182,32 @@ public class MainMenu extends MouseAdapter {
             try {
                 FileInputStream out = new FileInputStream("out.ser");
                 ObjectInputStream out1 = new ObjectInputStream(out);
-
                 Handler1.getInstance().objects.clear();
-                for (int i = 0; i < Handler1.getInstance().objects.size(); i++) {
+                try{
+                for (int i = 0; i < 500; i++) {
                     Object d1 = out1.readObject();
                     if (d1 instanceof Dante) {
-                        //Handler1.getInstance().objects.add(new Dante(((Dante) d1).x,((Dante)d1).y, ID.Dante,Handler1.getInstance(),Camera.getInstance,Game.getInstance().getG());
-                    } else if (d1 instanceof Box){
-                        Handler1.getInstance().objects.add((Box)d1);
-                    }else if (d1 instanceof Enemy){
-                        Handler1.getInstance().objects.add((Enemy)d1);
-                    }else if (d1 instanceof SmartEnemy){
-                        Handler1.getInstance().objects.add((SmartEnemy)d1);
-                    }else if (d1 instanceof ShotEnemy){
-                        Handler1.getInstance().objects.add((ShotEnemy)d1);
-                    }else if (d1 instanceof Enemy){
-                        Handler1.getInstance().objects.add((Enemy)d1);
-                    }else if (d1 instanceof Miniboss){
-                        Handler1.getInstance().objects.add((Miniboss)d1);
-                    }else if (d1 instanceof Door){
-                        Handler1.getInstance().objects.add((Door)d1);
+                        Handler1.getInstance().objects.add(new Dante(((Dante) d1).x,((Dante)d1).y,ID.Dante));
+                    } else if (d1 instanceof Camera) {
+                        Camera.getInstance().setX(((Camera)d1).getX());
+                        Camera.getInstance().setY(((Camera)d1).getY());
+                    } else if (d1 instanceof Box) {
+                        //Handler1.getInstance().objects.add((Box) d1);
+                    } else if (d1 instanceof Enemy) {
+                        //Handler1.getInstance().objects.add((Enemy) d1);
+                    } else if (d1 instanceof SmartEnemy) {
+                        //Handler1.getInstance().objects.add((SmartEnemy) d1);
+                    } else if (d1 instanceof ShotEnemy) {
+                        //Handler1.getInstance().objects.add((ShotEnemy) d1);
+                    } else if (d1 instanceof Enemy) {
+                        //Handler1.getInstance().objects.add((Enemy) d1);
+                    } else if (d1 instanceof Miniboss) {
+                        //Handler1.getInstance().objects.add((Miniboss) d1);
+                    } else if (d1 instanceof Door) {
+                        //Handler1.getInstance().objects.add((Door) d1);
                     }
                 }
-
-                for (int i = 0; i <Handler1.getInstance().objects.size(); i++){
-                    System.out.println(Handler1.getInstance().objects.get(i).id);
+                }catch (EOFException r){
                 }
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
