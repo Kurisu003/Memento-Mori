@@ -3,12 +3,14 @@ package Model;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 public class Dialog extends GameObject {
-    private String level;
-    public Dialog(int x, int y, ID id, String level) {
+    private String levelName;
+    private int[][] firstLevelSeed = {{3*64*17}, {3*64*9}};
+    public Dialog(int x, int y, ID id, String levelName) {
         super(x, y,id);
-        this.level = level;
+        this.levelName = levelName;
     }
 
     @Override
@@ -18,20 +20,23 @@ public class Dialog extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        if(this.level.equals("Limbo")){
-            /*g.setColor(Color.WHITE);
-            g.fillRect((int)Game.getCamera().getX()+35, (int)Game.getCamera().getY()+500, 200, 50);
+            g.setColor(Color.WHITE);
+            g.fillRect(5+3*64*17, 520+3*64*9, 200, 50);
             g.setColor(Color.black);
 
-             */
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 100));
-            g.drawString("Limbo",(int)Camera.getInstance().getX()+10*35+30,
-                        (int)Camera.getInstance().getY()+300);
-        }
+
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+            g.drawString(levelName,10+3*64*27, 515+3*64*9);
+
+        /*
+        x = 3*64*17
+        y = 3*64*9
+         */
+
     }
 
     @Override
     public Rectangle getBounds() {
-        return null;
+        return new Rectangle((int)Game.getCamera().getX()+35, (int)Game.getCamera().getY()+500, 200, 50);
     }
 }

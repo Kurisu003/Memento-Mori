@@ -93,6 +93,7 @@ public class Game extends Canvas implements Runnable {
 
     public ArrayList<BufferedImage> getEnemySprites(){
         return enemySprites;
+
     }
 
     public static void addPortal(int x, int y){

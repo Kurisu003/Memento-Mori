@@ -1,5 +1,6 @@
 package View;
 
+import Model.Dialog2;
 import Model.Game;
 import Model.GameState;
 
@@ -8,9 +9,10 @@ import javax.swing.plaf.nimbus.State;
 import java.awt.*;
 
 public class Window {
+    private static JFrame frame;
 
     public Window(int width, int height, String title, Game game){
-        JFrame frame = new JFrame(title);
+        frame = new JFrame(title);
         // Setting the size of the window
         frame.setPreferredSize(new Dimension(width, height));
         frame.setMaximumSize(new Dimension(width, height));
@@ -19,6 +21,7 @@ public class Window {
         // we add the game class to the frame
 
         frame.add(game);
+        //frame.add(new Dialog2());
 
         // you cannot resize the window
         frame.setResizable(false);
@@ -31,5 +34,9 @@ public class Window {
         frame.setVisible(true);
         frame.toFront();
         frame.requestFocus();
+    }
+
+    public static JFrame getFrame() {
+        return frame;
     }
 }
