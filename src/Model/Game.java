@@ -71,6 +71,7 @@ public class Game extends Canvas implements Runnable {
 
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
         render();
+
         loadsprites(5);
 
         Handler1.getInstance().addObject(new Dante(3500, 1800, ID.Dante));
