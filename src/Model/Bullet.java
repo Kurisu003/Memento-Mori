@@ -53,7 +53,7 @@ public class Bullet extends GameObject {
             g.setColor(Color.CYAN);
             g.drawOval(x,y,20,20);
         }
-        g.drawImage(bufferedShotImage, x, y, null);
+        g.drawImage(bufferedShotImage, x+2, y+2, null);
     }
 
     @Override

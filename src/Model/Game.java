@@ -71,7 +71,7 @@ public class Game extends Canvas implements Runnable {
 
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
         render();
-        loadsprites();
+        loadsprites(5);
 
         Handler1.getInstance().addObject(new Dante(3500, 1800, ID.Dante));
 //        handler.addObject(new Dialog(200, 50, ID.Dialog, folder));
@@ -99,7 +99,7 @@ public class Game extends Canvas implements Runnable {
         Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Levels/Limbo/BLC.png")));
     }
 
-    private static void loadsprites(){
+    private static void loadsprites(int amountRoomsGenerated){
 
         wallSprites.clear();
 
@@ -128,7 +128,7 @@ public class Game extends Canvas implements Runnable {
 
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
-        LoadLevel.clearAndLoadLevel(wallSprites, 5);
+        LoadLevel.clearAndLoadLevel(wallSprites, amountRoomsGenerated);
     }
 
     public static void removePortal() {
@@ -254,9 +254,9 @@ public class Game extends Canvas implements Runnable {
         bs.show();
     }
     
-    public void changeLevel(String level, Handler1 handler){
+    public void changeLevel(String level, int amountRoomsGenerated){
         folder = level;
-        loadsprites();
+        loadsprites(amountRoomsGenerated);
     }
 
     public static void main(String[] args) {
