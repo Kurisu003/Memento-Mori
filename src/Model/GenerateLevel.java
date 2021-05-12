@@ -20,6 +20,9 @@ public class GenerateLevel {
             for(int i = 1; i <= 5; i++) {
                 for (int j = 1; j <= 5; j++) {
 
+                    if(roomCount >= amountRoomsGenerated)
+                        return;
+
                     if(level[i][j] > 0){
                         Random rn = new Random();
                         int rand = rn.nextInt(4) + 1;
