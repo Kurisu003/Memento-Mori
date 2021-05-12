@@ -11,17 +11,20 @@ import View.BufferedImageLoader;
 
 public class Enemy extends GameObject {
 
-    int tickCounter = 0;
-    int animationCounter = 0;
+    private int tickCounter = 0;
+    private int animationCounter = 0;
     BufferedImage displayedImage;
     ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
 
     Random r= new Random();
-    int choose=0;
-    int hp=100;
+    private int choose=0;
+    private int hp=100;
+    private int speed;
 
-    public Enemy(int x, int y, ID id) {
+    public Enemy(int x, int y, ID id, int health, int speed) {
         super(x, y, id);
+        this.hp += health;
+        this.speed = speed;
         BufferedImageLoader loader = new BufferedImageLoader();
         enemyAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
         enemyAnimation.add(loader.loadImage("../Character/FrontAnimation2.png"));
@@ -51,8 +54,8 @@ public class Enemy extends GameObject {
                     velX *= -1;
                     velY *= -1;
                 } else if(choose == 0) {
-                    velX = (r.nextInt(2 - -2) + -2);
-                    velY = (r.nextInt(2 - -2) + -2);
+                    velX = (r.nextInt(2 + 2) - 2) + speed;
+                    velY = (r.nextInt(2 + 2) - 2) + speed;
 
                     if (velX!=0){
                         if (velY<0){

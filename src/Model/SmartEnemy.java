@@ -8,18 +8,22 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class SmartEnemy extends GameObject{
-    int hp=200;
     private transient BufferedImage displayedImage;
     private int directionalOffsetForAnimationX;
     private int directionalOffsetForAnimationY;
 
-    int frameCounter=0;
-    int hittingAnimationCounter=0;
-    int walkingAnimationCounter=0;
-    boolean isAnimating = false;
+    private int frameCounter=0;
+    private int hittingAnimationCounter=0;
+    private int walkingAnimationCounter=0;
+    private boolean isAnimating = false;
 
-    public SmartEnemy(int x, int y, ID id) {
+    private int hp=200;
+    private final int speed;
+
+    public SmartEnemy(int x, int y, ID id, int health, int speed) {
         super(x, y, id);
+        this.hp += health;
+        this.speed = speed;
         displayedImage = Game.getInstance().getEnemySprites().get(0);
     }
 
@@ -45,8 +49,8 @@ public class SmartEnemy extends GameObject{
                 double diffY = y - temp.getY() - 32;
                 double distance = Math.sqrt((x - temp.getX()) * (x - temp.getX()) + (y - temp.getY()) * (y - temp.getY()));
 
-                velX = ((-1.0 / distance) * diffX);
-                velY = ((-1.0 / distance) * diffY);
+                velX = ((-1.0 / distance) * diffX) + speed;
+                velY = ((-1.0 / distance) * diffY) + speed;
 
                 if(!(this.getBoundsBigger().intersects(temp.getBounds()))) {
                     if (frameCounter%50==0) {

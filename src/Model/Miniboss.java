@@ -17,8 +17,8 @@ public class Miniboss extends SmartEnemy {
     private transient final BufferedImage hpImage;
     private transient final BufferedImage noHpImage;
 
-    public Miniboss(int x, int y, ID id) {
-        super(x, y, id);
+    public Miniboss(int x, int y, ID id, int health, int speed) {
+        super(x, y, id, health, speed);
 
         BufferedImageLoader loader = new BufferedImageLoader();
         hpImage = loader.loadImage("../Assets/redRec.png");

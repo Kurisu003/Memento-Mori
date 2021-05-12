@@ -14,7 +14,6 @@ public class ShotEnemy extends GameObject{
 
     int tickCounter = 0;
     int animationCounter = 0;
-    int hp = 200;
 
     Random r= new Random();
     Random r2= new Random();
@@ -23,9 +22,13 @@ public class ShotEnemy extends GameObject{
     BufferedImage displayedImage;
     ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
 
+    int hp = 200;
+    private final int speed;
 
-    public ShotEnemy(int x, int y, ID id) {
+    public ShotEnemy(int x, int y, ID id, int health, int speed) {
         super(x, y, id);
+        this.hp += health;
+        this.speed = speed;
 
         BufferedImageLoader loader = new BufferedImageLoader();
         enemyAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
@@ -58,8 +61,8 @@ public class ShotEnemy extends GameObject{
                     velX *= -1;
                     velY *= -1;
                 } else if(choose == 0) {
-                    velX = (r.nextInt(2 - -2) + -2);
-                    velY = (r.nextInt(2 - -2) + -2);
+                    velX = (r.nextInt(2 + 2) - 2) + speed;
+                    velY = (r.nextInt(2 + 2) - 2) + speed;
 
                     if (velX!=0){
                         if (velY<0){
