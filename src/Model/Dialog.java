@@ -24,7 +24,6 @@ public class Dialog extends GameObject {
             g.fillRect(5+3*64*17, 520+3*64*9, 200, 50);
             g.setColor(Color.black);
 
-
             g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
             g.drawString(levelName,10+3*64*27, 515+3*64*9);
 
@@ -32,11 +31,10 @@ public class Dialog extends GameObject {
         x = 3*64*17
         y = 3*64*9
          */
-
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle((int)Game.getCamera().getX()+35, (int)Game.getCamera().getY()+500, 200, 50);
+        return new Rectangle(10+3*64*27, 515+3*64*9);
     }
 }

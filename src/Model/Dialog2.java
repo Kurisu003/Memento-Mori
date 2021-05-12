@@ -19,17 +19,23 @@ public class Dialog2 extends JPanel {
         setLayout(new GridBagLayout());
         label = new JLabel();
         add(label);
+    }
+
+    public void performDialog(){
         for(int i = 0; i < text.size(); i++){
             Timer timer = new Timer(500, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String labelText = label.getText();
-                    labelText += text.get(i).charAt(charIndex);
+                    labelText += text.get(0).charAt(charIndex);
                     label.setText(labelText);
                     charIndex++;
-                    if (charIndex >= t.length()) {
+                    /*
+                    if (charIndex >= i.length()) {
                         ((Timer) e.getSource()).stop();
                     }
+
+                     */
                 }
             });
             timer.start();

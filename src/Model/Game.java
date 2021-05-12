@@ -90,10 +90,8 @@ public class Game extends Canvas implements Runnable {
         for(int i = 1; i <= 14; i++)
             enemySprites.add(loader.loadImage("../Enemies/SmartEnemy/Sprite (" + i + ").png").getSubimage(36, 254,44,66));
     }
-
-    public ArrayList<BufferedImage> getEnemySprites(){
-        return enemySprites;
-
+        public ArrayList<BufferedImage> getEnemySprites(){
+            return enemySprites;
     }
 
     public static void addPortal(int x, int y){
