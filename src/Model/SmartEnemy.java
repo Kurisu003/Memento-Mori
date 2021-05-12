@@ -49,8 +49,8 @@ public class SmartEnemy extends GameObject{
                 double diffY = y - temp.getY() - 32;
                 double distance = Math.sqrt((x - temp.getX()) * (x - temp.getX()) + (y - temp.getY()) * (y - temp.getY()));
 
-                velX = ((-1.0 / distance) * diffX) + speed;
-                velY = ((-1.0 / distance) * diffY) + speed;
+                velX = ((-1.0 / distance) * diffX);
+                velY = ((-1.0 / distance) * diffY);
 
                 if(!(this.getBoundsBigger().intersects(temp.getBounds()))) {
                     if (frameCounter%50==0) {
@@ -68,10 +68,12 @@ public class SmartEnemy extends GameObject{
                     if (hittingAnimationCounter / 3 == 0)
                         displayedImage = Game.getInstance().getEnemySprites().get(walkingAnimationCounter / 3 + 40);
                     directionalOffsetForAnimationY = 5;
+                    velX += speed;
                 }
                 else{
                     if (hittingAnimationCounter / 3 == 0)
                         displayedImage = Game.getInstance().getEnemySprites().get(walkingAnimationCounter / 3 + 54);
+                    velX-=speed;
                     directionalOffsetForAnimationY = 7;
                     directionalOffsetForAnimationX = -20;
                 }
