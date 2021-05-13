@@ -32,6 +32,7 @@ public class MainMenu extends MouseAdapter {
     private transient BufferedImage minus;
 
 
+
     private transient BufferedImage backspaceLeft;
     private transient BufferedImage backspaceRight;
     private transient BufferedImage backspaceUp;
