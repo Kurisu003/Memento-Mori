@@ -86,7 +86,7 @@ public class Game extends Canvas implements Runnable {
         loadsprites(5);
 
         Handler1.getInstance().addObject(new Dante(3500, 1800, ID.Dante));
-//        handler.addObject(new Dialog(200, 50, ID.Dialog, folder));
+        Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog, folder));
 
         // Adds hitting animation right
         for(int i = 1; i <= 20; i++)

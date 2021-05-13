@@ -1,11 +1,9 @@
 package View;
 
-import Model.Dialog2;
 import Model.Game;
-import Model.GameState;
+import Model.LevelDialog;
 
 import javax.swing.*;
-import javax.swing.plaf.nimbus.State;
 import java.awt.*;
 
 public class Window {
@@ -18,10 +16,25 @@ public class Window {
         frame.setMaximumSize(new Dimension(width, height));
         frame.setMinimumSize(new Dimension(width, height));
 
+        frame.setLayout(new CardLayout());
+
         // we add the game class to the frame
 
+        //frame.add(game);
+        /*
+        StoryDialog dialog = new StoryDialog(game);
+        frame.add(dialog);
+        boolean isFinished = false;
+        while(!isFinished){
+            isFinished = dialog.getIsFinished();
+        }
+
+        frame.getContentPane().remove(dialog);
         frame.add(game);
-        //frame.add(new Dialog2());
+        frame.invalidate();
+        frame.validate();
+
+         */
 
         // you cannot resize the window
         frame.setResizable(false);
@@ -34,6 +47,18 @@ public class Window {
         frame.setVisible(true);
         frame.toFront();
         frame.requestFocus();
+
+
+        LevelDialog levelDialog = new LevelDialog();
+        //StoryDialog dialog = new StoryDialog();
+        //frame.getContentPane().add(dialog);
+        frame.getContentPane().add(levelDialog);
+        frame.getContentPane().add(game);
+
+
+        //frame.remove(dialog);
+        //frame.revalidate();
+        //frame.repaint();
     }
 
     public static JFrame getFrame() {
