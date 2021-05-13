@@ -185,7 +185,8 @@ public class Game extends Canvas implements Runnable {
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-//                System.out.println(updates);
+                if(showHitbox)
+                System.out.println(updates);
                 updates = 0;
             }
         }
