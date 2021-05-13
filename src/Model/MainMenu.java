@@ -28,12 +28,8 @@ public class MainMenu extends MouseAdapter {
     private final transient BufferedImage musicVolume;
     private final transient BufferedImage gameVolume;
 
-
     private transient BufferedImage plus;
     private transient BufferedImage minus;
-
-
-
 
     private transient BufferedImage backspaceLeft;
     private transient BufferedImage backspaceRight;
@@ -62,6 +58,7 @@ public class MainMenu extends MouseAdapter {
         background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (6).png"));
         background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (7).png"));
         background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (8).png"));
+        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/EscMenuBackground.png"));
 
         title = loader.loadImage("../MainMenuAssets/Title.png");
         startNewGame = loader.loadImage("../MainMenuAssets/StartNewGame.png");
@@ -103,7 +100,6 @@ public class MainMenu extends MouseAdapter {
         }
 
         // To check for Music Volume
-        System.out.println();
         if(mx >= 1538 && mx <= 1588 && my >= 743 && my <= 793) {
             Music.setMusicVolume((float) (Music.getMusicVolume() + Math.log(Math.abs(Music.getMusicVolume())) * 2.5));
             Music.setSimpleMusicVolume(Music.getSimpleMusicVolume() + 1);
@@ -126,54 +122,50 @@ public class MainMenu extends MouseAdapter {
         // To check for click on save icons
         if(mx >= 2257 && mx <= 2457 && my >= 153 && my <= 353){
             Game.setState(GameState.Game);
-
+            Game.getInstance().setSelectedSaveState(1);
             try {
-                FileOutputStream out = new FileOutputStream("out.ser");
+                FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
                 ObjectOutputStream out1= new ObjectOutputStream(out);
                 for (int i =0;i<Handler1.getInstance().objects.size(); i++) {
                     out1.writeObject(Handler1.getInstance().objects.get(i));
                 }
                 out1.writeObject(Camera.getInstance());
                 out1.flush();
-            } catch (FileNotFoundException fileNotFoundException) {
+            } catch (IOException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
             }
 
         }
 
         if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353) {
             Game.setState(GameState.Game);
+            Game.getInstance().setSelectedSaveState(2);
 
             try {
-                FileOutputStream out = new FileOutputStream("out.ser");
+                FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
                 ObjectOutputStream out1 = new ObjectOutputStream(out);
                 for (int i = 0; i < Handler1.getInstance().objects.size(); i++) {
                     out1.writeObject(Handler1.getInstance().objects.get(i));
                 }
                 out1.flush();
-            } catch (FileNotFoundException fileNotFoundException) {
+            } catch (IOException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
             }
         }
 
         if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353) {
             Game.setState(GameState.Game);
+            Game.getInstance().setSelectedSaveState(3);
 
             try {
-                FileOutputStream out = new FileOutputStream("out.ser");
+                FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
                 ObjectOutputStream out1 = new ObjectOutputStream(out);
                 for (int i = 0; i < Handler1.getInstance().objects.size(); i++) {
                     out1.writeObject(Handler1.getInstance().objects.get(i));
                 }
                 out1.flush();
-            } catch (FileNotFoundException fileNotFoundException) {
+            } catch (IOException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
             }
         }
 
@@ -245,7 +237,6 @@ public class MainMenu extends MouseAdapter {
                 animationCounter = (animationCounter + 1) % 8;
             }
         }
-
     }
 
     public void render(Graphics g){
