@@ -22,6 +22,7 @@ public class MainMenu extends MouseAdapter {
     private final transient BufferedImage settings;
     private final transient BufferedImage saveIcon;
 
+
     private final transient BufferedImage soundBarEmpty;
     private final transient BufferedImage soundBarFull;
     private final transient BufferedImage musicVolume;
@@ -30,6 +31,8 @@ public class MainMenu extends MouseAdapter {
 
     private transient BufferedImage plus;
     private transient BufferedImage minus;
+
+
 
 
     private transient BufferedImage backspaceLeft;
