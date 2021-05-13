@@ -23,6 +23,9 @@ public class EscMenu extends MouseAdapter {
     private final BufferedImage minus;
     private final BufferedImage plus;
 
+    private static int tempCamX;
+    private static int tempCamY;
+
     public EscMenu(){
         BufferedImageLoader loader = new BufferedImageLoader();
 
@@ -37,6 +40,13 @@ public class EscMenu extends MouseAdapter {
 
         plus = loader.loadImage("../MainMenuAssets/Plus.png");
         minus = loader.loadImage("../MainMenuAssets/Minus.png");
+    }
+
+    public static double getTempCamX() {
+        return tempCamX;
+    }
+    public static double getTempCamY() {
+        return tempCamY;
     }
 
     public void mousePressed(MouseEvent e) {
@@ -82,8 +92,11 @@ public class EscMenu extends MouseAdapter {
             }
 
             // To Resume game
-            if (mx >= 1118 && mx <= 1618 && my >= -226 && my <= -176)
+            if (mx >= 1118 && mx <= 1618 && my >= -226 && my <= -176) {
                 Game.setState(GameState.Game);
+                Camera.getInstance().setX(tempCamX);
+                Camera.getInstance().setY(tempCamY);
+            }
         }
     }
 
@@ -119,5 +132,10 @@ public class EscMenu extends MouseAdapter {
 
 
         g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
+    }
+
+    public static void setTempCamCoordinates(double tempX, double tempY){
+        tempCamX = (int) tempX;
+        tempCamY = (int) tempY;
     }
 }

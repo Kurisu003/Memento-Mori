@@ -28,7 +28,6 @@ public class Game extends Canvas implements Runnable {
         if(state.equals(GameState.Game)) {
             Camera.getInstance().setX(3264);
             Camera.getInstance().setY(1728);
-
         }
         else if(state.equals(GameState.EscMenu)){
             Camera.getInstance().setX(1088);
