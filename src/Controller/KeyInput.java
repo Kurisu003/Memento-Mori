@@ -34,7 +34,8 @@ public class KeyInput extends KeyAdapter {
                 if(key == KeyEvent.VK_X) handler1.setHitbox(!Game.showHitbox);
 
                 if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.Game)) Game.setState(GameState.EscMenu);
-                if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.MainMenu)) MainMenu.setCamera(1088, 0);
+                else if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.MainMenu)) MainMenu.setCamera(1088, 0);
+                else if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.EscMenu)) Game.setState(GameState.Game);
             }
         }
     }

@@ -16,6 +16,7 @@ public class Game extends Canvas implements Runnable {
     private boolean isRunning = false;
     private static BufferedImage floor;
     private final ArrayList<BufferedImage> enemySprites = new ArrayList<>();
+    private int selectedSaveState;
 
     int updates = 0;
 
@@ -28,6 +29,10 @@ public class Game extends Canvas implements Runnable {
             Camera.getInstance().setX(3264);
             Camera.getInstance().setY(1728);
 
+        }
+        else if(state.equals(GameState.EscMenu)){
+            Camera.getInstance().setX(1088);
+            Camera.getInstance().setY(-576);
         }
         Game.state = state;
     }
@@ -45,6 +50,7 @@ public class Game extends Canvas implements Runnable {
     private Graphics g;
 
     private final MainMenu mainMenu;
+    private final EscMenu escMenu;
 
     private static BufferedImageLoader loader;
 
@@ -61,11 +67,13 @@ public class Game extends Canvas implements Runnable {
 
     private Game(){
         mainMenu = new MainMenu();
+        escMenu = new EscMenu();
         new View.Window(1100,611,"Memento Mori",this);
         start();
         Camera.getInstance().setX(1088);
         this.addKeyListener(new KeyInput(Handler1.getInstance()));
         this.addMouseListener(mainMenu);
+        this.addMouseListener(escMenu);
         folder = Levels.Limbo.name();
         loader = new BufferedImageLoader();
 
@@ -168,6 +176,7 @@ public class Game extends Canvas implements Runnable {
             delta += (now - lastTime) / ns;
             lastTime = now;
             while(delta >= 1) {
+                if(state.equals(GameState.Game) || state.equals(GameState.MainMenu))
                 tick();
                 mainMenu.calculations();
                 updates++;
@@ -248,6 +257,8 @@ public class Game extends Canvas implements Runnable {
             g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
         } else if(state==GameState.MainMenu){
             mainMenu.render(g);
+        } else if(state == GameState.EscMenu){
+            escMenu.render(g);
         }
 
         g.dispose();
@@ -262,5 +273,13 @@ public class Game extends Canvas implements Runnable {
     public static void main(String[] args) {
 
         Game.getInstance();
+    }
+
+    public int getSelectedSaveState() {
+        return selectedSaveState;
+    }
+
+    public void setSelectedSaveState(int selectedSaveState) {
+        this.selectedSaveState = selectedSaveState;
     }
 }
