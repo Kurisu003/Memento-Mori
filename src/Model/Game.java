@@ -72,12 +72,8 @@ public class Game extends Canvas implements Runnable {
         Camera.getInstance().setX(1088);
         this.addKeyListener(new KeyInput(Handler1.getInstance()));
         this.addMouseListener(mainMenu);
-<<<<<<< HEAD
-        folder = Levels.Greed.name();
-=======
         this.addMouseListener(escMenu);
-        folder = Levels.Limbo.name();
->>>>>>> 207f106b1da347fd2d5e1ad11bd3bdbae7f67370
+        folder = Levels.Anger.name();
         loader = new BufferedImageLoader();
 
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
