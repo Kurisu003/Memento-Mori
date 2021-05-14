@@ -341,13 +341,32 @@ public class Dante extends GameObject {
         x += velX;
         y += velY;
 
+        double t1 = System.currentTimeMillis();
+
         if(levelIsComplete() && !portalExists) {
             Game.addPortal(3392 + 64, 1856 + 64);
             portalExists = true;
         }
 
+        double t2 = System.currentTimeMillis();
+
+        double zeit=t2-t1;
+
+        System.out.println(zeit);
+
+        double t3 = System.currentTimeMillis();
+
+
         // checks for collision with objects
         checkCollision();
+
+        double t4 = System.currentTimeMillis();
+
+        double zeit2=t4-t3;
+
+        System.out.println(zeit2);
+
+        double t5 = System.currentTimeMillis();
 
         // Needed so that shooting is always available when button is pressed
         // and enough time has passed
@@ -444,6 +463,10 @@ public class Dante extends GameObject {
             checkBulletDirection();
             timeSinceLastShot = 0;
         }
+        double t6 = System.currentTimeMillis();
+        System.out.println(t6);
+        double zeit3=t6-t5;
+        System.out.println(zeit3);
     }
 
 }

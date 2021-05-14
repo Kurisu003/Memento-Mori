@@ -1,10 +1,7 @@
 package Controller;
 
 import Controller.Handler1;
-import Model.Game;
-import Model.GameObject;
-import Model.GameState;
-import Model.MainMenu;
+import Model.*;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -33,8 +30,16 @@ public class KeyInput extends KeyAdapter {
                 if(key == KeyEvent.VK_RIGHT) handler1.setShootRight(true);
                 if(key == KeyEvent.VK_X) handler1.setHitbox(!Game.showHitbox);
 
-                if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.Game)) Game.setState(GameState.EscMenu);
-                if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.MainMenu)) MainMenu.setCamera(1088, 0);
+                if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.Game)){
+                    EscMenu.setTempCamCoordinates(Camera.getInstance().getX(), Camera.getInstance().getY());
+                    Game.setState(GameState.EscMenu);
+                }
+                else if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.MainMenu)) MainMenu.setCamera(1088, 0);
+                else if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.EscMenu)){
+                    Game.setState(GameState.Game);
+                    Camera.getInstance().setX(EscMenu.getTempCamX());
+                    Camera.getInstance().setY(EscMenu.getTempCamY());
+                }
             }
         }
     }
