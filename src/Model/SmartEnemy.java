@@ -17,6 +17,14 @@ public class SmartEnemy extends GameObject{
     private int walkingAnimationCounter=0;
     private boolean isAnimating = false;
 
+    public int getHp() {
+        return hp;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
     private int hp=200;
     private final int speed;
 

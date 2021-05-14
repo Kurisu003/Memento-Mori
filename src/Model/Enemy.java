@@ -18,6 +18,15 @@ public class Enemy extends GameObject {
 
     Random r= new Random();
     private int choose=0;
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
     private int hp=100;
     private int speed;
 

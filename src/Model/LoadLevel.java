@@ -4,16 +4,17 @@ import Controller.Handler1;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class LoadLevel {
+public class LoadLevel{
 
     public static void clearAndLoadLevel(ArrayList<BufferedImage> wallSprites, int amoutRoomsGenerated){
 
         // Clears list from all objects that aren't player Character
-        GenerateLevel.clearLevel();
-        GenerateLevel.generateLevel(amoutRoomsGenerated);
+        GenerateLevel.getInstance().clearLevel();
+        GenerateLevel.getInstance().generateLevel(amoutRoomsGenerated);
         Handler1.getInstance().objects.removeIf(temp -> !temp.getId().equals(ID.Dante));
 
         // Loops through generated level
@@ -22,7 +23,7 @@ public class LoadLevel {
                 // If there is supposed to be a level
                 // at the given place, a border gets added
                 // accordingly
-                if(GenerateLevel.getLevel()[i][j] != 0){
+                if(GenerateLevel.getInstance().getLevel()[i][j] != 0){
 
                     // Loops 17 times for rows and
                     // 9 times for columns
@@ -86,24 +87,24 @@ public class LoadLevel {
                                     ID.Block, wallSprites.get(4)));
                                 }
 
-                                if(GenerateLevel.getLevel()[i - 1][j] != 0 && y == 0 && x == 8){
+                                if(GenerateLevel.getInstance().getLevel()[i - 1][j] != 0 && y == 0 && x == 8){
                                     Handler1.getInstance().removeLastObject();
                                     Handler1.getInstance().addObject(new Door(64 * x + j * 1088, i * 576,
                                     ID.Door, wallSprites.get(11), wallSprites.get(15)));
                                 }
 
-                                if(GenerateLevel.getLevel()[i + 1][j] != 0 && y == 8 && x == 8){
+                                if(GenerateLevel.getInstance().getLevel()[i + 1][j] != 0 && y == 8 && x == 8){
                                     Handler1.getInstance().removeLastObject();
                                     Handler1.getInstance().addObject(new Door(64 * x + j * 1088, 64 * y + i * 576,
                                     ID.Door, wallSprites.get(8), wallSprites.get(12)));
                                 }
 
-                                if(GenerateLevel.getLevel()[i][j - 1] != 0 && x == 0 && y == 4){
+                                if(GenerateLevel.getInstance().getLevel()[i][j - 1] != 0 && x == 0 && y == 4){
                                     Handler1.getInstance().removeLastObject();
                                     Handler1.getInstance().addObject(new Door(j * 1088, 64 * y + i * 576,
                                     ID.Door, wallSprites.get(9), wallSprites.get(13)));
                                 }
-                                if(GenerateLevel.getLevel()[i][j + 1] != 0 && x == 16 && y == 4){
+                                if(GenerateLevel.getInstance().getLevel()[i][j + 1] != 0 && x == 16 && y == 4){
                                     Handler1.getInstance().removeLastObject();
                                     Handler1.getInstance().addObject(new Door(64 * x + j * 1088, 64 * y + i * 576,
                                     ID.Door, wallSprites.get(10), wallSprites.get(14)));

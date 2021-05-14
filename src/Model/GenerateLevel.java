@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class GenerateLevel {
+public class GenerateLevel implements Serializable {
 
     // Array with 7 so you have a "buffer"
     // left and right and you don't get errors
@@ -10,7 +11,16 @@ public class GenerateLevel {
     // level[i - 1]
     private static int [][] level = new int[7][7];
 
-    public static void generateLevel(int amountRoomsGenerated){
+    private static GenerateLevel instance = null;
+
+    public static GenerateLevel getInstance(){
+        if(instance == null){
+            instance = new GenerateLevel();
+        }
+        return instance;
+    }
+
+    public  void generateLevel(int amountRoomsGenerated){
         int roomCount = 1;
 
         level[3][3] = 1;
@@ -43,7 +53,7 @@ public class GenerateLevel {
         }
     }
 
-    public static void clearLevel(){
+    public  void clearLevel(){
         for(int i = 0; i <= level.length - 1; i++) {
             for (int j = 0; j <= level.length - 1; j++) {
                 level[i][j] = 0;
@@ -51,7 +61,7 @@ public class GenerateLevel {
         }
     }
 
-    public static void printLevel(){
+    public  void printLevel(){
         for(int i = 0; i <= level.length - 1; i++) {
             for (int j = 0; j <= level.length - 1; j++) {
                 System.out.print(level[i][j]);
@@ -60,7 +70,7 @@ public class GenerateLevel {
         }
     }
 
-    public static int[][] getLevel() {
+    public  int[][] getLevel() {
         return level;
     }
 

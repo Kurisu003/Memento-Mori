@@ -22,7 +22,15 @@ public class ShotEnemy extends GameObject{
     BufferedImage displayedImage;
     ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
 
-    int hp = 200;
+    public int getHp() {
+        return hp;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    private int hp = 200;
     private final int speed;
 
     public ShotEnemy(int x, int y, ID id, int health, int speed) {
