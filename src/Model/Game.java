@@ -73,7 +73,7 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(Handler1.getInstance()));
         this.addMouseListener(mainMenu);
         this.addMouseListener(escMenu);
-        folder = Levels.Anger.name();
+        folder = Levels.Greed.name();
         loader = new BufferedImageLoader();
 
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
