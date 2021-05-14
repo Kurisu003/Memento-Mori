@@ -197,7 +197,7 @@ public class Dante extends GameObject {
 
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
-                if(GenerateLevel.getLevel()[i][j] > 0)
+                if(GenerateLevel.getInstance().getLevel()[i][j] > 0)
                     if(wherePlayerHasBeen[j][i] == 0)
                         levelIsDone = false;
             }
@@ -290,7 +290,7 @@ public class Dante extends GameObject {
                     g.drawImage(minimapSprites.get(0), (int)Camera.getInstance().getX() + 813 + i * 45,
                             (int)Camera.getInstance().getY() + j * 25 - 16, null);
                 }
-                else if(wherePlayerHasBeen[i][j] == 0 && GenerateLevel.getLevel()[j][i] > 0){
+                else if(wherePlayerHasBeen[i][j] == 0 && GenerateLevel.getInstance().getLevel()[j][i] > 0){
                     g.drawImage(minimapSprites.get(2),(int)Camera.getInstance().getX() + 813 + i * 45,
                             (int)Camera.getInstance().getY() + j * 25 - 16, null);
                 }

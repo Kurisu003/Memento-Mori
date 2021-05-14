@@ -23,6 +23,7 @@ public class MainMenu extends MouseAdapter {
     private final transient BufferedImage saveIcon;
 
 
+
     private final transient BufferedImage soundBarEmpty;
     private final transient BufferedImage soundBarFull;
     private final transient BufferedImage musicVolume;
@@ -134,6 +135,7 @@ public class MainMenu extends MouseAdapter {
                     out1.writeObject(Handler1.getInstance().objects.get(i));
                 }
                 out1.writeObject(Camera.getInstance());
+                out1.writeObject(GenerateLevel.getInstance());
                 out1.flush();
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
@@ -194,20 +196,17 @@ public class MainMenu extends MouseAdapter {
                     } else if (d1 instanceof Camera) {
                         Camera.getInstance().setX(((Camera)d1).getX());
                         Camera.getInstance().setY(((Camera)d1).getY());
-                    } else if (d1 instanceof Box) {
-                        //Handler1.getInstance().objects.add((Box) d1);
                     } else if (d1 instanceof Enemy) {
-                        //Handler1.getInstance().objects.add((Enemy) d1);
+                        Handler1.getInstance().objects.add(new Enemy(((Enemy) d1).x,((Enemy)d1).y,ID.Enemy,((Enemy)d1).getHp(),((Enemy)d1).getSpeed()));
                     } else if (d1 instanceof SmartEnemy) {
-                        //Handler1.getInstance().objects.add((SmartEnemy) d1);
+                        Handler1.getInstance().objects.add(new SmartEnemy(((SmartEnemy) d1).x,((SmartEnemy)d1).y,ID.Block,((SmartEnemy)d1).getHp(),((SmartEnemy)d1).getSpeed()));
                     } else if (d1 instanceof ShotEnemy) {
-                        //Handler1.getInstance().objects.add((ShotEnemy) d1);
-                    } else if (d1 instanceof Enemy) {
-                        //Handler1.getInstance().objects.add((Enemy) d1);
+                        Handler1.getInstance().objects.add(new ShotEnemy(((ShotEnemy) d1).x,((ShotEnemy)d1).y,ID.Block,((ShotEnemy)d1).getHp(),((ShotEnemy)d1).getSpeed()));
                     } else if (d1 instanceof Miniboss) {
-                        //Handler1.getInstance().objects.add((Miniboss) d1);
-                    } else if (d1 instanceof Door) {
-                        //Handler1.getInstance().objects.add((Door) d1);
+                        Handler1.getInstance().objects.add(new Miniboss(((Miniboss) d1).x,((Miniboss)d1).y,ID.Block,((Miniboss)d1).getHp(),((Miniboss)d1).getSpeed()));
+                    }else if(d1 instanceof GenerateLevel){
+
+                        int [][] level =((GenerateLevel)d1).getLevel().clone();
                     }
                 }
                 }catch (EOFException r){
