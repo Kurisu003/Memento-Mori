@@ -10,6 +10,10 @@ import java.util.ListIterator;
 
 import Controller.*;
 
+//TODO:
+// wenn man a spiel startet und im esc menu speichert und noar wieder a nuies spiel unfong noar miasat die linked list
+// gecleart werden
+
 public class Game extends Canvas implements Runnable {
 
     private Thread thread;
