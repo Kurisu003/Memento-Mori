@@ -96,7 +96,10 @@ public class Handler1 {
     public void tick(){
         for(int i = 0; i < objects.size(); i++){
             GameObject temp=objects.get(i);
+            double t1 = System.currentTimeMillis();
             temp.tick();
+            double t2 = System.currentTimeMillis();
+            System.out.println(temp.getId() + "  " + (t2-t1));
         }
     }
 

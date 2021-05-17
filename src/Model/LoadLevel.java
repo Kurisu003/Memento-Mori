@@ -2,19 +2,16 @@ package Model;
 
 import Controller.Handler1;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class LoadLevel{
 
-    public static void clearAndLoadLevel(ArrayList<BufferedImage> wallSprites, int amoutRoomsGenerated){
+    public static void clearAndLoadLevel(ArrayList<BufferedImage> wallSprites, int amountRoomsGenerated){
 
         // Clears list from all objects that aren't player Character
         GenerateLevel.getInstance().clearLevel();
-        GenerateLevel.getInstance().generateLevel(amoutRoomsGenerated);
+        GenerateLevel.getInstance().generateLevel(amountRoomsGenerated);
         Handler1.getInstance().objects.removeIf(temp -> !temp.getId().equals(ID.Dante));
 
         // Loops through generated level
