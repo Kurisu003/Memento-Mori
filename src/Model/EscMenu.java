@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.nio.charset.StandardCharsets;
 
 public class EscMenu extends MouseAdapter {
     private final BufferedImage background;
@@ -23,8 +24,8 @@ public class EscMenu extends MouseAdapter {
     private final BufferedImage minus;
     private final BufferedImage plus;
 
-    private static int tempCamX;
-    private static int tempCamY;
+    private static double tempCamX;
+    private static double tempCamY;
 
     public EscMenu(){
         BufferedImageLoader loader = new BufferedImageLoader();
@@ -77,18 +78,27 @@ public class EscMenu extends MouseAdapter {
             // To save and exit to main menu
             if (mx >= 1118 && mx <= 1618 && my >= -326 && my <= -276) {
                 Game.setState(GameState.MainMenu);
+
+                Camera.getInstance().setTempx(tempCamX);
+                Camera.getInstance().setTempy(tempCamY);
+
                 try {
                     FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
+                    out.write(("").getBytes());
                     ObjectOutputStream out1 = new ObjectOutputStream(out);
                     for (int i = 0; i< Handler1.getInstance().objects.size(); i++) {
                         out1.writeObject(Handler1.getInstance().objects.get(i));
                     }
                     out1.writeObject(Camera.getInstance());
+                    out1.writeObject(GenerateLevel.getInstance());
                     out1.flush();
+                    out.close();
                 } catch (IOException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
                 }
+
                 MainMenu.setCamera(1088, 0);
+
             }
 
             // To Resume game

@@ -126,6 +126,7 @@ public class MainMenu extends MouseAdapter {
             Game.getInstance().setSelectedSaveState(1);
             try {
                 FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
+                out.write(("").getBytes());
                 ObjectOutputStream out1= new ObjectOutputStream(out);
                 for (int i =0;i<Handler1.getInstance().objects.size(); i++) {
                     out1.writeObject(Handler1.getInstance().objects.get(i));
@@ -145,6 +146,7 @@ public class MainMenu extends MouseAdapter {
 
             try {
                 FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
+                out.write(("").getBytes());
                 ObjectOutputStream out1 = new ObjectOutputStream(out);
                 for (int i = 0; i < Handler1.getInstance().objects.size(); i++) {
                     out1.writeObject(Handler1.getInstance().objects.get(i));
@@ -162,6 +164,7 @@ public class MainMenu extends MouseAdapter {
 
             try {
                 FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
+                out.write(("").getBytes());
                 ObjectOutputStream out1 = new ObjectOutputStream(out);
                 for (int i = 0; i < Handler1.getInstance().objects.size(); i++) {
                     out1.writeObject(Handler1.getInstance().objects.get(i));
@@ -179,22 +182,24 @@ public class MainMenu extends MouseAdapter {
             Game.setState(GameState.Game);
 
             try {
-                FileInputStream out = new FileInputStream("out.ser");
+                FileInputStream out = new FileInputStream("out1.ser");
                 ObjectInputStream out1 = new ObjectInputStream(out);
                 Handler1.getInstance().objects.clear();
                 try{
                 for (int i = 0; i < 500; i++) {
                     Object d1 = out1.readObject();
                     if (d1 instanceof Dante) {
+                        System.out.println("Dante");
                         Handler1.getInstance().objects.add(new Dante(((Dante) d1).x,((Dante)d1).y,ID.Dante));
                     } else if (d1 instanceof Camera) {
-                        Camera.getInstance().setX(((Camera)d1).getX());
-                        Camera.getInstance().setY(((Camera)d1).getY());
+                        Camera.getInstance().setX(((Camera)d1).getTempx());
+                        Camera.getInstance().setY(((Camera)d1).getTempy());
                     } else if (d1 instanceof Enemy) {
                         Handler1.getInstance().objects.add(new Enemy(((Enemy) d1).x,((Enemy)d1).y,ID.Enemy,((Enemy)d1).getHp(),((Enemy)d1).getSpeed()));
                     } else if (d1 instanceof SmartEnemy) {
                         Handler1.getInstance().objects.add(new SmartEnemy(((SmartEnemy) d1).x,((SmartEnemy)d1).y,ID.Block,((SmartEnemy)d1).getHp(),((SmartEnemy)d1).getSpeed()));
                     } else if (d1 instanceof ShotEnemy) {
+                        System.out.println("Ich bin in SHotenemy");
                         Handler1.getInstance().objects.add(new ShotEnemy(((ShotEnemy) d1).x,((ShotEnemy)d1).y,ID.Block,((ShotEnemy)d1).getHp(),((ShotEnemy)d1).getSpeed()));
                     } else if (d1 instanceof Miniboss) {
                         Handler1.getInstance().objects.add(new Miniboss(((Miniboss) d1).x,((Miniboss)d1).y,ID.Block,((Miniboss)d1).getHp(),((Miniboss)d1).getSpeed()));

@@ -13,7 +13,10 @@ public class Enemy extends GameObject {
 
     private int tickCounter = 0;
     private int animationCounter = 0;
-    BufferedImage displayedImage;
+
+    transient BufferedImage displayedImage;
+    transient ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
+
 
     Random r= new Random();
     private int choose=0;
