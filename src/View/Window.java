@@ -20,21 +20,7 @@ public class Window {
 
         // we add the game class to the frame
 
-        //frame.add(game);
-        /*
-        StoryDialog dialog = new StoryDialog(game);
-        frame.add(dialog);
-        boolean isFinished = false;
-        while(!isFinished){
-            isFinished = dialog.getIsFinished();
-        }
-
-        frame.getContentPane().remove(dialog);
         frame.add(game);
-        frame.invalidate();
-        frame.validate();
-
-         */
 
         // you cannot resize the window
         frame.setResizable(false);
@@ -49,11 +35,15 @@ public class Window {
         frame.requestFocus();
 
 
-        LevelDialog levelDialog = new LevelDialog();
+        /*
+        Implementation with all dialogues!! 23 auskommentieren
+         */
+
+        //LevelDialog levelDialog = new LevelDialog();
         //StoryDialog dialog = new StoryDialog();
         //frame.getContentPane().add(dialog);
-        frame.getContentPane().add(levelDialog);
-        frame.getContentPane().add(game);
+        //frame.getContentPane().add(levelDialog);
+        //frame.getContentPane().add(game);
 
 
         //frame.remove(dialog);

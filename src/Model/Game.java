@@ -195,7 +195,7 @@ public class Game extends Canvas implements Runnable {
 
     public void tick(){
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
-            GameObject temp = iterator.next();
+            GameObject temp = iterator.next(); //FIXME CONCURRENTMODIFICATIONEXCEPTION
             if(temp.getId() == ID.Dante){
                 Camera.getInstance().tick(temp);
             }

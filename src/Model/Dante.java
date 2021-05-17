@@ -352,7 +352,7 @@ public class Dante extends GameObject {
 
         double zeit=t2-t1;
 
-        System.out.println(zeit);
+        //System.out.println(zeit);
 
         double t3 = System.currentTimeMillis();
 
@@ -364,7 +364,7 @@ public class Dante extends GameObject {
 
         double zeit2=t4-t3;
 
-        System.out.println(zeit2);
+        //System.out.println(zeit2);
 
         double t5 = System.currentTimeMillis();
 
@@ -464,9 +464,9 @@ public class Dante extends GameObject {
             timeSinceLastShot = 0;
         }
         double t6 = System.currentTimeMillis();
-        System.out.println(t6);
+        //System.out.println(t6);
         double zeit3=t6-t5;
-        System.out.println(zeit3);
+        //System.out.println(zeit3);
     }
 
 }
