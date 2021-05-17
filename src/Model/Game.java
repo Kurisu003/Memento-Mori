@@ -10,6 +10,10 @@ import java.util.ListIterator;
 
 import Controller.*;
 
+//TODO:
+// wenn man a spiel startet und im esc menu speichert und noar wieder a nuies spiel unfong noar miasat die linked list
+// gecleart werden
+
 public class Game extends Canvas implements Runnable {
 
     private Thread thread;
@@ -97,6 +101,9 @@ public class Game extends Canvas implements Runnable {
         // Adds walking animation left
         for(int i = 1; i <= 14; i++)
             enemySprites.add(loader.loadImage("../Enemies/SmartEnemy/Sprite (" + i + ").png").getSubimage(36, 254,44,66));
+
+        enemySprites.add(loader.loadImage("../Enemies/DumbEnemy/SpriteLeft.png"));
+        enemySprites.add(loader.loadImage("../Enemies/DumbEnemy/SpriteRight.png"));
     }
         public ArrayList<BufferedImage> getEnemySprites(){
             return enemySprites;
@@ -212,8 +219,6 @@ public class Game extends Canvas implements Runnable {
         else
             changeDoors(0);
 
-
-
         Handler1.getInstance().tick();
     }
 
@@ -282,4 +287,6 @@ public class Game extends Canvas implements Runnable {
     public void setSelectedSaveState(int selectedSaveState) {
         this.selectedSaveState = selectedSaveState;
     }
+
+
 }

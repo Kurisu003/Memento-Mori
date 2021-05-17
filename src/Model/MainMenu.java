@@ -136,7 +136,7 @@ public class MainMenu extends MouseAdapter {
             } catch (IOException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
-
+            EscMenu.setTempCamCoordinates(3264, 1728);
         }
 
         if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353) {
@@ -153,6 +153,7 @@ public class MainMenu extends MouseAdapter {
             } catch (IOException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
+            EscMenu.setTempCamCoordinates(3264, 1728);
         }
 
         if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353) {
@@ -169,6 +170,7 @@ public class MainMenu extends MouseAdapter {
             } catch (IOException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
+            EscMenu.setTempCamCoordinates(3264, 1728);
         }
 
         // CONTINUE GAME

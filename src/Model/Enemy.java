@@ -14,7 +14,6 @@ public class Enemy extends GameObject {
     private int tickCounter = 0;
     private int animationCounter = 0;
     BufferedImage displayedImage;
-    ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
 
     Random r= new Random();
     private int choose=0;
@@ -35,23 +34,21 @@ public class Enemy extends GameObject {
         this.hp += health;
         this.speed = speed;
         BufferedImageLoader loader = new BufferedImageLoader();
-        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
-        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation2.png"));
-        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
-        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation4.png"));
     }
 
     public void tick() {
         x += velX;
         y += velY;
 
-        if (++tickCounter % 5 == 0){
-            displayedImage = enemyAnimation.get(animationCounter);
-            animationCounter = (animationCounter + 1) % 4;
-        }
-
-
         choose = r.nextInt(50);
+
+        System.out.println(Game.getInstance().getEnemySprites().size());
+
+        if (Dante.getInstance().getX() < x)
+            displayedImage = Game.getInstance().getEnemySprites().get(68);
+        else
+            displayedImage = Game.getInstance().getEnemySprites().get(69);
+
 
         for(int i = 0; i < Handler1.getInstance().objects.size(); i++) {
             GameObject temp = Handler1.getInstance().objects.get(i);
