@@ -130,7 +130,6 @@ public class EscMenu extends MouseAdapter {
             g.drawImage(soundBarEmpty, 550 + 1088 + i * 50, -426, null);
         }
 
-
         g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
     }
 
