@@ -89,21 +89,21 @@ public class InGameDialog extends GameObject implements Serializable {
         return pressedButtons;
     }
 
-    public static void setPressedButtons(int index) {
-        System.out.println(index + " set true");
-        pressedButtons[index] = true;
-        for (boolean b: pressedButtons
-             ) {
-            if(b) {
-                boolCounter++;
-                System.out.println("BOOLC = " + boolCounter);
-            }
-            else{
-                boolCounter = 0;
-                break;
-            }
-        }
-        if(boolCounter == 3)
-            System.out.println("OK");
-    }
+//    public static void setPressedButtons(int index) {
+//        System.out.println(index + " set true");
+//        pressedButtons[index] = true;
+//        for (boolean b: pressedButtons
+//             ) {
+//            if(b) {
+//                boolCounter++;
+//                System.out.println("BOOLC = " + boolCounter);
+//            }
+//            else{
+//                boolCounter = 0;
+//                break;
+//            }
+//        }
+//        if(boolCounter == 3)
+//            System.out.println("OK");
+//    }
 }

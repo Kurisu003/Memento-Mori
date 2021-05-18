@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Handler1;
 import View.BufferedImageLoader;
 
 import java.awt.image.BufferedImage;
@@ -13,7 +14,7 @@ public class GenerateLevel implements Serializable {
         return obstacle;
     }
 
-    private ArrayList<BufferedImage> obstacle;
+    private transient ArrayList<BufferedImage> obstacle;
 
     // Array with 7 so you have a "buffer"
     // left and right and you don't get errors
@@ -64,6 +65,16 @@ public class GenerateLevel implements Serializable {
                 }
             }
         }
+            for(int i = 0; i <= GenerateLevel.getInstance().getLevel().length - 1; i++) {
+                for (int j = 0; j <= GenerateLevel.getInstance().getLevel().length - 1; j++) {
+                    if(GenerateLevel.getInstance().getLevel()[i][j] > 0){
+                        Random rand = new Random();
+                        int r = rand.nextInt(GenerateLevel.getInstance().getObstacle().size());
+
+                        Handler1.getInstance().addObject(new Box(3 * 1088 + 64, 3 + 576 + 64, ID.Block, loader.loadImage("../Levels/Empty.png")));
+                    }
+                }
+            }
     }
 
     public  void clearLevel(){

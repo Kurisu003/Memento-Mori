@@ -261,18 +261,7 @@ public class Game extends Canvas implements Runnable {
                 }
             }
 
-            for(int i = 0; i <= GenerateLevel.getInstance().getLevel().length - 1; i++) {
-                for (int j = 0; j <= GenerateLevel.getInstance().getLevel().length - 1; j++) {
-                    if(GenerateLevel.getInstance().getLevel()[i][j] > 0){
-                        Random rand = new Random();
-                        int r = rand.nextInt(GenerateLevel.getInstance().getObstacle().size());
-                        g.drawImage(GenerateLevel.getInstance().getObstacle().get(r), i * 1088 + 64, j * 576 + 64,
-                                null);
 
-                        Handler1.getInstance().addObject(new Box(i * 1088 + 64, j + 576 + 64, ID.Block, loader.loadImage("Levels/EmptyCollisionImage.png")));
-                    }
-                }
-            }
 
             Handler1.getInstance().render(g);
 

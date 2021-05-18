@@ -19,10 +19,10 @@ public class KeyInput extends KeyAdapter {
         for(int i=0; i < handler1.objects.size(); i++){
             GameObject temp= handler1.objects.get(i);
             if(temp.getId()== Model.ID.Dante){
-                if(key == KeyEvent.VK_W) {handler1.setUp(true); InGameDialog.setPressedButtons(0);}
-                if(key == KeyEvent.VK_S) {handler1.setDown(true); InGameDialog.setPressedButtons(1);}
-                if(key == KeyEvent.VK_A) {handler1.setLeft(true); InGameDialog.setPressedButtons(2);}
-                if(key == KeyEvent.VK_D) {handler1.setRight(true); InGameDialog.setPressedButtons(3);}
+                if(key == KeyEvent.VK_W) {handler1.setUp   (true);}
+                if(key == KeyEvent.VK_S) {handler1.setDown (true);}
+                if(key == KeyEvent.VK_A) {handler1.setLeft (true);}
+                if(key == KeyEvent.VK_D) {handler1.setRight(true);}
 
                 if(key == KeyEvent.VK_UP) handler1.setShootUp(true);
                 if(key == KeyEvent.VK_DOWN) handler1.setShootDown(true);
