@@ -199,7 +199,7 @@ public class MainMenu extends MouseAdapter {
                     } else if (d1 instanceof SmartEnemy) {
                         Handler1.getInstance().objects.add(new SmartEnemy(((SmartEnemy) d1).x,((SmartEnemy)d1).y,ID.Block,((SmartEnemy)d1).getHp(),((SmartEnemy)d1).getSpeed()));
                     } else if (d1 instanceof ShotEnemy) {
-                        System.out.println("Ich bin in SHotenemy");
+                        System.out.println("Ich bin in Shotenemy");
                         Handler1.getInstance().objects.add(new ShotEnemy(((ShotEnemy) d1).x,((ShotEnemy)d1).y,ID.Block,((ShotEnemy)d1).getHp(),((ShotEnemy)d1).getSpeed()));
                     } else if (d1 instanceof Miniboss) {
                         Handler1.getInstance().objects.add(new Miniboss(((Miniboss) d1).x,((Miniboss)d1).y,ID.Block,((Miniboss)d1).getHp(),((Miniboss)d1).getSpeed()));

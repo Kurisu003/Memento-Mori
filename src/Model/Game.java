@@ -7,6 +7,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Random;
 
 import Controller.*;
 
@@ -68,6 +69,10 @@ public class Game extends Canvas implements Runnable {
         return instance;
     }
 
+    public static String getFolder() {
+        return folder;
+    }
+
     private Game(){
         mainMenu = new MainMenu();
         escMenu = new EscMenu();
@@ -77,7 +82,7 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(Handler1.getInstance()));
         this.addMouseListener(mainMenu);
         this.addMouseListener(escMenu);
-        folder = Levels.Heresy.name();
+        folder = Levels.Limbo.name();
         loader = new BufferedImageLoader();
 
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
@@ -149,7 +154,7 @@ public class Game extends Canvas implements Runnable {
         for(int i = 0; i < Handler1.getInstance().objects.size(); i++){
             if(Handler1.getInstance().objects.get(i).getId() == ID.Portal) {
                 Handler1.getInstance().objects.remove(Handler1.getInstance().objects.get(i));
-                System.out.println();
+//                System.out.println();
             }
         }
     }
@@ -253,6 +258,19 @@ public class Game extends Canvas implements Runnable {
             for (int i = 1; i <= 6; i++) {
                 for (int j = 1; j <= 6; j++) {
                     g.drawImage(floor, i * 1088, j * 576, null);
+                }
+            }
+
+            for(int i = 0; i <= GenerateLevel.getInstance().getLevel().length - 1; i++) {
+                for (int j = 0; j <= GenerateLevel.getInstance().getLevel().length - 1; j++) {
+                    if(GenerateLevel.getInstance().getLevel()[i][j] > 0){
+                        Random rand = new Random();
+                        int r = rand.nextInt(GenerateLevel.getInstance().getObstacle().size());
+                        g.drawImage(GenerateLevel.getInstance().getObstacle().get(r), i * 1088 + 64, j * 576 + 64,
+                                null);
+
+                        Handler1.getInstance().addObject(new Box(i * 1088 + 64, j + 576 + 64, ID.Block, loader.loadImage("Levels/EmptyCollisionImage.png")));
+                    }
                 }
             }
 

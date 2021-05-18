@@ -1,9 +1,19 @@
 package Model;
 
+import View.BufferedImageLoader;
+
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GenerateLevel implements Serializable {
+
+    public ArrayList<BufferedImage> getObstacle() {
+        return obstacle;
+    }
+
+    private ArrayList<BufferedImage> obstacle;
 
     // Array with 7 so you have a "buffer"
     // left and right and you don't get errors
@@ -22,6 +32,9 @@ public class GenerateLevel implements Serializable {
 
     public  void generateLevel(int amountRoomsGenerated){
         int roomCount = 1;
+        BufferedImageLoader loader = new BufferedImageLoader();
+        obstacle = new ArrayList<>();
+        obstacle.add(loader.loadImage("../Levels/" + Game.getFolder() + "/Obstacles1.png"));
 
         level[3][3] = 1;
 

@@ -99,7 +99,7 @@ public class Handler1 {
             double t1 = System.currentTimeMillis();
             temp.tick();
             double t2 = System.currentTimeMillis();
-            System.out.println(temp.getId() + "  " + (t2-t1));
+//            System.out.println(temp.getId() + "  " + (t2-t1));
         }
     }
 
