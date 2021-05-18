@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.ListIterator;
 import java.util.Random;
 
@@ -206,11 +207,16 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void tick(){
-        for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
-            GameObject temp = iterator.next(); //FIXME CONCURRENTMODIFICATIONEXCEPTION
-            if(temp.getId() == ID.Dante){
-                Camera.getInstance().tick(temp);
+        try {
+            for (ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext(); ) {
+                GameObject temp = iterator.next(); //FIXME CONCURRENTMODIFICATIONEXCEPTION
+                if (temp.getId() == ID.Dante) {
+                    Camera.getInstance().tick(temp);
+                }
             }
+        }
+        catch(ConcurrentModificationException e){
+            e.printStackTrace();
         }
         boolean enemiesLeft = false;
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
