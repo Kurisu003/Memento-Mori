@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class ShotEnemy extends GameObject{
 
-    BufferedImage image;
+    transient BufferedImage image;
 
     int tickCounter = 0;
     int animationCounter = 0;
@@ -19,8 +19,8 @@ public class ShotEnemy extends GameObject{
     Random r2= new Random();
     int choose=0;
 
-    BufferedImage displayedImage;
-    ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
+    transient BufferedImage displayedImage;
+    transient ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
 
     public int getHp() {
         return hp;

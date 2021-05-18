@@ -246,7 +246,6 @@ public class Game extends Canvas implements Runnable {
         g=bs.getDrawGraphics();
         Graphics2D g2d=(Graphics2D)g;
 
-
         if(state==GameState.Game) {
             g2d.translate(-Camera.getInstance().getX(), -Camera.getInstance().getY());
 
@@ -275,8 +274,8 @@ public class Game extends Canvas implements Runnable {
         loadsprites(amountRoomsGenerated);
     }
 
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         Game.getInstance();
     }
 

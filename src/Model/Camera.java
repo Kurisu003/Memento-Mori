@@ -7,6 +7,24 @@ import java.io.Serializable;
 public class Camera implements Serializable {
     private double x,y;
 
+    public double getTempx() {
+        return tempx;
+    }
+
+    public void setTempx(double tempx) {
+        this.tempx = tempx;
+    }
+
+    public double getTempy() {
+        return tempy;
+    }
+
+    public void setTempy(double tempy) {
+        this.tempy = tempy;
+    }
+
+    private double tempx,tempy;
+
     private Camera(){
         this.x = x;
         this.y = y;
