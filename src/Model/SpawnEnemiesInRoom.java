@@ -26,6 +26,7 @@ public class SpawnEnemiesInRoom {
                                                             roomStartY + 64 + (rn.nextInt(320)), ID.Enemy,
                                                             currentLevel.ordinal() * 20, currentLevel.ordinal()));
             }
+            /*
             else if(typesOfEnemy[pos].equals(ID.Miniboss)){
                 if(minibosses == 0){
                     Handler1.getInstance().addObject(new Miniboss(roomStartX+(rn.nextInt(960)),
@@ -33,6 +34,18 @@ public class SpawnEnemiesInRoom {
                     minibosses = 1;
                 }
             }
+
+             */
+            
+            //Spawns 1 miniboss in the level Heresy
+            if(currentLevel.equals(Levels.Heresy)){
+                if(minibosses == 0){
+                    Handler1.getInstance().addObject(new Miniboss(roomStartX+(rn.nextInt(960)),
+                            roomStartY+(rn.nextInt(448)), ID.Miniboss, 0, 0));
+                    minibosses = 1;
+                }
+            }
+
         }
     }
 }

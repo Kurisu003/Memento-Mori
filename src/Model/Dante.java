@@ -428,7 +428,7 @@ public class Dante extends GameObject {
         }
         else if (!Handler1.getInstance().isRight()) velX = 0;
 
-        // Needed so character looks int the
+        // Needed so character looks into the
         // same direction he shoots
         if(Handler1.getInstance().isShootUp() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootLeft()){
             setBodyImgCounter = 0;
