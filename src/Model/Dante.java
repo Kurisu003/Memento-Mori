@@ -270,7 +270,8 @@ public class Dante extends GameObject {
         if(shouldSpawnEnemy){
             //Types of enemies can be put in ID[]{...} for a random spawn of each of them
             SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088 + 64, roomYCoordinate * 576 + 64,
-                                            new ID[]{ID.SmartEnemy, ID.ShotEnemy}, currentLevel);
+//                                            new ID[]{ID.SmartEnemy, ID.ShotEnemy}, currentLevel);
+                                            new ID[]{ID.ShotEnemy}, currentLevel);
         }
         if(shouldChangeLevel){
             Game.removePortal();
