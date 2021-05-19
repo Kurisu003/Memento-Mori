@@ -96,6 +96,8 @@ public class Enemy extends GameObject {
 
     public void render(Graphics g) {
         g.drawImage(displayedImage, x, y, null);
+
+        g.dispose();
     }
 
     public Rectangle getBounds() {

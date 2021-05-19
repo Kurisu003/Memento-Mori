@@ -177,7 +177,7 @@ public class Game extends Canvas implements Runnable {
 
         this.requestFocus();
         long lastTime = System.nanoTime();
-        double amountOfTicks = 60.0;
+        double amountOfTicks = 30.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         long timer = System.currentTimeMillis();
@@ -288,9 +288,10 @@ public class Game extends Canvas implements Runnable {
         } else if(state == GameState.EscMenu){
             escMenu.render(g);
         }
-
         g.dispose();
         bs.show();
+
+
     }
     
     public void changeLevel(String level, int amountRoomsGenerated){

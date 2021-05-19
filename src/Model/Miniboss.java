@@ -63,6 +63,7 @@ public class Miniboss extends SmartEnemy {
             else
                 g.drawImage(noHpImage,(int)Camera.getInstance().getX()+i*40+344,
                             (int)Camera.getInstance().getY()+10, null);
+      g.dispose();
     }
 
     @Override

@@ -117,6 +117,8 @@ public class ShotEnemy extends GameObject{
             g2.setColor(Color.red);
             g2.draw(getBounds());
         }
+
+        g.dispose();
     }
 
     @Override

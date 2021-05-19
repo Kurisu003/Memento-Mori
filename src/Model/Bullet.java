@@ -54,6 +54,7 @@ public class Bullet extends GameObject {
             g.drawOval(x,y,20,20);
         }
         g.drawImage(bufferedShotImage, x+2, y+2, null);
+        g.dispose();
     }
 
     @Override

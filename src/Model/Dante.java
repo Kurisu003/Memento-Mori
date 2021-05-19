@@ -341,6 +341,8 @@ public class Dante extends GameObject {
             g.drawImage(gameOverScreen, (int) Camera.getInstance().getX(), (int) Camera.getInstance().getY(), null);
             Game.setState(GameState.GameOver);
         }
+
+        g.dispose();
     }
 
     public void tick() {

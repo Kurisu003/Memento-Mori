@@ -36,6 +36,8 @@ public class Door extends GameObject {
             g2.setColor(Color.red);
             g2.draw(getSmallerBounds());
         }
+
+        g.dispose();
     }
 
     @Override

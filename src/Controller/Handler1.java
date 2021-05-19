@@ -120,6 +120,8 @@ public class Handler1 {
             if(temp.getId().equals(ID.Dante))
                 temp.render(g);
         }
+
+        g.dispose();
     }
 
     public void addObject(GameObject temp){

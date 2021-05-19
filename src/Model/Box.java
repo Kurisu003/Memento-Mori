@@ -26,6 +26,8 @@ public class Box extends GameObject {
             g2.setColor(Color.blue);
             g2.draw(getBounds());
         }
+
+        g.dispose();
     }
 
     @Override

@@ -10,7 +10,7 @@ public class SpawnEnemiesInRoom {
         Random rn = new Random();
 //        int amountOfEnemies = 2 + rn.nextInt(currentLevel.ordinal() + 1);
 
-        int amountOfEnemies = 10;
+        int amountOfEnemies = 1;
         for (int i = 0; i < amountOfEnemies; i++){
             rn = new Random();
             int pos = 0;

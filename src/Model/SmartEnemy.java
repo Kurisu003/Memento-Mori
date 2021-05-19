@@ -158,6 +158,8 @@ public class SmartEnemy extends GameObject{
         }
 
         g.drawImage(displayedImage, x + directionalOffsetForAnimationX, y - 32 + directionalOffsetForAnimationY, null);
+
+        g.dispose();
     }
 
     @Override
