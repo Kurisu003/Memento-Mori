@@ -153,10 +153,8 @@ public class Game extends Canvas implements Runnable {
 
     public static void removePortal() {
         for(int i = 0; i < Handler1.getInstance().objects.size(); i++){
-            if(Handler1.getInstance().objects.get(i).getId() == ID.Portal) {
+            if(Handler1.getInstance().objects.get(i).getId() == ID.Portal)
                 Handler1.getInstance().objects.remove(Handler1.getInstance().objects.get(i));
-//                System.out.println();
-            }
         }
     }
 
@@ -206,7 +204,8 @@ public class Game extends Canvas implements Runnable {
                 updates = 0;
             }
             long stopTime = System.nanoTime();
-            System.out.println((stopTime - startTime) / 1000000000);
+            if((stopTime - startTime) / 10000 > 2000)
+                System.out.println((stopTime - startTime) / 10000);
         }
         stop();
     }
