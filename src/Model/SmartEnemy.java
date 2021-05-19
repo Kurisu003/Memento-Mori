@@ -27,12 +27,16 @@ public class SmartEnemy extends GameObject{
 
     private int hp=200;
     private final int speed;
+    private final Game game;
+    private final ArrayList<BufferedImage> enemySprites;
 
     public SmartEnemy(int x, int y, ID id, int health, int speed) {
         super(x, y, id);
         this.hp += health;
         this.speed = speed;
-        displayedImage = Game.getInstance().getEnemySprites().get(0);
+        game = Game.getInstance();
+        enemySprites = game.getEnemySprites();
+        displayedImage = enemySprites.get(0);
     }
 
     @Override
@@ -41,18 +45,18 @@ public class SmartEnemy extends GameObject{
         directionalOffsetForAnimationY = 0;
 
         frameCounter++;
-        walkingAnimationCounter = (walkingAnimationCounter + 1) % 42;
+        walkingAnimationCounter += 1 % 42;
 
         for(GameObject temp: Handler1.getInstance().objects){
 
-            if(temp.getId() == ID.Block) {
+            if(temp.getId().equals(ID.Block)) {
                 if (getBoundsBigger().intersects(temp.getBounds())) {
                     x += (velX * 2) * -1;
                     y += (velY * 2) * -1;
                     velX *= -1;
                     velY *= -1;
                 }
-            }else if(temp.getId()==ID.Dante){
+            }else if(temp.getId().equals(ID.Dante)){
                 double diffX = x - temp.getX() - 32;
                 double diffY = y - temp.getY() - 32;
                 double distance = Math.sqrt((x - temp.getX()) * (x - temp.getX()) + (y - temp.getY()) * (y - temp.getY()));
@@ -74,13 +78,13 @@ public class SmartEnemy extends GameObject{
                 // from the hitting animation
                 if(Dante.getInstance().getX() > x) {
                     if (hittingAnimationCounter / 3 == 0)
-                        displayedImage = Game.getInstance().getEnemySprites().get(walkingAnimationCounter / 3 + 40);
+                        displayedImage = enemySprites.get(walkingAnimationCounter / 3 + 40);
                     directionalOffsetForAnimationY = 5;
                     velX += speed;
                 }
                 else{
                     if (hittingAnimationCounter / 3 == 0)
-                        displayedImage = Game.getInstance().getEnemySprites().get(walkingAnimationCounter / 3 + 54);
+                        displayedImage = enemySprites.get(walkingAnimationCounter / 3 + 54);
                     velX-=speed;
                     directionalOffsetForAnimationY = 7;
                     directionalOffsetForAnimationX = -20;
@@ -91,11 +95,11 @@ public class SmartEnemy extends GameObject{
                     hittingAnimationCounter++;
 
                     if(Dante.getInstance().getX() > x) {
-                        displayedImage = Game.getInstance().getEnemySprites().get((hittingAnimationCounter / 5) % 20);
+                        displayedImage = enemySprites.get((hittingAnimationCounter / 5) % 20);
                         directionalOffsetForAnimationY = 0;
                     }
                     else{
-                        displayedImage = Game.getInstance().getEnemySprites().get((hittingAnimationCounter / 5) % 20 + 20);
+                        displayedImage = enemySprites.get((hittingAnimationCounter / 5) % 20 + 20);
                         directionalOffsetForAnimationX = -33;
                         directionalOffsetForAnimationY = 0;
                     }
@@ -117,9 +121,9 @@ public class SmartEnemy extends GameObject{
                 }
                 // If hittingAnimationCounter has reached its finish,
                 // is animating is set to false
-                if(((hittingAnimationCounter / 5)  % 20) == 0){
-                    isAnimating = false;
-                }
+                    if(((hittingAnimationCounter / 5)  % 20) == 0)
+                        isAnimating = false;
+
                 }else if(temp.getId() == ID.SmartEnemy && temp.hashCode() != this.hashCode()){
                     if(frameCounter%20==0) {
                         if (getBoundsBigger().intersects(temp.getBounds())) {
