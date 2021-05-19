@@ -187,7 +187,7 @@ public class Game extends Canvas implements Runnable {
             delta += (now - lastTime) / ns;
             lastTime = now;
             while(delta >= 1) {
-                if(state.equals(GameState.Game) || state.equals(GameState.MainMenu))
+                if(state.equals(GameState.Game) || state.equals(GameState.MainMenu) || state.equals(GameState.GameOver))
                 tick();
                 mainMenu.calculations();
                 updates++;
@@ -208,7 +208,7 @@ public class Game extends Canvas implements Runnable {
     public void tick(){
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next(); //FIXME CONCURRENTMODIFICATIONEXCEPTION
-            if(temp.getId() == ID.Dante){
+            if((temp.getId() == ID.Dante && !state.equals(GameState.GameOver))){
                 Camera.getInstance().tick(temp);
             }
         }
@@ -225,6 +225,7 @@ public class Game extends Canvas implements Runnable {
             changeDoors(0);
 
         Handler1.getInstance().tick();
+
     }
 
     private void changeDoors(int state){
@@ -251,7 +252,7 @@ public class Game extends Canvas implements Runnable {
         g=bs.getDrawGraphics();
         Graphics2D g2d=(Graphics2D)g;
 
-        if(state==GameState.Game) {
+        if(state.equals(GameState.Game) || state.equals(GameState.GameOver)) {
             g2d.translate(-Camera.getInstance().getX(), -Camera.getInstance().getY());
 
             // Repeats sprites over entire level

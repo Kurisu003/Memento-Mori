@@ -51,10 +51,10 @@ public class EscMenu extends MouseAdapter {
     }
 
     public void mousePressed(MouseEvent e) {
-        if(Game.getState().equals(GameState.EscMenu)) {
-            int mx = (int) (e.getX() + Camera.getInstance().getX());
-            int my = (int) (e.getY() + Camera.getInstance().getY());
+        int mx = (int) (e.getX() + Camera.getInstance().getX());
+        int my = (int) (e.getY() + Camera.getInstance().getY());
 
+        if(Game.getState().equals(GameState.EscMenu)) {
             // To check for Music Volume
             if (mx >= 1538 && mx <= 1588 && my >= -526 && my <= -476) {
                 Music.setMusicVolume((float) (Music.getMusicVolume() + Math.log(Math.abs(Music.getMusicVolume())) * 2.5));
@@ -106,6 +106,11 @@ public class EscMenu extends MouseAdapter {
                 Game.setState(GameState.Game);
                 Camera.getInstance().setX(tempCamX);
                 Camera.getInstance().setY(tempCamY);
+            }
+        }
+        else if(Game.getState().equals(GameState.GameOver)){
+            if(mx >= -2000 && my >= -2000){
+                System.out.println(mx + "   " + my);
             }
         }
     }

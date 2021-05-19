@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Game;
 import Model.GameObject;
+import Model.GameState;
 import Model.ID;
 
 import java.awt.*;
@@ -97,7 +98,12 @@ public class Handler1 {
         for(int i = 0; i < objects.size(); i++){
             GameObject temp=objects.get(i);
             double t1 = System.currentTimeMillis();
-            temp.tick();
+            if((temp.getId() == ID.Dante)){
+                if(!Game.getState().equals(GameState.GameOver))
+                    temp.tick();
+            }else
+                temp.tick();
+
             double t2 = System.currentTimeMillis();
 //            System.out.println(temp.getId() + "  " + (t2-t1));
         }

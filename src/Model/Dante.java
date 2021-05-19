@@ -21,6 +21,7 @@ public class Dante extends GameObject {
 
     private transient final BufferedImage fullHeart;
     private transient final BufferedImage fullArmor;
+    private transient final BufferedImage gameOverScreen;
 
     private transient BufferedImage bulletImage;
     private transient final BufferedImage minibossHealth;
@@ -98,6 +99,7 @@ public class Dante extends GameObject {
         minibossHealth = loader.loadImage("../Assets/redRec.png");
 
         bulletImage = loader.loadImage("../Assets/Bullet.png");
+        gameOverScreen = loader.loadImage("../MainMenuAssets/GameOver/GameOverScreen.png");
     }
 
     public static GameObject getInstance() {
@@ -320,14 +322,10 @@ public class Dante extends GameObject {
 
 //        To draw hitboxes
         if(Game.showHitbox) {
-            //Graphics2D g2 = (Graphics2D) g;
-            //g2.setColor(Color.green);
-            //g2.draw(getBounds());
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setColor(Color.green);
+            g2.draw(getBounds());
         }
-
-        // Sets health to a min value of 0
-        if (health < 0)
-            health = 0;
 
         for(int i = 0; i < health; i++)
             g.drawImage(fullHeart, (int)Camera.getInstance().getX() + i * 35 + 10, (int)Camera.getInstance().getY() + 10, null);
@@ -335,6 +333,12 @@ public class Dante extends GameObject {
         for(int i = 0; i < armor; i++)
             g.drawImage(fullArmor, (int)Camera.getInstance().getX() + i * 35 + 10 + health * 35, (int)Camera.getInstance().getY() + 10, null);
 
+
+        // Sets health to a min value of 0
+        if (health <= 0) {
+            g.drawImage(gameOverScreen, (int) Camera.getInstance().getX(), (int) Camera.getInstance().getY(), null);
+            Game.setState(GameState.GameOver);
+        }
     }
 
     public void tick() {
