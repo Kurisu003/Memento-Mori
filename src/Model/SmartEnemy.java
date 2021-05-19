@@ -76,13 +76,13 @@ public class SmartEnemy extends GameObject{
                 // from the hitting animation
                 if(Dante.getInstance().getX() > x) {
                     if (hittingAnimationCounter / 3 == 0)
-                        displayedImage = Game.getInstance().getEnemySprites().get(walkingAnimationCounter / 3 + 40);
+                        displayedImage = enemySprites.get(walkingAnimationCounter / 3 + 40);
                     directionalOffsetForAnimationY = 5;
                     velX += speed;
                 }
                 else{
                     if (hittingAnimationCounter / 3 == 0)
-                        displayedImage = Game.getInstance().getEnemySprites().get(walkingAnimationCounter / 3 + 54);
+                        displayedImage = enemySprites.get(walkingAnimationCounter / 3 + 54);
                     velX-=speed;
                     directionalOffsetForAnimationY = 7;
                     directionalOffsetForAnimationX = -20;
@@ -93,11 +93,11 @@ public class SmartEnemy extends GameObject{
                     hittingAnimationCounter++;
 
                     if(Dante.getInstance().getX() > x) {
-                        displayedImage = Game.getInstance().getEnemySprites().get((hittingAnimationCounter / 5) % 20);
+                        displayedImage = enemySprites.get((hittingAnimationCounter / 5) % 20);
                         directionalOffsetForAnimationY = 0;
                     }
                     else{
-                        displayedImage = Game.getInstance().getEnemySprites().get((hittingAnimationCounter / 5) % 20 + 20);
+                        displayedImage = enemySprites.get((hittingAnimationCounter / 5) % 20 + 20);
                         directionalOffsetForAnimationX = -33;
                         directionalOffsetForAnimationY = 0;
                     }
