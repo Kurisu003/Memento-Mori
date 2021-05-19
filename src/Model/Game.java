@@ -183,17 +183,22 @@ public class Game extends Canvas implements Runnable {
         long timer = System.currentTimeMillis();
         while(isRunning) {
 
-            long startTime = System.nanoTime();
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
             while(delta >= 1) {
+                long startTime = System.nanoTime();
                 if(state.equals(GameState.Game) || state.equals(GameState.MainMenu) || state.equals(GameState.GameOver)) {
                     tick();
                 }
-                mainMenu.calculations();
+                if(state.equals(GameState.MainMenu))
+                    mainMenu.calculations();
                 updates++;
                 delta--;
+
+                long stopTime = System.nanoTime();
+                if((stopTime - startTime) / 10000 > 2000)
+                    System.out.println((stopTime - startTime) / 10000);
             }
             render();
 
@@ -203,9 +208,6 @@ public class Game extends Canvas implements Runnable {
                 System.out.println(updates);
                 updates = 0;
             }
-            long stopTime = System.nanoTime();
-            if((stopTime - startTime) / 10000 > 2000)
-                System.out.println((stopTime - startTime) / 10000);
         }
         stop();
     }
