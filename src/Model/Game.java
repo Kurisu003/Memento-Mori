@@ -232,7 +232,6 @@ public class Game extends Canvas implements Runnable {
             changeDoors(0);
 
         Handler1.getInstance().tick();
-
     }
 
     private void changeDoors(int state){
