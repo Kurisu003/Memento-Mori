@@ -27,15 +27,13 @@ public class SmartEnemy extends GameObject{
 
     private int hp=200;
     private final int speed;
-    private final Game game;
     private final ArrayList<BufferedImage> enemySprites;
 
     public SmartEnemy(int x, int y, ID id, int health, int speed) {
         super(x, y, id);
         this.hp += health;
         this.speed = speed;
-        game = Game.getInstance();
-        enemySprites = game.getEnemySprites();
+        enemySprites = Game.getInstance().getEnemySprites();
         displayedImage = enemySprites.get(0);
     }
 
@@ -121,9 +119,9 @@ public class SmartEnemy extends GameObject{
                 }
                 // If hittingAnimationCounter has reached its finish,
                 // is animating is set to false
-                    if(((hittingAnimationCounter / 5)  % 20) == 0)
-                        isAnimating = false;
-
+                if(((hittingAnimationCounter / 5)  % 20) == 0){
+                    isAnimating = false;
+                }
                 }else if(temp.getId() == ID.SmartEnemy && temp.hashCode() != this.hashCode()){
                     if(frameCounter%20==0) {
                         if (getBoundsBigger().intersects(temp.getBounds())) {
