@@ -65,16 +65,16 @@ public class GenerateLevel implements Serializable {
                 }
             }
         }
-            for(int i = 0; i <= GenerateLevel.getInstance().getLevel().length - 1; i++) {
-                for (int j = 0; j <= GenerateLevel.getInstance().getLevel().length - 1; j++) {
-                    if(GenerateLevel.getInstance().getLevel()[i][j] > 0){
-                        Random rand = new Random();
-                        int r = rand.nextInt(GenerateLevel.getInstance().getObstacle().size());
-
-                        Handler1.getInstance().addObject(new Box(3 * 1088 + 64, 3 + 576 + 64, ID.Block, loader.loadImage("../Levels/Empty.png")));
-                    }
-                }
-            }
+//        for(int i = 0; i <= GenerateLevel.getInstance().getLevel().length - 1; i++) {
+//            for (int j = 0; j <= GenerateLevel.getInstance().getLevel().length - 1; j++) {
+//                if(GenerateLevel.getInstance().getLevel()[i][j] > 0){
+//                    Random rand = new Random();
+//                    int r = rand.nextInt(GenerateLevel.getInstance().getObstacle().size());
+//
+//                    Handler1.getInstance().addObject(new Box(3 * 1088 + 64, 3 + 576 + 64, ID.Block, loader.loadImage("../Levels/Empty.png")));
+//                }
+//            }
+//        }
     }
 
     public  void clearLevel(){
@@ -83,6 +83,12 @@ public class GenerateLevel implements Serializable {
                 level[i][j] = 0;
             }
         }
+
+        Handler1.getInstance().objects.forEach(i -> {
+            if(i.getId() == ID.Block){
+                i.doAction(0);
+            }
+        });
     }
 
     public  void printLevel(){

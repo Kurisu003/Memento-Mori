@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.Handler1;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -29,5 +31,10 @@ public class Box extends GameObject {
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,64,64);
+    }
+
+    public int doAction(int action){
+        Handler1.getInstance().removeObject(this);
+        return 0;
     }
 }
