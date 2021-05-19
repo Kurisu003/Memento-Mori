@@ -35,7 +35,7 @@ public class GenerateLevel implements Serializable {
         int roomCount = 1;
         BufferedImageLoader loader = new BufferedImageLoader();
         obstacle = new ArrayList<>();
-        obstacle.add(loader.loadImage("../Levels/" + Game.getFolder() + "/Obstacles1.png"));
+//        obstacle.add(loader.loadImage("../Levels/" + Game.getFolder() + "/Obstacles1.png"));
 
         level[3][3] = 1;
 
@@ -83,12 +83,6 @@ public class GenerateLevel implements Serializable {
                 level[i][j] = 0;
             }
         }
-
-        Handler1.getInstance().objects.forEach(i -> {
-            if(i.getId() == ID.Block){
-                i.doAction(0);
-            }
-        });
     }
 
     public  void printLevel(){
