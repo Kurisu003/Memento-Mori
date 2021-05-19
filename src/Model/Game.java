@@ -197,10 +197,14 @@ public class Game extends Canvas implements Runnable {
                 delta--;
 
                 long stopTime = System.nanoTime();
-                if((stopTime - startTime) / 10000 > 2000)
-                    System.out.println((stopTime - startTime) / 10000);
+                if((stopTime - startTime) / 10000 > 4000)
+                    System.out.println("Tick: " + (stopTime - startTime) / 10000);
             }
+            long startTime = System.nanoTime();
             render();
+            long stopTime = System.nanoTime();
+            if((stopTime - startTime) / 10000 > 4000)
+                System.out.println("Render: " + (stopTime - startTime) / 10000);
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
