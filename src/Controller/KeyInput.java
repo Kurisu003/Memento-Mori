@@ -40,6 +40,8 @@ public class KeyInput extends KeyAdapter {
                     Camera.getInstance().setX(EscMenu.getTempCamX());
                     Camera.getInstance().setY(EscMenu.getTempCamY());
                 }
+
+                if(key == KeyEvent.VK_ENTER) Game.setState(GameState.Shop);
             }
         }
     }
