@@ -83,7 +83,7 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(Handler1.getInstance()));
         this.addMouseListener(mainMenu);
         this.addMouseListener(escMenu);
-        folder = Levels.Limbo.name();
+        folder = Levels.Heresy.name();
         loader = new BufferedImageLoader();
 
         this.createBufferStrategy(3);
@@ -238,7 +238,8 @@ public class Game extends Canvas implements Runnable {
         boolean enemiesLeft = false;
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
-            if(temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy || temp.getId() == ID.ShotEnemy){
+            if(temp.getId().equals(ID.Enemy) || temp.getId().equals(ID.SmartEnemy) || temp.getId().equals(ID.ShotEnemy)
+                || temp.getId().equals(ID.Miniboss)){
                 enemiesLeft = true;
             }
         }
