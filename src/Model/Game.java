@@ -52,7 +52,7 @@ public class Game extends Canvas implements Runnable {
         return g;
     }
 
-    private Graphics g;
+    private static Graphics g;
 
     private final MainMenu mainMenu;
     private final EscMenu escMenu;
@@ -86,12 +86,16 @@ public class Game extends Canvas implements Runnable {
         folder = Levels.Limbo.name();
         loader = new BufferedImageLoader();
 
+        this.createBufferStrategy(3);
+        BufferStrategy bs = this.getBufferStrategy();
+        g = bs.getDrawGraphics();
+
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
         render();
 
-        loadsprites(5);
+        loadsprites(5, g);
 
-        Handler1.getInstance().addObject(new Dante(3500, 1800, ID.Dante));
+        Handler1.getInstance().addObject(new Dante(3 * 64 * 17 + 8 * 64, 3 * 64 * 9 + 4 * 64, ID.Dante));
         Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog, folder));
 
         // Adds hitting animation right
@@ -116,10 +120,10 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void addPortal(int x, int y){
-        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Levels/Limbo/BLC.png")));
+        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Levels/Limbo/BLC.png"), false));
     }
 
-    private static void loadsprites(int amountRoomsGenerated){
+    private static void loadsprites(int amountRoomsGenerated, Graphics g){
 
         wallSprites.clear();
 
@@ -149,6 +153,8 @@ public class Game extends Canvas implements Runnable {
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
         LoadLevel.clearAndLoadLevel(wallSprites, amountRoomsGenerated);
+        GenerateLevel.getInstance().loadObstacles(g);
+
     }
 
     public static void removePortal() {
@@ -265,7 +271,7 @@ public class Game extends Canvas implements Runnable {
             this.createBufferStrategy(3);
             return;
         }
-        g=bs.getDrawGraphics();
+        g = bs.getDrawGraphics();
         Graphics2D g2d=(Graphics2D)g;
 
         if(state.equals(GameState.Game) || state.equals(GameState.GameOver)) {
@@ -277,8 +283,6 @@ public class Game extends Canvas implements Runnable {
                     g.drawImage(floor, i * 1088, j * 576, null);
                 }
             }
-
-
 
             Handler1.getInstance().render(g);
 
@@ -295,7 +299,7 @@ public class Game extends Canvas implements Runnable {
     
     public void changeLevel(String level, int amountRoomsGenerated){
         folder = level;
-        loadsprites(amountRoomsGenerated);
+        loadsprites(amountRoomsGenerated, g);
     }
 
 

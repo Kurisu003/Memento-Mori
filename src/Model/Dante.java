@@ -301,6 +301,8 @@ public class Dante extends GameObject {
         }
         g.drawImage(minimapSprites.get(1),  (int)Camera.getInstance().getX() + (int)Camera.getInstance().getX() / 1088 * 45 + 813 ,
                                             (int)Camera.getInstance().getY() + (int)Camera.getInstance().getY() / 576 * 25 - 16, null);
+
+
     }
 
     private void changeToNextLevel(){
