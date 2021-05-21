@@ -86,15 +86,16 @@ public class Music implements LineListener, Runnable {
             FloatControl gainControl = (FloatControl)audioClip.getControl(FloatControl.Type.MASTER_GAIN);
 
 
-            if(this.id == ID.BG_music){
-                gainControl.setValue(musicVolume);
-                audioClip.loop(Clip.LOOP_CONTINUOUSLY);
-            }
+
             audioClip.start();
 
             while (!playCompleted) {
                 if(this.id == ID.ShootingSound)
                     gainControl.setValue(soundVolume);
+                else if(this.id == ID.BG_music){
+                    gainControl.setValue(musicVolume);
+                    audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+                }
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException ex) {
