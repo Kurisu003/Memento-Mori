@@ -68,7 +68,7 @@ public class Game extends Canvas implements Runnable {
         loader = new BufferedImageLoader();
         coinSprites = new ArrayList<>();
         for(int i = 1; i <= 11; i++)
-            coinSprites.add(loader.loadImage("../Assets/Coin/Coins (" + i + ").png"));
+            coinSprites.add(loader.loadImage("../Assets/Coin/Coins (" + i + ").png").getSubimage(7, 46, 26, 28));
 
         BufferStrategy bs = this.getBufferStrategy();
         if(bs==null){
@@ -83,7 +83,8 @@ public class Game extends Canvas implements Runnable {
         //how many rooms should be generated per level
         loadsprites(5);
 
-        Handler1.getInstance().addObject(new Dante(3 * 64 * 17 + 8 * 64, 3 * 64 * 9 + 4 * 64, ID.Dante));
+        Dante.getInstance();
+//        Handler1.getInstance().addObject(new Dante(3 * 64 * 17 + 8 * 64, 3 * 64 * 9 + 4 * 64, ID.Dante));
         Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog, folder));
 
         // Adds hitting animation right
@@ -244,15 +245,15 @@ public class Game extends Canvas implements Runnable {
                 else
                     Music.setIsMenu(false);
 
-                long stopTime = System.nanoTime();
-                if((stopTime - startTime) / 10000 > 4000)
-                    System.out.println("Tick: " + (stopTime - startTime) / 10000);
+//                long stopTime = System.nanoTime();
+//                if((stopTime - startTime) / 10000 > 4000)
+//                    System.out.println("Tick: " + (stopTime - startTime) / 10000);
             }
-            long startTime = System.nanoTime();
+//            long startTime = System.nanoTime();
             render();
-            long stopTime = System.nanoTime();
-            if((stopTime - startTime) / 10000 > 4000)
-                System.out.println("Render: " + (stopTime - startTime) / 10000);
+//            long stopTime = System.nanoTime();
+//            if((stopTime - startTime) / 10000 > 4000)
+//                System.out.println("Render: " + (stopTime - startTime) / 10000);
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;

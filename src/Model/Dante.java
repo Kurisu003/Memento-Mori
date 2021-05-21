@@ -35,8 +35,9 @@ public class Dante extends GameObject {
 
     private int timeSinceLastShot = 20;
     private int timeSinceLastDamage = 20;
-    private int fireSpeed = 20;
-    private int range = 30;
+
+    private int fireSpeed = 0;
+    private int range = 0;
     private static int health = 5;
     private static int armor = 2;
     private int coins = 0;
@@ -235,7 +236,7 @@ public class Dante extends GameObject {
         if(timeSinceLastShot % 1000 == 0){
             timeSinceLastShot = 30;
         }
-        if  (timeSinceLastShot > fireSpeed &&
+        if  (timeSinceLastShot > 20 - fireSpeed &&
                 (Handler1.getInstance().isShootUp() || Handler1.getInstance().isShootDown() || Handler1.getInstance().isShootLeft() || Handler1.getInstance().isShootRight())){
             checkBulletDirection();
             timeSinceLastShot = 0;
@@ -274,6 +275,14 @@ public class Dante extends GameObject {
         }
     }
 
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
     /**
      * This method indicates when Dante was hit to reduce his remaining live hearts
      * @param action how much damage the action did to Dante
@@ -295,6 +304,10 @@ public class Dante extends GameObject {
      * @return current instance
      */
     public static GameObject getInstance() {
+        if(instance == null){
+            instance = new Dante(3 * 64 * 17 + 8 * 64, 3 * 64 * 9 + 4 * 64, ID.Dante);
+            Handler1.getInstance().addObject(instance);
+        }
         return instance;
     }
 
@@ -307,6 +320,9 @@ public class Dante extends GameObject {
         this.fireSpeed = speed;
     }
 
+    public int getFireSpeed() {
+        return fireSpeed;
+    }
     /**
      * This method is used to set the range of Dante's weapon.
      * @param range integer to indicate the range
@@ -315,6 +331,20 @@ public class Dante extends GameObject {
     public void setRange(int range){
         this.range = range;
     }
+
+    public int getRange() {
+        return range;
+    }
+
+
+    public static void setHealth(int health) {
+        Dante.health = health;
+    }
+
+    public static int getHealth() {
+        return health;
+    }
+
 
     /**
      * Method to set different bullet images

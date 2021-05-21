@@ -103,7 +103,7 @@ public class Music implements LineListener, Runnable {
                 if(isShop){
                     if(this.id != ID.Shop_music){
                         audioClip.stop();
-                        System.out.println("KUAN SHOP: "+this.id);
+//                        System.out.println("KUAN SHOP: "+this.id);
                     }
                     else
                         audioClip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -160,7 +160,7 @@ public class Music implements LineListener, Runnable {
      */
     @Override
     public void run() {
-        System.out.println("IS RUNNING" + this.id);
+//        System.out.println("IS RUNNING" + this.id);
         this.playMusic();
     }
 

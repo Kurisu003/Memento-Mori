@@ -24,6 +24,8 @@ public class EscMenu extends MouseAdapter {
     private final BufferedImage shopButton;
     private final BufferedImage soundBarEmpty;
     private final BufferedImage soundBarFull;
+    private final BufferedImage upgradeBarEmpty;
+    private final BufferedImage upgradeBarFull;
     private final BufferedImage minus;
     private final BufferedImage plus;
     private final BufferedImage backButton;
@@ -45,8 +47,13 @@ public class EscMenu extends MouseAdapter {
         shopBackground = loader.loadImage("../Assets/Shop.png");
         musicVolume = loader.loadImage("../MainMenuAssets/MusicVolume.png");
         gameVolume = loader.loadImage("../MainMenuAssets/GameVolume.png");
+
         soundBarEmpty = loader.loadImage("../MainMenuAssets/GameSoundbarEmpty.png");
         soundBarFull = loader.loadImage("../MainMenuAssets/GameSoundbarFiller.png");
+        upgradeBarEmpty = loader.loadImage("../MainMenuAssets/ShopUpgradeBarEmpty.png");
+        upgradeBarFull = loader.loadImage("../MainMenuAssets/ShopUpgradeBarFull.png");
+
+
         saveAndExit = loader.loadImage("../MainMenuAssets/SaveAndExit.png");
         resumeGame = loader.loadImage("../MainMenuAssets/ResumeGame.png");
         shopButton = loader.loadImage("../MainMenuAssets/Shop.png");
@@ -137,6 +144,8 @@ public class EscMenu extends MouseAdapter {
                 Camera.getInstance().setX(Camera.getInstance().getX() - 1088);
             }
 
+            // For upgrading
+
         }
 
         // For Gameover
@@ -188,8 +197,20 @@ public class EscMenu extends MouseAdapter {
 
         // To draw icons in shop
         g.drawImage(playerSpeedIcon, 2186, -500, null);
-        g.drawImage(bulletSpeedIcon, 2186, -300, null);
-        g.drawImage(bulletRangeIcon, 2186, -100, null);
+        g.drawImage(bulletSpeedIcon, 2186, -350, null);
+        g.drawImage(bulletRangeIcon, 2186, -200, null);
+
+        // For upgrading in shop
+        for(int j = 0; j < 3; j++) {
+            for (int i = 0; i < 5; i++) {
+                g.drawImage(upgradeBarEmpty, 2186 + i * 50, -450 + j * 150, null);
+            }
+        }
+
+        // Plus for upgrading in shop
+        g.drawImage(plus, 2350, -510, null);
+        g.drawImage(plus, 2350, -360, null);
+        g.drawImage(plus, 2350, -210, null);
 
         g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
     }

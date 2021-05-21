@@ -50,7 +50,7 @@ public class Bullet extends GameObject {
         x += velX;
         y += velY;
 
-        if (++timeAlive > range) {
+        if (++timeAlive > 10 + range * 5) {
             Handler1.getInstance().removeObject(this);
         }
 

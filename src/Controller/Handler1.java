@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.Game;
-import Model.GameObject;
-import Model.GameState;
-import Model.ID;
+import Model.*;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -193,16 +190,12 @@ public class Handler1 {
      * @param g graphic to be rendered
      */
     public void render(Graphics g){
-
 //      Always renders Dante last so its on top of everything
         for(GameObject temp : objects){
             if(!temp.getId().equals(ID.Dante))
                 temp.render(g);
         }
-        for(GameObject temp : objects){
-            if(temp.getId().equals(ID.Dante))
-                temp.render(g);
-        }
+        Dante.getInstance().render(g);
 
         g.dispose();
     }
