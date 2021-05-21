@@ -216,6 +216,9 @@ public class EscMenu extends MouseAdapter {
 
         // To draw back button in shop
         g.drawImage(backButton, 2186, -566, null);
+        // To render coin in shop
+        g.drawImage(Game.getInstance().getCoinSprites().get(0), 2500, -550, null);
+        // TODO daneben schreiben "x Anzahl von coins" (Dante.getInstance().getCoins())
 
         // To draw icons in shop
         g.drawImage(playerSpeedIcon, 2186, -500, null);
@@ -223,12 +226,14 @@ public class EscMenu extends MouseAdapter {
         g.drawImage(bulletRangeIcon, 2186, -200, null);
 
         // For upgrading in shop
+        // To draw empty bars of upgrades
         for(int j = 0; j < 3; j++) {
             for (int i = 0; i < 5; i++) {
                 g.drawImage(upgradeBarEmpty, 2186 + i * 50, -450 + j * 150, null);
             }
         }
 
+        // To draw full bars of upgrades
         for(int i = 0; i < ((Dante) Dante.getInstance()).getSpeed(); i++){
             g.drawImage(upgradeBarFull, 2186 + i * 50, -450, null);
         }
