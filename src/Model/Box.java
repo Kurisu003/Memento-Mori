@@ -11,6 +11,11 @@ import java.awt.image.BufferedImage;
 public class Box extends GameObject {
     private transient final BufferedImage bufferedImage;
 
+    private int hitboxW;
+    private int hitboxH;
+    private int xOffset;
+    private int yOffset;
+
     /**
      * Constructor to create an instance.
      * @param x x-coordinate where the block should be displayed
@@ -18,14 +23,25 @@ public class Box extends GameObject {
      * @param id this object's id
      * @param bufferedImage the image which should represent the Box
      */
-    public Box(int x, int y, ID id, BufferedImage bufferedImage) {
+    public Box(int x, int y, ID id, BufferedImage bufferedImage, boolean smallHitboxTrue) {
         super(x, y,id);
+        if(smallHitboxTrue){
+            hitboxW = 58;
+            hitboxH = 58;
+            xOffset = 4;
+            yOffset = 4;
+        }
+        else{
+            hitboxH = 64;
+            hitboxW = 64;
+        }
         this.bufferedImage = bufferedImage;
     }
 
     /**
      * This method is to check for actions of the block.
      */
+
     @Override
     public void tick() {
     }
@@ -63,7 +79,7 @@ public class Box extends GameObject {
      */
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x,y,64,64);
+        return new Rectangle(x + xOffset,y + yOffset, hitboxW, hitboxH);
     }
 
 

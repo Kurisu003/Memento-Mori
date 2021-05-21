@@ -26,7 +26,7 @@ public class Dante extends GameObject {
     private transient BufferedImage bulletImage;
     private transient final BufferedImage minibossHealth;
 
-    private Levels currentLevel = Levels.Limbo;
+    private Levels currentLevel = Levels.Heresy;
     private static GameObject instance;
 
     private int roomXCoordinate;
@@ -282,7 +282,7 @@ public class Dante extends GameObject {
     public void doAction(int action) {
         // Needed so that damage doesn't get dealt
         // every frame, but only every 30th frame
-        if(timeSinceLastDamage > 30) {
+        if(timeSinceLastDamage > 50) {
             if (armor == 0) health -= action;
             else armor -= action;
             timeSinceLastDamage = 0;
@@ -351,18 +351,6 @@ public class Dante extends GameObject {
             }
         }
 
-//        System.out.println(levelIsDone);
-
-//        GenerateLevel.printLevel();
-//        System.out.println("----------------");
-//        for(int i = 0; i <= wherePlayerHasBeen.length - 1; i++) {
-//            for (int j = 0; j <= wherePlayerHasBeen.length - 1; j++) {
-//                System.out.print(wherePlayerHasBeen[i][j]);
-//            }
-//            System.out.println();
-//        }
-//        System.out.println("*****************");
-
         return levelIsDone;
     }
 
@@ -424,13 +412,12 @@ public class Dante extends GameObject {
                 x+=velX*-1;
                 y+=velY*-1;
             }
-            if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds())){
-                // To do damage to player
+            if(temp.getId() == ID.Enemy && getBounds().intersects(temp.getBounds()))
                 doAction(1);
-            }
-            if(temp.getId() == ID.Portal && getBounds().intersects(temp.getBounds())){
+            if(temp.getId() == ID.Portal && getBounds().intersects(temp.getBounds()))
                 shouldChangeLevel = true;
-            }
+            if(temp.getId().equals(ID.Miniboss) && getBounds().intersects(temp.getBounds()))
+                doAction(1);
         }
 
         // Used because object cant be added
@@ -462,11 +449,15 @@ public class Dante extends GameObject {
             Camera.getInstance().setX(Camera.getInstance().getX() + newCameraCoordinate);
             roomXCoordinate += newRoomCoordinate;
         }
+
         else{
             y += newCoordinate;
             Camera.getInstance().setY(Camera.getInstance().getY() + newCameraCoordinate);
             roomYCoordinate += newRoomCoordinate;
-        }
+
+        g.drawImage(minimapSprites.get(1),  (int)Camera.getInstance().getX() + (int)Camera.getInstance().getX() / 1088 * 45 + 813 ,
+                                            (int)Camera.getInstance().getY() + (int)Camera.getInstance().getY() / 576 * 25 - 16, null);
+
     }
 
     /**

@@ -2,6 +2,7 @@ package Model;
 
 import View.BufferedImageLoader;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,11 +13,6 @@ import java.util.Random;
  */
 public class GenerateLevel implements Serializable {
 
-    public ArrayList<BufferedImage> getObstacle() {
-        return obstacle;
-    }
-
-    private transient ArrayList<BufferedImage> obstacle;
 
     // Array with 7 so you have a "buffer"
     // left and right and you don't get errors
@@ -48,7 +44,6 @@ public class GenerateLevel implements Serializable {
 
         //obstacle.add(loader.loadImage("../Levels/" + Game.getFolder() + "/Obstacles1.png"));
 
-
         level[3][3] = 1;
 
         // Roomcount starts at 1
@@ -77,16 +72,64 @@ public class GenerateLevel implements Serializable {
                 }
             }
         }
-//        for(int i = 0; i <= GenerateLevel.getInstance().getLevel().length - 1; i++) {
-//            for (int j = 0; j <= GenerateLevel.getInstance().getLevel().length - 1; j++) {
-//                if(GenerateLevel.getInstance().getLevel()[i][j] > 0){
-//                    Random rand = new Random();
-//                    int r = rand.nextInt(GenerateLevel.getInstance().getObstacle().size());
-//
-//                    Handler1.getInstance().addObject(new Box(3 * 1088 + 64, 3 + 576 + 64, ID.Block, loader.loadImage("../Levels/Empty.png")));
-//                }
-//            }
-//        }
+    }
+
+    public void loadObstacles(Graphics g){
+        BufferedImageLoader loader = new BufferedImageLoader();
+        for(int i = 0; i <= GenerateLevel.getInstance().getLevel().length - 1; i++) {
+            for (int j = 0; j <= GenerateLevel.getInstance().getLevel().length - 1; j++) {
+                if(GenerateLevel.getInstance().getLevel()[i][j] > 0){
+                    Random rand = new Random();
+                    int r = rand.nextInt(3);
+
+
+                    if (r == 1) {
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 1, i * 576 + 64 * 1, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 2, i * 576 + 64 * 1, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 3, i * 576 + 64 * 1, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 1, i * 576 + 64 * 2, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 3, i * 576 + 64 * 6, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 4, i * 576 + 64 * 6, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 4, i * 576 + 64 * 5, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 5, i * 576 + 64 * 5, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 11, i * 576 + 64 * 2, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 11, i * 576 + 64 * 4, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 11, i * 576 + 64 * 5, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 12, i * 576 + 64 * 2, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 12, i * 576 + 64 * 3, ID.Block, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/BLC.png"), true));
+                    }
+
+
+                }
+            }
+        }
     }
 
     /**

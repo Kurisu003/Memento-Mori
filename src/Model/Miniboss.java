@@ -5,6 +5,8 @@ import View.BufferedImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * This is the "miniboss" in the fourth level. It can pass walls and doors and follows the main character wherever
@@ -12,10 +14,14 @@ import java.awt.image.BufferedImage;
  */
 public class Miniboss extends SmartEnemy {
 
-    int hp = 2000;
+    int hp = 10000;
+
 
     private transient final BufferedImage hpImage;
     private transient final BufferedImage noHpImage;
+    private transient BufferedImage displayImage;
+    private transient final ArrayList<BufferedImage> sprites;
+    private final Dante dante;
 
     /**
      * Constructor to create a new object. It loads the healthbar image immediately.
@@ -27,12 +33,19 @@ public class Miniboss extends SmartEnemy {
      */
     public Miniboss(int x, int y, ID id, int health, int speed) {
         super(x, y, id, health, speed);
-
         BufferedImageLoader loader = new BufferedImageLoader();
+
+        dante = (Dante) Dante.getInstance();
+
+        sprites = new ArrayList<>();
+        sprites.add(loader.loadImage("../Enemies/Miniboss/MinibossLeft.png"));
+        sprites.add(loader.loadImage("../Enemies/Miniboss/MinibossRight.png"));
+
+        displayImage = sprites.get(0);
+
         hpImage = loader.loadImage("../Assets/redRec.png");
         noHpImage = loader.loadImage("../Assets/whiteRec.png");
     }
-
     /**
      * Update of the position to follow Dante and update of the remaining health in case Dante shot him with the gun.
      */
@@ -51,6 +64,12 @@ public class Miniboss extends SmartEnemy {
         if(hp <= 0) {
             Handler1.getInstance().removeObject(this);
         }
+
+        if (dante.getX() < x)
+            displayImage = sprites.get(0);
+        else
+            displayImage = sprites.get(1);
+
         x+=velX;
         y+=velY;
     }
@@ -74,14 +93,18 @@ public class Miniboss extends SmartEnemy {
             g.fillRect(x, y, 128, 128);
         }
 
+        g.drawImage(displayImage, x, y, null);
+
         //Draw hp bar
-        for(int i = 0; i < 10; i++)
-            if(i < this.hp/100)
-                g.drawImage(hpImage, (int)Camera.getInstance().getX()+i*40+344,
-                            (int)Camera.getInstance().getY()+10, null);
-            else
-                g.drawImage(noHpImage,(int)Camera.getInstance().getX()+i*40+344,
-                            (int)Camera.getInstance().getY()+10, null);
+        for(int i = 0; i < 100; i++){
+            g.drawImage(noHpImage, (int) Camera.getInstance().getX() + i * 10 + 50,
+                    (int) Camera.getInstance().getY() + 64 * 8, null);
+        }
+
+        for(int i = 0; i < hp/100; i++) {
+            g.drawImage(hpImage, (int) Camera.getInstance().getX() + i * 10 + 50,
+                    (int) Camera.getInstance().getY() + 64 * 8, null);
+        }
     }
 
     /**

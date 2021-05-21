@@ -8,5 +8,6 @@ public enum GameState {
     Game,
     GameOver,
     Won,
+    Shop,
     EscMenu;
 }

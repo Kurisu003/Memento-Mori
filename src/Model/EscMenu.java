@@ -16,14 +16,21 @@ import java.io.ObjectOutputStream;
  */
 public class EscMenu extends MouseAdapter {
     private final BufferedImage background;
+    private final BufferedImage shopBackground;
     private final BufferedImage musicVolume;
     private final BufferedImage gameVolume;
     private final BufferedImage saveAndExit;
     private final BufferedImage resumeGame;
+    private final BufferedImage shopButton;
     private final BufferedImage soundBarEmpty;
     private final BufferedImage soundBarFull;
     private final BufferedImage minus;
     private final BufferedImage plus;
+    private final BufferedImage backButton;
+
+    private final BufferedImage playerSpeedIcon;
+    private final BufferedImage bulletSpeedIcon;
+    private final BufferedImage bulletRangeIcon;
 
     private static double tempCamX;
     private static double tempCamY;
@@ -35,16 +42,22 @@ public class EscMenu extends MouseAdapter {
         BufferedImageLoader loader = new BufferedImageLoader();
 
         background = loader.loadImage("../MainMenuAssets/BackgroundFrames/EscMenuBackground.png");
-
+        shopBackground = loader.loadImage("../Assets/Shop.png");
         musicVolume = loader.loadImage("../MainMenuAssets/MusicVolume.png");
         gameVolume = loader.loadImage("../MainMenuAssets/GameVolume.png");
         soundBarEmpty = loader.loadImage("../MainMenuAssets/GameSoundbarEmpty.png");
         soundBarFull = loader.loadImage("../MainMenuAssets/GameSoundbarFiller.png");
         saveAndExit = loader.loadImage("../MainMenuAssets/SaveAndExit.png");
         resumeGame = loader.loadImage("../MainMenuAssets/ResumeGame.png");
+        shopButton = loader.loadImage("../MainMenuAssets/Shop.png");
 
         plus = loader.loadImage("../MainMenuAssets/Plus.png");
         minus = loader.loadImage("../MainMenuAssets/Minus.png");
+        backButton = loader.loadImage("../MainMenuAssets/BackspaceLeft.png");
+
+        playerSpeedIcon = loader.loadImage("../Assets/PlayerSpeed.png");
+        bulletSpeedIcon = loader.loadImage("../Assets/BulletSpeed.png");
+        bulletRangeIcon = loader.loadImage("../Assets/BulletRange.png");
     }
 
     /**
@@ -99,7 +112,6 @@ public class EscMenu extends MouseAdapter {
                 }
 
                 MainMenu.setCamera(1088, 0);
-
             }
 
             // To Resume game
@@ -108,6 +120,17 @@ public class EscMenu extends MouseAdapter {
                 Camera.getInstance().setX(tempCamX);
                 Camera.getInstance().setY(tempCamY);
             }
+
+            // To get to shopButton
+            if (mx >= 1118 && mx <= 1618 && my >= -126 && my <= -76) {
+                Camera.getInstance().setX(Camera.getInstance().getX() + 1088);
+            }
+
+            // To get back to esc menu from shop
+            if (mx >= 2168 && mx <= 2411 && my >= -566 && my <= -516){
+                Camera.getInstance().setX(Camera.getInstance().getX() - 1088);
+            }
+
         }
         else if(Game.getState().equals(GameState.GameOver)){
             if(mx >= -2000 && my >= -2000){
@@ -126,10 +149,12 @@ public class EscMenu extends MouseAdapter {
 
         // To render background and titles
         g.drawImage(background, 1088, -576, null);
+        g.drawImage(shopBackground, 1088*2, -576, null);
         g.drawImage(musicVolume, 1118, -526, null);
         g.drawImage(gameVolume, 1118, -426, null);
         g.drawImage(saveAndExit, 1118, -326, null);
         g.drawImage(resumeGame, 1118, -226, null);
+        g.drawImage(shopButton, 1118, -126, null);
 
         // To render plus and minus for volume changes
         g.drawImage(plus, 1538, -526, null);
@@ -149,6 +174,14 @@ public class EscMenu extends MouseAdapter {
             g.drawImage(soundBarEmpty, 550 + 1088 + i * 50, -526, null);
             g.drawImage(soundBarEmpty, 550 + 1088 + i * 50, -426, null);
         }
+
+        // To draw back button in shop
+        g.drawImage(backButton, 2186, -566, null);
+
+        // To draw icons in shop
+        g.drawImage(playerSpeedIcon, 2186, -500, null);
+        g.drawImage(bulletSpeedIcon, 2186, -300, null);
+        g.drawImage(bulletRangeIcon, 2186, -100, null);
 
         g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
     }

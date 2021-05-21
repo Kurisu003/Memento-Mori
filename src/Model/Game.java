@@ -32,17 +32,28 @@ public class Game extends Canvas implements Runnable {
 
     private static BufferedImage floor;
     private final ArrayList<BufferedImage> enemySprites = new ArrayList<>();
+
     private static final ArrayList<BufferedImage> wallSprites = new ArrayList<>();
     private static BufferedImageLoader loader;
     private Graphics g;
 
-    private static String folder;
     private int selectedSaveState;
-    private int updates = 0;
+
+    private ArrayList<BufferedImage> coinSprites;
+    public ArrayList<BufferedImage> getCoinSprites() {
+        return coinSprites;
+    }
+
+
+    int updates = 0;
 
     private static GameState state = GameState.MainMenu;
-    private final MainMenu mainMenu;
-    private final EscMenu escMenu;
+    
+    private static String folder;
+
+    public Graphics getG() {
+        return g;
+    }
 
 
     /**
@@ -57,8 +68,15 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(Handler1.getInstance()));
         this.addMouseListener(mainMenu);
         this.addMouseListener(escMenu);
-        folder = Levels.Limbo.name();
+        folder = Levels.Heresy.name();
         loader = new BufferedImageLoader();
+        coinSprites = new ArrayList<>();
+        for(int i = 1; i <= 11; i++)
+            coinSprites.add(loader.loadImage("../Assets/Coin/Coins (" + i + ").png"));
+
+        this.createBufferStrategy(3);
+        BufferStrategy bs = this.getBufferStrategy();
+        g = bs.getDrawGraphics();
 
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
         render();
@@ -66,7 +84,7 @@ public class Game extends Canvas implements Runnable {
         //how many rooms should be generated per level
         loadsprites(5);
 
-        Handler1.getInstance().addObject(new Dante(3500, 1800, ID.Dante));
+        Handler1.getInstance().addObject(new Dante(3 * 64 * 17 + 8 * 64, 3 * 64 * 9 + 4 * 64, ID.Dante));
         Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog, folder));
 
         // Adds hitting animation right
@@ -183,6 +201,8 @@ public class Game extends Canvas implements Runnable {
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
         LoadLevel.clearAndLoadLevel(wallSprites, amountRoomsGenerated);
+        GenerateLevel.getInstance().loadObstacles(g);
+
     }
 
     /**
@@ -275,7 +295,8 @@ public class Game extends Canvas implements Runnable {
         boolean enemiesLeft = false;
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
-            if(temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy || temp.getId() == ID.ShotEnemy){
+            if(temp.getId().equals(ID.Enemy) || temp.getId().equals(ID.SmartEnemy) || temp.getId().equals(ID.ShotEnemy)
+                || temp.getId().equals(ID.Miniboss)){
                 enemiesLeft = true;
             }
         }
@@ -315,7 +336,7 @@ public class Game extends Canvas implements Runnable {
             this.createBufferStrategy(3);
             return;
         }
-        g=bs.getDrawGraphics();
+        g = bs.getDrawGraphics();
         Graphics2D g2d=(Graphics2D)g;
 
         if(state.equals(GameState.Game) || state.equals(GameState.GameOver)) {
@@ -327,6 +348,7 @@ public class Game extends Canvas implements Runnable {
                     g.drawImage(floor, i * 1088, j * 576, null);
                 }
             }
+
             //Render all images
             Handler1.getInstance().render(g);
 
@@ -345,7 +367,7 @@ public class Game extends Canvas implements Runnable {
      * @param y y-coordinate of the portal's position
      */
     public static void addPortal(int x, int y){
-        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Levels/Limbo/BLC.png")));
+        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Levels/Limbo/BLC.png"), false));
     }
 
     /**
@@ -365,7 +387,7 @@ public class Game extends Canvas implements Runnable {
      */
     public void changeLevel(String level, int amountRoomsGenerated){
         folder = level;
-        loadsprites(amountRoomsGenerated);
+        loadsprites(amountRoomsGenerated, g);
     }
 
     /**
