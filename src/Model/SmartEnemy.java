@@ -18,7 +18,7 @@ public class SmartEnemy extends GameObject{
     private int hittingAnimationCounter=0;
     private int walkingAnimationCounter=0;
     private boolean isAnimating = false;
-    private final ArrayList<BufferedImage> enemySprites;
+    private final transient ArrayList<BufferedImage> enemySprites;
 
     private int hp=200;
     private final int speed;

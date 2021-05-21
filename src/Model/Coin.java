@@ -11,9 +11,9 @@ public class Coin extends GameObject{
     private int x;
     private int y;
     private int framCounter = 0;
-    private Graphics g;
-    private ArrayList<BufferedImage> sprites;
-    private BufferedImage displayImage;
+    private transient Graphics g;
+    private transient ArrayList<BufferedImage> sprites;
+    private transient BufferedImage displayImage;
 
     public Coin(int x, int y){
         this.x = x;

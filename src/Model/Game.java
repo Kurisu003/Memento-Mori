@@ -39,8 +39,8 @@ public class Game extends Canvas implements Runnable {
 
     private int selectedSaveState;
 
-    private ArrayList<BufferedImage> coinSprites;
-    public ArrayList<BufferedImage> getCoinSprites() {
+    private transient ArrayList<BufferedImage> coinSprites;
+    public  ArrayList<BufferedImage> getCoinSprites() {
         return coinSprites;
     }
 
