@@ -69,10 +69,10 @@ public class Game extends Canvas implements Runnable {
         loader = new BufferedImageLoader();
         coinSprites = new ArrayList<>();
         for(int i = 1; i <= 11; i++)
-            coinSprites.add(loader.loadImage("../Assets/Coin/Coins (" + i + ").png"));
+            coinSprites.add(loader.loadImage("../Assets/Coin/Coins (" + i + ").png").getSubimage(7,46, 26, 28));
 
         BufferStrategy bs = this.getBufferStrategy();
-        if(bs==null){
+        if(bs == null){
             this.createBufferStrategy(3);
             return;
         }
@@ -231,7 +231,7 @@ public class Game extends Canvas implements Runnable {
             delta += (now - lastTime) / ns;
             lastTime = now;
             while(delta >= 1) {
-                long startTime = System.nanoTime();
+//                long startTime = System.nanoTime();
                 if(state.equals(GameState.Game) || state.equals(GameState.MainMenu) || state.equals(GameState.GameOver)) {
                     tick();
                 }
@@ -240,15 +240,15 @@ public class Game extends Canvas implements Runnable {
                 updates++;
                 delta--;
 
-                long stopTime = System.nanoTime();
-                if((stopTime - startTime) / 10000 > 4000)
-                    System.out.println("Tick: " + (stopTime - startTime) / 10000);
+//                long stopTime = System.nanoTime();
+//                if((stopTime - startTime) / 10000 > 4000)
+//                    System.out.println("Tick: " + (stopTime - startTime) / 10000);
             }
-            long startTime = System.nanoTime();
+//            long startTime = System.nanoTime();
             render();
-            long stopTime = System.nanoTime();
-            if((stopTime - startTime) / 10000 > 4000)
-                System.out.println("Render: " + (stopTime - startTime) / 10000);
+//            long stopTime = System.nanoTime();
+//            if((stopTime - startTime) / 10000 > 4000)
+//                System.out.println("Render: " + (stopTime - startTime) / 10000);
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
@@ -257,20 +257,8 @@ public class Game extends Canvas implements Runnable {
                 updates = 0;
             }
         }
-        //stop();
     }
 
-    /*
-    private void stop(){
-        isRunning = false;
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-     */
 
     /**
      * Checks in a certain period of time if changes are made and reacts to them. For example it checks if every
@@ -278,28 +266,14 @@ public class Game extends Canvas implements Runnable {
      */
     public void tick(){
 
-        /*
-        try {
-            for (ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext(); ) {
-                GameObject temp = iterator.next(); //FIXME CONCURRENTMODIFICATIONEXCEPTION
-                if (temp.getId() == ID.Dante) {
-                    Camera.getInstance().tick(temp);
-                }
-            }
-        }
-        catch(ConcurrentModificationException e){
-            e.printStackTrace();
-        }
-
-         */
         boolean enemiesLeft = false;
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
-            if(temp.getId().equals(ID.Enemy) || temp.getId().equals(ID.SmartEnemy) || temp.getId().equals(ID.ShotEnemy)
-                || temp.getId().equals(ID.Miniboss)){
+            if(temp.getId().equals(ID.Enemy) || temp.getId().equals(ID.SmartEnemy) || temp.getId().equals(ID.ShotEnemy)){
                 enemiesLeft = true;
             }
         }
+
         if(enemiesLeft)
             changeDoors(1);
         else

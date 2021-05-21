@@ -39,6 +39,7 @@ public class Dante extends GameObject {
     private int range = 30;
     private static int health = 5;
     private static int armor = 2;
+    private int coins = 0;
 
     private int frameCount = 0;
     private boolean portalExists;
@@ -346,12 +347,21 @@ public class Dante extends GameObject {
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
                 if(GenerateLevel.getInstance().getLevel()[i][j] > 0)
-                    if(wherePlayerHasBeen[j][i] == 0)
+                    if(wherePlayerHasBeen[j][i] == 0 || bossLeft())
                         levelIsDone = false;
             }
         }
 
         return levelIsDone;
+    }
+
+    private boolean bossLeft(){
+        boolean bossLeft = false;
+        for(GameObject temp : Handler1.getInstance().objects){
+            if(temp.getId().equals(ID.Miniboss))
+                bossLeft = true;
+        }
+        return bossLeft;
     }
 
     /**
@@ -380,6 +390,8 @@ public class Dante extends GameObject {
     private void checkCollision(){
         boolean shouldSpawnEnemy = false;
         boolean shouldChangeLevel = false;
+        int tempCoin = 0;
+        boolean shouldRemoveCoin = false;
 
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
@@ -418,6 +430,16 @@ public class Dante extends GameObject {
                 shouldChangeLevel = true;
             if(temp.getId().equals(ID.Miniboss) && getBounds().intersects(temp.getBounds()))
                 doAction(1);
+            if(temp.getId().equals(ID.Coin) && getBounds().intersects(temp.getBounds())){
+                coins++;
+                shouldRemoveCoin = true;
+                tempCoin = iterator.nextIndex() - 1;
+            }
+        }
+
+        if(shouldRemoveCoin){
+            Handler1.getInstance().removeObject(Handler1.getInstance().objects.get(tempCoin));
+            shouldRemoveCoin = false;
         }
 
         // Used because object cant be added

@@ -5,6 +5,7 @@ import Controller.Handler1;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * This enemy follows Dante and does damage to him.
@@ -140,6 +141,9 @@ public class SmartEnemy extends GameObject{
         y+=velY;
 
         if(hp <= 0) {
+            Random rand = new Random();
+            if(rand.nextInt(100) <= 15)
+                Handler1.getInstance().addObject(new Coin(x, y));
             Handler1.getInstance().removeObject(this);
         }
     }

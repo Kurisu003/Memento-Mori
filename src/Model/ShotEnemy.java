@@ -104,8 +104,9 @@ public class ShotEnemy extends GameObject{
         }
 
         if(hp <= 0) {
-            System.out.println("test in gegner");
-            Handler1.getInstance().addObject(new Coin(x, y));
+            Random rand = new Random();
+            if(rand.nextInt(100) <= 15)
+                Handler1.getInstance().addObject(new Coin(x, y));
             Handler1.getInstance().removeObject(this);
         }
     }

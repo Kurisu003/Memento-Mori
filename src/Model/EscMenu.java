@@ -136,7 +136,7 @@ public class EscMenu extends MouseAdapter {
         // For Gameover
         else if(Game.getState().equals(GameState.GameOver)){
             if(mx >= -2000 && my >= -2000){
-                System.out.println(mx + "   " + my);
+//                System.out.println(mx + "   " + my);
             }
         }
     }

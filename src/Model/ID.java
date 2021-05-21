@@ -16,6 +16,7 @@ public enum ID {
     BG_music(),
     ShootingSound(),
     Miniboss(),
+    Coin,
     Dialog();
 
 
