@@ -330,7 +330,7 @@ public class Game extends Canvas implements Runnable {
         //Render frame by frame
         BufferStrategy bs = this.getBufferStrategy();
         if(bs==null){
-            this.createBufferStrategy(3);
+            this.createBufferStrategy(2);
             return;
         }
         g = bs.getDrawGraphics();
