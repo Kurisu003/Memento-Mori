@@ -443,21 +443,16 @@ public class Dante extends GameObject {
      * @param newRoomCoordinate x- or y-coordinate for the new room
      * @param isX indicates if given coordinate is the x coordinate, if is false, it's the y-coordinate
      **/
-    private void setNewCoordinates(int newCoordinate, int newCameraCoordinate, int newRoomCoordinate, boolean isX){
-        if(isX){
+    private void setNewCoordinates(int newCoordinate, int newCameraCoordinate, int newRoomCoordinate, boolean isX) {
+        if (isX) {
             x += newCoordinate;
             Camera.getInstance().setX(Camera.getInstance().getX() + newCameraCoordinate);
             roomXCoordinate += newRoomCoordinate;
-        }
-
-        else{
+        } else {
             y += newCoordinate;
             Camera.getInstance().setY(Camera.getInstance().getY() + newCameraCoordinate);
             roomYCoordinate += newRoomCoordinate;
-
-        g.drawImage(minimapSprites.get(1),  (int)Camera.getInstance().getX() + (int)Camera.getInstance().getX() / 1088 * 45 + 813 ,
-                                            (int)Camera.getInstance().getY() + (int)Camera.getInstance().getY() / 576 * 25 - 16, null);
-
+        }
     }
 
     /**

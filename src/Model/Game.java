@@ -44,17 +44,14 @@ public class Game extends Canvas implements Runnable {
         return coinSprites;
     }
 
-
     int updates = 0;
 
     private static GameState state = GameState.MainMenu;
     
     private static String folder;
 
-    public Graphics getG() {
-        return g;
-    }
-
+    private MainMenu mainMenu;
+    private EscMenu escMenu;
 
     /**
      * This is the private Constructor of the Game class so only one instance can be created.
@@ -201,7 +198,7 @@ public class Game extends Canvas implements Runnable {
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
         LoadLevel.clearAndLoadLevel(wallSprites, amountRoomsGenerated);
-        GenerateLevel.getInstance().loadObstacles(g);
+        GenerateLevel.getInstance().loadObstacles();
 
     }
 
@@ -387,7 +384,7 @@ public class Game extends Canvas implements Runnable {
      */
     public void changeLevel(String level, int amountRoomsGenerated){
         folder = level;
-        loadsprites(amountRoomsGenerated, g);
+        loadsprites(amountRoomsGenerated);
     }
 
     /**

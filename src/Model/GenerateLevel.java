@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Handler1;
 import View.BufferedImageLoader;
 
 import java.awt.*;
@@ -40,7 +41,6 @@ public class GenerateLevel implements Serializable {
     public  void generateLevel(int amountRoomsGenerated){
         int roomCount = 1;
         BufferedImageLoader loader = new BufferedImageLoader();
-        obstacle = new ArrayList<>();
 
         //obstacle.add(loader.loadImage("../Levels/" + Game.getFolder() + "/Obstacles1.png"));
 
@@ -74,7 +74,7 @@ public class GenerateLevel implements Serializable {
         }
     }
 
-    public void loadObstacles(Graphics g){
+    public void loadObstacles(){
         BufferedImageLoader loader = new BufferedImageLoader();
         for(int i = 0; i <= GenerateLevel.getInstance().getLevel().length - 1; i++) {
             for (int j = 0; j <= GenerateLevel.getInstance().getLevel().length - 1; j++) {
@@ -125,8 +125,6 @@ public class GenerateLevel implements Serializable {
                         Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 12, i * 576 + 64 * 3, ID.Block, loader.loadImage(
                                 "../Levels/" + Game.getFolder() + "/BLC.png"), true));
                     }
-
-
                 }
             }
         }
