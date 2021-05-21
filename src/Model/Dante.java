@@ -43,9 +43,10 @@ public class Dante extends GameObject {
 
     private int fireSpeed = 0;
     private int range = 0;
+    private int speed = 0;
     private static int health = 5;
     private static int armor = 2;
-    private int coins = 0;
+    private int coins = 100;
 
     private int frameCount = 0;
     private boolean portalExists;
@@ -124,32 +125,13 @@ public class Dante extends GameObject {
         x += velX;
         y += velY;
 
-        double t1 = System.currentTimeMillis();
-
         if(levelIsComplete() && !portalExists) {
             Game.addPortal(3392 + 64, 1856 + 64);
             portalExists = true;
         }
 
-        double t2 = System.currentTimeMillis();
-
-        double zeit=t2-t1;
-
-        //System.out.println(zeit);
-
-        double t3 = System.currentTimeMillis();
-
-
         // checks for collision with objects
         checkCollision();
-
-        double t4 = System.currentTimeMillis();
-
-        double zeit2=t4-t3;
-
-        //System.out.println(zeit2);
-
-        double t5 = System.currentTimeMillis();
 
         // Needed so that shooting is always available when button is pressed
         // and enough time has passed
@@ -246,10 +228,6 @@ public class Dante extends GameObject {
             checkBulletDirection();
             timeSinceLastShot = 0;
         }
-        double t6 = System.currentTimeMillis();
-        //System.out.println(t6);
-        double zeit3=t6-t5;
-        //System.out.println(zeit3);
     }
 
     /**
@@ -325,6 +303,7 @@ public class Dante extends GameObject {
         this.fireSpeed = speed;
     }
 
+
     public int getFireSpeed() {
         return fireSpeed;
     }
@@ -341,6 +320,13 @@ public class Dante extends GameObject {
         return range;
     }
 
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
 
     public static void setHealth(int health) {
         Dante.health = health;

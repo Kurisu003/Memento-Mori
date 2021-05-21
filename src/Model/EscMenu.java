@@ -146,7 +146,27 @@ public class EscMenu extends MouseAdapter {
 
             // For upgrading
             // TODO Adding of upgrading options
+            if (mx >= 2350 && mx <= 2400 && my >= -510 && my <= -460){
+                if(((Dante)Dante.getInstance()).getSpeed() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 1) {
+                    ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 1);
+                    ((Dante) Dante.getInstance()).setSpeed(((Dante) Dante.getInstance()).getSpeed() + 1);
+                }
 
+            }
+            if (mx >= 2350 && mx <= 2400 && my >= -360 && my <= -310){
+                if(((Dante)Dante.getInstance()).getFireSpeed() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 1) {
+                    ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 1);
+                    ((Dante) Dante.getInstance()).setFireSpeed(((Dante) Dante.getInstance()).getFireSpeed() + 1);
+                }
+
+            }
+            if (mx >= 2350 && mx <= 2400 && my >= -210 && my <= -160){
+                if(((Dante)Dante.getInstance()).getRange() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 1) {
+                    ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 1);
+                    ((Dante) Dante.getInstance()).setRange(((Dante) Dante.getInstance()).getRange() + 1);
+                }
+
+            }
 
         }
 
@@ -207,6 +227,16 @@ public class EscMenu extends MouseAdapter {
             for (int i = 0; i < 5; i++) {
                 g.drawImage(upgradeBarEmpty, 2186 + i * 50, -450 + j * 150, null);
             }
+        }
+
+        for(int i = 0; i < ((Dante) Dante.getInstance()).getSpeed(); i++){
+            g.drawImage(upgradeBarFull, 2186 + i * 50, -450, null);
+        }
+        for(int i = 0; i < ((Dante) Dante.getInstance()).getFireSpeed(); i++){
+            g.drawImage(upgradeBarFull, 2186 + i * 50, -300, null);
+        }
+        for(int i = 0; i < ((Dante) Dante.getInstance()).getRange(); i++){
+            g.drawImage(upgradeBarFull, 2186 + i * 50, -150, null);
         }
 
         // Plus for upgrading in shop
