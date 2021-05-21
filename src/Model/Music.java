@@ -84,9 +84,7 @@ public class Music implements LineListener, Runnable {
 
             audioClip.open(audioStream);
             FloatControl gainControl = (FloatControl)audioClip.getControl(FloatControl.Type.MASTER_GAIN);
-
-
-
+            
             audioClip.start();
 
             while (!playCompleted) {
@@ -101,8 +99,6 @@ public class Music implements LineListener, Runnable {
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
-
-
             }
             audioClip.close();
 

@@ -124,6 +124,7 @@ public class EscMenu extends MouseAdapter {
             // To get to shopButton
             if (mx >= 1118 && mx <= 1618 && my >= -126 && my <= -76) {
                 Camera.getInstance().setX(Camera.getInstance().getX() + 1088);
+                new Thread(new Music("res/Music/HeavenlySound.wav", ID.Shop_music)).start();
             }
 
             // To get back to esc menu from shop

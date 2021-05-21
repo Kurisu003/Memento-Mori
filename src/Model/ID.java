@@ -14,6 +14,7 @@ public enum ID {
     ShotEnemy(),
     Door(),
     BG_music(),
+    Shop_music(),
     ShootingSound(),
     Miniboss(),
     Dialog();
