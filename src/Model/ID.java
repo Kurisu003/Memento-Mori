@@ -17,6 +17,7 @@ public enum ID {
     Shop_music(),
     ShootingSound(),
     Miniboss(),
+    Coin,
     Dialog();
 
 

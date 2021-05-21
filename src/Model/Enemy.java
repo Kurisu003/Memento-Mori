@@ -86,6 +86,9 @@ public class Enemy extends GameObject {
         }
 
         if(hp <= 0) {
+            Random rand = new Random();
+            if(rand.nextInt(100) <= 15)
+                Handler1.getInstance().addObject(new Coin(x, y));
             Handler1.getInstance().removeObject(this);
         }
     }

@@ -5,6 +5,7 @@ import Controller.Handler1;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * This enemy follows Dante and does damage to him.
@@ -18,7 +19,7 @@ public class SmartEnemy extends GameObject{
     private int hittingAnimationCounter=0;
     private int walkingAnimationCounter=0;
     private boolean isAnimating = false;
-    private final ArrayList<BufferedImage> enemySprites;
+    private final transient ArrayList<BufferedImage> enemySprites;
 
     private int hp=200;
     private final int speed;
@@ -140,6 +141,9 @@ public class SmartEnemy extends GameObject{
         y+=velY;
 
         if(hp <= 0) {
+            Random rand = new Random();
+            if(rand.nextInt(100) <= 15)
+                Handler1.getInstance().addObject(new Coin(x, y));
             Handler1.getInstance().removeObject(this);
         }
     }

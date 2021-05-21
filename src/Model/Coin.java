@@ -11,14 +11,13 @@ public class Coin extends GameObject{
     private int x;
     private int y;
     private int framCounter = 0;
-    private Graphics g;
-    private ArrayList<BufferedImage> sprites;
-    private BufferedImage displayImage;
+    private transient Graphics g;
+    private transient ArrayList<BufferedImage> sprites;
+    private transient BufferedImage displayImage;
 
     public Coin(int x, int y){
         this.x = x;
         this.y = y;
-        System.out.println("test");
         g = Game.getInstance().getG();
         sprites = Game.getInstance().getCoinSprites();
     }
@@ -33,11 +32,23 @@ public class Coin extends GameObject{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(displayImage, x, y, null);
+
+        if(Game.showHitbox){
+            g.setColor(Color.ORANGE);
+            g.drawOval(x,y,32,32);
+        }
+
+
+        g.drawImage(displayImage, x + 5, y + 5, null);
     }
 
     @Override
     public Rectangle getBounds() {
-        return null;
+        return new Rectangle(x,y,32,32);
+    }
+
+    @Override
+    public ID getId() {
+        return ID.Coin;
     }
 }
