@@ -26,6 +26,8 @@ public class Game extends Canvas implements Runnable {
      */
     private static Game instance = null;
 
+    private static Thread gameMusic;
+
     private boolean isRunning = false;
     public static boolean showHitbox = false;
 
@@ -77,7 +79,8 @@ public class Game extends Canvas implements Runnable {
         }
         g = bs.getDrawGraphics();
 
-        new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
+        gameMusic = new Thread(new Music("res/music/bg_music.wav", ID.BG_music));
+        gameMusic.start();
         render();
 
         //how many rooms should be generated per level
@@ -415,5 +418,9 @@ public class Game extends Canvas implements Runnable {
      */
     public ArrayList<BufferedImage> getEnemySprites(){
         return enemySprites;
+    }
+
+    public static Thread getGameMusic() {
+        return gameMusic;
     }
 }
