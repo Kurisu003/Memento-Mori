@@ -1,19 +1,30 @@
 package Controller;
 
-import Controller.Handler1;
 import Model.*;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * This handles all key inputs so the player can move around and shoot. With x the hitboxes can be seen and with esc
+ * pressed in-game a menu appears to save the game or to set the music and sound volume.
+ */
 public class KeyInput extends KeyAdapter {
 
     Handler1 handler1;
 
+    /**
+     * Constructor to create an instance
+     * @param handler1 the object which should be handled
+     */
     public KeyInput(Handler1 handler1){
         this.handler1=handler1;
     }
 
+    /**
+     * Indicates what happens when certain keys on the keyboard are pressed
+     * @param e KeyEvent to determine which key was pressed
+     */
     public void keyPressed(KeyEvent e){
         int key=e.getKeyCode();
         for(int i=0; i < handler1.objects.size(); i++){
@@ -44,6 +55,10 @@ public class KeyInput extends KeyAdapter {
         }
     }
 
+    /**
+     * Indicates what happens when certain keys on the keyboard are released
+     * @param e KeyEvent to determine which key was released
+     */
     public void keyReleased(KeyEvent e){
         int key=e.getKeyCode();
         for(int i=0;i<handler1.objects.size();i++){

@@ -1,6 +1,5 @@
 package Model;
 
-import Controller.Handler1;
 import View.BufferedImageLoader;
 
 import java.awt.image.BufferedImage;
@@ -8,6 +7,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * This class generates all the levels by loading the sprites.
+ */
 public class GenerateLevel implements Serializable {
 
     public ArrayList<BufferedImage> getObstacle() {
@@ -20,10 +22,14 @@ public class GenerateLevel implements Serializable {
     // left and right and you don't get errors
     // when trying to do something like
     // level[i - 1]
-    private static int [][] level = new int[7][7];
+    private static final int [][] level = new int[7][7];
 
     private static GenerateLevel instance = null;
 
+    /**
+     * This returns the current instance
+     * @return current instance of GenerateLevel
+     */
     public static GenerateLevel getInstance(){
         if(instance == null){
             instance = new GenerateLevel();
@@ -31,6 +37,10 @@ public class GenerateLevel implements Serializable {
         return instance;
     }
 
+    /**
+     * This method generates different levels. The number of levels depends on the parameter given.
+     * @param amountRoomsGenerated number of levels which should be generated
+     */
     public  void generateLevel(int amountRoomsGenerated){
         int roomCount = 1;
         BufferedImageLoader loader = new BufferedImageLoader();
@@ -79,6 +89,9 @@ public class GenerateLevel implements Serializable {
 //        }
     }
 
+    /**
+     * This method clears the levels by setting all values to 0
+     */
     public  void clearLevel(){
         for(int i = 0; i <= level.length - 1; i++) {
             for (int j = 0; j <= level.length - 1; j++) {
@@ -87,6 +100,9 @@ public class GenerateLevel implements Serializable {
         }
     }
 
+    /**
+     * This method prints the level's coordinates
+     */
     public  void printLevel(){
         for(int i = 0; i <= level.length - 1; i++) {
             for (int j = 0; j <= level.length - 1; j++) {
@@ -96,6 +112,10 @@ public class GenerateLevel implements Serializable {
         }
     }
 
+    /**
+     * This method is the getter-method of the level-2D-Array
+     * @return all levels saved in the 2D array
+     */
     public  int[][] getLevel() {
         return level;
     }

@@ -9,6 +9,13 @@ import java.awt.*;
 public class Window {
     private static JFrame frame;
 
+    /**
+     * This is the constructor of the class Window to create an object of this class
+     * @param width the width of the frame
+     * @param height the height of the frame
+     * @param title the title of the frame
+     * @param game the instance of the game which should be displayed
+     */
     public Window(int width, int height, String title, Game game){
         frame = new JFrame(title);
         // Setting the size of the window
@@ -49,8 +56,16 @@ public class Window {
         //frame.remove(dialog);
         //frame.revalidate();
         //frame.repaint();
+
+        //To set program icon
+        BufferedImageLoader loader = new BufferedImageLoader();
+        frame.setIconImage(loader.loadImage("../Character/IdleWithWeapon.png"));
     }
 
+    /**
+     * Getter method of the current frame
+     * @return the frame
+     */
     public static JFrame getFrame() {
         return frame;
     }

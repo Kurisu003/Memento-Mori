@@ -5,8 +5,16 @@ import Controller.Handler1;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * This class loads all the levels which are displayed in the game.
+ */
 public class LoadLevel{
 
+    /**
+     * Clears all levels and loads the current so the old levels are not displayed anymore in the background.
+     * @param wallSprites all images which should be displayed for this level
+     * @param amountRoomsGenerated how many rooms should be generated in this level
+     */
     public static void clearAndLoadLevel(ArrayList<BufferedImage> wallSprites, int amountRoomsGenerated){
 
         // Clears list from all objects that aren't player Character

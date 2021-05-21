@@ -16,64 +16,38 @@ import Controller.*;
 // wenn man a spiel startet und im esc menu speichert und noar wieder a nuies spiel unfong noar miasat die linked list
 // gecleart werden
 
+/**
+ * This is the main class of the whole program. It starts the entire gameplay and calls methods in order to build the
+ * game step by step.
+ */
 public class Game extends Canvas implements Runnable {
 
-    private Thread thread;
+    /*
+        ALL ATTRIBUTES OF THIS CLASS
+     */
+    private static Game instance = null;
+
     private boolean isRunning = false;
+    public static boolean showHitbox = false;
+
     private static BufferedImage floor;
     private final ArrayList<BufferedImage> enemySprites = new ArrayList<>();
-    private int selectedSaveState;
-
-    int updates = 0;
-
-    public static GameState getState() {
-        return state;
-    }
-
-    public static void setState(GameState state) {
-        if(state.equals(GameState.Game)) {
-            Camera.getInstance().setX(3264);
-            Camera.getInstance().setY(1728);
-        }
-        else if(state.equals(GameState.EscMenu)){
-            Camera.getInstance().setX(1088);
-            Camera.getInstance().setY(-576);
-        }
-        Game.state = state;
-    }
-
-    private static GameState state = GameState.MainMenu;
-
     private static final ArrayList<BufferedImage> wallSprites = new ArrayList<>();
-    
-    private static String folder;
-
-    public Graphics getG() {
-        return g;
-    }
-
+    private static BufferedImageLoader loader;
     private Graphics g;
 
+    private static String folder;
+    private int selectedSaveState;
+    private int updates = 0;
+
+    private static GameState state = GameState.MainMenu;
     private final MainMenu mainMenu;
     private final EscMenu escMenu;
 
-    private static BufferedImageLoader loader;
 
-    public static boolean showHitbox = false;
-
-    private static Game instance = null;
-
-    public static Game getInstance(){
-        if(instance == null){
-            instance = new Game();
-        }
-        return instance;
-    }
-
-    public static String getFolder() {
-        return folder;
-    }
-
+    /**
+     * This is the private Constructor of the Game class so only one instance can be created.
+     */
     private Game(){
         mainMenu = new MainMenu();
         escMenu = new EscMenu();
@@ -89,6 +63,7 @@ public class Game extends Canvas implements Runnable {
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
         render();
 
+        //how many rooms should be generated per level
         loadsprites(5);
 
         Handler1.getInstance().addObject(new Dante(3500, 1800, ID.Dante));
@@ -111,14 +86,73 @@ public class Game extends Canvas implements Runnable {
         enemySprites.add(loader.loadImage("../Enemies/DumbEnemy/SpriteLeft.png"));
         enemySprites.add(loader.loadImage("../Enemies/DumbEnemy/SpriteRight.png"));
     }
-        public ArrayList<BufferedImage> getEnemySprites(){
-            return enemySprites;
+
+    /**
+     * This is the main which starts the whole game by calling {@link #getInstance()}.
+     * @param args
+     */
+    public static void main(String[] args) {
+        Game.getInstance();
     }
 
-    public static void addPortal(int x, int y){
-        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Levels/Limbo/BLC.png")));
+    /**
+     * This method creates a single instance of the Game class by calling the private constructor {@link #Game()}.
+     * If an instance already exists it will just return the existing one.
+     * For this implementation the singleton pattern is used.
+     * @return the one and only instance of Game
+     */
+    public static Game getInstance(){
+        if(instance == null){
+            instance = new Game();
+        }
+        return instance;
     }
 
+    /**
+     * To set the game to its state (in-game: Game or menu: EscMenu) in order to display the right window
+     * @param state which GameState should be set
+     */
+    public static void setState(GameState state) {
+        if(state.equals(GameState.Game)) {
+            Camera.getInstance().setX(3264);
+            Camera.getInstance().setY(1728);
+        }
+        else if(state.equals(GameState.EscMenu)){
+            Camera.getInstance().setX(1088);
+            Camera.getInstance().setY(-576);
+        }
+        Game.state = state;
+    }
+
+    /**
+     * Getter of the game state.
+     * @return the current state of the game
+     */
+    public static GameState getState() {
+        return state;
+    }
+
+    /**
+     * Setter of the selected game state to set if the player chooses the first, second or third saving slot
+     * @param selectedSaveState integer to set 1, 2, or 3
+     */
+    public void setSelectedSaveState(int selectedSaveState) {
+        this.selectedSaveState = selectedSaveState;
+    }
+
+    /**
+     * Getter of the selected save slot
+     * @return integer which can be 1, 2 or 3 depending on the currently seleced save state
+     */
+    public int getSelectedSaveState() {
+        return selectedSaveState;
+    }
+
+    /**
+     * Adds the images which should be loaded for this level to the array.
+     * Calls the method to load the sprites for the level.
+     * @param amountRoomsGenerated how many rooms should be generated
+     */
     private static void loadsprites(int amountRoomsGenerated){
 
         wallSprites.clear();
@@ -151,38 +185,28 @@ public class Game extends Canvas implements Runnable {
         LoadLevel.clearAndLoadLevel(wallSprites, amountRoomsGenerated);
     }
 
-    public static void removePortal() {
-        for(int i = 0; i < Handler1.getInstance().objects.size(); i++){
-            if(Handler1.getInstance().objects.get(i).getId() == ID.Portal)
-                Handler1.getInstance().objects.remove(Handler1.getInstance().objects.get(i));
-        }
-    }
-
+    /**
+     * This method creates and starts a Game-Thread
+     * It sets the attribute isRunning to true to indicate that the thread is running now.
+     */
     private void start(){
         isRunning = true;
-        thread = new Thread(this); //this because we call the run methode
+        Thread thread = new Thread(this); //this because we call the run methode
         thread.start();
     }
-
-    private void stop(){
-        isRunning = false;
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * This is the code which the thread calls and so it is running continually. Methods are called to get all functions
+     * recquired to play the game
+     */
     public void run(){
-
+        //Get the focus for this thread
         this.requestFocus();
         long lastTime = System.nanoTime();
-        double amountOfTicks = 30.0;
+        double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         long timer = System.currentTimeMillis();
         while(isRunning) {
-
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
@@ -213,11 +237,28 @@ public class Game extends Canvas implements Runnable {
                 updates = 0;
             }
         }
-        stop();
+        //stop();
     }
 
+    /*
+    private void stop(){
+        isRunning = false;
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+     */
+
+    /**
+     * Checks in a certain period of time if changes are made and reacts to them. For example it checks if every
+     * enemy is dead so it can unlock the doors.
+     */
     public void tick(){
 
+        /*
         try {
             for (ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext(); ) {
                 GameObject temp = iterator.next(); //FIXME CONCURRENTMODIFICATIONEXCEPTION
@@ -229,6 +270,8 @@ public class Game extends Canvas implements Runnable {
         catch(ConcurrentModificationException e){
             e.printStackTrace();
         }
+
+         */
         boolean enemiesLeft = false;
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
@@ -244,22 +287,29 @@ public class Game extends Canvas implements Runnable {
         Handler1.getInstance().tick();
     }
 
+    /**
+     * Set the doors in the level locked or unlocked with this method by giving it a value depending
+     * on whether every enemy is dead or not
+     * @param state 1 = enemies left -> lock every door, 0 = no enemy left -> unlock every door
+     */
     private void changeDoors(int state){
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
-            if(temp.getId() == ID.Door && state == 1){
-                ((Door) temp).lockDoor();
+            if(temp.getId() == ID.Door){
+                if(state == 1)
+                    ((Door) temp).lockDoor();
+                else if(state == 0)
+                    ((Door) temp).unlockDoor();
             }
-            else if(temp.getId() == ID.Door && state == 0){
-                ((Door) temp).unlockDoor();
-
-            }
-
         }
     }
 
+    /**
+     * This method renders every object-image so it is displayed.
+     */
     public void render(){
 
+        //Render frame by frame
         BufferStrategy bs = this.getBufferStrategy();
         if(bs==null){
             this.createBufferStrategy(3);
@@ -277,9 +327,7 @@ public class Game extends Canvas implements Runnable {
                     g.drawImage(floor, i * 1088, j * 576, null);
                 }
             }
-
-
-
+            //Render all images
             Handler1.getInstance().render(g);
 
             g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
@@ -288,29 +336,59 @@ public class Game extends Canvas implements Runnable {
         } else if(state == GameState.EscMenu){
             escMenu.render(g);
         }
-        g.dispose();
         bs.show();
-
-
     }
-    
+
+    /**
+     * Adds the portal to the game.
+     * @param x x-coordinate of the portal's position
+     * @param y y-coordinate of the portal's position
+     */
+    public static void addPortal(int x, int y){
+        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Levels/Limbo/BLC.png")));
+    }
+
+    /**
+     * This method removes the portal from the linked list with all GameObjects
+     */
+    public static void removePortal() {
+        for(int i = 0; i < Handler1.getInstance().objects.size(); i++){
+            if(Handler1.getInstance().objects.get(i).getId() == ID.Portal)
+                Handler1.getInstance().objects.remove(Handler1.getInstance().objects.get(i));
+        }
+    }
+
+    /**
+     * If the current level is completed the next level has to be loaded.
+     * @param level which level should be loaded next
+     * @param amountRoomsGenerated how many rooms should be generated
+     */
     public void changeLevel(String level, int amountRoomsGenerated){
         folder = level;
         loadsprites(amountRoomsGenerated);
     }
 
-
-    public static void main(String[] args) {
-        Game.getInstance();
+    /**
+     * Getter of the graphics
+     * @return the current drawn graphics
+     */
+    public Graphics getG() {
+        return g;
     }
 
-    public int getSelectedSaveState() {
-        return selectedSaveState;
+    /**
+     * Getter of the folder of level
+     * @return name of the folder/level
+     */
+    public static String getFolder() {
+        return folder;
     }
 
-    public void setSelectedSaveState(int selectedSaveState) {
-        this.selectedSaveState = selectedSaveState;
+    /**
+     * Getter of the arraylist which stores the sprites of the enemy
+     * @return arraylist of the enemy's images for different positions
+     */
+    public ArrayList<BufferedImage> getEnemySprites(){
+        return enemySprites;
     }
-
-
 }

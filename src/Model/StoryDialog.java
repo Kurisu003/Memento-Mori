@@ -14,6 +14,10 @@ public class StoryDialog extends JPanel {
     private JLabel label;
     int charIndex = 0;
 
+    /**
+     * Constructor to create an object of this class. The layout and label are set up and the method to start writing
+     * the text is called.
+     */
     public StoryDialog() {
 
         text = "Hello\nYou\n";
@@ -25,7 +29,10 @@ public class StoryDialog extends JPanel {
         startWriting(text);
     }
 
-    //Method to start the writing
+    /**
+     * Starts the writing by displaying letter by letter of the given string.
+     * @param t text which should be written
+     */
     public void startWriting(String t) {
         Timer timer = new Timer(400, e -> {
             String labelText = label.getText();

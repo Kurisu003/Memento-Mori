@@ -7,12 +7,13 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.nio.charset.StandardCharsets;
 
+/**
+ * This class creates the menu which is displayed when pressed esc.
+ */
 public class EscMenu extends MouseAdapter {
     private final BufferedImage background;
     private final BufferedImage musicVolume;
@@ -27,6 +28,9 @@ public class EscMenu extends MouseAdapter {
     private static double tempCamX;
     private static double tempCamY;
 
+    /**
+     * Constructor to create a new instance of the class EscMenu
+     */
     public EscMenu(){
         BufferedImageLoader loader = new BufferedImageLoader();
 
@@ -43,13 +47,10 @@ public class EscMenu extends MouseAdapter {
         minus = loader.loadImage("../MainMenuAssets/Minus.png");
     }
 
-    public static double getTempCamX() {
-        return tempCamX;
-    }
-    public static double getTempCamY() {
-        return tempCamY;
-    }
-
+    /**
+     * This method is called whenever the mouse is pressed and checks the position of the mouse click
+     * @param e MouseEvent to get information about the mouse click
+     */
     public void mousePressed(MouseEvent e) {
         int mx = (int) (e.getX() + Camera.getInstance().getX());
         int my = (int) (e.getY() + Camera.getInstance().getY());
@@ -115,6 +116,10 @@ public class EscMenu extends MouseAdapter {
         }
     }
 
+    /**
+     * This method renders all the graphics for the EscMenu
+     * @param g graphic to be rendered
+     */
     public void render(Graphics g) {
         Graphics2D g2d=(Graphics2D)g;
         g2d.translate(-Camera.getInstance().getX(), -Camera.getInstance().getY());
@@ -147,9 +152,28 @@ public class EscMenu extends MouseAdapter {
 
         g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
     }
-
+    /**
+     * Sets the temporary camera coordinates
+     * @param tempX double for x-coordinate
+     * @param tempY double for y-coordinate
+     */
     public static void setTempCamCoordinates(double tempX, double tempY){
         tempCamX = (int) tempX;
         tempCamY = (int) tempY;
     }
+    /**
+     * Returns the temporary camera x-coordinate
+     * @return temporary camera x-coordinate
+     */
+    public static double getTempCamX() {
+        return tempCamX;
+    }
+    /**
+     * Returns the temporary camera y-coordinate
+     * @return temporary camera y-coordinate
+     */
+    public static double getTempCamY() {
+        return tempCamY;
+    }
+
 }

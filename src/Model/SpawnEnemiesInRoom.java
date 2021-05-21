@@ -4,13 +4,25 @@ import Controller.Handler1;
 
 import java.util.Random;
 
+/**
+ * This class spawns the enemies in a room depending on the desired amount and types of enemies.
+ */
 public class SpawnEnemiesInRoom {
     private static int minibosses;
+
+    /**
+     * Spawns enemies randomly. What kind of enemy should be spawned can be given to that method and the program
+     * chooses randomly how many of a certain type get spawned, but with a limit for a maximum of enemies.
+     * @param roomStartX x-coordinate where the room position starts
+     * @param roomStartY y-coordinate where the room position starts
+     * @param typesOfEnemy array of desired types of enemies which are allowed to be spawn
+     * @param currentLevel indicates which level is the current one
+     */
     public static void spawnEnemies(int roomStartX, int roomStartY, ID[] typesOfEnemy, Levels currentLevel){
         Random rn = new Random();
 //        int amountOfEnemies = 2 + rn.nextInt(currentLevel.ordinal() + 1);
 
-        int amountOfEnemies = 1;
+        int amountOfEnemies = 5;
         for (int i = 0; i < amountOfEnemies; i++){
             rn = new Random();
             int pos = 0;

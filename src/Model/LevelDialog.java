@@ -12,6 +12,9 @@ public class LevelDialog extends JPanel {
     private final JLabel label;
     private int size = 0;
 
+    /**
+     * Constructor for the dialog where the layout and label are set up.
+     */
     public LevelDialog() {
         String text = "HELLO";
         setLayout(new GridBagLayout());
@@ -22,6 +25,9 @@ public class LevelDialog extends JPanel {
         resizeString();
     }
 
+    /**
+     * Animation to make font bigger up to a certain size.
+     */
     public void resizeString(){
         Timer timer = new Timer(0, e ->{
             label.setFont(new Font("Serif", Font.PLAIN, size));

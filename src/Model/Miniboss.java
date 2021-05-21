@@ -8,15 +8,23 @@ import java.awt.image.BufferedImage;
 
 /**
  * This is the "miniboss" in the fourth level. It can pass walls and doors and follows the main character wherever
- * it is going until it's defeated.
+ * it is going until the miniboss itself is defeated.
  */
 public class Miniboss extends SmartEnemy {
 
-    int hp = 1000;
+    int hp = 2000;
 
     private transient final BufferedImage hpImage;
     private transient final BufferedImage noHpImage;
 
+    /**
+     * Constructor to create a new object. It loads the healthbar image immediately.
+     * @param x x-coordinate of the position
+     * @param y y-coordinate of the position
+     * @param id ID of this object
+     * @param health amount of health
+     * @param speed amount of speed
+     */
     public Miniboss(int x, int y, ID id, int health, int speed) {
         super(x, y, id, health, speed);
 
@@ -24,6 +32,10 @@ public class Miniboss extends SmartEnemy {
         hpImage = loader.loadImage("../Assets/redRec.png");
         noHpImage = loader.loadImage("../Assets/whiteRec.png");
     }
+
+    /**
+     * Update of the position to follow Dante and update of the remaining health in case Dante shot him with the gun.
+     */
     @Override
     public void tick(){
         for(GameObject temp: Handler1.getInstance().objects){
@@ -43,11 +55,18 @@ public class Miniboss extends SmartEnemy {
         y+=velY;
     }
 
-    public int doAction(int action){
+    /**
+     * When the miniboss got hit by the bullet the health decreases.
+     * @param action how much damage the bullet did
+     */
+    public void doAction(int action){
         this.hp -= action;
-        return 0;
     }
 
+    /**
+     * Renders the hitbox of the enemy and draws the healthbar and keeps updated.
+     * @param g graphics where it should be drawn
+     */
     @Override
     public void render(Graphics g) {
         if(Game.showHitbox) {
@@ -63,9 +82,12 @@ public class Miniboss extends SmartEnemy {
             else
                 g.drawImage(noHpImage,(int)Camera.getInstance().getX()+i*40+344,
                             (int)Camera.getInstance().getY()+10, null);
-      g.dispose();
     }
 
+    /**
+     * Returns the bounds of the enemy.
+     * @return rectangle which indicates the bounds
+     */
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x, y, 128, 128);

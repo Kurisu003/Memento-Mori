@@ -1,7 +1,6 @@
 package Model;
 
 import Controller.Handler1;
-import Controller.MouseInput;
 import View.BufferedImageLoader;
 
 import java.awt.*;
@@ -11,30 +10,31 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Menu which the player sees at first in order to decide whether to start a new game, continue the game or to set
+ * the music and sound volume.
+ */
 public class MainMenu extends MouseAdapter {
 
     private final ArrayList<BufferedImage> background;
     private final transient BufferedImage title;
 
-    private transient BufferedImage mainMenu;
     private final transient BufferedImage startNewGame;
     private final transient BufferedImage continueGame;
     private final transient BufferedImage settings;
     private final transient BufferedImage saveIcon;
-
-
 
     private final transient BufferedImage soundBarEmpty;
     private final transient BufferedImage soundBarFull;
     private final transient BufferedImage musicVolume;
     private final transient BufferedImage gameVolume;
 
-    private transient BufferedImage plus;
-    private transient BufferedImage minus;
+    private final transient BufferedImage plus;
+    private final transient BufferedImage minus;
 
-    private transient BufferedImage backspaceLeft;
-    private transient BufferedImage backspaceRight;
-    private transient BufferedImage backspaceUp;
+    private final transient BufferedImage backspaceLeft;
+    private final transient BufferedImage backspaceRight;
+    private final transient BufferedImage backspaceUp;
 
     private static int desiredCameraX;
     private static int desiredCameraY;
@@ -42,15 +42,26 @@ public class MainMenu extends MouseAdapter {
     private int frameCounter;
     private int animationCounter;
 
+    /**
+     * This is the constructor for the MainMenu to set up everything
+     */
     public MainMenu(){
+        //Set the position of where the MainMenu gets displayed
         Camera.getInstance().setX(1088);
         Camera.getInstance().setY(0);
 
+        //Set the values of the Camera to the attribute desiredCamera
         desiredCameraX = (int) Camera.getInstance().getX();
         desiredCameraY = (int) Camera.getInstance().getY();
 
+        //Creates instance of BufferedImageLoader to load images
         BufferedImageLoader loader = new BufferedImageLoader();
         background = new ArrayList<>();
+        //Load all background frames
+        for(int i = 1; i < 9; i++){
+            background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames ("+ i +").png"));
+        }
+        /*
         background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (1).png"));
         background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (2).png"));
         background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (3).png"));
@@ -59,6 +70,7 @@ public class MainMenu extends MouseAdapter {
         background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (6).png"));
         background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (7).png"));
         background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (8).png"));
+        */
         background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/EscMenuBackground.png"));
 
         title = loader.loadImage("../MainMenuAssets/Title.png");
@@ -81,19 +93,28 @@ public class MainMenu extends MouseAdapter {
         backspaceUp = loader.loadImage("../MainMenuAssets/BackspaceUp.png");
     }
 
+    /**
+     * This method is called whenever the mouse is pressed and depending on its position it will do some action or not.
+     * @param e detects the mouse button which is clicked in order to get information about it
+     */
     public void mousePressed(MouseEvent e) {
+        //coordinates where the mouse button was clicked
         int mx = (int) (e.getX() + Camera.getInstance().getX());
         int my = (int) (e.getY() + Camera.getInstance().getY());
 
+        //check if one of the "buttons" is clicked
         if(mx > 1098 && mx < 1598) {
-            if (my > 300 && my < 350) {
+            //"Start new game" camera goes right
+            if (my > 300 && my < 350)
                 desiredCameraX += 1088;
-            } else if (my > 375 && my < 425) {
+            //"Continue game" camera goes left
+            else if (my > 375 && my < 425)
                 desiredCameraX = 0;
-            } else if (my > 450 && my < 500) {
+            //"Settings" camera goes down
+            else if (my > 450 && my < 500)
                 desiredCameraY = 576;
-            }
         }
+        //get back to the main menu
         if((mx - Camera.getInstance().getX() >= 20 && mx - Camera.getInstance().getX() <= 273) &&
             (my - Camera.getInstance().getY() >= 20 && my - Camera.getInstance().getY() <= 70)){
             desiredCameraX = 1088;
@@ -121,70 +142,23 @@ public class MainMenu extends MouseAdapter {
         }
         // NEW GAME
         // To check for click on save icons
-        if(mx >= 2257 && mx <= 2457 && my >= 153 && my <= 353){
-            Game.setState(GameState.Game);
-            Game.getInstance().setSelectedSaveState(1);
-            try {
-                FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
-                out.write(("").getBytes());
-                ObjectOutputStream out1= new ObjectOutputStream(out);
-                for (int i =0;i<Handler1.getInstance().objects.size(); i++) {
-                    out1.writeObject(Handler1.getInstance().objects.get(i));
-                }
-                out1.writeObject(Camera.getInstance());
-                out1.writeObject(GenerateLevel.getInstance());
-                out1.flush();
-            } catch (IOException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
-            EscMenu.setTempCamCoordinates(3264, 1728);
-        }
+        if(mx >= 2257 && mx <= 2457 && my >= 153 && my <= 353)
+            selectAndSetSaveState(1);
 
-        if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353) {
-            Game.setState(GameState.Game);
-            Game.getInstance().setSelectedSaveState(2);
+        if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353)
+            selectAndSetSaveState(2);
 
-            try {
-                FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
-                out.write(("").getBytes());
-                ObjectOutputStream out1 = new ObjectOutputStream(out);
-                for (int i = 0; i < Handler1.getInstance().objects.size(); i++) {
-                    out1.writeObject(Handler1.getInstance().objects.get(i));
-                }
-                out1.flush();
-            } catch (IOException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
-            EscMenu.setTempCamCoordinates(3264, 1728);
-        }
-
-        if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353) {
-            Game.setState(GameState.Game);
-            Game.getInstance().setSelectedSaveState(3);
-
-            try {
-                FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
-                out.write(("").getBytes());
-                ObjectOutputStream out1 = new ObjectOutputStream(out);
-                for (int i = 0; i < Handler1.getInstance().objects.size(); i++) {
-                    out1.writeObject(Handler1.getInstance().objects.get(i));
-                }
-                out1.flush();
-            } catch (IOException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
-            EscMenu.setTempCamCoordinates(3264, 1728);
-        }
+        if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353)
+            selectAndSetSaveState(3);
 
         // CONTINUE GAME
         // To check for click on save icons
         if(mx >= 81 && mx <= 281 && my >= 153 && my <= 353) {
             Game.setState(GameState.Game);
-
             try {
                 FileInputStream out = new FileInputStream("out1.ser");
                 ObjectInputStream out1 = new ObjectInputStream(out);
-                Handler1.getInstance().objects.clear();
+                Handler1.getInstance().objects.clear(); //clearing the linked list
                 try{
                 for (int i = 0; i < 500; i++) {
                     Object d1 = out1.readObject();
@@ -199,7 +173,7 @@ public class MainMenu extends MouseAdapter {
                     } else if (d1 instanceof SmartEnemy) {
                         Handler1.getInstance().objects.add(new SmartEnemy(((SmartEnemy) d1).x,((SmartEnemy)d1).y,ID.Block,((SmartEnemy)d1).getHp(),((SmartEnemy)d1).getSpeed()));
                     } else if (d1 instanceof ShotEnemy) {
-                        System.out.println("Ich bin in Shotenemy");
+                        System.out.println("Ich bin ein Shotenemy");
                         Handler1.getInstance().objects.add(new ShotEnemy(((ShotEnemy) d1).x,((ShotEnemy)d1).y,ID.Block,((ShotEnemy)d1).getHp(),((ShotEnemy)d1).getSpeed()));
                     } else if (d1 instanceof Miniboss) {
                         Handler1.getInstance().objects.add(new Miniboss(((Miniboss) d1).x,((Miniboss)d1).y,ID.Block,((Miniboss)d1).getHp(),((Miniboss)d1).getSpeed()));
@@ -209,15 +183,13 @@ public class MainMenu extends MouseAdapter {
                     }
                 }
                 }catch (EOFException r){
+                    r.printStackTrace();
                 }
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
+            } catch (FileNotFoundException | ClassNotFoundException exception) {
+                exception.printStackTrace();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
-            } catch (ClassNotFoundException classNotFoundException) {
-                classNotFoundException.printStackTrace();
             }
-
         }
 
         if(mx >= 442 && mx <= 642 && my >= 153 && my <= 353)
@@ -227,6 +199,33 @@ public class MainMenu extends MouseAdapter {
 
     }
 
+    /**
+     * This method is called by every click on a saving icon to set on which saving slot the player is currently
+     * playing
+     * @param saveState integer of the actual saving slot
+     */
+    private void selectAndSetSaveState(int saveState){
+        Game.setState(GameState.Game);
+        Game.getInstance().setSelectedSaveState(saveState);
+        try {
+            FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
+            out.write(("").getBytes());
+            ObjectOutputStream out1= new ObjectOutputStream(out);
+            for (int i =0;i<Handler1.getInstance().objects.size(); i++) {
+                out1.writeObject(Handler1.getInstance().objects.get(i));
+            }
+            out1.writeObject(Camera.getInstance());
+            out1.writeObject(GenerateLevel.getInstance());
+            out1.flush();
+        } catch (IOException fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
+        }
+        EscMenu.setTempCamCoordinates(3264, 1728);
+    }
+
+    /**
+     * Set the position of the main menu so it can be seen.
+     */
     public void calculations(){
         if(Game.getState().equals(GameState.MainMenu)) {
             if (desiredCameraX < Camera.getInstance().getX())
@@ -245,6 +244,10 @@ public class MainMenu extends MouseAdapter {
         }
     }
 
+    /**
+     * This method redners every graphic object which is displayed at the main menu
+     * @param g the graphics to be rendered
+     */
     public void render(Graphics g){
 
         Graphics2D g2d=(Graphics2D)g;
@@ -291,6 +294,11 @@ public class MainMenu extends MouseAdapter {
         g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
     }
 
+    /**
+     * Sets the camera coordinates to the desired coordinates.
+     * @param x x-coordinate of the desired camera position
+     * @param y y-coordinate of the desired camera position
+     */
     public static void setCamera(int x, int y){
         desiredCameraX = x;
         desiredCameraY = y;

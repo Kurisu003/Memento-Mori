@@ -1,12 +1,14 @@
 package Model;
 
 import Controller.Handler1;
-import View.BufferedImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * This enemy follows Dante and does damage to him.
+ */
 public class SmartEnemy extends GameObject{
     private transient BufferedImage displayedImage;
     private int directionalOffsetForAnimationX;
@@ -16,19 +18,19 @@ public class SmartEnemy extends GameObject{
     private int hittingAnimationCounter=0;
     private int walkingAnimationCounter=0;
     private boolean isAnimating = false;
-    private ArrayList<BufferedImage> enemySprites;
-
-    public int getHp() {
-        return hp;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
+    private final ArrayList<BufferedImage> enemySprites;
 
     private int hp=200;
     private final int speed;
 
+    /**
+     * Constructor to create an object of this class
+     * @param x x-coordinate of the position
+     * @param y y-coordinate of the position
+     * @param id ID of the object
+     * @param health amount of health
+     * @param speed amount of speed
+     */
     public SmartEnemy(int x, int y, ID id, int health, int speed) {
         super(x, y, id);
         this.hp += health;
@@ -37,6 +39,9 @@ public class SmartEnemy extends GameObject{
         displayedImage = enemySprites.get(0);
     }
 
+    /**
+     * Keeps the enemy updated to react on changes just like damage and changing directions.
+     */
     @Override
     public void tick() {
         directionalOffsetForAnimationX = 0;
@@ -94,13 +99,12 @@ public class SmartEnemy extends GameObject{
 
                     if(Dante.getInstance().getX() > x) {
                         displayedImage = enemySprites.get((hittingAnimationCounter / 5) % 20);
-                        directionalOffsetForAnimationY = 0;
                     }
                     else{
                         displayedImage = enemySprites.get((hittingAnimationCounter / 5) % 20 + 20);
                         directionalOffsetForAnimationX = -33;
-                        directionalOffsetForAnimationY = 0;
                     }
+                    directionalOffsetForAnimationY = 0;
                     // isAnimating is needed so that animation finishes playing
                     // if player steps out of hitbox
                     isAnimating = true;
@@ -140,12 +144,19 @@ public class SmartEnemy extends GameObject{
         }
     }
 
-    // to do damage to enemy
-    public int doAction(int action){
+    /**
+     * Indicates when enemy gets hit by a bullet.
+     * @param action how much damage is done
+     */
+    @Override
+    public void doAction(int action){
         this.hp -= action;
-        return 0;
     }
 
+    /**
+     * Renders the graphics displayed for this enemy.
+     * @param g graphics where the drawing should succeed
+     */
     @Override
     public void render(Graphics g) {
 //        g.setColor(Color.red);
@@ -158,15 +169,37 @@ public class SmartEnemy extends GameObject{
         }
 
         g.drawImage(displayedImage, x + directionalOffsetForAnimationX, y - 32 + directionalOffsetForAnimationY, null);
-
-        g.dispose();
     }
 
+    /**
+     * Getter of the health.
+     * @return amount of health
+     */
+    public int getHp() {
+        return hp;
+    }
+
+    /**
+     * Getter of the speed.
+     * @return amount of speed
+     */
+    public int getSpeed() {
+        return speed;
+    }
+
+    /**
+     * Returns normal bounds of the enemy
+     * @return rectangle which indicates the bounds
+     */
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y - 5,32,37);
     }
 
+    /**
+     * Returns bigger bounds so the enemy does not stuck in walls.
+     * @return rectangle which indicates bigger bounds
+     */
     public Rectangle getBoundsBigger(){
         return new Rectangle(x,y - 10,30,50);
     }

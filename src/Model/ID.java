@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Enum to identify the different objects in the game.
+ */
 public enum ID {
 
     Dante(),

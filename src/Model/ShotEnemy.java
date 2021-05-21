@@ -8,6 +8,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * This enemy is able to shoot and moves to the direction of Dante
+ */
 public class ShotEnemy extends GameObject{
 
     transient BufferedImage image;
@@ -19,20 +22,20 @@ public class ShotEnemy extends GameObject{
     Random r2= new Random();
     int choose=0;
 
-    transient BufferedImage displayedImage;
-    transient ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
-
-    public int getHp() {
-        return hp;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
     private int hp = 200;
     private final int speed;
 
+    transient BufferedImage displayedImage;
+    transient ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
+
+    /**
+     * Constructor to create an instance.
+     * @param x x-coordinate of the position
+     * @param y y-coordinate of the position
+     * @param id ID of this object
+     * @param health amount of health
+     * @param speed amount of speed
+     */
     public ShotEnemy(int x, int y, ID id, int health, int speed) {
         super(x, y, id);
         this.hp += health;
@@ -46,6 +49,10 @@ public class ShotEnemy extends GameObject{
         //this.image=image;
     }
 
+    /**
+     * Updates in order to check changes and to react on them. For example if damage is done to the enemy to update the
+     * remaining health or to display it if it's dead.
+     */
     @Override
     public void tick() {
         x+=velX;
@@ -101,12 +108,18 @@ public class ShotEnemy extends GameObject{
         }
     }
 
-    // to do damage to enemy
-    public int doAction(int action){
+    /**
+     * Detects damage done to the enemy
+     * @param action how much damage is done
+     */
+    public void doAction(int action){
         this.hp -= action;
-        return 0;
     }
 
+    /**
+     * Renders the image and graphics of the enemy
+     * @param g graphics where the drawing should succeed.
+     */
     @Override
     public void render(Graphics g) {
         g.setColor(Color.green);
@@ -117,15 +130,37 @@ public class ShotEnemy extends GameObject{
             g2.setColor(Color.red);
             g2.draw(getBounds());
         }
-
-        g.dispose();
     }
 
+    /**
+     * Getter of the enemy's health.
+     * @return amount of health
+     */
+    public int getHp() {
+        return hp;
+    }
+
+    /**
+     * Getter of the enemy's speed.
+     * @return amount of speed
+     */
+    public int getSpeed() {
+        return speed;
+    }
+
+    /**
+     * Returns the normal bounds of the enemy.
+     * @return rectangle of the bounds
+     */
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x-8,y-8,40,40);
     }
 
+    /**
+     * Returns the bigger bounds so the enemy does not stuck in the walls.
+     * @return bigger bounds as a rectangle
+     */
     public Rectangle getBoundsBigger() {
         return new Rectangle(x-16,y-16,64,64);
     }

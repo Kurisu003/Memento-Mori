@@ -1,11 +1,8 @@
 package Model;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.concurrent.ExecutionException;
+
 
 /**
  * In this class the little dialogues within the game are displayed.
@@ -21,24 +18,34 @@ public class InGameDialog extends GameObject implements Serializable {
     private static boolean[] pressedButtons = {false, false, false, false};
     private static int boolCounter;
 
-
-
+    /**
+     * Constructor for the dialog
+     * @param x x-coordinate of the position
+     * @param y y-coordinate of the position
+     * @param id ID of this object
+     * @param levelName the name of the level to be displayed
+     */
     public InGameDialog(int x, int y, ID id, String levelName) {
         super(x, y,id);
         this.levelName = levelName;
     }
 
+    /**
+     * Checks for updates and does changes if necessary.
+     */
     @Override
     public void tick() {
 
     }
 
+    /**
+     * Renders the dialogues. For the Limbo-Level (="Tutorial") another graphic is drawn.
+     * @param g graphics where the drawing should succeed.
+     */
     @Override
     public void render(Graphics g) {
-
         //Only for the first level (Limbo)
-        //TODO change "Heresy" to Limbo
-        if(this.levelName.equals("Heresy"))
+        if(this.levelName.equals("Limbo"))
             tutorialLimbo(g);
 
         else {
@@ -57,6 +64,10 @@ public class InGameDialog extends GameObject implements Serializable {
          */
     }
 
+    /**
+     * Graphics to be drawn for the tutorial.
+     * @param g graphics where the dialog should be drawn
+     */
     public void tutorialLimbo(Graphics g){
         //Tutorial rectangle
         Graphics2D g2 = (Graphics2D) g;
@@ -76,6 +87,10 @@ public class InGameDialog extends GameObject implements Serializable {
 
     }
 
+    /**
+     * Get the bounds of the dialog.
+     * @return the size of the dialog as a rectangle
+     */
     @Override
     public Rectangle getBounds() {
         return new Rectangle(5+3*64*17, 520+3*64*9);
@@ -84,10 +99,6 @@ public class InGameDialog extends GameObject implements Serializable {
     /*
     Getter + setter
      */
-
-    public static boolean[] getPressedButtons() {
-        return pressedButtons;
-    }
 
 //    public static void setPressedButtons(int index) {
 //        System.out.println(index + " set true");
