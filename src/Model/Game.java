@@ -24,6 +24,12 @@ public class Game extends Canvas implements Runnable {
     private final ArrayList<BufferedImage> enemySprites = new ArrayList<>();
     private int selectedSaveState;
 
+    private ArrayList<BufferedImage> coinSprites;
+    public ArrayList<BufferedImage> getCoinSprites() {
+        return coinSprites;
+    }
+
+
     int updates = 0;
 
     public static GameState getState() {
@@ -85,6 +91,9 @@ public class Game extends Canvas implements Runnable {
         this.addMouseListener(escMenu);
         folder = Levels.Heresy.name();
         loader = new BufferedImageLoader();
+        coinSprites = new ArrayList<>();
+        for(int i = 1; i <= 11; i++)
+            coinSprites.add(loader.loadImage("../Assets/Coin/Coins (" + i + ").png"));
 
         this.createBufferStrategy(3);
         BufferStrategy bs = this.getBufferStrategy();
