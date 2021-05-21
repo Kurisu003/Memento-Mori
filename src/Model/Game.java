@@ -71,7 +71,7 @@ public class Game extends Canvas implements Runnable {
         for(int i = 1; i <= 11; i++)
             coinSprites.add(loader.loadImage("../Assets/Coin/Coins (" + i + ").png"));
 
-        this.createBufferStrategy(3);
+        this.createBufferStrategy(2);
         BufferStrategy bs = this.getBufferStrategy();
         g = bs.getDrawGraphics();
 
