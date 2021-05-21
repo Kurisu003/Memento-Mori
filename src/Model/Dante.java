@@ -27,6 +27,11 @@ public class Dante extends GameObject {
     private transient final BufferedImage minibossHealth;
 
     private Levels currentLevel = Levels.Heresy;
+
+    public static void setInstance(GameObject instance) {
+        Dante.instance = instance;
+    }
+
     private static GameObject instance;
 
     private int roomXCoordinate;

@@ -144,14 +144,46 @@ public class MainMenu extends MouseAdapter {
         }
         // NEW GAME
         // To check for click on save icons
-        if(mx >= 2257 && mx <= 2457 && my >= 153 && my <= 353)
+        if(mx >= 2257 && mx <= 2457 && my >= 153 && my <= 353) {
+
+            Dante.setInstance(null);
+            Game.setFolder();
+            Dante.getInstance();
+            Game.getInstance().loadsprites(5);
+            Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
+
+            Game.setState(GameState.Game);
+
+
             selectAndSetSaveState(1);
+        }
 
-        if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353)
+        if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353){
+
+            Dante.setInstance(null);
+            Game.setFolder();
+            Dante.getInstance();
+            Game.getInstance().loadsprites(5);
+            Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
+
+            Game.setState(GameState.Game);
+
             selectAndSetSaveState(2);
+        }
 
-        if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353)
+        if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353) {
+
+            Dante.setInstance(null);
+            Game.setFolder();
+            Dante.getInstance();
+            Game.getInstance().loadsprites(5);
+            Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
+
+            Game.setState(GameState.Game);
+
             selectAndSetSaveState(3);
+        }
+
 
         // CONTINUE GAME
         // To check for click on save icons

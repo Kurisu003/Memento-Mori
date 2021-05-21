@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.logging.Handler;
 
 /**
  * This class creates the menu which is displayed when pressed esc.
@@ -117,6 +118,8 @@ public class EscMenu extends MouseAdapter {
                 } catch (IOException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
                 }
+
+                Handler1.getInstance().objects.clear();
 
                 MainMenu.setCamera(1088, 0);
             }

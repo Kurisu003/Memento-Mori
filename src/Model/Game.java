@@ -48,7 +48,11 @@ public class Game extends Canvas implements Runnable {
     int updates = 0;
 
     private static GameState state = GameState.MainMenu;
-    
+
+    public static void setFolder() {
+        Game.folder = Levels.Heresy.name();
+    }
+
     private static String folder;
 
     private MainMenu mainMenu;
@@ -87,9 +91,9 @@ public class Game extends Canvas implements Runnable {
         //how many rooms should be generated per level
         loadsprites(5);
 
-        Dante.getInstance();
+        //Dante.getInstance();
 //        Handler1.getInstance().addObject(new Dante(3 * 64 * 17 + 8 * 64, 3 * 64 * 9 + 4 * 64, ID.Dante));
-        Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog, folder));
+        //Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog, folder));
 
         // Adds hitting animation right
         for(int i = 1; i <= 20; i++)
@@ -176,7 +180,7 @@ public class Game extends Canvas implements Runnable {
      * Calls the method to load the sprites for the level.
      * @param amountRoomsGenerated how many rooms should be generated
      */
-    private static void loadsprites(int amountRoomsGenerated){
+    public  void loadsprites(int amountRoomsGenerated){
 
         wallSprites.clear();
 
