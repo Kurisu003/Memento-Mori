@@ -86,6 +86,7 @@ public class Enemy extends GameObject {
         }
 
         if(hp <= 0) {
+
             Handler1.getInstance().removeObject(this);
         }
     }

@@ -101,12 +101,12 @@ public class ShotEnemy extends GameObject{
                     Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet, temp.getX() +(r.nextInt( 11+11) -11), temp.getY()+(r.nextInt(11 +11) -11), 30, 1, image));
                 }
             }
+        }
 
-            if(hp <= 0) {
-                System.out.println("test in gegner");
-//                Handler1.getInstance().addObject(new Coin(x, y));
-                Handler1.getInstance().removeObject(this);
-            }
+        if(hp <= 0) {
+            System.out.println("test in gegner");
+            Handler1.getInstance().addObject(new Coin(x, y));
+            Handler1.getInstance().removeObject(this);
         }
     }
 
