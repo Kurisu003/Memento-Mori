@@ -3,6 +3,8 @@ package Model;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import javax.sound.sampled.*;
 
@@ -21,6 +23,8 @@ public class Music implements LineListener, Runnable {
     private static boolean isMenu = false;
 
     private boolean playCompleted = false;
+
+    private static Executor threadPool = Executors.newCachedThreadPool();
 
     /**
      * This is the public constructor of Music which must be called when a Music object is created
@@ -90,7 +94,7 @@ public class Music implements LineListener, Runnable {
             FloatControl gainControl = (FloatControl)audioClip.getControl(FloatControl.Type.MASTER_GAIN);
 
             while (!playCompleted) {
-                if(this.id == ID.ShootingSound){
+                if(this.id == ID.ShootingSound || this.id == ID.Coin){
                     audioClip.start();
                     gainControl.setValue(soundVolume);
                 }
@@ -103,10 +107,9 @@ public class Music implements LineListener, Runnable {
                 if(isShop){
                     if(this.id != ID.Shop_music){
                         audioClip.stop();
-//                        System.out.println("KUAN SHOP: "+this.id);
                     }
                     else
-                        audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+                        audioClip.start();
                 }
                 else if(!isMenu) {
                     if (this.id == ID.Menu_music)
@@ -117,8 +120,10 @@ public class Music implements LineListener, Runnable {
                 else {
                     if(this.id == ID.Shop_music)
                         audioClip.stop();
-                    else if(this.id == ID.Menu_music)
-                            audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+                    else if(this.id == ID.Menu_music){
+                        audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+                    }
+
                 }
                 if(this.id == ID.BG_music || this.id == ID.Shop_music || this.id == ID.Menu_music){
                     gainControl.setValue(musicVolume);
@@ -151,7 +156,7 @@ public class Music implements LineListener, Runnable {
     @Override
     public void update(LineEvent event) {
         LineEvent.Type type = event.getType();
-        if(this.id == ID.ShootingSound && type == LineEvent.Type.STOP)
+        if((this.id == ID.ShootingSound || this.id == ID.Shop_music) && type == LineEvent.Type.STOP)
             this.playCompleted = true;
     }
 
@@ -209,10 +214,18 @@ public class Music implements LineListener, Runnable {
     }
 
     /**
-     * Setter for the isMenu value to ckeck wheter it is the main menu or the esc menu
+     * Setter for the isMenu value to check whether it is the main menu or the esc menu
      * @param isMenu true or false
      */
     public static void setIsMenu(boolean isMenu) {
         Music.isMenu = isMenu;
+    }
+
+    /**
+     * Returns the Executor to execute the run in Music
+     * @return the threadPool to generate Threads
+     */
+    public static Executor getThreadPool() {
+        return threadPool;
     }
 }

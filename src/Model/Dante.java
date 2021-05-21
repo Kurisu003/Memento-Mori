@@ -406,7 +406,7 @@ public class Dante extends GameObject {
         if(shotY != y || shotX != x){
             Handler1.getInstance().addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, shotX, shotY,
                     range, damage, bulletImage));
-            new Thread(new Music("res/Sounds/Guns/M4/GunSound1.wav", ID.ShootingSound)).start();
+            Music.getThreadPool().execute(new Music("res/Sounds/Guns/M4/GunSound1.wav", ID.ShootingSound));
         }
     }
 
@@ -461,6 +461,7 @@ public class Dante extends GameObject {
             if(temp.getId().equals(ID.Miniboss) && getBounds().intersects(temp.getBounds()))
                 doAction(1);
             if(temp.getId().equals(ID.Coin) && getBounds().intersects(temp.getBounds())){
+                Music.getThreadPool().execute(new Music("res/Music/CoinSound.wav", ID.Coin));
                 coins++;
                 shouldRemoveCoin = true;
                 tempCoin = iterator.nextIndex() - 1;

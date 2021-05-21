@@ -7,6 +7,8 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 
 import Controller.*;
@@ -52,6 +54,8 @@ public class Game extends Canvas implements Runnable {
     private MainMenu mainMenu;
     private EscMenu escMenu;
 
+
+
     /**
      * This is the private Constructor of the Game class so only one instance can be created.
      */
@@ -77,7 +81,7 @@ public class Game extends Canvas implements Runnable {
         }
         g = bs.getDrawGraphics();
 
-        new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
+        Music.getThreadPool().execute(new Music("res/music/bg_music.wav", ID.BG_music));
         render();
 
         //how many rooms should be generated per level
@@ -236,14 +240,15 @@ public class Game extends Canvas implements Runnable {
                 if(state.equals(GameState.Game) || state.equals(GameState.MainMenu) || state.equals(GameState.GameOver)) {
                     tick();
                 }
-                if(state.equals(GameState.MainMenu))
-                    mainMenu.calculations();
-                updates++;
-                delta--;
-                if(state.equals(GameState.EscMenu) || state.equals(GameState.MainMenu))
+                if(state.equals(GameState.MainMenu)) {
                     Music.setIsMenu(true);
+                    mainMenu.calculations();
+                }
                 else
                     Music.setIsMenu(false);
+                updates++;
+                delta--;
+
 
 //                long stopTime = System.nanoTime();
 //                if((stopTime - startTime) / 10000 > 4000)
@@ -420,4 +425,5 @@ public class Game extends Canvas implements Runnable {
     public ArrayList<BufferedImage> getEnemySprites(){
         return enemySprites;
     }
+
 }

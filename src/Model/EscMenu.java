@@ -65,8 +65,6 @@ public class EscMenu extends MouseAdapter {
         playerSpeedIcon = loader.loadImage("../Assets/PlayerSpeed.png");
         bulletSpeedIcon = loader.loadImage("../Assets/BulletSpeed.png");
         bulletRangeIcon = loader.loadImage("../Assets/BulletRange.png");
-
-        new Thread(new Music("res/Music/HeavenlySound.wav", ID.Shop_music)).start();
     }
 
     /**
@@ -134,13 +132,12 @@ public class EscMenu extends MouseAdapter {
             if (mx >= 1118 && mx <= 1618 && my >= -126 && my <= -76) {
                 Camera.getInstance().setX(Camera.getInstance().getX() + 1088);
                 Music.setIsShop(true);
-                Music.setIsMenu(false);
+                Music.getThreadPool().execute(new Music("res/Music/HeavenlySound.wav", ID.Shop_music));
             }
 
             // To get back to esc menu from shop
             if (mx >= 2168 && mx <= 2411 && my >= -566 && my <= -516){
                 Music.setIsShop(false);
-                Music.setIsMenu(true);
                 Camera.getInstance().setX(Camera.getInstance().getX() - 1088);
             }
 

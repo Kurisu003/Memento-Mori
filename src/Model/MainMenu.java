@@ -92,7 +92,7 @@ public class MainMenu extends MouseAdapter {
         backspaceRight = loader.loadImage("../MainMenuAssets/BackspaceRight.png");
         backspaceUp = loader.loadImage("../MainMenuAssets/BackspaceUp.png");
 
-        new Thread(new Music("res/music/RiseUpDeadMan.wav", ID.Menu_music)).start();
+        Music.getThreadPool().execute(new Music("res/music/RiseUpDeadMan.wav", ID.Menu_music));
     }
 
     /**
@@ -248,7 +248,7 @@ public class MainMenu extends MouseAdapter {
     }
 
     /**
-     * This method redners every graphic object which is displayed at the main menu
+     * This method renders every graphic object which is displayed at the main menu
      * @param g the graphics to be rendered
      */
     public void render(Graphics g){
