@@ -6,9 +6,8 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.ListIterator;
-import java.util.Random;
+
 
 import Controller.*;
 
@@ -27,8 +26,6 @@ public class Game extends Canvas implements Runnable {
      */
     private static Game instance = null;
 
-    private static Thread gameMusic;
-
     private boolean isRunning = false;
     public static boolean showHitbox = false;
 
@@ -41,7 +38,7 @@ public class Game extends Canvas implements Runnable {
 
     private int selectedSaveState;
 
-    private ArrayList<BufferedImage> coinSprites;
+    private final ArrayList<BufferedImage> coinSprites;
     public ArrayList<BufferedImage> getCoinSprites() {
         return coinSprites;
     }
@@ -80,8 +77,7 @@ public class Game extends Canvas implements Runnable {
         }
         g = bs.getDrawGraphics();
 
-        gameMusic = new Thread(new Music("res/music/bg_music.wav", ID.BG_music));
-        gameMusic.start();
+        new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
         render();
 
         //how many rooms should be generated per level
@@ -106,6 +102,7 @@ public class Game extends Canvas implements Runnable {
 
         enemySprites.add(loader.loadImage("../Enemies/DumbEnemy/SpriteLeft.png"));
         enemySprites.add(loader.loadImage("../Enemies/DumbEnemy/SpriteRight.png"));
+
     }
 
     /**
@@ -418,9 +415,5 @@ public class Game extends Canvas implements Runnable {
      */
     public ArrayList<BufferedImage> getEnemySprites(){
         return enemySprites;
-    }
-
-    public static Thread getGameMusic() {
-        return gameMusic;
     }
 }

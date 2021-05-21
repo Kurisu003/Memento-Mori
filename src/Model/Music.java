@@ -2,6 +2,7 @@ package Model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.sound.sampled.*;
 
@@ -15,6 +16,7 @@ public class Music implements LineListener, Runnable {
     private static float soundVolume = -27.489f;
     private static int simpleMusicVolume = 4;
     private static int simpleGameVolume = 4;
+    private static boolean isShop = false;
 
     private boolean playCompleted = false;
 
@@ -84,15 +86,28 @@ public class Music implements LineListener, Runnable {
 
             audioClip.open(audioStream);
             FloatControl gainControl = (FloatControl)audioClip.getControl(FloatControl.Type.MASTER_GAIN);
-            
-            audioClip.start();
 
             while (!playCompleted) {
-                if(this.id == ID.ShootingSound)
+                if(this.id == ID.ShootingSound){
+                    audioClip.start();
                     gainControl.setValue(soundVolume);
-                else if(this.id == ID.BG_music){
+                }
+                else if(isShop){
+                    if(this.id == ID.BG_music)
+                        audioClip.stop();
+                    else if(this.id == ID.Shop_music)
+                        audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+                }
+                else {
+                    if(this.id == ID.Shop_music){
+                        audioClip.stop();
+                    }
+                    else if(this.id == ID.BG_music) {
+                        audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+                    }
+                }
+                if(this.id == ID.BG_music || this.id == ID.Shop_music){
                     gainControl.setValue(musicVolume);
-                    audioClip.loop(Clip.LOOP_CONTINUOUSLY);
                 }
                 try {
                     Thread.sleep(1);
@@ -131,6 +146,7 @@ public class Music implements LineListener, Runnable {
      */
     @Override
     public void run() {
+        System.out.println("IS RUNNING" + this.id);
         this.playMusic();
     }
 
@@ -168,5 +184,9 @@ public class Music implements LineListener, Runnable {
      */
     public static float getSoundVolume() {
         return soundVolume;
+    }
+
+    public static void setIsShop(boolean isShop) {
+        Music.isShop = isShop;
     }
 }
