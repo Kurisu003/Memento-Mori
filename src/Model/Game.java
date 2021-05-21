@@ -71,8 +71,11 @@ public class Game extends Canvas implements Runnable {
         for(int i = 1; i <= 11; i++)
             coinSprites.add(loader.loadImage("../Assets/Coin/Coins (" + i + ").png"));
 
-        this.createBufferStrategy(2);
         BufferStrategy bs = this.getBufferStrategy();
+        if(bs==null){
+            this.createBufferStrategy(3);
+            return;
+        }
         g = bs.getDrawGraphics();
 
         new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
@@ -355,7 +358,9 @@ public class Game extends Canvas implements Runnable {
         } else if(state == GameState.EscMenu){
             escMenu.render(g);
         }
+        g.dispose();
         bs.show();
+
     }
 
     /**
