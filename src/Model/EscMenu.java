@@ -145,6 +145,8 @@ public class EscMenu extends MouseAdapter {
             }
 
             // For upgrading
+            // TODO Adding of upgrading options
+
 
         }
 

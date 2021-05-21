@@ -37,9 +37,7 @@ public class Coin extends GameObject{
             g.setColor(Color.ORANGE);
             g.drawOval(x,y,32,32);
         }
-
-
-        g.drawImage(displayImage, x + 5, y + 5, null);
+        g.drawImage(displayImage, x + 3, y + 3, null);
     }
 
     @Override
