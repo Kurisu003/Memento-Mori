@@ -91,6 +91,8 @@ public class MainMenu extends MouseAdapter {
         backspaceLeft = loader.loadImage("../MainMenuAssets/BackspaceLeft.png");
         backspaceRight = loader.loadImage("../MainMenuAssets/BackspaceRight.png");
         backspaceUp = loader.loadImage("../MainMenuAssets/BackspaceUp.png");
+
+        new Thread(new Music("res/music/RiseUpDeadMan.wav", ID.Menu_music)).start();
     }
 
     /**
@@ -206,6 +208,7 @@ public class MainMenu extends MouseAdapter {
      */
     private void selectAndSetSaveState(int saveState){
         Game.setState(GameState.Game);
+        Music.setIsMenu(false);
         Game.getInstance().setSelectedSaveState(saveState);
         try {
             FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");

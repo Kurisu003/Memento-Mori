@@ -127,11 +127,13 @@ public class EscMenu extends MouseAdapter {
             if (mx >= 1118 && mx <= 1618 && my >= -126 && my <= -76) {
                 Camera.getInstance().setX(Camera.getInstance().getX() + 1088);
                 Music.setIsShop(true);
+                Music.setIsMenu(false);
             }
 
             // To get back to esc menu from shop
             if (mx >= 2168 && mx <= 2411 && my >= -566 && my <= -516){
                 Music.setIsShop(false);
+                Music.setIsMenu(true);
                 Camera.getInstance().setX(Camera.getInstance().getX() - 1088);
             }
 

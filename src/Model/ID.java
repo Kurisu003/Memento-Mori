@@ -15,6 +15,7 @@ public enum ID {
     Door(),
     BG_music(),
     Shop_music(),
+    Menu_music(),
     ShootingSound(),
     Miniboss(),
     Coin,

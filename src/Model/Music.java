@@ -16,7 +16,9 @@ public class Music implements LineListener, Runnable {
     private static float soundVolume = -27.489f;
     private static int simpleMusicVolume = 4;
     private static int simpleGameVolume = 4;
+
     private static boolean isShop = false;
+    private static boolean isMenu = false;
 
     private boolean playCompleted = false;
 
@@ -92,21 +94,33 @@ public class Music implements LineListener, Runnable {
                     audioClip.start();
                     gainControl.setValue(soundVolume);
                 }
-                else if(isShop){
-                    if(this.id == ID.BG_music)
+                if(isMenu && !isShop){
+                    if(this.id != ID.Menu_music)
                         audioClip.stop();
-                    else if(this.id == ID.Shop_music)
+                    else
+                        audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+                }
+                if(isShop){
+                    if(this.id != ID.Shop_music){
+                        audioClip.stop();
+                        System.out.println("KUAN SHOP: "+this.id);
+                    }
+                    else
+                        audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+                }
+                else if(!isMenu) {
+                    if (this.id == ID.Menu_music)
+                        audioClip.stop();
+                    else if (this.id == ID.BG_music)
                         audioClip.loop(Clip.LOOP_CONTINUOUSLY);
                 }
                 else {
-                    if(this.id == ID.Shop_music){
+                    if(this.id == ID.Shop_music)
                         audioClip.stop();
-                    }
-                    else if(this.id == ID.BG_music) {
-                        audioClip.loop(Clip.LOOP_CONTINUOUSLY);
-                    }
+                    else if(this.id == ID.Menu_music)
+                            audioClip.loop(Clip.LOOP_CONTINUOUSLY);
                 }
-                if(this.id == ID.BG_music || this.id == ID.Shop_music){
+                if(this.id == ID.BG_music || this.id == ID.Shop_music || this.id == ID.Menu_music){
                     gainControl.setValue(musicVolume);
                 }
                 try {
@@ -186,7 +200,19 @@ public class Music implements LineListener, Runnable {
         return soundVolume;
     }
 
+    /**
+     * Setter for the isShop value to check if the current room is the shop
+     * @param isShop true or false
+     */
     public static void setIsShop(boolean isShop) {
         Music.isShop = isShop;
+    }
+
+    /**
+     * Setter for the isMenu value to ckeck wheter it is the main menu or the esc menu
+     * @param isMenu true or false
+     */
+    public static void setIsMenu(boolean isMenu) {
+        Music.isMenu = isMenu;
     }
 }

@@ -26,8 +26,6 @@ public class Game extends Canvas implements Runnable {
      */
     private static Game instance = null;
 
-    private static Thread gameMusic;
-
     private boolean isRunning = false;
     public static boolean showHitbox = false;
 
@@ -79,8 +77,7 @@ public class Game extends Canvas implements Runnable {
         }
         g = bs.getDrawGraphics();
 
-        gameMusic = new Thread(new Music("res/music/bg_music.wav", ID.BG_music));
-        gameMusic.start();
+        new Thread(new Music("res/music/bg_music.wav", ID.BG_music)).start();
         render();
 
         //how many rooms should be generated per level
@@ -242,6 +239,10 @@ public class Game extends Canvas implements Runnable {
                     mainMenu.calculations();
                 updates++;
                 delta--;
+                if(state.equals(GameState.EscMenu) || state.equals(GameState.MainMenu))
+                    Music.setIsMenu(true);
+                else
+                    Music.setIsMenu(false);
 
                 long stopTime = System.nanoTime();
                 if((stopTime - startTime) / 10000 > 4000)
@@ -297,11 +298,10 @@ public class Game extends Canvas implements Runnable {
          */
         //FIXME concurrentmodificationexception
         boolean enemiesLeft = false;
-        for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
-            GameObject temp = iterator.next();
-            if(temp.getId().equals(ID.Enemy) || temp.getId().equals(ID.SmartEnemy) || temp.getId().equals(ID.ShotEnemy)
-                || temp.getId().equals(ID.Miniboss)){
+        for (GameObject temp : Handler1.getInstance().objects) {
+            if (temp.getId().equals(ID.Enemy) || temp.getId().equals(ID.SmartEnemy) || temp.getId().equals(ID.ShotEnemy)) {
                 enemiesLeft = true;
+                break;
             }
         }
         if(enemiesLeft)
@@ -345,7 +345,7 @@ public class Game extends Canvas implements Runnable {
 
         if(state.equals(GameState.Game) || state.equals(GameState.GameOver)) {
             g2d.translate(-Camera.getInstance().getX(), -Camera.getInstance().getY());
-
+            Music.setIsMenu(false);
             // Repeats sprites over entire level
             for (int i = 1; i <= 6; i++) {
                 for (int j = 1; j <= 6; j++) {
@@ -418,9 +418,5 @@ public class Game extends Canvas implements Runnable {
      */
     public ArrayList<BufferedImage> getEnemySprites(){
         return enemySprites;
-    }
-
-    public static Thread getGameMusic() {
-        return gameMusic;
     }
 }
