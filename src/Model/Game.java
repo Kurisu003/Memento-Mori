@@ -138,6 +138,13 @@ public class Game extends Canvas implements Runnable {
         }
         return instance;
     }
+    public static Game getInstance(int test){
+        if(instance == null){
+            System.out.println(test);
+            instance = new Game();
+        }
+        return instance;
+    }
 
     /**
      * To set the game to its state (in-game: Game or menu: EscMenu) in order to display the right window

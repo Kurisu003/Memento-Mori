@@ -27,33 +27,11 @@ public class Dante extends GameObject {
 
     private transient BufferedImage bulletImage;
 
-    public Levels getCurrentLevel() {
-        return currentLevel;
-    }
-
-    public static void setCurrentLevel(Levels currentLevel) {
-        currentLevel = currentLevel;
-    }
-
     public static Levels currentLevel = Levels.Heresy;
-
-    public static void setInstance(GameObject instance) {
-        Dante.instance = instance;
-    }
-
     private static GameObject instance;
 
     private int roomXCoordinate;
     private int roomYCoordinate;
-
-    public  int[][] getWherePlayerHasBeen() {
-        return wherePlayerHasBeen;
-    }
-
-    public static void setWherePlayerHasBeen(int[][] wherePlayerHasBeen) {
-        wherePlayerHasBeen = wherePlayerHasBeen;
-    }
-
     public static int [][] wherePlayerHasBeen = new int[7][7];
 
     private int timeSinceLastShot = 20;
@@ -644,22 +622,23 @@ public class Dante extends GameObject {
         return new Rectangle(x + 7,y,50,64);
     }
 
+    public static void setWherePlayerHasBeen(int[][] wherePlayerHasBeen) {
+        wherePlayerHasBeen = wherePlayerHasBeen;
+    }
+    public  int[][] getWherePlayerHasBeen() {
+        return wherePlayerHasBeen;
+    }
+    public static void setInstance(GameObject instance) {
+        Dante.instance = instance;
+    }
+    public static void setCurrentLevel(Levels currentLevel) {
+        currentLevel = currentLevel;
+    }
+    public Levels getCurrentLevel() {
+        return currentLevel;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void setDamage(int damage){
+        this.damage = damage;
+    }
 }
