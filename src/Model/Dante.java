@@ -387,8 +387,10 @@ public class Dante extends GameObject {
     private boolean bossLeft(){
         boolean bossLeft = false;
         for(GameObject temp : Handler1.getInstance().objects){
-            if(temp.getId().equals(ID.Miniboss))
+            if (temp.getId().equals(ID.Miniboss)) {
                 bossLeft = true;
+                break;
+            }
         }
         return bossLeft;
     }
