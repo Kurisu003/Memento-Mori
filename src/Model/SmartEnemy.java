@@ -38,6 +38,7 @@ public class SmartEnemy extends GameObject{
         this.speed = speed;
         enemySprites = Game.getInstance().getEnemySprites();
         displayedImage = enemySprites.get(0);
+        // FIXME Index out of bounds exception (index 0 out of bounds for length 0)
     }
 
     /**

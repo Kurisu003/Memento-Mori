@@ -144,7 +144,7 @@ public class EscMenu extends MouseAdapter {
                 Music.setIsShop(false);
                 Camera.getInstance().setX(Camera.getInstance().getX() - 1088);
             }
-            
+
             // For upgrading
             if (mx >= 2380 && mx <= 2430 && my >= -510 && my <= -460){
                 if(((Dante)Dante.getInstance()).getSpeed() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 5) {
