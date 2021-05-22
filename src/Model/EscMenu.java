@@ -224,6 +224,7 @@ public class EscMenu extends MouseAdapter {
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         g.drawString("x"+ ((Dante) Dante.getInstance()).getCoins(), 2528, -528);
 
+
         // To draw icons in shop
         g.drawImage(playerSpeedIcon, 2186, -500, null);
         g.drawImage(bulletSpeedIcon, 2186, -350, null);
