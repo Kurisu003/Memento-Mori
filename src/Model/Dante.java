@@ -44,8 +44,8 @@ public class Dante extends GameObject {
     private int fireSpeed = 0;
     private int range = 0;
     private int speed = 0;
-    private static int health = 5;
-    private static int armor = 2;
+    private int health = 5;
+    private int armor = 2;
     private int coins = 100;
 
     private int frameCount = 0;
@@ -336,12 +336,12 @@ public class Dante extends GameObject {
         this.speed = speed;
     }
 
-    public static void setHealth(int health) {
-        Dante.health = health;
+    public void setHealth(int health) {
+        this.health = health;
     }
 
-    public static int getHealth() {
-        return health;
+    public int getHealth() {
+        return this.health;
     }
 
 

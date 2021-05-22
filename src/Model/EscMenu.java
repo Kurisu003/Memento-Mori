@@ -34,6 +34,7 @@ public class EscMenu extends MouseAdapter {
     private final BufferedImage playerSpeedIcon;
     private final BufferedImage bulletSpeedIcon;
     private final BufferedImage bulletRangeIcon;
+    private final BufferedImage heartIcon;
 
     private static double tempCamX;
     private static double tempCamY;
@@ -54,7 +55,6 @@ public class EscMenu extends MouseAdapter {
         upgradeBarEmpty = loader.loadImage("../MainMenuAssets/ShopUpgradeBarEmpty.png");
         upgradeBarFull = loader.loadImage("../MainMenuAssets/ShopUpgradeBarFull.png");
 
-
         saveAndExit = loader.loadImage("../MainMenuAssets/SaveAndExit.png");
         resumeGame = loader.loadImage("../MainMenuAssets/ResumeGame.png");
         shopButton = loader.loadImage("../MainMenuAssets/Shop.png");
@@ -66,6 +66,7 @@ public class EscMenu extends MouseAdapter {
         playerSpeedIcon = loader.loadImage("../Assets/PlayerSpeed.png");
         bulletSpeedIcon = loader.loadImage("../Assets/BulletSpeed.png");
         bulletRangeIcon = loader.loadImage("../Assets/BulletRange.png");
+        heartIcon = loader.loadImage("../Assets/BigHeart.png");
     }
 
     /**
@@ -143,10 +144,9 @@ public class EscMenu extends MouseAdapter {
                 Music.setIsShop(false);
                 Camera.getInstance().setX(Camera.getInstance().getX() - 1088);
             }
-
+            
             // For upgrading
-            // TODO Adding of upgrading options
-            if (mx >= 2350 && mx <= 2400 && my >= -510 && my <= -460){
+            if (mx >= 2380 && mx <= 2430 && my >= -510 && my <= -460){
                 if(((Dante)Dante.getInstance()).getSpeed() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 5) {
                     ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 5);
                     ((Dante) Dante.getInstance()).setSpeed(((Dante) Dante.getInstance()).getSpeed() + 1);
@@ -154,20 +154,27 @@ public class EscMenu extends MouseAdapter {
                 }
 
             }
-            if (mx >= 2350 && mx <= 2400 && my >= -360 && my <= -310){
+            if (mx >= 2380 && mx <= 2430 && my >= -360 && my <= -310){
                 if(((Dante)Dante.getInstance()).getFireSpeed() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 5) {
                     ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 5);
                     ((Dante) Dante.getInstance()).setFireSpeed(((Dante) Dante.getInstance()).getFireSpeed() + 1);
                     Music.getThreadPool().execute(new Music("res/Sounds/Upgrade.wav", ID.UpgradeSound));
                 }
             }
-            if (mx >= 2350 && mx <= 2400 && my >= -210 && my <= -160){
+            if (mx >= 2380 && mx <= 2430 && my >= -210 && my <= -160){
                 if(((Dante)Dante.getInstance()).getRange() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 5) {
                     ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 5);
                     ((Dante) Dante.getInstance()).setRange(((Dante) Dante.getInstance()).getRange() + 1);
                     Music.getThreadPool().execute(new Music("res/Sounds/Upgrade.wav", ID.UpgradeSound));
                 }
 
+            }
+            if(mx >= 2320 && mx <= 2379 && my >= -77 && my <= -22){
+                if(((Dante) Dante.getInstance()).getCoins() >= 10){
+                    ((Dante) Dante.getInstance()).setHealth(((Dante) Dante.getInstance()).getHealth() + 1);
+                    ((Dante) Dante.getInstance()).setCoins(((Dante) Dante.getInstance()).getCoins() - 10);
+                    Music.getThreadPool().execute(new Music("res/Sounds/Upgrade.wav", ID.UpgradeSound));
+                }
             }
 
         }
@@ -229,6 +236,8 @@ public class EscMenu extends MouseAdapter {
         g.drawImage(playerSpeedIcon, 2186, -500, null);
         g.drawImage(bulletSpeedIcon, 2186, -350, null);
         g.drawImage(bulletRangeIcon, 2186, -200, null);
+        g.drawImage(heartIcon, 2186, -70, null);
+
 
         // For upgrading in shop
         // To draw empty bars of upgrades
@@ -249,10 +258,25 @@ public class EscMenu extends MouseAdapter {
             g.drawImage(upgradeBarFull, 2186 + i * 50, -150, null);
         }
 
+
         // Plus for upgrading in shop
-        g.drawImage(plus, 2350, -510, null);
-        g.drawImage(plus, 2350, -360, null);
-        g.drawImage(plus, 2350, -210, null);
+        g.drawImage(plus, 2380, -510, null);
+        g.drawImage(plus, 2380, -360, null);
+        g.drawImage(plus, 2380, -210, null);
+        g.drawImage(plus, 2320, -77, null);
+
+        // For prices in shop
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+        g.drawString("5", 2320,-475);
+        g.drawString("5", 2320,-325);
+        g.drawString("5", 2320,-175);
+        g.drawString("10", 2240,-42);
+
+        g.drawImage(Game.getInstance().getCoinSprites().get(0), 2340, -500, null);
+        g.drawImage(Game.getInstance().getCoinSprites().get(0), 2340, -350, null);
+        g.drawImage(Game.getInstance().getCoinSprites().get(0), 2340, -200, null);
+        g.drawImage(Game.getInstance().getCoinSprites().get(0), 2280, -68, null);
 
         g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
     }
