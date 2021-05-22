@@ -471,6 +471,14 @@ public class Dante extends GameObject {
                 tempCoin = iterator.nextIndex() - 1;
             }
             if(temp.getId().equals(ID.DamageObstacle) && getBounds().intersects(temp.getBounds())){
+                assert temp instanceof DamageObstacle;
+                if(((DamageObstacle) temp).getIsSpike()){
+                    if(((DamageObstacle) temp).getFrameCounter() >= 50 && ((DamageObstacle) temp).getFrameCounter() <= 180){
+                        this.doObstacleDamage();
+                        System.out.println("test");
+                    }
+                }
+                else
                 this.doObstacleDamage();
             }
         }

@@ -74,8 +74,29 @@ public class Game extends Canvas implements Runnable {
 
         damageObstacleSprites = new ArrayList<>();
 
+        // For fire animation
         for (int i = 0; i <= 7; i++)
             damageObstacleSprites.add(loader.loadImage("../Assets/DamageObstacles/Fire" + i + ".png"));
+
+
+        // For Spike extending animation
+        for(int i = 0; i <= 5; i++)
+            damageObstacleSprites.add(loader.loadImage("../Assets/DamageObstacles/Spikes.png").
+                                                        getSubimage(64 * i, 0, 64, 64));
+        // For Spike holding spikes up
+        for(int i = 0; i <= 10; i++)
+            damageObstacleSprites.add(loader.loadImage("../Assets/DamageObstacles/Spikes.png").
+                    getSubimage(64 * 5, 0, 64, 64));
+
+        // For Spikes contracting animation
+        for(int i = 0; i <= 5; i++)
+            damageObstacleSprites.add(loader.loadImage("../Assets/DamageObstacles/Spikes.png").
+                    getSubimage(64 * 5 - 64 * i, 0, 64, 64));
+
+        // For Spike holding spikes down
+        for(int i = 0; i <= 10; i++)
+            damageObstacleSprites.add(loader.loadImage("../Assets/DamageObstacles/Spikes.png").
+                    getSubimage(0, 0, 64, 64));
 
         BufferStrategy bs = this.getBufferStrategy();
         if(bs==null){

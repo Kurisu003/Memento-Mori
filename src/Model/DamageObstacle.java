@@ -13,19 +13,29 @@ public class DamageObstacle extends GameObject{
     private boolean isSpike;
 
     public DamageObstacle(int x, int y, boolean isSpike){
+        this.isSpike = isSpike;
         this.x = x;
         this.y = y;
     }
 
     @Override
     public void tick() {
-        if(isSpike)
-            displayImage = Game.getInstance().getDamageObstacleSprites().get(frameCounter + 8);
+        if(isSpike) {
+            frameCounter = (frameCounter + 1) % 300;
+            displayImage = Game.getInstance().getDamageObstacleSprites().get((frameCounter / 10) + 8);
+        }
         else {
             frameCounter = (frameCounter + 1) % 64;
             displayImage = Game.getInstance().getDamageObstacleSprites().get(frameCounter / 8);
         }
+    }
 
+    public boolean getIsSpike(){
+        return isSpike;
+    }
+
+    public int getFrameCounter(){
+        return frameCounter;
     }
 
     @Override
