@@ -13,7 +13,7 @@ import java.util.Random;
  * This is the "miniboss" in the fourth level. It can pass walls and doors and follows the main character wherever
  * it is going until the miniboss itself is defeated.
  */
-public class Miniboss extends SmartEnemy {
+public class Miniboss extends GameObject {
 
     int hp = 10000;
 
@@ -34,7 +34,7 @@ public class Miniboss extends SmartEnemy {
      * @param speed amount of speed
      */
     public Miniboss(int x, int y, ID id, int health, int speed) {
-        super(x, y, id, health, speed);
+        super(x, y, id);
         BufferedImageLoader loader = new BufferedImageLoader();
 
         dante = (Dante) Dante.getInstance();

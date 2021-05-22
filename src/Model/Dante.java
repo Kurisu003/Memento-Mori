@@ -45,13 +45,22 @@ public class Dante extends GameObject {
 
     private int roomXCoordinate;
     private int roomYCoordinate;
-    private final int [][] wherePlayerHasBeen = new int[7][7];
+
+    public  int[][] getWherePlayerHasBeen() {
+        return wherePlayerHasBeen;
+    }
+
+    public static void setWherePlayerHasBeen(int[][] wherePlayerHasBeen) {
+        wherePlayerHasBeen = wherePlayerHasBeen;
+    }
+
+    public static int [][] wherePlayerHasBeen = new int[7][7];
 
     private int timeSinceLastShot = 20;
     private int timeSinceLastDamage = 20;
     private int timeSinceLastObstacleDamage = 20;
 
-    private int fireSpeed = 0;
+    private static int fireSpeed = 0;
     private int range = 0;
     private int damage = 0;
     private int health = 5;
@@ -281,8 +290,8 @@ public class Dante extends GameObject {
      * Sets the coin when the player collects it
      * @param coins amount of collected coins
      */
-    public void setCoins(int coins) {
-        this.coins = coins;
+    public static void setCoins(int coins) {
+        coins = coins;
     }
 
     /**
@@ -327,8 +336,8 @@ public class Dante extends GameObject {
      * @param speed integer to indicate the speed
      */
     // to set firespeed of weapon
-    public void setFireSpeed(int speed){
-        this.fireSpeed = speed;
+    public static void setFireSpeed(int speed){
+        fireSpeed = speed;
     }
 
 
@@ -340,8 +349,8 @@ public class Dante extends GameObject {
      * @param range integer to indicate the range
      */
     // to set range of Weapon
-    public void setRange(int range){
-        this.range = range;
+    public static void setRange(int range){
+        range = range;
     }
 
     public int getRange() {
@@ -352,12 +361,14 @@ public class Dante extends GameObject {
         return damage;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
+
+    public static void setSpeed(int speed) {
+        speed = speed;
+
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public static void setHealth(int health) {
+        health = health;
     }
 
     public int getHealth() {

@@ -218,7 +218,7 @@ public class Game extends Canvas implements Runnable {
 
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
-        LoadLevel.clearAndLoadLevel(wallSprites, amountRoomsGenerated,true);
+        LoadLevel.clearAndLoadLevel(wallSprites, amountRoomsGenerated);
         GenerateLevel.getInstance().loadObstacles();
 
     }
@@ -252,7 +252,7 @@ public class Game extends Canvas implements Runnable {
 
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
-        LoadLevel.clearAndLoadLevel(wallSprites, amountRoomsGenerated,false);
+        LoadLevel.clearAndLoadLevel(wallSprites, amountRoomsGenerated);
         //GenerateLevel.getInstance().loadObstacles();
 
     }

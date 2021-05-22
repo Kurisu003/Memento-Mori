@@ -199,8 +199,13 @@ public class MainMenu extends MouseAdapter {
                         Dante.getInstance();
                         Dante.getInstance().setX(((Dante)d1).x);
                         Dante.getInstance().setY(((Dante)d1).y);
+                        Dante.setCoins(((Dante)d1).getCoins());
+                        Dante.setFireSpeed(((Dante)d1).getFireSpeed());
+                        Dante.setHealth(((Dante)d1).getHealth());
+                        Dante.setRange(((Dante)d1).getRange());
                         Dante.setCurrentLevel(((Dante)d1).currentLevel);
                         Game.setFolder(((Dante)d1).currentLevel.name());
+                        Dante.setWherePlayerHasBeen(((Dante)d1).getWherePlayerHasBeen());
                     } else if (d1 instanceof Camera) {
                         tempx=((Camera)d1).getTempx();
                         tempy=((Camera)d1).getTempy();
@@ -215,11 +220,11 @@ public class MainMenu extends MouseAdapter {
                         Handler1.getInstance().objects.add(new SmartEnemy(((SmartEnemy) d1).x,((SmartEnemy)d1).y,ID.SmartEnemy,((SmartEnemy)d1).getHp(),((SmartEnemy)d1).getSpeed()));
                     } else if (d1 instanceof ShotEnemy) {
                         Handler1.getInstance().objects.add(new ShotEnemy(((ShotEnemy) d1).x,((ShotEnemy)d1).y,ID.ShotEnemy,((ShotEnemy)d1).getHp(),((ShotEnemy)d1).getSpeed()));
-                    } else if (d1 instanceof Miniboss) {
-                        System.out.println("Test");
-                        Handler1.getInstance().objects.add(new Miniboss(((Miniboss) d1).x,((Miniboss)d1).y,ID.Miniboss,((Miniboss)d1).getHp(),((Miniboss)d1).getSpeed()));
-                    }else if(d1 instanceof GenerateLevel){
+                    } else if(d1 instanceof GenerateLevel){
                         GenerateLevel.getInstance().setLevel(((GenerateLevel)d1).getLevel());
+                    }else if(d1 instanceof Miniboss){
+                        Handler1.getInstance().addObject(new Miniboss(((Miniboss)d1).x,
+                                ((Miniboss)d1).y, ID.Miniboss, 0, 0));
                     }
                 }
                 }catch (EOFException r){
@@ -229,7 +234,7 @@ public class MainMenu extends MouseAdapter {
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-            Game.getInstance().loadspritesOfSavedGame(Dante.currentLevel.ordinal());
+            Game.getInstance().loadspritesOfSavedGame(0);
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
             Camera.getInstance().setX(tempx);
             Camera.getInstance().setY(tempy);
