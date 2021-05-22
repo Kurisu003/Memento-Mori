@@ -31,7 +31,7 @@ public class EscMenu extends MouseAdapter {
     private final BufferedImage plus;
     private final BufferedImage backButton;
 
-    private final BufferedImage playerSpeedIcon;
+    private final BufferedImage playerDamageIcon;
     private final BufferedImage bulletSpeedIcon;
     private final BufferedImage bulletRangeIcon;
     private final BufferedImage heartIcon;
@@ -63,7 +63,7 @@ public class EscMenu extends MouseAdapter {
         minus = loader.loadImage("../MainMenuAssets/Minus.png");
         backButton = loader.loadImage("../MainMenuAssets/BackspaceLeft.png");
 
-        playerSpeedIcon = loader.loadImage("../Assets/PlayerSpeed.png");
+        playerDamageIcon = loader.loadImage("../Assets/PlayerDamage.png");
         bulletSpeedIcon = loader.loadImage("../Assets/BulletSpeed.png");
         bulletRangeIcon = loader.loadImage("../Assets/BulletRange.png");
         heartIcon = loader.loadImage("../Assets/BigHeart.png");
@@ -150,9 +150,9 @@ public class EscMenu extends MouseAdapter {
 
             // For upgrading
             if (mx >= 2380 && mx <= 2430 && my >= -510 && my <= -460){
-                if(((Dante)Dante.getInstance()).getSpeed() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 5) {
+                if(((Dante)Dante.getInstance()).getDamage() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 5) {
                     ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 5);
-                    ((Dante) Dante.getInstance()).setSpeed(((Dante) Dante.getInstance()).getSpeed() + 1);
+                    ((Dante) Dante.getInstance()).setDamage(((Dante) Dante.getInstance()).getDamage() + 1);
                     Music.getThreadPool().execute(new Music("res/Sounds/Upgrade.wav", ID.UpgradeSound));
                 }
 
@@ -235,7 +235,7 @@ public class EscMenu extends MouseAdapter {
         g.drawString("x"+ ((Dante) Dante.getInstance()).getCoins(), 2533, -531);
 
         // To draw icons in shop
-        g.drawImage(playerSpeedIcon, 2186, -500, null);
+        g.drawImage(playerDamageIcon, 2186, -500, null);
         g.drawImage(bulletSpeedIcon, 2186, -350, null);
         g.drawImage(bulletRangeIcon, 2186, -200, null);
         g.drawImage(heartIcon, 2186, -70, null);
@@ -250,7 +250,7 @@ public class EscMenu extends MouseAdapter {
         }
 
         // To draw full bars of upgrades
-        for(int i = 0; i < ((Dante) Dante.getInstance()).getSpeed(); i++){
+        for(int i = 0; i < ((Dante) Dante.getInstance()).getDamage(); i++){
             g.drawImage(upgradeBarFull, 2186 + i * 50, -450, null);
         }
         for(int i = 0; i < ((Dante) Dante.getInstance()).getFireSpeed(); i++){

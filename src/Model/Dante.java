@@ -52,7 +52,7 @@ public class Dante extends GameObject {
 
     private int fireSpeed = 0;
     private int range = 0;
-    private int speed = 0;
+    private int damage = 0;
     private int health = 5;
     private int armor = 2;
     private int coins = 100;
@@ -336,12 +336,12 @@ public class Dante extends GameObject {
         return range;
     }
 
-    public int getSpeed() {
-        return speed;
+    public int getDamage() {
+        return damage;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
     public void setHealth(int health) {
@@ -414,7 +414,7 @@ public class Dante extends GameObject {
         int damage = 100;
         if(shotY != y || shotX != x){
             Handler1.getInstance().addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, shotX, shotY,
-                    range, damage, bulletImage));
+                    range, damage + this.damage * 20, bulletImage));
             Music.getThreadPool().execute(new Music("res/Sounds/Guns/M4/GunSound1.wav", ID.ShootingSound));
         }
     }
@@ -489,7 +489,7 @@ public class Dante extends GameObject {
         if(shouldSpawnEnemy){
             //Types of enemies can be put in ID[]{...} for a random spawn of each of them
             SpawnEnemiesInRoom.spawnEnemies(roomXCoordinate * 1088 + 64, roomYCoordinate * 576 + 64,
-                    new ID[]{ID.SmartEnemy, ID.ShotEnemy}, currentLevel);
+                    new ID[]{ID.SmartEnemy, ID.ShotEnemy, ID.Enemy}, currentLevel);
             //new ID[]{ID.ShotEnemy}, currentLevel);
         }
         if(shouldChangeLevel){

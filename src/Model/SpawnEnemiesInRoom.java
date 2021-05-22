@@ -31,17 +31,17 @@ public class SpawnEnemiesInRoom {
                 Handler1.getInstance().addObject(new SmartEnemy(roomStartX + 64 + (rn.nextInt(832)),
                                                                 roomStartY + 64 + (rn.nextInt(320)),
 //                                        typesOfEnemy[pos], currentLevel.ordinal() * 20, currentLevel.ordinal()));
-                                        typesOfEnemy[pos], 0, 0));
+                                        typesOfEnemy[pos], currentLevel.ordinal() * 30, 0));
             else if (typesOfEnemy[pos].equals(ID.ShotEnemy))
                 Handler1.getInstance().addObject(new ShotEnemy( roomStartX + 64 + (rn.nextInt(832)),
                                                                 roomStartY + 64 + (rn.nextInt(320)), typesOfEnemy[pos],
 //                                                            currentLevel.ordinal() * 20, currentLevel.ordinal()));
-                                                            0, 0));
+                                                            currentLevel.ordinal() * 20, 0));
             else if(typesOfEnemy[pos].equals(ID.Enemy)) {
                 Handler1.getInstance().addObject(new Enemy( roomStartX + 64 + (rn.nextInt(832)),
                                                             roomStartY + 64 + (rn.nextInt(320)), ID.Enemy,
 //                                                            currentLevel.ordinal() * 20, currentLevel.ordinal()));
-                                                            0, 0));
+                                                        currentLevel.ordinal() * 10, 0));
             }
             /*
             else if(typesOfEnemy[pos].equals(ID.Miniboss)){
