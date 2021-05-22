@@ -223,7 +223,7 @@ public class Dante extends GameObject {
         if(timeSinceLastShot % 1000 == 0){
             timeSinceLastShot = 30;
         }
-        if  (timeSinceLastShot > 20 - fireSpeed &&
+        if  (timeSinceLastShot > 20 - fireSpeed * 2 &&
                 (Handler1.getInstance().isShootUp() || Handler1.getInstance().isShootDown() || Handler1.getInstance().isShootLeft() || Handler1.getInstance().isShootRight())){
             checkBulletDirection();
             timeSinceLastShot = 0;
