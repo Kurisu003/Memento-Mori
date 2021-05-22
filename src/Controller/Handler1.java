@@ -4,6 +4,7 @@ import Model.*;
 
 import java.awt.*;
 import java.util.LinkedList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * In this class all game objects are saved in a linked list. Different values are checked in this class for example
@@ -13,7 +14,7 @@ public class Handler1 {
 
     // Linked list of objects which are in the game
     // examples: character, walls, ...
-    public LinkedList<GameObject>objects = new LinkedList<GameObject>();
+    public CopyOnWriteArrayList<GameObject> objects = new CopyOnWriteArrayList<>();
 
     private boolean up=false, down=false, right=false, left=false;
     private boolean shootUp=false,shootDown=false,shootRight=false,shootLeft=false;
@@ -220,6 +221,6 @@ public class Handler1 {
      * Removes the last object from the linked list.
      */
     public void removeLastObject(){
-        objects.removeLast();
+        objects.remove(objects.size()-1);
     }
 }
