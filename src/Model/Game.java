@@ -47,6 +47,10 @@ public class Game extends Canvas implements Runnable {
         Game.folder = Levels.Heresy.name();
     }
 
+    public static void setFolder(String folder) {
+        Game.folder = folder;
+    }
+
     private static String folder;
 
     private MainMenu mainMenu;
@@ -145,6 +149,11 @@ public class Game extends Canvas implements Runnable {
         Game.state = state;
     }
 
+    public static void setOnlyState(GameState state) {
+
+        Game.state = state;
+    }
+
     /**
      * Getter of the game state.
      * @return the current state of the game
@@ -203,8 +212,42 @@ public class Game extends Canvas implements Runnable {
 
         floor = loader.loadImage("../Levels/" + folder + "/Background.png");
 
-        LoadLevel.clearAndLoadLevel(wallSprites, amountRoomsGenerated);
+        LoadLevel.clearAndLoadLevel(wallSprites, amountRoomsGenerated,true);
         GenerateLevel.getInstance().loadObstacles();
+
+    }
+
+    public  void loadspritesOfSavedGame(int amountRoomsGenerated){
+
+        wallSprites.clear();
+
+        BufferedImageLoader loader = new BufferedImageLoader();
+
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(0,192,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(64,192,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(128,192,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(0,128,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(128,128,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(0,0,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(64,0,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(128,0,64,64));
+
+
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(64,128,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(0,64,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(128,64,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(64,64,64,64));
+
+
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(192,192,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(192,64,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(192,128,64,64));
+        wallSprites.add(loader.loadImage("../Levels/" + folder + "/SpriteSheet.png").getSubimage(192,0,64,64));
+
+        floor = loader.loadImage("../Levels/" + folder + "/Background.png");
+
+        LoadLevel.clearAndLoadLevel(wallSprites, amountRoomsGenerated,false);
+        //GenerateLevel.getInstance().loadObstacles();
 
     }
 

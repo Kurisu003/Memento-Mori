@@ -14,13 +14,16 @@ public class LoadLevel{
      * Clears all levels and loads the current so the old levels are not displayed anymore in the background.
      * @param wallSprites all images which should be displayed for this level
      * @param amountRoomsGenerated how many rooms should be generated in this level
+     * @param newGame
      */
-    public static void clearAndLoadLevel(ArrayList<BufferedImage> wallSprites, int amountRoomsGenerated){
+    public static void clearAndLoadLevel(ArrayList<BufferedImage> wallSprites, int amountRoomsGenerated, boolean newGame){
 
         // Clears list from all objects that aren't player Character
-        GenerateLevel.getInstance().clearLevel();
-        GenerateLevel.getInstance().generateLevel(amountRoomsGenerated);
-        Handler1.getInstance().objects.removeIf(temp -> !temp.getId().equals(ID.Dante));
+        if(newGame) {
+            GenerateLevel.getInstance().clearLevel();
+            GenerateLevel.getInstance().generateLevel(amountRoomsGenerated);
+            Handler1.getInstance().objects.removeIf(temp -> !temp.getId().equals(ID.Dante));
+        }
 
         // Loops through generated level
         for(int i = 1; i < 6; i++) {

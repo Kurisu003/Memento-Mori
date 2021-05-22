@@ -19,9 +19,13 @@ public class GenerateLevel implements Serializable {
     // left and right and you don't get errors
     // when trying to do something like
     // level[i - 1]
-    private static final int [][] level = new int[7][7];
+    private int [][] level = new int[7][7];
 
     private static GenerateLevel instance = null;
+
+    public void setLevel(int[][] level) {
+        this.level = level;
+    }
 
     /**
      * This returns the current instance
@@ -84,45 +88,45 @@ public class GenerateLevel implements Serializable {
 
 
                     if (r == 1) {
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 1, i * 576 + 64 * 1, ID.Block, loader.loadImage(
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 1, i * 576 + 64 * 1, ID.Obstacle, loader.loadImage(
                                 "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
 
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 2, i * 576 + 64 * 1, ID.Block, loader.loadImage(
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 2, i * 576 + 64 * 1, ID.Obstacle, loader.loadImage(
                                 "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
 
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 3, i * 576 + 64 * 1, ID.Block, loader.loadImage(
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 3, i * 576 + 64 * 1, ID.Obstacle, loader.loadImage(
                                 "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
 
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 1, i * 576 + 64 * 2, ID.Block, loader.loadImage(
-                                "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
-
-
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 3, i * 576 + 64 * 6, ID.Block, loader.loadImage(
-                                "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
-
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 4, i * 576 + 64 * 6, ID.Block, loader.loadImage(
-                                "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
-
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 4, i * 576 + 64 * 5, ID.Block, loader.loadImage(
-                                "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
-
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 5, i * 576 + 64 * 5, ID.Block, loader.loadImage(
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 1, i * 576 + 64 * 2, ID.Obstacle, loader.loadImage(
                                 "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
 
 
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 11, i * 576 + 64 * 2, ID.Block, loader.loadImage(
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 3, i * 576 + 64 * 6, ID.Obstacle, loader.loadImage(
                                 "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
 
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 11, i * 576 + 64 * 4, ID.Block, loader.loadImage(
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 4, i * 576 + 64 * 6, ID.Obstacle, loader.loadImage(
                                 "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
 
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 11, i * 576 + 64 * 5, ID.Block, loader.loadImage(
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 4, i * 576 + 64 * 5, ID.Obstacle, loader.loadImage(
                                 "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
 
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 12, i * 576 + 64 * 2, ID.Block, loader.loadImage(
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 5, i * 576 + 64 * 5, ID.Obstacle, loader.loadImage(
                                 "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
 
-                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 12, i * 576 + 64 * 3, ID.Block, loader.loadImage(
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 11, i * 576 + 64 * 2, ID.Obstacle, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 11, i * 576 + 64 * 4, ID.Obstacle, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 11, i * 576 + 64 * 5, ID.Obstacle, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 12, i * 576 + 64 * 2, ID.Obstacle, loader.loadImage(
+                                "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
+
+                        Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 12, i * 576 + 64 * 3, ID.Obstacle, loader.loadImage(
                                 "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
                     }
                 }

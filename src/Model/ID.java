@@ -13,6 +13,7 @@ public enum ID {
     SmartEnemy(),
     ShotEnemy(),
     Door(),
+    Obstacle(),
     BG_music(),
     Shop_music(),
     Menu_music(),

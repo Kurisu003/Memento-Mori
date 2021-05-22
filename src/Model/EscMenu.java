@@ -105,6 +105,7 @@ public class EscMenu extends MouseAdapter {
                 Camera.getInstance().setTempx(tempCamX);
                 Camera.getInstance().setTempy(tempCamY);
 
+
                 try {
                     FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
                     out.write(("").getBytes());
