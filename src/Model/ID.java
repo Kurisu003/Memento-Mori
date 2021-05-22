@@ -7,6 +7,7 @@ public enum ID {
 
     Dante(),
     Block(),
+    DamageObstacle(),
     Portal(),
     Bullet(),
     Enemy(),

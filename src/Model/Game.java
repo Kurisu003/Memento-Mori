@@ -35,9 +35,7 @@ public class Game extends Canvas implements Runnable {
     private int selectedSaveState;
 
     private final ArrayList<BufferedImage> coinSprites;
-    public ArrayList<BufferedImage> getCoinSprites() {
-        return coinSprites;
-    }
+    private final ArrayList<BufferedImage> damageObstacleSprites;
 
     int updates = 0;
 
@@ -75,6 +73,11 @@ public class Game extends Canvas implements Runnable {
         coinSprites = new ArrayList<>();
         for(int i = 1; i <= 11; i++)
             coinSprites.add(loader.loadImage("../Assets/Coin/Coins (" + i + ").png").getSubimage(7, 46, 26, 28));
+
+        damageObstacleSprites = new ArrayList<>();
+
+        for (int i = 0; i <= 7; i++)
+            damageObstacleSprites.add(loader.loadImage("../Assets/DamageObstacles/Fire" + i + ".png"));
 
         BufferStrategy bs = this.getBufferStrategy();
         if(bs==null){
@@ -465,6 +468,14 @@ public class Game extends Canvas implements Runnable {
      */
     public ArrayList<BufferedImage> getEnemySprites(){
         return enemySprites;
+    }
+
+    public ArrayList<BufferedImage> getCoinSprites() {
+        return coinSprites;
+    }
+
+    public ArrayList<BufferedImage> getDamageObstacleSprites() {
+        return damageObstacleSprites;
     }
 
 }

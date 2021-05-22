@@ -49,6 +49,7 @@ public class Dante extends GameObject {
 
     private int timeSinceLastShot = 20;
     private int timeSinceLastDamage = 20;
+    private int timeSinceLastObstacleDamage = 20;
 
     private int fireSpeed = 0;
     private int range = 0;
@@ -145,11 +146,13 @@ public class Dante extends GameObject {
         // and enough time has passed
         timeSinceLastShot++;
         timeSinceLastDamage++;
-
+        timeSinceLastObstacleDamage++;
         // Needed so that timeSinceLastDamage doesn't overflow
         if(timeSinceLastDamage % 9999 == 0)
             timeSinceLastDamage = 0;
 
+        if(timeSinceLastObstacleDamage % 999 == 0)
+            timeSinceLastObstacleDamage = 0;
         // Reuses timeSinceLastShot as a sort
         // of way to keep track of ticks since it
         // counts up every time. This is needed as we dont
@@ -295,6 +298,15 @@ public class Dante extends GameObject {
             if (armor == 0) health -= action;
             else armor -= action;
             timeSinceLastDamage = 0;
+        }
+    }
+
+    // Applies damage directly to HP,
+    // bypassing any armor
+    private void doObstacleDamage(){
+        if(timeSinceLastObstacleDamage > 50){
+            health--;
+            timeSinceLastObstacleDamage = 0;
         }
     }
 
@@ -476,6 +488,9 @@ public class Dante extends GameObject {
                 coins++;
                 shouldRemoveCoin = true;
                 tempCoin = iterator.nextIndex() - 1;
+            }
+            if(temp.getId().equals(ID.DamageObstacle) && getBounds().intersects(temp.getBounds())){
+                this.doObstacleDamage();
             }
         }
 

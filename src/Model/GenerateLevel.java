@@ -128,6 +128,8 @@ public class GenerateLevel implements Serializable {
 
                         Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 12, i * 576 + 64 * 3, ID.Obstacle, loader.loadImage(
                                 "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
+
+                        Handler1.getInstance().addObject(new DamageObstacle(j * 1088 + 64 * 12, i * 576 + 64 * 4,false));
                     }
                 }
             }

@@ -91,7 +91,7 @@ public class Miniboss extends SmartEnemy {
         this.hp -= action;
         //Miniboss getting faster every -1000hp
         if(this.hp != 10000 && this.hp % 1000 == 0)
-            this.increasingSpeed += 0.1;
+            this.increasingSpeed += 0.3;
     }
 
     /**
