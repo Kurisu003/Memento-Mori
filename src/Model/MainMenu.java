@@ -21,6 +21,7 @@ public class MainMenu extends MouseAdapter {
 
     private final transient BufferedImage startNewGame;
     private final transient BufferedImage continueGame;
+    private final transient BufferedImage exitGame;
     private final transient BufferedImage settings;
     private final transient BufferedImage saveIcon;
 
@@ -61,21 +62,12 @@ public class MainMenu extends MouseAdapter {
         for(int i = 1; i < 9; i++){
             background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames ("+ i +").png"));
         }
-        /*
-        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (1).png"));
-        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (2).png"));
-        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (3).png"));
-        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (4).png"));
-        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (5).png"));
-        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (6).png"));
-        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (7).png"));
-        background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/BackgroundFrames (8).png"));
-        */
         background.add(loader.loadImage("../MainMenuAssets/BackgroundFrames/EscMenuBackground.png"));
 
         title = loader.loadImage("../MainMenuAssets/Title.png");
         startNewGame = loader.loadImage("../MainMenuAssets/StartNewGame.png");
         continueGame = loader.loadImage("../MainMenuAssets/ContinueGame.png");
+        exitGame = loader.loadImage("../MainMenuAssets/ExitGame.png");
         settings = loader.loadImage("../MainMenuAssets/Settings.png");
 
         saveIcon = loader.loadImage("../MainMenuAssets/SaveIcons.png");
@@ -115,6 +107,9 @@ public class MainMenu extends MouseAdapter {
             //"Settings" camera goes down
             else if (my > 450 && my < 500)
                 desiredCameraY = 576;
+        }
+        else if(mx >= 1618 && mx <= 2118 && my >= 450 && my <= 500){
+            System.exit(0);
         }
         //get back to the main menu
         if((mx - Camera.getInstance().getX() >= 20 && mx - Camera.getInstance().getX() <= 273) &&
@@ -291,9 +286,10 @@ public class MainMenu extends MouseAdapter {
         g.drawImage(background.get(animationCounter), 0, -150, null);
 
         g.drawImage(title, 100 + 1088, 10, null);
-        g.drawImage(startNewGame, 30 + 1088, 300, null);
-        g.drawImage(continueGame, 30 + 1088, 375, null);
-        g.drawImage(settings, 30 + 1088, 450, null);
+        g.drawImage(startNewGame, 1118, 300, null);
+        g.drawImage(continueGame, 1118, 375, null);
+        g.drawImage(settings, 1118, 450, null);
+        g.drawImage(exitGame, 1618, 450, null);
 
         // Save Icons for new Game
         g.drawImage(saveIcon, 2176, 0, null);
