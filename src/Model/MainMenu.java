@@ -202,6 +202,7 @@ public class MainMenu extends MouseAdapter {
                         dante.setFireSpeed(((Dante)d1).getFireSpeed());
                         dante.setHealth(((Dante)d1).getHealth());
                         dante.setRange(((Dante)d1).getRange());
+                        dante.setDamage(((Dante)d1).getDamage());
                         dante.setCurrentLevel(((Dante)d1).getCurrentLevel());
                         dante.setWherePlayerHasBeen(((Dante)d1).getWherePlayerHasBeen());
                         Game.setFolder(((Dante)d1).getCurrentLevel().name());
