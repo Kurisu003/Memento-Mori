@@ -24,7 +24,6 @@ public class Dante extends GameObject {
     private transient final BufferedImage gameOverScreen;
 
     private transient BufferedImage bulletImage;
-    private transient final BufferedImage minibossHealth;
 
     private Levels currentLevel = Levels.Heresy;
 
@@ -110,7 +109,6 @@ public class Dante extends GameObject {
 
         fullHeart = loader.loadImage("../Assets/FullHeart.png");
         fullArmor = loader.loadImage("../Assets/FullShield.png");
-        minibossHealth = loader.loadImage("../Assets/redRec.png");
 
         bulletImage = loader.loadImage("../Assets/Bullet.png");
         gameOverScreen = loader.loadImage("../MainMenuAssets/GameOver/GameOverScreen.png");

@@ -55,7 +55,7 @@ public class SpawnEnemiesInRoom {
              */
             
             // Spawns 1 miniboss in the level Heresy
-            System.out.println(currentLevel);
+//            System.out.println(currentLevel);
             if(currentLevel.equals(Levels.Heresy)){
                 if(minibosses == 0){
                     Handler1.getInstance().addObject(new Miniboss(roomStartX+(rn.nextInt(960)),

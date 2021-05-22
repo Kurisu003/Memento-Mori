@@ -345,7 +345,7 @@ public class Game extends Canvas implements Runnable {
             return;
         }
         g = bs.getDrawGraphics();
-        Graphics2D g2d=(Graphics2D)g;
+        Graphics2D g2d = (Graphics2D)g;
 
         if(state.equals(GameState.Game) || state.equals(GameState.GameOver)) {
             g2d.translate(-Camera.getInstance().getX(), -Camera.getInstance().getY());
