@@ -150,6 +150,7 @@ public class EscMenu extends MouseAdapter {
                 if(((Dante)Dante.getInstance()).getSpeed() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 1) {
                     ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 1);
                     ((Dante) Dante.getInstance()).setSpeed(((Dante) Dante.getInstance()).getSpeed() + 1);
+                    Music.getThreadPool().execute(new Music("res/Sounds/Upgrade.wav", ID.UpgradeSound));
                 }
 
             }
@@ -157,6 +158,7 @@ public class EscMenu extends MouseAdapter {
                 if(((Dante)Dante.getInstance()).getFireSpeed() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 1) {
                     ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 1);
                     ((Dante) Dante.getInstance()).setFireSpeed(((Dante) Dante.getInstance()).getFireSpeed() + 1);
+                    Music.getThreadPool().execute(new Music("res/Sounds/Upgrade.wav", ID.UpgradeSound));
                 }
 
             }
@@ -164,6 +166,7 @@ public class EscMenu extends MouseAdapter {
                 if(((Dante)Dante.getInstance()).getRange() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 1) {
                     ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 1);
                     ((Dante) Dante.getInstance()).setRange(((Dante) Dante.getInstance()).getRange() + 1);
+                    Music.getThreadPool().execute(new Music("res/Sounds/Upgrade.wav", ID.UpgradeSound));
                 }
 
             }

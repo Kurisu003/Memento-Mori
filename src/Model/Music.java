@@ -106,7 +106,12 @@ public class Music implements LineListener, Runnable {
                 }
                 if(isShop){
                     if(this.id != ID.Shop_music){
-                        audioClip.stop();
+                        if(this.id == ID.UpgradeSound){
+                            audioClip.start();
+                            gainControl.setValue(soundVolume);
+                        }
+                        else
+                            audioClip.stop();
                     }
                     else
                         audioClip.start();
