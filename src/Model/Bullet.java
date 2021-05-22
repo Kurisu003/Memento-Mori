@@ -61,7 +61,7 @@ public class Bullet extends GameObject {
                     Handler1.getInstance().removeObject(this);
                     temp.doAction(damage);
                 }
-                if (temp.getId() == ID.Block || temp.getId() == ID.Door)
+                if (temp.getId() == ID.Block || temp.getId() == ID.Door || temp.getId() == ID.Obstacle)
                     Handler1.getInstance().removeObject(this);
             }
         }

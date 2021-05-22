@@ -53,7 +53,7 @@ public class SmartEnemy extends GameObject{
 
         for(GameObject temp: Handler1.getInstance().objects){
 
-            if(temp.getId() == ID.Block) {
+            if(temp.getId() == ID.Block || temp.getId() == ID.Obstacle) {
                 if (getBoundsBigger().intersects(temp.getBounds())) {
                     x += (velX * 2) * -1;
                     y += (velY * 2) * -1;

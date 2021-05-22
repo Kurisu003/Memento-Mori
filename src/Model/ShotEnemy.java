@@ -69,7 +69,7 @@ public class ShotEnemy extends GameObject{
         for(int i = 0; i < Handler1.getInstance().objects.size(); i++) {
             GameObject temp = Handler1.getInstance().objects.get(i);
 
-            if(temp.getId() == ID.Block||temp.getId()==ID.Door) {
+            if(temp.getId() == ID.Block||temp.getId()==ID.Door|| temp.getId() == ID.Obstacle) {
                 if(getBoundsBigger().intersects(temp.getBounds())) {
                     x += (velX * 4) * -1;
                     y += (velY * 4) * -1;
