@@ -224,7 +224,7 @@ public class MainMenu extends MouseAdapter {
                         GenerateLevel.getInstance().setLevel(((GenerateLevel)d1).getLevel());
                     }else if(d1 instanceof Miniboss){
                         Handler1.getInstance().addObject(new Miniboss(((Miniboss)d1).x,
-                                ((Miniboss)d1).y, ID.Miniboss, 0, 0));
+                                ((Miniboss)d1).y, ID.Miniboss, ((Miniboss)d1).hp, 0));
                     }
                 }
                 }catch (EOFException r){
