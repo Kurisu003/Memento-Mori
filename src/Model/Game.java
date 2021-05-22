@@ -91,11 +91,15 @@ public class Game extends Canvas implements Runnable {
 
         //how many rooms should be generated per level
         loadsprites(5);
-
+        loadEnemySprites();
         //Dante.getInstance();
 //        Handler1.getInstance().addObject(new Dante(3 * 64 * 17 + 8 * 64, 3 * 64 * 9 + 4 * 64, ID.Dante));
         //Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog, folder));
 
+
+    }
+
+    private void loadEnemySprites(){
         // Adds hitting animation right
         for(int i = 1; i <= 20; i++)
             enemySprites.add(loader.loadImage("../Enemies/SmartEnemy/Sprite (" + i + ").png").getSubimage(130, 22,80,72));
@@ -112,7 +116,6 @@ public class Game extends Canvas implements Runnable {
 
         enemySprites.add(loader.loadImage("../Enemies/DumbEnemy/SpriteLeft.png"));
         enemySprites.add(loader.loadImage("../Enemies/DumbEnemy/SpriteRight.png"));
-
     }
 
     /**
@@ -467,6 +470,8 @@ public class Game extends Canvas implements Runnable {
      * @return arraylist of the enemy's images for different positions
      */
     public ArrayList<BufferedImage> getEnemySprites(){
+        if(enemySprites.size() == 0)
+            loadEnemySprites();
         return enemySprites;
     }
 
