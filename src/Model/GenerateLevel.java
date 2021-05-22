@@ -87,6 +87,7 @@ public class GenerateLevel implements Serializable {
                     int r = rand.nextInt(3);
 
 
+//                    if (true) {
                     if (r == 1) {
                         Handler1.getInstance().addObject(new Box(j * 1088 + 64 * 1, i * 576 + 64 * 1, ID.Obstacle, loader.loadImage(
                                 "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));

@@ -41,22 +41,6 @@ public class Window {
         frame.toFront();
         frame.requestFocus();
 
-
-        /*
-        Implementation with all dialogues!! 23 auskommentieren
-         */
-
-        //LevelDialog levelDialog = new LevelDialog();
-        //StoryDialog dialog = new StoryDialog();
-        //frame.getContentPane().add(dialog);
-        //frame.getContentPane().add(levelDialog);
-        //frame.getContentPane().add(game);
-
-
-        //frame.remove(dialog);
-        //frame.revalidate();
-        //frame.repaint();
-
         //To set program icon
         BufferedImageLoader loader = new BufferedImageLoader();
         frame.setIconImage(loader.loadImage("../Character/IdleWithWeapon.png"));

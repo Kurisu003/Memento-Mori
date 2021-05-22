@@ -54,8 +54,6 @@ public class Game extends Canvas implements Runnable {
     private MainMenu mainMenu;
     private EscMenu escMenu;
 
-
-
     /**
      * This is the private Constructor of the Game class so only one instance can be created.
      */
@@ -132,15 +130,9 @@ public class Game extends Canvas implements Runnable {
      * For this implementation the singleton pattern is used.
      * @return the one and only instance of Game
      */
-    public static Game getInstance(){
+    public static synchronized Game getInstance(){
         if(instance == null){
-            instance = new Game();
-        }
-        return instance;
-    }
-    public static Game getInstance(int test){
-        if(instance == null){
-            System.out.println(test);
+            System.out.println("sers");
             instance = new Game();
         }
         return instance;
