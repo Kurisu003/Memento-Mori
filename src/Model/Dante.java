@@ -378,7 +378,7 @@ public class Dante extends GameObject {
                 if(GenerateLevel.getInstance().getLevel()[i][j] > 0)
                     if(wherePlayerHasBeen[j][i] == 0 || bossLeft())
                         levelIsDone = false;
-            }
+            } //FIXME NoSuchFieldError
         }
 
         return levelIsDone;

@@ -23,6 +23,7 @@ public class Miniboss extends SmartEnemy {
     private transient BufferedImage displayImage;
     private transient final ArrayList<BufferedImage> sprites;
     private final Dante dante;
+    private double increasingSpeed;
 
     /**
      * Constructor to create a new object. It loads the healthbar image immediately.
@@ -46,6 +47,9 @@ public class Miniboss extends SmartEnemy {
 
         hpImage = loader.loadImage("../Assets/redRec.png");
         noHpImage = loader.loadImage("../Assets/whiteRec.png");
+
+        increasingSpeed = 1.5;
+
     }
     /**
      * Update of the position to follow Dante and update of the remaining health in case Dante shot him with the gun.
@@ -58,8 +62,8 @@ public class Miniboss extends SmartEnemy {
                 double diffy=y-temp.getY()-32;
                 double distance=Math.sqrt((x-temp.getX())*(x-temp.getX())+(y-temp.getY())*(y- temp.getY()));
 
-                velX=((-1.0/distance)*diffx)*1.5;
-                velY=((-1.0/distance)*diffy)*1.5;
+                velX=((-1.0/distance)*diffx)*increasingSpeed;
+                velY=((-1.0/distance)*diffy)*increasingSpeed;
             }
         }
         if(hp <= 0) {
@@ -85,6 +89,9 @@ public class Miniboss extends SmartEnemy {
      */
     public void doAction(int action){
         this.hp -= action;
+        //Miniboss getting faster every -1000hp
+        if(this.hp != 10000 && this.hp % 1000 == 0)
+            this.increasingSpeed += 0.1;
     }
 
     /**
