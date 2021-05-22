@@ -36,7 +36,7 @@ public class Miniboss extends GameObject {
     public Miniboss(int x, int y, ID id, int health, int speed) {
         super(x, y, id);
         BufferedImageLoader loader = new BufferedImageLoader();
-
+        this.hp=health;
         dante = (Dante) Dante.getInstance();
 
         sprites = new ArrayList<>();
