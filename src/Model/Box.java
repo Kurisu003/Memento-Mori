@@ -62,17 +62,6 @@ public class Box extends GameObject {
         }
     }
 
-    //TODO brauchts dess ibhraup?
-
-    /**
-     * Removes the block if action is done to it.
-     * @param action how much damage it does
-     */
-    @Override
-    public void doAction(int action){
-        Handler1.getInstance().removeObject(this);
-    }
-
     /**
      * Returns the bounds of the generated block
      * @return the bounds as a 64x64 rectangle, with the position of the given block
