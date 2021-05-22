@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * This is the "miniboss" in the fourth level. It can pass walls and doors and follows the main character wherever
@@ -62,6 +63,10 @@ public class Miniboss extends SmartEnemy {
             }
         }
         if(hp <= 0) {
+            for(int i = 0; i < 5; i++){
+                Random rand = new Random();
+                Handler1.getInstance().addObject(new Coin(x + rand.nextInt(50) + 25, y + rand.nextInt(50) + 25));
+            }
             Handler1.getInstance().removeObject(this);
         }
 

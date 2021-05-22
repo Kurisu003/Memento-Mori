@@ -147,24 +147,23 @@ public class EscMenu extends MouseAdapter {
             // For upgrading
             // TODO Adding of upgrading options
             if (mx >= 2350 && mx <= 2400 && my >= -510 && my <= -460){
-                if(((Dante)Dante.getInstance()).getSpeed() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 1) {
-                    ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 1);
+                if(((Dante)Dante.getInstance()).getSpeed() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 5) {
+                    ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 5);
                     ((Dante) Dante.getInstance()).setSpeed(((Dante) Dante.getInstance()).getSpeed() + 1);
                     Music.getThreadPool().execute(new Music("res/Sounds/Upgrade.wav", ID.UpgradeSound));
                 }
 
             }
             if (mx >= 2350 && mx <= 2400 && my >= -360 && my <= -310){
-                if(((Dante)Dante.getInstance()).getFireSpeed() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 1) {
-                    ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 1);
+                if(((Dante)Dante.getInstance()).getFireSpeed() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 5) {
+                    ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 5);
                     ((Dante) Dante.getInstance()).setFireSpeed(((Dante) Dante.getInstance()).getFireSpeed() + 1);
                     Music.getThreadPool().execute(new Music("res/Sounds/Upgrade.wav", ID.UpgradeSound));
                 }
-
             }
             if (mx >= 2350 && mx <= 2400 && my >= -210 && my <= -160){
-                if(((Dante)Dante.getInstance()).getRange() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 1) {
-                    ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 1);
+                if(((Dante)Dante.getInstance()).getRange() < 5 && ((Dante)Dante.getInstance()).getCoins() >= 5) {
+                    ((Dante)Dante.getInstance()).setCoins(((Dante)Dante.getInstance()).getCoins() - 5);
                     ((Dante) Dante.getInstance()).setRange(((Dante) Dante.getInstance()).getRange() + 1);
                     Music.getThreadPool().execute(new Music("res/Sounds/Upgrade.wav", ID.UpgradeSound));
                 }
@@ -224,7 +223,6 @@ public class EscMenu extends MouseAdapter {
         g.setColor(Color.WHITE);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         g.drawString("x"+ ((Dante) Dante.getInstance()).getCoins(), 2528, -528);
-        // TODO daneben schreiben "x Anzahl von coins" (Dante.getInstance().getCoins())
 
         // To draw icons in shop
         g.drawImage(playerSpeedIcon, 2186, -500, null);

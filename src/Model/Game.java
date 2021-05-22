@@ -13,10 +13,6 @@ import java.util.concurrent.Executors;
 
 import Controller.*;
 
-//TODO:
-// wenn man a spiel startet und im esc menu speichert und noar wieder a nuies spiel unfong noar miasat die linked list
-// gecleart werden
-
 /**
  * This is the main class of the whole program. It starts the entire gameplay and calls methods in order to build the
  * game step by step.

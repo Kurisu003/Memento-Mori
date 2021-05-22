@@ -529,15 +529,34 @@ public class Dante extends GameObject {
         }
 
         for(int i = 0; i < health; i++)
-            g.drawImage(fullHeart, (int)Camera.getInstance().getX() + i * 35 + 10, (int)Camera.getInstance().getY() + 10, null);
+            g.drawImage(fullHeart,
+                    (int)Camera.getInstance().getX() + i * 35 + 10,
+                    (int)Camera.getInstance().getY() + 10,
+                    null);
 
         for(int i = 0; i < armor; i++)
-            g.drawImage(fullArmor, (int)Camera.getInstance().getX() + i * 35 + 10 + health * 35, (int)Camera.getInstance().getY() + 10, null);
+            g.drawImage(fullArmor,
+                    (int)Camera.getInstance().getX() + i * 35 + 10 + health * 35,
+                    (int)Camera.getInstance().getY() + 10,
+                    null);
 
+        g.drawImage(Game.getInstance().getCoinSprites().get(0),
+                (int) Camera.getInstance().getX() + 20,
+                (int) Camera.getInstance().getY() + 64,
+                null);
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        g.drawString("x" + coins,
+                (int) Camera.getInstance().getX() + 10,
+                (int) Camera.getInstance().getY() + 115);
 
         // Sets health to a min value of 0
         if (health <= 0) {
-            g.drawImage(gameOverScreen, (int) Camera.getInstance().getX(), (int) Camera.getInstance().getY(), null);
+            g.drawImage(gameOverScreen,
+                    (int) Camera.getInstance().getX(),
+                    (int) Camera.getInstance().getY(),
+                    null);
             Game.setState(GameState.GameOver);
         }
     }
