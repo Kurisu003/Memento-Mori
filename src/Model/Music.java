@@ -98,11 +98,17 @@ public class Music implements LineListener, Runnable {
                     audioClip.start();
                     gainControl.setValue(soundVolume);
                 }
+
                 if(isMenu && !isShop){
-                    if(this.id != ID.Menu_music)
+                    if(this.id != ID.Menu_music){
                         audioClip.stop();
-                    else
+                    }
+                    //Music plays from beginning when going back to main menu
+                    else{
+                        if(!audioClip.isRunning())
+                            audioClip.setFramePosition(0);
                         audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+                    }
                 }
                 if(isShop){
                     if(this.id != ID.Shop_music){
@@ -116,16 +122,12 @@ public class Music implements LineListener, Runnable {
                     else
                         audioClip.start();
                 }
-                else if(!isMenu) {
+                if(!isMenu && !isShop) {
                     if (this.id == ID.Menu_music)
                         audioClip.stop();
-                    else if (this.id == ID.BG_music)
-                        audioClip.loop(Clip.LOOP_CONTINUOUSLY);
-                }
-                else {
-                    if(this.id == ID.Shop_music)
-                        audioClip.stop();
-                    else if(this.id == ID.Menu_music){
+                    else if (this.id == ID.BG_music){
+                        if(!audioClip.isRunning())
+                            audioClip.setFramePosition(0);
                         audioClip.loop(Clip.LOOP_CONTINUOUSLY);
                     }
 

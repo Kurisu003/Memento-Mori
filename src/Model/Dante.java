@@ -15,6 +15,8 @@ import java.util.ListIterator;
  */
 public class Dante extends GameObject {
 
+    private static final long serialVersionUID = 6529685098267757690L;
+
     private transient final ArrayList<BufferedImage> playerAnimations = new ArrayList<>();
     private transient final ArrayList<BufferedImage> playerGun = new ArrayList<>();
     private transient final ArrayList<BufferedImage> minimapSprites = new ArrayList<>();
@@ -25,7 +27,15 @@ public class Dante extends GameObject {
 
     private transient BufferedImage bulletImage;
 
-    private Levels currentLevel = Levels.Heresy;
+    public Levels getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public static void setCurrentLevel(Levels currentLevel) {
+        currentLevel = currentLevel;
+    }
+
+    public static Levels currentLevel = Levels.Heresy;
 
     public static void setInstance(GameObject instance) {
         Dante.instance = instance;
@@ -427,7 +437,7 @@ public class Dante extends GameObject {
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
 
-            if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())){
+            if(temp.getId() == ID.Block && getBounds().intersects(temp.getBounds())||temp.getId() == ID.Obstacle && getBounds().intersects(temp.getBounds())){
                 x+=velX*-1;
                 y+=velY*-1;
             }
