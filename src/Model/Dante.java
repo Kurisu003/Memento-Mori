@@ -258,10 +258,18 @@ public class Dante extends GameObject {
         }
     }
 
+    /**
+     * Returns the amount of coins
+     * @return number of coins the player has
+     */
     public int getCoins() {
         return coins;
     }
 
+    /**
+     * Sets the coin when the player collects it
+     * @param coins amount of collected coins
+     */
     public void setCoins(int coins) {
         this.coins = coins;
     }
@@ -414,6 +422,8 @@ public class Dante extends GameObject {
         int tempCoin = 0;
         boolean shouldRemoveCoin = false;
 
+
+        //FIXME ConcurrentModificationException
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
 
