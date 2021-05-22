@@ -132,7 +132,6 @@ public class Game extends Canvas implements Runnable {
      */
     public static synchronized Game getInstance(){
         if(instance == null){
-            System.out.println("sers");
             instance = new Game();
         }
         return instance;

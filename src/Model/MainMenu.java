@@ -187,7 +187,6 @@ public class MainMenu extends MouseAdapter {
             double tempy = 0;
             BufferedImageLoader loader = new BufferedImageLoader();
             try {
-
                 FileInputStream out = new FileInputStream("out1.ser");
                 ObjectInputStream out1 = new ObjectInputStream(out);
                 Handler1.getInstance().objects.clear();
@@ -196,16 +195,16 @@ public class MainMenu extends MouseAdapter {
                 for (int i = 0; i < 500; i++) {
                     Object d1 = out1.readObject();
                     if (d1 instanceof Dante) {
-                        Dante.getInstance();
-                        Dante.getInstance().setX(((Dante)d1).x);
-                        Dante.getInstance().setY(((Dante)d1).y);
-                        Dante.setCoins(((Dante)d1).getCoins());
-                        Dante.setFireSpeed(((Dante)d1).getFireSpeed());
-                        Dante.setHealth(((Dante)d1).getHealth());
-                        Dante.setRange(((Dante)d1).getRange());
-                        Dante.setCurrentLevel(((Dante)d1).currentLevel);
-                        Game.setFolder(((Dante)d1).currentLevel.name());
-                        Dante.setWherePlayerHasBeen(((Dante)d1).getWherePlayerHasBeen());
+                        Dante dante = (Dante) Dante.getInstance();
+                        dante.setX(((Dante)d1).x);
+                        dante.setY(((Dante)d1).y);
+                        dante.setCoins(((Dante)d1).getCoins());
+                        dante.setFireSpeed(((Dante)d1).getFireSpeed());
+                        dante.setHealth(((Dante)d1).getHealth());
+                        dante.setRange(((Dante)d1).getRange());
+                        dante.setCurrentLevel(((Dante)d1).getCurrentLevel());
+                        dante.setWherePlayerHasBeen(((Dante)d1).getWherePlayerHasBeen());
+                        Game.setFolder(((Dante)d1).getCurrentLevel().name());
                     } else if (d1 instanceof Camera) {
                         tempx=((Camera)d1).getTempx();
                         tempy=((Camera)d1).getTempy();
@@ -224,7 +223,7 @@ public class MainMenu extends MouseAdapter {
                         GenerateLevel.getInstance().setLevel(((GenerateLevel)d1).getLevel());
                     }else if(d1 instanceof Miniboss){
                         Handler1.getInstance().addObject(new Miniboss(((Miniboss)d1).x,
-                                ((Miniboss)d1).y, ID.Miniboss, ((Miniboss)d1).hp, 0));
+                                ((Miniboss)d1).y, ID.Miniboss, ((Miniboss)d1).hp));
                     }
                 }
                 }catch (EOFException r){

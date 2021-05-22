@@ -38,7 +38,7 @@ public class Dante extends GameObject {
     private int timeSinceLastDamage = 20;
     private int timeSinceLastObstacleDamage = 20;
 
-    private static int fireSpeed = 0;
+    private int fireSpeed = 0;
     private int range = 0;
     private int damage = 0;
     private int health = 5;
@@ -268,8 +268,8 @@ public class Dante extends GameObject {
      * Sets the coin when the player collects it
      * @param coins amount of collected coins
      */
-    public static void setCoins(int coins) {
-        coins = coins;
+    public void setCoins(int coins) {
+        this.coins = coins;
     }
 
     /**
@@ -311,13 +311,12 @@ public class Dante extends GameObject {
 
     /**
      * This method sets the firespeed for Dante's weapon
-     * @param speed integer to indicate the speed
+     * @param fireSpeed integer to indicate the speed
      */
     // to set firespeed of weapon
-    public static void setFireSpeed(int speed){
-        fireSpeed = speed;
+    public void setFireSpeed(int fireSpeed){
+        this.fireSpeed = fireSpeed;
     }
-
 
     public int getFireSpeed() {
         return fireSpeed;
@@ -327,8 +326,8 @@ public class Dante extends GameObject {
      * @param range integer to indicate the range
      */
     // to set range of Weapon
-    public static void setRange(int range){
-        range = range;
+    public void setRange(int range){
+        this.range = range;
     }
 
     public int getRange() {
@@ -339,20 +338,13 @@ public class Dante extends GameObject {
         return damage;
     }
 
-
-    public static void setSpeed(int speed) {
-        speed = speed;
-
-    }
-
-    public static void setHealth(int health) {
-        health = health;
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public int getHealth() {
         return this.health;
     }
-
 
     /**
      * Method to set different bullet images
@@ -622,8 +614,8 @@ public class Dante extends GameObject {
         return new Rectangle(x + 7,y,50,64);
     }
 
-    public static void setWherePlayerHasBeen(int[][] wherePlayerHasBeen) {
-        wherePlayerHasBeen = wherePlayerHasBeen;
+    public void setWherePlayerHasBeen(int[][] wherePlayerHasBeen) {
+        Dante.wherePlayerHasBeen = wherePlayerHasBeen;
     }
     public  int[][] getWherePlayerHasBeen() {
         return wherePlayerHasBeen;
@@ -631,8 +623,8 @@ public class Dante extends GameObject {
     public static void setInstance(GameObject instance) {
         Dante.instance = instance;
     }
-    public static void setCurrentLevel(Levels currentLevel) {
-        currentLevel = currentLevel;
+    public void setCurrentLevel(Levels currentLevel) {
+        Dante.currentLevel = currentLevel;
     }
     public Levels getCurrentLevel() {
         return currentLevel;

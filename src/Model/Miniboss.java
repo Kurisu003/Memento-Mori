@@ -15,8 +15,7 @@ import java.util.Random;
  */
 public class Miniboss extends GameObject {
 
-    int hp = 10000;
-
+    int hp;
 
     private transient final BufferedImage hpImage;
     private transient final BufferedImage noHpImage;
@@ -31,12 +30,11 @@ public class Miniboss extends GameObject {
      * @param y y-coordinate of the position
      * @param id ID of this object
      * @param health amount of health
-     * @param speed amount of speed
      */
-    public Miniboss(int x, int y, ID id, int health, int speed) {
+    public Miniboss(int x, int y, ID id, int health) {
         super(x, y, id);
         BufferedImageLoader loader = new BufferedImageLoader();
-        this.hp=health;
+        this.hp = health;
         dante = (Dante) Dante.getInstance();
 
         sprites = new ArrayList<>();
@@ -57,7 +55,7 @@ public class Miniboss extends GameObject {
     @Override
     public void tick(){
         for(GameObject temp: Handler1.getInstance().objects){
-            if(temp.id==ID.Dante){
+            if(temp.id == ID.Dante){
                 double diffx=x-temp.getX()-32;
                 double diffy=y-temp.getY()-32;
                 double distance=Math.sqrt((x-temp.getX())*(x-temp.getX())+(y-temp.getY())*(y- temp.getY()));
@@ -114,6 +112,7 @@ public class Miniboss extends GameObject {
         }
 
         for(int i = 0; i < hp/100; i++) {
+            System.out.println("test");
             g.drawImage(hpImage, (int) Camera.getInstance().getX() + i * 10 + 50,
                     (int) Camera.getInstance().getY() + 64 * 8, null);
         }
