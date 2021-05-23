@@ -36,7 +36,7 @@ public class SmartEnemy extends GameObject{
         super(x, y, id);
         this.hp += health;
         this.speed = speed;
-        enemySprites = Game.getInstance().getEnemySprites();
+        enemySprites = Game.getInstance(22).getEnemySprites();
         displayedImage = enemySprites.get(0);
     }
 

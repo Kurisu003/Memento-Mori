@@ -22,11 +22,11 @@ public class DamageObstacle extends GameObject{
     public void tick() {
         if(isSpike) {
             frameCounter = (frameCounter + 1) % 300;
-            displayImage = Game.getInstance().getDamageObstacleSprites().get((frameCounter / 10) + 8);
+            displayImage = Game.getInstance(1).getDamageObstacleSprites().get((frameCounter / 10) + 8);
         }
         else {
             frameCounter = (frameCounter + 1) % 64;
-            displayImage = Game.getInstance().getDamageObstacleSprites().get(frameCounter / 8);
+            displayImage = Game.getInstance(2).getDamageObstacleSprites().get(frameCounter / 8);
         }
     }
 

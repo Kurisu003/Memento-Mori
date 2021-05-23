@@ -560,7 +560,7 @@ public class Dante extends GameObject {
                     (int)Camera.getInstance().getY() + 10,
                     null);
 
-        g.drawImage(Game.getInstance().getCoinSprites().get(0),
+        g.drawImage(Game.getInstance(20).getCoinSprites().get(0),
                 (int) Camera.getInstance().getX() + 20,
                 (int) Camera.getInstance().getY() + 64,
                 null);
@@ -612,7 +612,7 @@ public class Dante extends GameObject {
      */
     private void changeToNextLevel(){
         currentLevel = currentLevel.next();
-        Game.getInstance().changeLevel(currentLevel.name(), currentLevel.ordinal() + 5);
+        Game.getInstance(21).changeLevel(currentLevel.name(), currentLevel.ordinal() + 5);
         //Game.getInstance().changeLevel(currentLevel.name(), 5);
 
         for(int i = 0; i < 7; i++){

@@ -49,9 +49,9 @@ public class Enemy extends GameObject {
         int choose = r.nextInt(50);
 
         if (Dante.getInstance().getX() < x)
-            displayedImage = Game.getInstance().getEnemySprites().get(68);
+            displayedImage = Game.getInstance(18).getEnemySprites().get(68);
         else
-            displayedImage = Game.getInstance().getEnemySprites().get(69);
+            displayedImage = Game.getInstance(19).getEnemySprites().get(69);
 
 
         for(int i = 0; i < Handler1.getInstance().objects.size(); i++) {

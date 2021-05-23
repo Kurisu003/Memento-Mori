@@ -40,8 +40,8 @@ public class ShotEnemy extends GameObject{
         super(x, y, id);
         loader = new BufferedImageLoader();
         bulletImage = loader.loadImage("../Assets/Bullet.png");
-        left = Game.getInstance().getEnemySprites().get(70);
-        right = Game.getInstance().getEnemySprites().get(71);
+        left = Game.getInstance(15).getEnemySprites().get(70);
+        right = Game.getInstance(16).getEnemySprites().get(71);
         this.hp += health;
         this.speed = speed;
     }

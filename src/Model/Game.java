@@ -133,11 +133,11 @@ public class Game extends Canvas implements Runnable {
     }
 
     /**
-     * This is the main which starts the whole game by calling {@link #getInstance()}.
+     * This is the main which starts the whole game by calling {@link #getInstance(int test)}.
      * @param args
      */
     public static void main(String[] args) {
-        Game.getInstance();
+        Game.getInstance(0);
     }
 
     /**
@@ -146,8 +146,9 @@ public class Game extends Canvas implements Runnable {
      * For this implementation the singleton pattern is used.
      * @return the one and only instance of Game
      */
-    public static synchronized Game getInstance(){
+    public static synchronized Game getInstance(int test){
         if(instance == null){
+            System.out.println(test);
             instance = new Game();
         }
         return instance;

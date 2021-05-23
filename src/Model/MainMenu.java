@@ -152,7 +152,7 @@ public class MainMenu extends MouseAdapter {
                 }
             }
             dante.getWherePlayerHasBeen()[3][3] = 1;
-            Game.getInstance().loadsprites(2 + Dante.currentLevel.ordinal());
+            Game.getInstance(3).loadsprites(2 + Dante.currentLevel.ordinal());
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
             Game.setState(GameState.Game);
@@ -171,7 +171,7 @@ public class MainMenu extends MouseAdapter {
                 }
             }
             dante.getWherePlayerHasBeen()[3][3] = 1;
-            Game.getInstance().loadsprites(5);
+            Game.getInstance(4).loadsprites(5);
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
             Game.setState(GameState.Game);
@@ -191,7 +191,7 @@ public class MainMenu extends MouseAdapter {
                 }
             }
             dante.getWherePlayerHasBeen()[3][3] = 1;
-            Game.getInstance().loadsprites(5);
+            Game.getInstance(5).loadsprites(5);
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
             Game.setState(GameState.Game);
@@ -254,7 +254,7 @@ public class MainMenu extends MouseAdapter {
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-            Game.getInstance().loadspritesOfSavedGame(0);
+            Game.getInstance(6).loadspritesOfSavedGame(0);
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
             Camera.getInstance().setX(tempx);
             Camera.getInstance().setY(tempy);
@@ -277,9 +277,9 @@ public class MainMenu extends MouseAdapter {
     private void selectAndSetSaveState(int saveState){
         Game.setState(GameState.Game);
         Music.setIsMenu(false);
-        Game.getInstance().setSelectedSaveState(saveState);
+        Game.getInstance(7).setSelectedSaveState(saveState);
         try {
-            FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
+            FileOutputStream out = new FileOutputStream("out" + Game.getInstance(8).getSelectedSaveState() + ".ser");
             out.write(("").getBytes());
             ObjectOutputStream out1= new ObjectOutputStream(out);
             for (int i =0;i<Handler1.getInstance().objects.size(); i++) {

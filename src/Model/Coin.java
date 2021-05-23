@@ -24,7 +24,6 @@ public class Coin extends GameObject{
     public Coin(int x, int y){
         this.x = x;
         this.y = y;
-        sprites = Game.getInstance().getCoinSprites();
     }
 
     /**
@@ -35,7 +34,7 @@ public class Coin extends GameObject{
         frameCounter = (frameCounter + 1) % 110;
 
         if(frameCounter % 10 == 0)
-            displayImage = sprites.get(frameCounter / 10);
+            displayImage = Game.getInstance(23).getCoinSprites().get(frameCounter / 10);
     }
 
     /**

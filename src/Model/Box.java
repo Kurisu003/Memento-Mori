@@ -31,7 +31,7 @@ public class Box extends GameObject {
         super(x, y,id);
         this.isPortal = isPortal;
         if(isPortal)
-            portalSprites = Game.getInstance().getPortalSprites();
+            portalSprites = Game.getInstance(17).getPortalSprites();
         if(smallHitboxTrue){
             hitboxW = 58;
             hitboxH = 58;
