@@ -122,5 +122,13 @@ public class LoadLevel{
                 }
             }
         }
+
+        if(Dante.currentLevel == Levels.Limbo) {
+            Handler1.getInstance().addObject(new Coin(3 * 1088 + 490, 3 * 576 + 350));
+            Handler1.getInstance().addObject(new Coin(3 * 1088 + 490 + 36, 3 * 576 + 350));
+            Handler1.getInstance().addObject(new Coin(3 * 1088 + 490 + 34 + 36, 3 * 576 + 350));
+            Handler1.getInstance().addObject(new Coin(3 * 1088 + 490 + 18, 3 * 576 + 30 + 350));
+            Handler1.getInstance().addObject(new Coin(3 * 1088 + 490 + 18 + 36, 3 * 576 + 30 + 350));
+        }
     }
 }

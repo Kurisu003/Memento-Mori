@@ -43,7 +43,7 @@ public class Dante extends GameObject {
     private int damage = 0;
     private int health = 7;
     private int armor = 5;
-    private int coins = 1000;
+    private int coins = 100;
 
     private int frameCount = 0;
     private int gameOverScreenCounter = 0;
@@ -51,6 +51,7 @@ public class Dante extends GameObject {
 
     private transient BufferedImage bufferedBodyImage;
     private transient BufferedImage bufferedGunImage;
+    private transient BufferedImage darken;
 
     /**
      * This is the constructor for Dante
@@ -118,6 +119,8 @@ public class Dante extends GameObject {
         gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver3.png"));
         gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver4.png"));
         gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver5.png"));
+
+        darken = loader.loadImage("../Assets/Darken.png");
     }
 
     /**
@@ -567,16 +570,20 @@ public class Dante extends GameObject {
                     (int)Camera.getInstance().getY() + 10,
                     null);
 
+
+        g.drawImage(darken, (int) Camera.getInstance().getX(), (int) Camera.getInstance().getY() + 60, null);
+
         g.drawImage(Game.getInstance(20).getCoinSprites().get(0),
                 (int) Camera.getInstance().getX() + 20,
                 (int) Camera.getInstance().getY() + 64,
                 null);
 
+
         g.setColor(Color.WHITE);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         g.drawString("x" + coins,
                 (int) Camera.getInstance().getX() + 10,
-                (int) Camera.getInstance().getY() + 115);
+                (int) Camera.getInstance().getY() + 110);
 
         // Sets health to a min value of 0
         if (health <= 0) {
