@@ -43,7 +43,7 @@ public class Dante extends GameObject {
     private int damage = 0;
     private int health = 5;
     private int armor = 2;
-    private int coins = 100;
+    private int coins = 1000;
 
     private int frameCount = 0;
     private int gameOverScreenCounter = 0;
@@ -617,7 +617,7 @@ public class Dante extends GameObject {
      */
     private void changeToNextLevel(){
         currentLevel = currentLevel.next();
-        Game.getInstance(21).changeLevel(currentLevel.name(), currentLevel.ordinal() + 5);
+        Game.getInstance(21).changeLevel(currentLevel.name(), currentLevel.ordinal() + 2);
         //Game.getInstance().changeLevel(currentLevel.name(), 5);
 
         for(int i = 0; i < 7; i++){

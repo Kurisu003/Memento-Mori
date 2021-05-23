@@ -54,8 +54,6 @@ public class KeyInput extends KeyAdapter {
                     Game.setState(GameState.Game);
                     Camera.getInstance().setX(EscMenu.getTempCamX());
                     Camera.getInstance().setY(EscMenu.getTempCamY());
-                    Music.setIsShop(false);
-                    Music.setIsMenu(true);
                 }
             }
         }
