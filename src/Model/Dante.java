@@ -416,7 +416,7 @@ public class Dante extends GameObject {
         int damage = 100;
         if(shotY != y || shotX != x){
             Handler1.getInstance().addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, shotX, shotY,
-                    range, damage + this.damage * 20, bulletImage));
+                    range, damage + this.damage * 20, bulletImage,10));
             Music.getThreadPool().execute(new Music("res/Sounds/Guns/M4/GunSound1.wav", ID.ShootingSound));
         }
     }
@@ -472,6 +472,8 @@ public class Dante extends GameObject {
             if(temp.getId() == ID.Portal && getBounds().intersects(temp.getBounds()))
                 shouldChangeLevel = true;
             if(temp.getId().equals(ID.Miniboss) && getBounds().intersects(temp.getBounds()))
+                doAction(1);
+            if(temp.getId().equals(ID.Bullet) && getBounds().intersects(temp.getBounds()))
                 doAction(1);
             if(temp.getId().equals(ID.Coin) && getBounds().intersects(temp.getBounds())){
                 Music.getThreadPool().execute(new Music("res/Music/CoinSound.wav", ID.Coin));
