@@ -286,6 +286,13 @@ public class EscMenu extends MouseAdapter {
         g.drawImage(Game.getInstance(13).getCoinSprites().get(0), 2340, -200, null);
         g.drawImage(Game.getInstance(14).getCoinSprites().get(0), 2280, -68, null);
 
+        // For amount of hearts
+
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 25));
+        g.drawString(String.valueOf(((Dante) Dante.getInstance()).getHealth()), 2195, -40);
+
         g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
     }
     /**
