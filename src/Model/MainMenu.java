@@ -152,12 +152,10 @@ public class MainMenu extends MouseAdapter {
                 }
             }
             dante.getWherePlayerHasBeen()[3][3] = 1;
-            Game.getInstance().loadsprites(5);
+            Game.getInstance().loadsprites(2);
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
             Game.setState(GameState.Game);
-
-
             selectAndSetSaveState(1);
         }
 
