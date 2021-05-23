@@ -112,7 +112,6 @@ public class Miniboss extends GameObject {
         }
 
         for(int i = 0; i < hp/100; i++) {
-            System.out.println("test");
             g.drawImage(hpImage, (int) Camera.getInstance().getX() + i * 10 + 50,
                     (int) Camera.getInstance().getY() + 64 * 8, null);
         }

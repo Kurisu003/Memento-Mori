@@ -184,8 +184,15 @@ public class EscMenu extends MouseAdapter {
 
         // For Gameover
         else if(Game.getState().equals(GameState.GameOver)){
-            if(mx >= -2000 && my >= -2000){
-//                System.out.println(mx + "   " + my);
+            if (mx >= Camera.getInstance().getX() + 47 && mx <= Camera.getInstance().getX() + 542 &&
+                my >= Camera.getInstance().getY() + 442 && my <= Camera.getInstance().getY() + 492){
+                // TODO Try again (from checkpoint if available)
+            }
+            else if (mx >= Camera.getInstance().getX() + 547 && mx <= Camera.getInstance().getX() + 1042 &&
+                     my >= Camera.getInstance().getY() + 442 && my <= Camera.getInstance().getY() + 492) {
+                System.out.println("test");
+                MainMenu.setCamera(1088, 0);
+                Game.setState(GameState.MainMenu);
             }
         }
     }

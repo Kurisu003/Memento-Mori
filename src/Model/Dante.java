@@ -5,6 +5,7 @@ import View.BufferedImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -23,7 +24,7 @@ public class Dante extends GameObject {
 
     private transient final BufferedImage fullHeart;
     private transient final BufferedImage fullArmor;
-    private transient final BufferedImage gameOverScreen;
+    private transient final ArrayList<BufferedImage> gameOverScreen;
 
     private transient BufferedImage bulletImage;
 
@@ -46,6 +47,7 @@ public class Dante extends GameObject {
     private int coins = 100;
 
     private int frameCount = 0;
+    private int gameOverScreenCounter = 0;
     private boolean portalExists;
 
     private transient BufferedImage bufferedBodyImage;
@@ -109,7 +111,14 @@ public class Dante extends GameObject {
         fullArmor = loader.loadImage("../Assets/FullShield.png");
 
         bulletImage = loader.loadImage("../Assets/Bullet.png");
-        gameOverScreen = loader.loadImage("../MainMenuAssets/GameOver/GameOverScreen.png");
+
+        gameOverScreen = new ArrayList<>();
+        gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver0.png"));
+        gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver1.png"));
+        gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver2.png"));
+        gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver3.png"));
+        gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver4.png"));
+        gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver5.png"));
     }
 
     /**
@@ -475,7 +484,6 @@ public class Dante extends GameObject {
                 if(((DamageObstacle) temp).getIsSpike()){
                     if(((DamageObstacle) temp).getFrameCounter() >= 50 && ((DamageObstacle) temp).getFrameCounter() <= 180){
                         this.doObstacleDamage();
-                        System.out.println("test");
                     }
                 }
                 else
@@ -565,7 +573,8 @@ public class Dante extends GameObject {
 
         // Sets health to a min value of 0
         if (health <= 0) {
-            g.drawImage(gameOverScreen,
+            gameOverScreenCounter = ++gameOverScreenCounter % 600;
+            g.drawImage(gameOverScreen.get(gameOverScreenCounter / 100),
                     (int) Camera.getInstance().getX(),
                     (int) Camera.getInstance().getY(),
                     null);

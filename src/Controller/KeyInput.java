@@ -44,7 +44,6 @@ public class KeyInput extends KeyAdapter {
 
                 if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.MainMenu)){
 //                    Camera.getInstance().setX(1088);
-                    System.out.println("test");
                     MainMenu.setCamera(1088,0);
                 }
                 else if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.Game)){
