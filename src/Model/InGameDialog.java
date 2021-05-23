@@ -44,11 +44,6 @@ public class InGameDialog extends GameObject implements Serializable {
      */
     @Override
     public void render(Graphics g) {
-        //Only for the first level (Limbo)
-        if(this.levelName.equals("Limbo"))
-            tutorialLimbo(g);
-
-        else {
             Graphics2D g2 = (Graphics2D) g;
 
             //Font
@@ -56,35 +51,11 @@ public class InGameDialog extends GameObject implements Serializable {
             g.setColor(Color.BLACK);
             g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
             g2.drawString(levelName, 70 + 3 * 64 * 17, 550 + 3 * 64 * 9);
-        }
 
         /*
         x = 3*64*17
         y = 3*64*9
          */
-    }
-
-    /**
-     * Graphics to be drawn for the tutorial.
-     * @param g graphics where the dialog should be drawn
-     */
-    public void tutorialLimbo(Graphics g){
-        //Tutorial rectangle
-        Graphics2D g2 = (Graphics2D) g;
-
-        g2.setComposite(halfVisible);
-        g2.setColor(Color.DARK_GRAY);
-        g2.fillRect(250+3*64*17+3*64, 400+3*64*9, 200, 80);
-
-        //Font
-        g2.setComposite(fullVisible);
-        g2.setColor(Color.BLACK);
-        g2.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-        g2.drawString("MOVE WITH",290+3*64*17+3*64, 435+3*64*9);
-        g2.drawString("W, A, S, D", 300+3*64*17+3*64, 460+3*64*9);
-
-
-
     }
 
     /**
