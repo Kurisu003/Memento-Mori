@@ -167,9 +167,8 @@ public class SmartEnemy extends GameObject{
 //        g.fillRect(x,y,32,32);
 
         if(Game.showHitbox) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(Color.green);
-            g2.draw(getBoundsBigger());
+            g.setColor(Color.green);
+            g.fillRect(x, y, 32, 37);
         }
 
         g.drawImage(displayedImage, x + directionalOffsetForAnimationX, y - 32 + directionalOffsetForAnimationY, null);

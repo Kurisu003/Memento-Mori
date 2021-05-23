@@ -123,6 +123,6 @@ public class Miniboss extends GameObject {
      */
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 128, 128);
+        return new Rectangle(x, y, 118, 128);
     }
 }
