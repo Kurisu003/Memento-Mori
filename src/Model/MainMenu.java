@@ -144,6 +144,13 @@ public class MainMenu extends MouseAdapter {
             Dante.setInstance(null);
             Game.setFolder();
             Dante.getInstance();
+            Dante dante = (Dante) Dante.getInstance();
+            for(int i = 0; i < 7; i++){
+                for(int j = 0; j < 7; j++){
+                    dante.getWherePlayerHasBeen()[i][j] = 0;
+                }
+            }
+            dante.getWherePlayerHasBeen()[3][3] = 1;
             Game.getInstance().loadsprites(5);
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
@@ -158,6 +165,13 @@ public class MainMenu extends MouseAdapter {
             Dante.setInstance(null);
             Game.setFolder();
             Dante.getInstance();
+            Dante dante = (Dante) Dante.getInstance();
+            for(int i = 0; i < 7; i++){
+                for(int j = 0; j < 7; j++){
+                    dante.getWherePlayerHasBeen()[i][j] = 0;
+                }
+            }
+            dante.getWherePlayerHasBeen()[3][3] = 1;
             Game.getInstance().loadsprites(5);
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
@@ -171,6 +185,13 @@ public class MainMenu extends MouseAdapter {
             Dante.setInstance(null);
             Game.setFolder();
             Dante.getInstance();
+            Dante dante = (Dante) Dante.getInstance();
+            for(int i = 0; i < 7; i++){
+                for(int j = 0; j < 7; j++){
+                    dante.getWherePlayerHasBeen()[i][j] = 0;
+                }
+            }
+            dante.getWherePlayerHasBeen()[3][3] = 1;
             Game.getInstance().loadsprites(5);
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
