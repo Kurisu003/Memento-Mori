@@ -212,7 +212,7 @@ public class MainMenu extends MouseAdapter {
                     }else if (d1 instanceof Box){
                         if(((Box)d1).getId()==ID.Obstacle) {
                             Handler1.getInstance().addObject(new Box(((Box) d1).x, ((Box) d1).y, ID.Obstacle, loader.loadImage(
-                                    "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
+                                    "../Levels/" + Game.getFolder() + "/Obstacle.png"), true, false));
                         }
                     } else if (d1 instanceof Enemy) {
                         Handler1.getInstance().objects.add(new Enemy(((Enemy) d1).x,((Enemy)d1).y,ID.Enemy,((Enemy)d1).getHp(),((Enemy)d1).getSpeed()));

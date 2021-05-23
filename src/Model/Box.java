@@ -4,17 +4,21 @@ import Controller.Handler1;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * This class represents every block the background is made of.
  */
 public class Box extends GameObject {
-    private transient final BufferedImage bufferedImage;
+    private transient BufferedImage displayImage;
 
     private int hitboxW;
     private int hitboxH;
     private int xOffset;
     private int yOffset;
+    private boolean isPortal;
+    private int frameCounter;
+    private ArrayList<BufferedImage> portalSprites;
 
     /**
      * Constructor to create an instance.
@@ -23,8 +27,11 @@ public class Box extends GameObject {
      * @param id this object's id
      * @param bufferedImage the image which should represent the Box
      */
-    public Box(int x, int y, ID id, BufferedImage bufferedImage, boolean smallHitboxTrue) {
+    public Box(int x, int y, ID id, BufferedImage bufferedImage, boolean smallHitboxTrue, boolean isPortal) {
         super(x, y,id);
+        this.isPortal = isPortal;
+        if(isPortal)
+            portalSprites = Game.getInstance().getPortalSprites();
         if(smallHitboxTrue){
             hitboxW = 58;
             hitboxH = 58;
@@ -35,7 +42,7 @@ public class Box extends GameObject {
             hitboxH = 64;
             hitboxW = 64;
         }
-        this.bufferedImage = bufferedImage;
+        this.displayImage = bufferedImage;
     }
 
     /**
@@ -44,6 +51,12 @@ public class Box extends GameObject {
 
     @Override
     public void tick() {
+        if(isPortal) {
+            frameCounter = (frameCounter + 1) % 80;
+            if (frameCounter % 10 == 0) {
+                displayImage = portalSprites.get(frameCounter / 10);
+            }
+        }
     }
 
     /**
@@ -52,7 +65,7 @@ public class Box extends GameObject {
      */
     @Override
     public void render(Graphics g) {
-        g.drawImage(bufferedImage, x, y, null);
+        g.drawImage(displayImage, x, y, null);
 
 //        To draw hitboxes
         if(Game.showHitbox) {
@@ -68,7 +81,10 @@ public class Box extends GameObject {
      */
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x + xOffset,y + yOffset, hitboxW, hitboxH);
+        if(!isPortal)
+            return new Rectangle(x + xOffset,y + yOffset, hitboxW, hitboxH);
+        else
+            return new Rectangle(x + xOffset,y + yOffset, 64, 35);
     }
 
 

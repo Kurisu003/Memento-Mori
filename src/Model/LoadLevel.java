@@ -53,45 +53,45 @@ public class LoadLevel{
                                 // TOP LEFT CORNER
                                 if(x == 0 && y == 0){
                                     Handler1.getInstance().addObject(new Box(j * 1088, i * 576, ID.Block,
-                                            wallSprites.get(5), false));
+                                            wallSprites.get(5), false, false));
                                 }
                                 // y is always 8 so it can be multiplied
                                 // BOTTOM LEFT CORNER
                                 else if(x == 0 && y == 8){
                                     Handler1.getInstance().addObject(new Box(j * 1088, 64 * y + i * 576,
-                                    ID.Block, wallSprites.get(0), false));
+                                    ID.Block, wallSprites.get(0), false, false));
                                 }
                                 // TOP RIGHT CORNER
                                 else if(x == 16 && y == 0){
                                     Handler1.getInstance().addObject(new Box(64 * x + j * 1088, i * 576,
-                                    ID.Block, wallSprites.get(7), false));
+                                    ID.Block, wallSprites.get(7), false, false));
                                 }
                                 // BOTTOM RIGHT CORNER
                                 else if(x == 16 && y == 8){
                                     Handler1.getInstance().addObject(new Box(64 * x + j * 1088, 64 * y + i * 576,
-                                    ID.Block, wallSprites.get(2), false));
+                                    ID.Block, wallSprites.get(2), false, false));
                                 }
 
                                 // To check Walls
                                 // TOP WALL
                                 else if(x > 0 && x < 16 && y == 0){
                                     Handler1.getInstance().addObject(new Box(64 * x + j * 1088, i * 576,
-                                    ID.Block, wallSprites.get(6), false));
+                                    ID.Block, wallSprites.get(6), false, false));
                                 }
                                 // BOTTOM WALL
                                 else if(x > 0 && x < 16){
                                     Handler1.getInstance().addObject(new Box(64 * x + j * 1088, 64 * y + i * 576,
-                                    ID.Block, wallSprites.get(1), false));
+                                    ID.Block, wallSprites.get(1), false, false));
                                 }
                                 // LEFT WALL
                                 else if(x == 0){
                                     Handler1.getInstance().addObject(new Box(j * 1088, 64 * y + i * 576,
-                                    ID.Block, wallSprites.get(3), false));
+                                    ID.Block, wallSprites.get(3), false, false));
                                 }
                                 // RIGHT WALL
                                 else {
                                     Handler1.getInstance().addObject(new Box(64 * x + j * 1088, 64 * y + i * 576,
-                                    ID.Block, wallSprites.get(4), false));
+                                    ID.Block, wallSprites.get(4), false, false));
                                 }
 
                                 if(GenerateLevel.getInstance().getLevel()[i - 1][j] != 0 && y == 0 && x == 8){
