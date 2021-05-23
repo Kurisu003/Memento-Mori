@@ -24,7 +24,7 @@ public class Music implements LineListener, Runnable {
 
     private boolean playCompleted = false;
 
-    private static final Executor threadPool = Executors.newCachedThreadPool();
+    private static Executor threadPool = Executors.newCachedThreadPool();
 
     /**
      * This is the public constructor of Music which must be called when a Music object is created
@@ -225,27 +225,11 @@ public class Music implements LineListener, Runnable {
     }
 
     /**
-     * Getter for the isShop value to check if the current room is the shop
-     * @return true -> if isShop, false -> if !isShop
-     */
-    public static boolean isShop() {
-        return isShop;
-    }
-
-    /**
-     * Setter for the isMenu value to check whether it is the main menu
+     * Setter for the isMenu value to check whether it is the main menu or the esc menu
      * @param isMenu true or false
      */
     public static void setIsMenu(boolean isMenu) {
         Music.isMenu = isMenu;
-    }
-
-    /**
-     * Getter for the isMenu value to check if the current room is the menu
-     * @return true -> if isMenu, false -> if !isMenu
-     */
-    public static boolean isMenu() {
-        return isMenu;
     }
 
     /**
