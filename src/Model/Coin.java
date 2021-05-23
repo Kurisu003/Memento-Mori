@@ -24,7 +24,6 @@ public class Coin extends GameObject{
     public Coin(int x, int y){
         this.x = x;
         this.y = y;
-        g = Game.getInstance().getG();
         sprites = Game.getInstance().getCoinSprites();
     }
 
