@@ -25,8 +25,9 @@ public class ShotEnemy extends GameObject{
     private int hp = 200;
     private final int speed;
 
-    transient BufferedImage displayedImage;
-    transient ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
+    private transient BufferedImage displayedImage;
+    private final transient BufferedImage left;
+    private final transient BufferedImage right;
 
     /**
      * Constructor to create an instance.
@@ -38,15 +39,10 @@ public class ShotEnemy extends GameObject{
      */
     public ShotEnemy(int x, int y, ID id, int health, int speed) {
         super(x, y, id);
+        left = Game.getInstance().getEnemySprites().get(70);
+        right = Game.getInstance().getEnemySprites().get(71);
         this.hp += health;
         this.speed = speed;
-
-        BufferedImageLoader loader = new BufferedImageLoader();
-        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
-        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation2.png"));
-        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
-        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation4.png"));
-        //this.image=image;
     }
 
     /**
@@ -58,11 +54,10 @@ public class ShotEnemy extends GameObject{
         x+=velX;
         y+=velY;
 
-        if (++tickCounter % 5 == 0){
-            displayedImage = enemyAnimation.get(animationCounter);
-            animationCounter = (animationCounter + 1) % 4;
-        }
-
+        if(Dante.getInstance().getX() <= x)
+            displayedImage = left;
+        else
+            displayedImage = right;
 
         choose = r.nextInt(50);
 
@@ -157,7 +152,7 @@ public class ShotEnemy extends GameObject{
      */
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x-8,y-8,40,40);
+        return new Rectangle(x,y,64,64);
     }
 
     /**

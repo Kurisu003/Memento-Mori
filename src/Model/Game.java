@@ -127,6 +127,9 @@ public class Game extends Canvas implements Runnable {
 
         enemySprites.add(loader.loadImage("../Enemies/DumbEnemy/SpriteLeft.png"));
         enemySprites.add(loader.loadImage("../Enemies/DumbEnemy/SpriteRight.png"));
+
+        enemySprites.add(loader.loadImage("../Enemies/ShotEnemy/ShotEnemyLeft.png"));
+        enemySprites.add(loader.loadImage("../Enemies/ShotEnemy/ShotEnemyRight.png"));
     }
 
     /**
