@@ -13,13 +13,12 @@ import java.util.Random;
  */
 public class ShotEnemy extends GameObject{
 
-    transient BufferedImage image;
+    private final BufferedImageLoader loader;
+    private final transient BufferedImage bulletImage;
 
     int tickCounter = 0;
-    int animationCounter = 0;
 
     Random r= new Random();
-    Random r2= new Random();
     int choose=0;
 
     private int hp = 200;
@@ -39,6 +38,8 @@ public class ShotEnemy extends GameObject{
      */
     public ShotEnemy(int x, int y, ID id, int health, int speed) {
         super(x, y, id);
+        loader = new BufferedImageLoader();
+        bulletImage = loader.loadImage("../Assets/Bullet.png");
         left = Game.getInstance().getEnemySprites().get(70);
         right = Game.getInstance().getEnemySprites().get(71);
         this.hp += health;
@@ -93,7 +94,10 @@ public class ShotEnemy extends GameObject{
             }
             if(temp.id==ID.Dante){
                 if (++tickCounter % (r.nextInt(250 - 200) + 200) == 0) {
-                    Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet, temp.getX() +(r.nextInt( 11+11) -11), temp.getY()+(r.nextInt(11 +11) -11), 30, 1, image));
+                    Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet,
+                            temp.getX() +(r.nextInt( 11+11) -11),
+                            temp.getY()+(r.nextInt(11 +11) -11),
+                            30, 1, bulletImage));
                 }
             }
         }
