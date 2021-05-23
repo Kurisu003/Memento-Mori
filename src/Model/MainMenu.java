@@ -152,6 +152,7 @@ public class MainMenu extends MouseAdapter {
                 }
             }
             dante.getWherePlayerHasBeen()[3][3] = 1;
+            dante.setCurrentLevel(Levels.Limbo);
             Game.getInstance(3).loadsprites(2 + Dante.currentLevel.ordinal());
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
@@ -171,7 +172,8 @@ public class MainMenu extends MouseAdapter {
                 }
             }
             dante.getWherePlayerHasBeen()[3][3] = 1;
-            Game.getInstance(4).loadsprites(5);
+            dante.setCurrentLevel(Levels.Limbo);
+            Game.getInstance(4).loadsprites(2 + Dante.currentLevel.ordinal());
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
             Game.setState(GameState.Game);
@@ -191,7 +193,8 @@ public class MainMenu extends MouseAdapter {
                 }
             }
             dante.getWherePlayerHasBeen()[3][3] = 1;
-            Game.getInstance(5).loadsprites(5);
+            dante.setCurrentLevel(Levels.Limbo);
+            Game.getInstance(5).loadsprites(2 + Dante.currentLevel.ordinal());
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
             Game.setState(GameState.Game);
@@ -262,10 +265,122 @@ public class MainMenu extends MouseAdapter {
 
         }
 
-        if(mx >= 442 && mx <= 642 && my >= 153 && my <= 353)
-            Game.setState(GameState.Game);
-        if(mx >= 805 && mx <= 1005 && my >= 153 && my <= 353)
-            Game.setState(GameState.Game);
+        if(mx >= 442 && mx <= 642 && my >= 153 && my <= 353){
+            double tempx = 0;
+            double tempy = 0;
+            BufferedImageLoader loader = new BufferedImageLoader();
+            try {
+                FileInputStream out = new FileInputStream("out2.ser");
+                ObjectInputStream out1 = new ObjectInputStream(out);
+                Handler1.getInstance().objects.clear();
+                Dante.setInstance(null);
+                try{
+                    for (int i = 0; i < 500; i++) {
+                        Object d1 = out1.readObject();
+                        if (d1 instanceof Dante) {
+                            Dante dante = (Dante) Dante.getInstance();
+                            dante.setX(((Dante)d1).x);
+                            dante.setY(((Dante)d1).y);
+                            dante.setCoins(((Dante)d1).getCoins());
+                            dante.setFireSpeed(((Dante)d1).getFireSpeed());
+                            dante.setHealth(((Dante)d1).getHealth());
+                            dante.setRange(((Dante)d1).getRange());
+                            dante.setDamage(((Dante)d1).getDamage());
+                            dante.setCurrentLevel(((Dante)d1).getCurrentLevel());
+                            dante.setWherePlayerHasBeen(((Dante)d1).getWherePlayerHasBeen());
+                            Game.setFolder(((Dante)d1).getCurrentLevel().name());
+                        } else if (d1 instanceof Camera) {
+                            tempx=((Camera)d1).getTempx();
+                            tempy=((Camera)d1).getTempy();
+                        }else if (d1 instanceof Box){
+                            if(((Box)d1).getId()==ID.Obstacle) {
+                                Handler1.getInstance().addObject(new Box(((Box) d1).x, ((Box) d1).y, ID.Obstacle, loader.loadImage(
+                                        "../Levels/" + Game.getFolder() + "/Obstacle.png"), true, false));
+                            }
+                        } else if (d1 instanceof Enemy) {
+                            Handler1.getInstance().objects.add(new Enemy(((Enemy) d1).x,((Enemy)d1).y,ID.Enemy,((Enemy)d1).getHp(),((Enemy)d1).getSpeed()));
+                        } else if (d1 instanceof SmartEnemy) {
+                            Handler1.getInstance().objects.add(new SmartEnemy(((SmartEnemy) d1).x,((SmartEnemy)d1).y,ID.SmartEnemy,((SmartEnemy)d1).getHp(),((SmartEnemy)d1).getSpeed()));
+                        } else if (d1 instanceof ShotEnemy) {
+                            Handler1.getInstance().objects.add(new ShotEnemy(((ShotEnemy) d1).x,((ShotEnemy)d1).y,ID.ShotEnemy,((ShotEnemy)d1).getHp(),((ShotEnemy)d1).getSpeed()));
+                        } else if(d1 instanceof GenerateLevel){
+                            GenerateLevel.getInstance().setLevel(((GenerateLevel)d1).getLevel());
+                        }else if(d1 instanceof Miniboss){
+                            Handler1.getInstance().addObject(new Miniboss(((Miniboss)d1).x,
+                                    ((Miniboss)d1).y, ID.Miniboss, ((Miniboss)d1).hp));
+                        }
+                    }
+                }catch (EOFException r){
+                }
+            } catch (FileNotFoundException | ClassNotFoundException exception) {
+                exception.printStackTrace();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            Game.getInstance(6).loadspritesOfSavedGame(0);
+            Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
+            Camera.getInstance().setX(tempx);
+            Camera.getInstance().setY(tempy);
+            Game.setOnlyState(GameState.Game);
+        }
+        if(mx >= 805 && mx <= 1005 && my >= 153 && my <= 353){
+            double tempx = 0;
+            double tempy = 0;
+            BufferedImageLoader loader = new BufferedImageLoader();
+            try {
+                FileInputStream out = new FileInputStream("out3.ser");
+                ObjectInputStream out1 = new ObjectInputStream(out);
+                Handler1.getInstance().objects.clear();
+                Dante.setInstance(null);
+                try{
+                    for (int i = 0; i < 500; i++) {
+                        Object d1 = out1.readObject();
+                        if (d1 instanceof Dante) {
+                            Dante dante = (Dante) Dante.getInstance();
+                            dante.setX(((Dante)d1).x);
+                            dante.setY(((Dante)d1).y);
+                            dante.setCoins(((Dante)d1).getCoins());
+                            dante.setFireSpeed(((Dante)d1).getFireSpeed());
+                            dante.setHealth(((Dante)d1).getHealth());
+                            dante.setRange(((Dante)d1).getRange());
+                            dante.setDamage(((Dante)d1).getDamage());
+                            dante.setCurrentLevel(((Dante)d1).getCurrentLevel());
+                            dante.setWherePlayerHasBeen(((Dante)d1).getWherePlayerHasBeen());
+                            Game.setFolder(((Dante)d1).getCurrentLevel().name());
+                        } else if (d1 instanceof Camera) {
+                            tempx=((Camera)d1).getTempx();
+                            tempy=((Camera)d1).getTempy();
+                        }else if (d1 instanceof Box){
+                            if(((Box)d1).getId()==ID.Obstacle) {
+                                Handler1.getInstance().addObject(new Box(((Box) d1).x, ((Box) d1).y, ID.Obstacle, loader.loadImage(
+                                        "../Levels/" + Game.getFolder() + "/Obstacle.png"), true, false));
+                            }
+                        } else if (d1 instanceof Enemy) {
+                            Handler1.getInstance().objects.add(new Enemy(((Enemy) d1).x,((Enemy)d1).y,ID.Enemy,((Enemy)d1).getHp(),((Enemy)d1).getSpeed()));
+                        } else if (d1 instanceof SmartEnemy) {
+                            Handler1.getInstance().objects.add(new SmartEnemy(((SmartEnemy) d1).x,((SmartEnemy)d1).y,ID.SmartEnemy,((SmartEnemy)d1).getHp(),((SmartEnemy)d1).getSpeed()));
+                        } else if (d1 instanceof ShotEnemy) {
+                            Handler1.getInstance().objects.add(new ShotEnemy(((ShotEnemy) d1).x,((ShotEnemy)d1).y,ID.ShotEnemy,((ShotEnemy)d1).getHp(),((ShotEnemy)d1).getSpeed()));
+                        } else if(d1 instanceof GenerateLevel){
+                            GenerateLevel.getInstance().setLevel(((GenerateLevel)d1).getLevel());
+                        }else if(d1 instanceof Miniboss){
+                            Handler1.getInstance().addObject(new Miniboss(((Miniboss)d1).x,
+                                    ((Miniboss)d1).y, ID.Miniboss, ((Miniboss)d1).hp));
+                        }
+                    }
+                }catch (EOFException r){
+                }
+            } catch (FileNotFoundException | ClassNotFoundException exception) {
+                exception.printStackTrace();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            Game.getInstance(6).loadspritesOfSavedGame(0);
+            Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
+            Camera.getInstance().setX(tempx);
+            Camera.getInstance().setY(tempy);
+            Game.setOnlyState(GameState.Game);
+        }
 
     }
 
