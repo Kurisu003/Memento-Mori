@@ -131,8 +131,12 @@ public class Dante extends GameObject {
         y += velY;
 
         if(levelIsComplete() && !portalExists) {
-            Game.addPortal(3392 + 64, 1856 + 64);
-            portalExists = true;
+            if(currentLevel!=Levels.Fraud) {
+                Game.addPortal(3392 + 64, 1856 + 64);
+                portalExists = true;
+            }else {
+                Handler1.getInstance().addObject(new Miniboss(4,4,ID.Miniboss,50));
+            }
         }
 
         // checks for collision with objects
