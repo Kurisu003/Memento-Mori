@@ -127,7 +127,7 @@ public class Music implements LineListener, Runnable {
                         audioClip.start();
                 }
                 if(!isMenu && !isShop) {
-                    if (this.id == ID.Menu_music)
+                    if (this.id == ID.Menu_music || this.id == ID.Shop_music)
                         audioClip.stop();
                     else if (this.id == ID.BG_music){
                         if(!audioClip.isRunning())
