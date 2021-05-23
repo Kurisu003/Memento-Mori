@@ -248,6 +248,8 @@ public class MainMenu extends MouseAdapter {
                     }else if(d1 instanceof Miniboss){
                         Handler1.getInstance().addObject(new Miniboss(((Miniboss)d1).x,
                                 ((Miniboss)d1).y, ID.Miniboss, ((Miniboss)d1).hp));
+                    }else if (d1 instanceof DamageObstacle){
+                        Handler1.getInstance().addObject(new DamageObstacle(((DamageObstacle)d1).getX(),((DamageObstacle)d1).getY(), ((DamageObstacle)d1).getIsSpike()));
                     }
                 }
                 }catch (EOFException r){
@@ -308,6 +310,8 @@ public class MainMenu extends MouseAdapter {
                         }else if(d1 instanceof Miniboss){
                             Handler1.getInstance().addObject(new Miniboss(((Miniboss)d1).x,
                                     ((Miniboss)d1).y, ID.Miniboss, ((Miniboss)d1).hp));
+                        }else if (d1 instanceof DamageObstacle){
+                            Handler1.getInstance().addObject(new DamageObstacle(((DamageObstacle)d1).getX(),((DamageObstacle)d1).getY(), ((DamageObstacle)d1).getIsSpike()));
                         }
                     }
                 }catch (EOFException r){
@@ -366,6 +370,9 @@ public class MainMenu extends MouseAdapter {
                         }else if(d1 instanceof Miniboss){
                             Handler1.getInstance().addObject(new Miniboss(((Miniboss)d1).x,
                                     ((Miniboss)d1).y, ID.Miniboss, ((Miniboss)d1).hp));
+                        }else if (d1 instanceof DamageObstacle){
+
+                            Handler1.getInstance().addObject(new DamageObstacle(((DamageObstacle)d1).getX(),((DamageObstacle)d1).getY(), ((DamageObstacle)d1).getIsSpike()));
                         }
                     }
                 }catch (EOFException r){
