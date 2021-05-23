@@ -130,7 +130,7 @@ public class ShotEnemy extends GameObject{
 
         if(Game.showHitbox) {
             g.setColor(Color.green);
-            g.fillRect(x, y, 64, 64);
+            g.drawRect(x, y, 64, 64);
         }
     }
 

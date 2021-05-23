@@ -103,7 +103,7 @@ public class Enemy extends GameObject {
 
         if(Game.showHitbox) {
             g.setColor(Color.green);
-            g.fillRect(x, y, 32, 32);
+            g.drawRect(x, y, 32, 32);
         }
     }
 

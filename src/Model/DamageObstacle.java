@@ -8,6 +8,8 @@ public class DamageObstacle extends GameObject{
 
     private int x;
     private int y;
+    private int hitboxH;
+    private int hitboxW;
     private transient BufferedImage displayImage;
     private int frameCounter = 0;
     private boolean isSpike;
@@ -16,6 +18,14 @@ public class DamageObstacle extends GameObject{
         this.isSpike = isSpike;
         this.x = x;
         this.y = y;
+        if(!isSpike){
+            hitboxH = 45;
+            hitboxW = 40;
+        }
+        else{
+            hitboxH = 64;
+            hitboxW = 64;
+        }
     }
 
     @Override
@@ -41,11 +51,22 @@ public class DamageObstacle extends GameObject{
     @Override
     public void render(Graphics g) {
         g.drawImage(displayImage, x, y, null);
+        if(Game.showHitbox){
+            if(hitboxH == 45)
+                g.drawRect(x,y + 20,hitboxH,hitboxW);
+            else
+                g.drawRect(x,y,hitboxH,hitboxW);
+
+        }
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 64, 64);
+        if(hitboxH == 45)
+            return new Rectangle(x, y + 20, hitboxH, hitboxW);
+        else
+            return new Rectangle(x, y, hitboxH, hitboxW);
+
     }
 
     public ID getId(){

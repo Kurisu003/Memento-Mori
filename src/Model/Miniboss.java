@@ -101,7 +101,7 @@ public class Miniboss extends GameObject {
     public void render(Graphics g) {
         if(Game.showHitbox) {
             g.setColor(Color.green);
-            g.fillRect(x, y, 128, 128);
+            g.drawRect(x, y, 128, 128);
         }
 
         g.drawImage(displayImage, x, y, null);
