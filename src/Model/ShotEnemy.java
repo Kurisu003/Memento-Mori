@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class ShotEnemy extends GameObject{
 
-    private final BufferedImageLoader loader;
+    private final transient BufferedImageLoader loader;
     private final transient BufferedImage bulletImage;
 
     int tickCounter = 0;
@@ -67,8 +67,8 @@ public class ShotEnemy extends GameObject{
 
             if(temp.getId() == ID.Block||temp.getId()==ID.Door|| temp.getId() == ID.Obstacle) {
                 if(getBoundsBigger().intersects(temp.getBounds())) {
-                    x += (velX * 4) * -1;
-                    y += (velY * 4) * -1;
+                    x += (velX) * -1;
+                    y += (velY) * -1;
                     velX *= -1;
                     velY *= -1;
                 } else if(choose == 0) {

@@ -18,7 +18,7 @@ public class Box extends GameObject {
     private int yOffset;
     private boolean isPortal;
     private int frameCounter;
-    private ArrayList<BufferedImage> portalSprites;
+    private transient ArrayList<BufferedImage> portalSprites;
 
     /**
      * Constructor to create an instance.
