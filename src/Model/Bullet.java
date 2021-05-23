@@ -30,14 +30,14 @@ public class Bullet extends GameObject {
      * @param damage how much damage the bullet does to enemies
      * @param shotType what image should be displayed for this bullet
      */
-    public Bullet(int x, int y, ID id, int mx, int my, int range, int damage, BufferedImage shotType) {
+    public Bullet(int x, int y, ID id, int mx, int my, int range, int damage, BufferedImage shotType, double speed) {
         super(x, y, id);
         this.range = range;
         this.bufferedShotImage = shotType;
         this.damage = damage;
 
-        velX= (mx-x)/10;
-        velY= (my-y)/10;
+        velX= (mx-x)/speed;
+        velY= (my-y)/speed;
     }
 
     /**

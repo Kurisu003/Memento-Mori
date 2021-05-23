@@ -94,10 +94,11 @@ public class ShotEnemy extends GameObject{
             }
             if(temp.id==ID.Dante){
                 if (++tickCounter % (r.nextInt(250 - 200) + 200) == 0) {
+
                     Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet,
                             temp.getX() +(r.nextInt( 11+11) -11),
                             temp.getY()+(r.nextInt(11 +11) -11),
-                            30, 1, bulletImage));
+                            30, 1, bulletImage,20));
                 }
             }
         }
