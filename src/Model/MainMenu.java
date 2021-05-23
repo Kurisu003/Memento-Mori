@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.logging.Handler;
 
 /**
  * Menu which the player sees at first in order to decide whether to start a new game, continue the game or to set
@@ -140,7 +141,7 @@ public class MainMenu extends MouseAdapter {
         // NEW GAME
         // To check for click on save icons
         if(mx >= 2257 && mx <= 2457 && my >= 153 && my <= 353) {
-
+            Handler1.getInstance().objects.clear();
             Dante.setInstance(null);
             Game.setFolder();
             Dante.getInstance();
@@ -161,7 +162,7 @@ public class MainMenu extends MouseAdapter {
         }
 
         if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353){
-
+            Handler1.getInstance().objects.clear();
             Dante.setInstance(null);
             Game.setFolder();
             Dante.getInstance();
@@ -181,7 +182,7 @@ public class MainMenu extends MouseAdapter {
         }
 
         if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353) {
-
+            Handler1.getInstance().objects.clear();
             Dante.setInstance(null);
             Game.setFolder();
             Dante.getInstance();
