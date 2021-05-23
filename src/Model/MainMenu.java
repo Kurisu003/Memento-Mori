@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.logging.Handler;
 
 /**
  * Menu which the player sees at first in order to decide whether to start a new game, continue the game or to set
@@ -140,25 +141,39 @@ public class MainMenu extends MouseAdapter {
         // NEW GAME
         // To check for click on save icons
         if(mx >= 2257 && mx <= 2457 && my >= 153 && my <= 353) {
-
+            Handler1.getInstance().objects.clear();
             Dante.setInstance(null);
             Game.setFolder();
             Dante.getInstance();
-            Game.getInstance().loadsprites(5);
+            Dante dante = (Dante) Dante.getInstance();
+            for(int i = 0; i < 7; i++){
+                for(int j = 0; j < 7; j++){
+                    dante.getWherePlayerHasBeen()[i][j] = 0;
+                }
+            }
+            dante.getWherePlayerHasBeen()[3][3] = 1;
+            dante.setCurrentLevel(Levels.Limbo);
+            Game.getInstance(3).loadsprites(2 + Dante.currentLevel.ordinal());
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
             Game.setState(GameState.Game);
-
-
             selectAndSetSaveState(1);
         }
 
         if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353){
-
+            Handler1.getInstance().objects.clear();
             Dante.setInstance(null);
             Game.setFolder();
             Dante.getInstance();
-            Game.getInstance().loadsprites(5);
+            Dante dante = (Dante) Dante.getInstance();
+            for(int i = 0; i < 7; i++){
+                for(int j = 0; j < 7; j++){
+                    dante.getWherePlayerHasBeen()[i][j] = 0;
+                }
+            }
+            dante.getWherePlayerHasBeen()[3][3] = 1;
+            dante.setCurrentLevel(Levels.Limbo);
+            Game.getInstance(4).loadsprites(2 + Dante.currentLevel.ordinal());
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
             Game.setState(GameState.Game);
@@ -167,11 +182,19 @@ public class MainMenu extends MouseAdapter {
         }
 
         if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353) {
-
+            Handler1.getInstance().objects.clear();
             Dante.setInstance(null);
             Game.setFolder();
             Dante.getInstance();
-            Game.getInstance().loadsprites(5);
+            Dante dante = (Dante) Dante.getInstance();
+            for(int i = 0; i < 7; i++){
+                for(int j = 0; j < 7; j++){
+                    dante.getWherePlayerHasBeen()[i][j] = 0;
+                }
+            }
+            dante.getWherePlayerHasBeen()[3][3] = 1;
+            dante.setCurrentLevel(Levels.Limbo);
+            Game.getInstance(5).loadsprites(2 + Dante.currentLevel.ordinal());
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
             Game.setState(GameState.Game);
@@ -212,7 +235,7 @@ public class MainMenu extends MouseAdapter {
                     }else if (d1 instanceof Box){
                         if(((Box)d1).getId()==ID.Obstacle) {
                             Handler1.getInstance().addObject(new Box(((Box) d1).x, ((Box) d1).y, ID.Obstacle, loader.loadImage(
-                                    "../Levels/" + Game.getFolder() + "/Obstacle.png"), true));
+                                    "../Levels/" + Game.getFolder() + "/Obstacle.png"), true, false));
                         }
                     } else if (d1 instanceof Enemy) {
                         Handler1.getInstance().objects.add(new Enemy(((Enemy) d1).x,((Enemy)d1).y,ID.Enemy,((Enemy)d1).getHp(),((Enemy)d1).getSpeed()));
@@ -234,7 +257,7 @@ public class MainMenu extends MouseAdapter {
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-            Game.getInstance().loadspritesOfSavedGame(0);
+            Game.getInstance(6).loadspritesOfSavedGame(0);
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
             Camera.getInstance().setX(tempx);
             Camera.getInstance().setY(tempy);
@@ -242,10 +265,122 @@ public class MainMenu extends MouseAdapter {
 
         }
 
-        if(mx >= 442 && mx <= 642 && my >= 153 && my <= 353)
-            Game.setState(GameState.Game);
-        if(mx >= 805 && mx <= 1005 && my >= 153 && my <= 353)
-            Game.setState(GameState.Game);
+        if(mx >= 442 && mx <= 642 && my >= 153 && my <= 353){
+            double tempx = 0;
+            double tempy = 0;
+            BufferedImageLoader loader = new BufferedImageLoader();
+            try {
+                FileInputStream out = new FileInputStream("out2.ser");
+                ObjectInputStream out1 = new ObjectInputStream(out);
+                Handler1.getInstance().objects.clear();
+                Dante.setInstance(null);
+                try{
+                    for (int i = 0; i < 500; i++) {
+                        Object d1 = out1.readObject();
+                        if (d1 instanceof Dante) {
+                            Dante dante = (Dante) Dante.getInstance();
+                            dante.setX(((Dante)d1).x);
+                            dante.setY(((Dante)d1).y);
+                            dante.setCoins(((Dante)d1).getCoins());
+                            dante.setFireSpeed(((Dante)d1).getFireSpeed());
+                            dante.setHealth(((Dante)d1).getHealth());
+                            dante.setRange(((Dante)d1).getRange());
+                            dante.setDamage(((Dante)d1).getDamage());
+                            dante.setCurrentLevel(((Dante)d1).getCurrentLevel());
+                            dante.setWherePlayerHasBeen(((Dante)d1).getWherePlayerHasBeen());
+                            Game.setFolder(((Dante)d1).getCurrentLevel().name());
+                        } else if (d1 instanceof Camera) {
+                            tempx=((Camera)d1).getTempx();
+                            tempy=((Camera)d1).getTempy();
+                        }else if (d1 instanceof Box){
+                            if(((Box)d1).getId()==ID.Obstacle) {
+                                Handler1.getInstance().addObject(new Box(((Box) d1).x, ((Box) d1).y, ID.Obstacle, loader.loadImage(
+                                        "../Levels/" + Game.getFolder() + "/Obstacle.png"), true, false));
+                            }
+                        } else if (d1 instanceof Enemy) {
+                            Handler1.getInstance().objects.add(new Enemy(((Enemy) d1).x,((Enemy)d1).y,ID.Enemy,((Enemy)d1).getHp(),((Enemy)d1).getSpeed()));
+                        } else if (d1 instanceof SmartEnemy) {
+                            Handler1.getInstance().objects.add(new SmartEnemy(((SmartEnemy) d1).x,((SmartEnemy)d1).y,ID.SmartEnemy,((SmartEnemy)d1).getHp(),((SmartEnemy)d1).getSpeed()));
+                        } else if (d1 instanceof ShotEnemy) {
+                            Handler1.getInstance().objects.add(new ShotEnemy(((ShotEnemy) d1).x,((ShotEnemy)d1).y,ID.ShotEnemy,((ShotEnemy)d1).getHp(),((ShotEnemy)d1).getSpeed()));
+                        } else if(d1 instanceof GenerateLevel){
+                            GenerateLevel.getInstance().setLevel(((GenerateLevel)d1).getLevel());
+                        }else if(d1 instanceof Miniboss){
+                            Handler1.getInstance().addObject(new Miniboss(((Miniboss)d1).x,
+                                    ((Miniboss)d1).y, ID.Miniboss, ((Miniboss)d1).hp));
+                        }
+                    }
+                }catch (EOFException r){
+                }
+            } catch (FileNotFoundException | ClassNotFoundException exception) {
+                exception.printStackTrace();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            Game.getInstance(6).loadspritesOfSavedGame(0);
+            Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
+            Camera.getInstance().setX(tempx);
+            Camera.getInstance().setY(tempy);
+            Game.setOnlyState(GameState.Game);
+        }
+        if(mx >= 805 && mx <= 1005 && my >= 153 && my <= 353){
+            double tempx = 0;
+            double tempy = 0;
+            BufferedImageLoader loader = new BufferedImageLoader();
+            try {
+                FileInputStream out = new FileInputStream("out3.ser");
+                ObjectInputStream out1 = new ObjectInputStream(out);
+                Handler1.getInstance().objects.clear();
+                Dante.setInstance(null);
+                try{
+                    for (int i = 0; i < 500; i++) {
+                        Object d1 = out1.readObject();
+                        if (d1 instanceof Dante) {
+                            Dante dante = (Dante) Dante.getInstance();
+                            dante.setX(((Dante)d1).x);
+                            dante.setY(((Dante)d1).y);
+                            dante.setCoins(((Dante)d1).getCoins());
+                            dante.setFireSpeed(((Dante)d1).getFireSpeed());
+                            dante.setHealth(((Dante)d1).getHealth());
+                            dante.setRange(((Dante)d1).getRange());
+                            dante.setDamage(((Dante)d1).getDamage());
+                            dante.setCurrentLevel(((Dante)d1).getCurrentLevel());
+                            dante.setWherePlayerHasBeen(((Dante)d1).getWherePlayerHasBeen());
+                            Game.setFolder(((Dante)d1).getCurrentLevel().name());
+                        } else if (d1 instanceof Camera) {
+                            tempx=((Camera)d1).getTempx();
+                            tempy=((Camera)d1).getTempy();
+                        }else if (d1 instanceof Box){
+                            if(((Box)d1).getId()==ID.Obstacle) {
+                                Handler1.getInstance().addObject(new Box(((Box) d1).x, ((Box) d1).y, ID.Obstacle, loader.loadImage(
+                                        "../Levels/" + Game.getFolder() + "/Obstacle.png"), true, false));
+                            }
+                        } else if (d1 instanceof Enemy) {
+                            Handler1.getInstance().objects.add(new Enemy(((Enemy) d1).x,((Enemy)d1).y,ID.Enemy,((Enemy)d1).getHp(),((Enemy)d1).getSpeed()));
+                        } else if (d1 instanceof SmartEnemy) {
+                            Handler1.getInstance().objects.add(new SmartEnemy(((SmartEnemy) d1).x,((SmartEnemy)d1).y,ID.SmartEnemy,((SmartEnemy)d1).getHp(),((SmartEnemy)d1).getSpeed()));
+                        } else if (d1 instanceof ShotEnemy) {
+                            Handler1.getInstance().objects.add(new ShotEnemy(((ShotEnemy) d1).x,((ShotEnemy)d1).y,ID.ShotEnemy,((ShotEnemy)d1).getHp(),((ShotEnemy)d1).getSpeed()));
+                        } else if(d1 instanceof GenerateLevel){
+                            GenerateLevel.getInstance().setLevel(((GenerateLevel)d1).getLevel());
+                        }else if(d1 instanceof Miniboss){
+                            Handler1.getInstance().addObject(new Miniboss(((Miniboss)d1).x,
+                                    ((Miniboss)d1).y, ID.Miniboss, ((Miniboss)d1).hp));
+                        }
+                    }
+                }catch (EOFException r){
+                }
+            } catch (FileNotFoundException | ClassNotFoundException exception) {
+                exception.printStackTrace();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            Game.getInstance(6).loadspritesOfSavedGame(0);
+            Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
+            Camera.getInstance().setX(tempx);
+            Camera.getInstance().setY(tempy);
+            Game.setOnlyState(GameState.Game);
+        }
 
     }
 
@@ -257,9 +392,9 @@ public class MainMenu extends MouseAdapter {
     private void selectAndSetSaveState(int saveState){
         Game.setState(GameState.Game);
         Music.setIsMenu(false);
-        Game.getInstance().setSelectedSaveState(saveState);
+        Game.getInstance(7).setSelectedSaveState(saveState);
         try {
-            FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
+            FileOutputStream out = new FileOutputStream("out" + Game.getInstance(8).getSelectedSaveState() + ".ser");
             out.write(("").getBytes());
             ObjectOutputStream out1= new ObjectOutputStream(out);
             for (int i =0;i<Handler1.getInstance().objects.size(); i++) {

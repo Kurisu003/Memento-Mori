@@ -107,7 +107,7 @@ public class EscMenu extends MouseAdapter {
 
 
                 try {
-                    FileOutputStream out = new FileOutputStream("out" + Game.getInstance().getSelectedSaveState() + ".ser");
+                    FileOutputStream out = new FileOutputStream("out" + Game.getInstance(9).getSelectedSaveState() + ".ser");
                     out.write(("").getBytes());
                     ObjectOutputStream out1 = new ObjectOutputStream(out);
                     for (int i = 0; i< Handler1.getInstance().objects.size(); i++) {
@@ -184,8 +184,14 @@ public class EscMenu extends MouseAdapter {
 
         // For Gameover
         else if(Game.getState().equals(GameState.GameOver)){
-            if(mx >= -2000 && my >= -2000){
-//                System.out.println(mx + "   " + my);
+            if (mx >= Camera.getInstance().getX() + 47 && mx <= Camera.getInstance().getX() + 542 &&
+                my >= Camera.getInstance().getY() + 442 && my <= Camera.getInstance().getY() + 492){
+                // TODO Try again (from checkpoint if available)
+            }
+            else if (mx >= Camera.getInstance().getX() + 547 && mx <= Camera.getInstance().getX() + 1042 &&
+                     my >= Camera.getInstance().getY() + 442 && my <= Camera.getInstance().getY() + 492) {
+                MainMenu.setCamera(1088, 0);
+                Game.setState(GameState.MainMenu);
             }
         }
     }
@@ -229,7 +235,7 @@ public class EscMenu extends MouseAdapter {
         // To draw back button in shop
         g.drawImage(backButton, 2186, -566, null);
         // To render coin in shop
-        g.drawImage(Game.getInstance().getCoinSprites().get(0), 2500, -550, null);
+        g.drawImage(Game.getInstance(10).getCoinSprites().get(0), 2500, -550, null);
         g.setColor(Color.WHITE);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         g.drawString("x"+ ((Dante) Dante.getInstance()).getCoins(), 2533, -531);
@@ -275,10 +281,10 @@ public class EscMenu extends MouseAdapter {
         g.drawString("5", 2320,-175);
         g.drawString("10", 2240,-42);
 
-        g.drawImage(Game.getInstance().getCoinSprites().get(0), 2340, -500, null);
-        g.drawImage(Game.getInstance().getCoinSprites().get(0), 2340, -350, null);
-        g.drawImage(Game.getInstance().getCoinSprites().get(0), 2340, -200, null);
-        g.drawImage(Game.getInstance().getCoinSprites().get(0), 2280, -68, null);
+        g.drawImage(Game.getInstance(11).getCoinSprites().get(0), 2340, -500, null);
+        g.drawImage(Game.getInstance(12).getCoinSprites().get(0), 2340, -350, null);
+        g.drawImage(Game.getInstance(13).getCoinSprites().get(0), 2340, -200, null);
+        g.drawImage(Game.getInstance(14).getCoinSprites().get(0), 2280, -68, null);
 
         g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
     }

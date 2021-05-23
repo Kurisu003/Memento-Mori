@@ -36,23 +36,15 @@ public class Game extends Canvas implements Runnable {
 
     private final ArrayList<BufferedImage> coinSprites;
     private final ArrayList<BufferedImage> damageObstacleSprites;
+    private final ArrayList<BufferedImage> portalSprites;
 
     int updates = 0;
 
     private static GameState state = GameState.MainMenu;
-
-    public static void setFolder() {
-        Game.folder = Levels.Heresy.name();
-    }
-
-    public static void setFolder(String folder) {
-        Game.folder = folder;
-    }
-
     private static String folder;
-
-    private MainMenu mainMenu;
-    private EscMenu escMenu;
+    private final MainMenu mainMenu;
+    private final EscMenu escMenu;
+    private transient BufferedImage tutorialOverlay;
 
     /**
      * This is the private Constructor of the Game class so only one instance can be created.
@@ -66,7 +58,7 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(Handler1.getInstance()));
         this.addMouseListener(mainMenu);
         this.addMouseListener(escMenu);
-        folder = Levels.Heresy.name();
+        folder = Dante.currentLevel.name();
         loader = new BufferedImageLoader();
         coinSprites = new ArrayList<>();
         for(int i = 1; i <= 11; i++)
@@ -98,6 +90,11 @@ public class Game extends Canvas implements Runnable {
             damageObstacleSprites.add(loader.loadImage("../Assets/DamageObstacles/Spikes.png").
                     getSubimage(0, 0, 64, 64));
 
+        portalSprites = new ArrayList<>();
+        for(int i = 0; i <= 8; i++){
+            portalSprites.add(loader.loadImage("../Assets/Portal/Portal" + i + ".png"));
+        }
+
         BufferStrategy bs = this.getBufferStrategy();
         if(bs==null){
             this.createBufferStrategy(3);
@@ -107,15 +104,11 @@ public class Game extends Canvas implements Runnable {
 
         Music.getThreadPool().execute(new Music("res/music/bg_music.wav", ID.BG_music));
         render();
-
         //how many rooms should be generated per level
-        loadsprites(5);
+        loadsprites(2 + Dante.currentLevel.ordinal());
         loadEnemySprites();
-        //Dante.getInstance();
-//        Handler1.getInstance().addObject(new Dante(3 * 64 * 17 + 8 * 64, 3 * 64 * 9 + 4 * 64, ID.Dante));
-        //Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog, folder));
 
-
+        tutorialOverlay = loader.loadImage("../Levels/Limbo/TutorialOverlay.png");
     }
 
     private void loadEnemySprites(){
@@ -135,14 +128,17 @@ public class Game extends Canvas implements Runnable {
 
         enemySprites.add(loader.loadImage("../Enemies/DumbEnemy/SpriteLeft.png"));
         enemySprites.add(loader.loadImage("../Enemies/DumbEnemy/SpriteRight.png"));
+
+        enemySprites.add(loader.loadImage("../Enemies/ShotEnemy/ShotEnemyLeft.png"));
+        enemySprites.add(loader.loadImage("../Enemies/ShotEnemy/ShotEnemyRight.png"));
     }
 
     /**
-     * This is the main which starts the whole game by calling {@link #getInstance()}.
+     * This is the main which starts the whole game by calling {@link #getInstance(int test)}.
      * @param args
      */
     public static void main(String[] args) {
-        Game.getInstance();
+        Game.getInstance(0);
     }
 
     /**
@@ -151,8 +147,9 @@ public class Game extends Canvas implements Runnable {
      * For this implementation the singleton pattern is used.
      * @return the one and only instance of Game
      */
-    public static synchronized Game getInstance(){
+    public static synchronized Game getInstance(int test){
         if(instance == null){
+            System.out.println(test);
             instance = new Game();
         }
         return instance;
@@ -337,20 +334,7 @@ public class Game extends Canvas implements Runnable {
                 updates = 0;
             }
         }
-        //stop();
     }
-
-    /*
-    private void stop(){
-        isRunning = false;
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-     */
 
     /**
      * Checks in a certain period of time if changes are made and reacts to them. For example it checks if every
@@ -358,20 +342,6 @@ public class Game extends Canvas implements Runnable {
      */
     public void tick(){
 
-        /*
-        try {
-            for (ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext(); ) {
-                GameObject temp = iterator.next(); //FIXME CONCURRENTMODIFICATIONEXCEPTION
-                if (temp.getId() == ID.Dante) {
-                    Camera.getInstance().tick(temp);
-                }
-            }
-        }
-        catch(ConcurrentModificationException e){
-            e.printStackTrace();
-        }
-
-         */
         //FIXME concurrentmodificationexception
         boolean enemiesLeft = false;
         for (GameObject temp : Handler1.getInstance().objects) {
@@ -429,6 +399,10 @@ public class Game extends Canvas implements Runnable {
                 }
             }
 
+            if(Dante.currentLevel == Levels.Limbo) {
+                g.drawImage(tutorialOverlay, 3264, 1728, null);
+            }
+
             //Render all images
             Handler1.getInstance().render(g);
 
@@ -449,7 +423,7 @@ public class Game extends Canvas implements Runnable {
      * @param y y-coordinate of the portal's position
      */
     public static void addPortal(int x, int y){
-        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Levels/Limbo/BLC.png"), false));
+        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,null, false, true));
     }
 
     /**
@@ -506,4 +480,15 @@ public class Game extends Canvas implements Runnable {
         return damageObstacleSprites;
     }
 
+    public ArrayList<BufferedImage> getPortalSprites() {
+        return portalSprites;
+    }
+
+    public static void setFolder() {
+        Game.folder = Levels.Limbo.name();
+    }
+
+    public static void setFolder(String folder) {
+        Game.folder = folder;
+    }
 }

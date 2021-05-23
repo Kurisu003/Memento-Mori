@@ -13,20 +13,20 @@ import java.util.Random;
  */
 public class ShotEnemy extends GameObject{
 
-    transient BufferedImage image;
+    private final BufferedImageLoader loader;
+    private final transient BufferedImage bulletImage;
 
     int tickCounter = 0;
-    int animationCounter = 0;
 
     Random r= new Random();
-    Random r2= new Random();
     int choose=0;
 
     private int hp = 200;
     private final int speed;
 
-    transient BufferedImage displayedImage;
-    transient ArrayList<BufferedImage> enemyAnimation = new ArrayList<>();
+    private transient BufferedImage displayedImage;
+    private final transient BufferedImage left;
+    private final transient BufferedImage right;
 
     /**
      * Constructor to create an instance.
@@ -38,15 +38,12 @@ public class ShotEnemy extends GameObject{
      */
     public ShotEnemy(int x, int y, ID id, int health, int speed) {
         super(x, y, id);
+        loader = new BufferedImageLoader();
+        bulletImage = loader.loadImage("../Assets/Bullet.png");
+        left = Game.getInstance(15).getEnemySprites().get(70);
+        right = Game.getInstance(16).getEnemySprites().get(71);
         this.hp += health;
         this.speed = speed;
-
-        BufferedImageLoader loader = new BufferedImageLoader();
-        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
-        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation2.png"));
-        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation1&3.png"));
-        enemyAnimation.add(loader.loadImage("../Character/FrontAnimation4.png"));
-        //this.image=image;
     }
 
     /**
@@ -58,11 +55,10 @@ public class ShotEnemy extends GameObject{
         x+=velX;
         y+=velY;
 
-        if (++tickCounter % 5 == 0){
-            displayedImage = enemyAnimation.get(animationCounter);
-            animationCounter = (animationCounter + 1) % 4;
-        }
-
+        if(Dante.getInstance().getX() <= x)
+            displayedImage = left;
+        else
+            displayedImage = right;
 
         choose = r.nextInt(50);
 
@@ -97,8 +93,12 @@ public class ShotEnemy extends GameObject{
                 }
             }
             if(temp.id==ID.Dante){
-                if (++tickCounter % (r.nextInt(250 - 200) + 200) == 0) {
-                    Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet, temp.getX() +(r.nextInt( 11+11) -11), temp.getY()+(r.nextInt(11 +11) -11), 30, 1, image));
+                if (++tickCounter % (r.nextInt(50) + 50) == 0) {
+
+                    Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet,
+                            temp.getX() +(r.nextInt( 11+11) -11),
+                            temp.getY()+(r.nextInt(11 +11) -11),
+                            30, 1, bulletImage,30));
                 }
             }
         }
@@ -125,13 +125,12 @@ public class ShotEnemy extends GameObject{
      */
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.green);
-        g.fillRect(x,y,32,32);
+
+        g.drawImage(displayedImage, x, y, null);
 
         if(Game.showHitbox) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(Color.red);
-            g2.draw(getBounds());
+            g.setColor(Color.green);
+            g.fillRect(x, y, 64, 64);
         }
     }
 
@@ -157,7 +156,7 @@ public class ShotEnemy extends GameObject{
      */
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x-8,y-8,40,40);
+        return new Rectangle(x,y,64,64);
     }
 
     /**

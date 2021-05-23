@@ -23,11 +23,11 @@ public class Dante extends GameObject {
 
     private transient final BufferedImage fullHeart;
     private transient final BufferedImage fullArmor;
-    private transient final BufferedImage gameOverScreen;
+    private transient final ArrayList<BufferedImage> gameOverScreen;
 
     private transient BufferedImage bulletImage;
 
-    public static Levels currentLevel = Levels.Heresy;
+    public static Levels currentLevel = Levels.Limbo;
     private static GameObject instance;
 
     private int roomXCoordinate;
@@ -43,9 +43,10 @@ public class Dante extends GameObject {
     private int damage = 0;
     private int health = 5;
     private int armor = 2;
-    private int coins = 100;
+    private int coins = 1000;
 
     private int frameCount = 0;
+    private int gameOverScreenCounter = 0;
     private boolean portalExists;
 
     private transient BufferedImage bufferedBodyImage;
@@ -109,7 +110,14 @@ public class Dante extends GameObject {
         fullArmor = loader.loadImage("../Assets/FullShield.png");
 
         bulletImage = loader.loadImage("../Assets/Bullet.png");
-        gameOverScreen = loader.loadImage("../MainMenuAssets/GameOver/GameOverScreen.png");
+
+        gameOverScreen = new ArrayList<>();
+        gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver0.png"));
+        gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver1.png"));
+        gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver2.png"));
+        gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver3.png"));
+        gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver4.png"));
+        gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver5.png"));
     }
 
     /**
@@ -122,8 +130,12 @@ public class Dante extends GameObject {
         y += velY;
 
         if(levelIsComplete() && !portalExists) {
-            Game.addPortal(3392 + 64, 1856 + 64);
-            portalExists = true;
+            if(currentLevel!=Levels.Fraud) {
+                Game.addPortal(3392 + 64, 1856 + 64);
+                portalExists = true;
+            }else {
+                Handler1.getInstance().addObject(new Miniboss(4,4,ID.Miniboss,50));
+            }
         }
 
         // checks for collision with objects
@@ -285,6 +297,7 @@ public class Dante extends GameObject {
             if (armor == 0) health -= action;
             else armor -= action;
             timeSinceLastDamage = 0;
+            Music.getThreadPool().execute(new Music("res/Sounds/Hurt.wav", ID.HurtSound));
         }
     }
 
@@ -294,6 +307,7 @@ public class Dante extends GameObject {
         if(timeSinceLastObstacleDamage > 50){
             health--;
             timeSinceLastObstacleDamage = 0;
+            Music.getThreadPool().execute(new Music("res/Sounds/Hurt.wav", ID.HurtSound));
         }
     }
 
@@ -363,7 +377,7 @@ public class Dante extends GameObject {
         if(Handler1.getInstance().isShootUp() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootLeft())
             spawnBulletOnPress(y-132, y-32, x+25, x+25);
         else if(Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootUp())
-            spawnBulletOnPress(y+175, y+50, x+25, x+25);
+            spawnBulletOnPress(y+175, y+60, x+25, x+25);
         else if(Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp())
             spawnBulletOnPress(y+40, y+40, x-130, x);
         else if(Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp())
@@ -411,7 +425,7 @@ public class Dante extends GameObject {
         int damage = 100;
         if(shotY != y || shotX != x){
             Handler1.getInstance().addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, shotX, shotY,
-                    range, damage + this.damage * 20, bulletImage));
+                    range, damage + this.damage * 20, bulletImage,10));
             Music.getThreadPool().execute(new Music("res/Sounds/Guns/M4/GunSound1.wav", ID.ShootingSound));
         }
     }
@@ -468,6 +482,8 @@ public class Dante extends GameObject {
                 shouldChangeLevel = true;
             if(temp.getId().equals(ID.Miniboss) && getBounds().intersects(temp.getBounds()))
                 doAction(1);
+            if(temp.getId().equals(ID.Bullet) && getBounds().intersects(temp.getBounds()))
+                doAction(1);
             if(temp.getId().equals(ID.Coin) && getBounds().intersects(temp.getBounds())){
                 Music.getThreadPool().execute(new Music("res/Music/CoinSound.wav", ID.Coin));
                 coins++;
@@ -479,7 +495,6 @@ public class Dante extends GameObject {
                 if(((DamageObstacle) temp).getIsSpike()){
                     if(((DamageObstacle) temp).getFrameCounter() >= 50 && ((DamageObstacle) temp).getFrameCounter() <= 180){
                         this.doObstacleDamage();
-                        System.out.println("test");
                     }
                 }
                 else
@@ -556,7 +571,7 @@ public class Dante extends GameObject {
                     (int)Camera.getInstance().getY() + 10,
                     null);
 
-        g.drawImage(Game.getInstance().getCoinSprites().get(0),
+        g.drawImage(Game.getInstance(20).getCoinSprites().get(0),
                 (int) Camera.getInstance().getX() + 20,
                 (int) Camera.getInstance().getY() + 64,
                 null);
@@ -569,7 +584,8 @@ public class Dante extends GameObject {
 
         // Sets health to a min value of 0
         if (health <= 0) {
-            g.drawImage(gameOverScreen,
+            gameOverScreenCounter = ++gameOverScreenCounter % 600;
+            g.drawImage(gameOverScreen.get(gameOverScreenCounter / 100),
                     (int) Camera.getInstance().getX(),
                     (int) Camera.getInstance().getY(),
                     null);
@@ -607,7 +623,7 @@ public class Dante extends GameObject {
      */
     private void changeToNextLevel(){
         currentLevel = currentLevel.next();
-        Game.getInstance().changeLevel(currentLevel.name(), currentLevel.ordinal() + 5);
+        Game.getInstance(21).changeLevel(currentLevel.name(), currentLevel.ordinal() + 2);
         //Game.getInstance().changeLevel(currentLevel.name(), 5);
 
         for(int i = 0; i < 7; i++){

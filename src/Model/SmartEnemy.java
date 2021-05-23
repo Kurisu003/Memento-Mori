@@ -36,7 +36,7 @@ public class SmartEnemy extends GameObject{
         super(x, y, id);
         this.hp += health;
         this.speed = speed;
-        enemySprites = Game.getInstance().getEnemySprites();
+        enemySprites = Game.getInstance(22).getEnemySprites();
         displayedImage = enemySprites.get(0);
     }
 
@@ -167,9 +167,8 @@ public class SmartEnemy extends GameObject{
 //        g.fillRect(x,y,32,32);
 
         if(Game.showHitbox) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(Color.green);
-            g2.draw(getBoundsBigger());
+            g.setColor(Color.green);
+            g.fillRect(x, y, 32, 37);
         }
 
         g.drawImage(displayedImage, x + directionalOffsetForAnimationX, y - 32 + directionalOffsetForAnimationY, null);

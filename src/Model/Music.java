@@ -98,6 +98,10 @@ public class Music implements LineListener, Runnable {
                     audioClip.start();
                     gainControl.setValue(soundVolume);
                 }
+                if(this.id == ID.HurtSound){
+                    audioClip.start();
+                    gainControl.setValue(soundVolume + 17);
+                }
 
                 if(isMenu && !isShop){
                     if(this.id != ID.Menu_music){

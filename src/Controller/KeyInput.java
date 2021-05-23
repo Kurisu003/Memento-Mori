@@ -40,25 +40,20 @@ public class KeyInput extends KeyAdapter {
                 if(key == KeyEvent.VK_LEFT) handler1.setShootLeft(true);
                 if(key == KeyEvent.VK_RIGHT) handler1.setShootRight(true);
                 if(key == KeyEvent.VK_X) handler1.setHitbox(!Game.showHitbox);
-
-
-                if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.MainMenu)){
-//                    Camera.getInstance().setX(1088);
-                    System.out.println("test");
-                    MainMenu.setCamera(1088,0);
-                }
-                else if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.Game)){
-                    EscMenu.setTempCamCoordinates(Camera.getInstance().getX(), Camera.getInstance().getY());
-                    Game.setState(GameState.EscMenu);
-                }
-                else if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.EscMenu)){
-                    Game.setState(GameState.Game);
-                    Camera.getInstance().setX(EscMenu.getTempCamX());
-                    Camera.getInstance().setY(EscMenu.getTempCamY());
-                }
-
-                if(key == KeyEvent.VK_ENTER) Game.setState(GameState.Shop);
             }
+        }
+
+        if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.MainMenu)){
+            MainMenu.setCamera(1088,0);
+        }
+        else if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.Game)){
+            EscMenu.setTempCamCoordinates(Camera.getInstance().getX(), Camera.getInstance().getY());
+            Game.setState(GameState.EscMenu);
+        }
+        else if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.EscMenu)){
+            Game.setState(GameState.Game);
+            Camera.getInstance().setX(EscMenu.getTempCamX());
+            Camera.getInstance().setY(EscMenu.getTempCamY());
         }
     }
 

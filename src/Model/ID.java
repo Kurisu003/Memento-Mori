@@ -15,13 +15,14 @@ public enum ID {
     ShotEnemy(),
     Door(),
     Obstacle(),
+    Miniboss(),
+    Coin,
     BG_music(),
     Shop_music(),
     Menu_music(),
     ShootingSound(),
     UpgradeSound(),
-    Miniboss(),
-    Coin,
+    HurtSound(),
     Dialog();
 
 
