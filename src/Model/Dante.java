@@ -297,6 +297,7 @@ public class Dante extends GameObject {
             if (armor == 0) health -= action;
             else armor -= action;
             timeSinceLastDamage = 0;
+            Music.getThreadPool().execute(new Music("res/Sounds/Hurt.wav", ID.Coin));
         }
     }
 
@@ -306,6 +307,7 @@ public class Dante extends GameObject {
         if(timeSinceLastObstacleDamage > 50){
             health--;
             timeSinceLastObstacleDamage = 0;
+            Music.getThreadPool().execute(new Music("res/Sounds/Hurt.wav", ID.Coin));
         }
     }
 

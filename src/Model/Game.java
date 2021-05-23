@@ -44,6 +44,7 @@ public class Game extends Canvas implements Runnable {
     private static String folder;
     private final MainMenu mainMenu;
     private final EscMenu escMenu;
+    private transient BufferedImage tutorialOverlay;
 
     /**
      * This is the private Constructor of the Game class so only one instance can be created.
@@ -107,7 +108,7 @@ public class Game extends Canvas implements Runnable {
         loadsprites(2 + Dante.currentLevel.ordinal());
         loadEnemySprites();
 
-
+        tutorialOverlay = loader.loadImage("../Levels/Limbo/TutorialOverlay.png");
     }
 
     private void loadEnemySprites(){
@@ -392,6 +393,10 @@ public class Game extends Canvas implements Runnable {
                 for (int j = 1; j <= 6; j++) {
                     g.drawImage(floor, i * 1088, j * 576, null);
                 }
+            }
+
+            if(Dante.currentLevel == Levels.Limbo) {
+                g.drawImage(tutorialOverlay, 3264, 1728, null);
             }
 
             //Render all images
