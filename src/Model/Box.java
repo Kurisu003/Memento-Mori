@@ -42,6 +42,7 @@ public class Box extends GameObject {
             hitboxH = 64;
             hitboxW = 64;
         }
+        if(bufferedImage != null)
         this.displayImage = bufferedImage;
     }
 

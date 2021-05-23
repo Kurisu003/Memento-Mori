@@ -414,7 +414,7 @@ public class Game extends Canvas implements Runnable {
      * @param y y-coordinate of the portal's position
      */
     public static void addPortal(int x, int y){
-        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,loader.loadImage("../Levels/Limbo/BLC.png"), false, true));
+        Handler1.getInstance().addObject(new Box(x,y, ID.Portal,null, false, true));
     }
 
     /**
@@ -476,7 +476,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void setFolder() {
-        Game.folder = Levels.Heresy.name();
+        Game.folder = Levels.Limbo.name();
     }
 
     public static void setFolder(String folder) {

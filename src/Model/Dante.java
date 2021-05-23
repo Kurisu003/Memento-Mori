@@ -5,7 +5,6 @@ import View.BufferedImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -28,7 +27,7 @@ public class Dante extends GameObject {
 
     private transient BufferedImage bulletImage;
 
-    public static Levels currentLevel = Levels.Heresy;
+    public static Levels currentLevel = Levels.Limbo;
     private static GameObject instance;
 
     private int roomXCoordinate;
