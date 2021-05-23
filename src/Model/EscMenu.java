@@ -131,6 +131,8 @@ public class EscMenu extends MouseAdapter {
                 Game.setState(GameState.Game);
                 Camera.getInstance().setX(tempCamX);
                 Camera.getInstance().setY(tempCamY);
+                Music.setIsMenu(false);
+                Music.setIsShop(false);
             }
 
             // To get to shopButton
