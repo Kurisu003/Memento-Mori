@@ -370,6 +370,10 @@ public class Dante extends GameObject {
             spawnBulletOnPress(y+40, y+40, x+164, x+64);
     }
 
+    /**
+     * Checks if the level is completed
+     * @return true if all conditions to complete a level are done, false if not
+     */
     private boolean levelIsComplete(){
 
         boolean levelIsDone = true;

@@ -174,6 +174,10 @@ public class Game extends Canvas implements Runnable {
         Game.state = state;
     }
 
+    /**
+     * Sets the actual GameState
+     * @param state MainMenu, Game or EscMenu
+     */
     public static void setOnlyState(GameState state) {
 
         Game.state = state;

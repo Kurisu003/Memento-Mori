@@ -46,7 +46,7 @@ public class Miniboss extends GameObject {
         hpImage = loader.loadImage("../Assets/redRec.png");
         noHpImage = loader.loadImage("../Assets/whiteRec.png");
 
-        increasingSpeed = 1.5;
+        increasingSpeed = 1.50;
 
     }
     /**
@@ -90,6 +90,7 @@ public class Miniboss extends GameObject {
         //Miniboss getting faster every -1000hp
         if(this.hp != 10000 && this.hp % 1000 == 0)
             this.increasingSpeed += 0.3;
+        this.increasingSpeed = Math.round(this.increasingSpeed * 100.0)/100.0;
     }
 
     /**
@@ -125,5 +126,21 @@ public class Miniboss extends GameObject {
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x, y, 128, 128);
+    }
+
+    /**
+     * Returns the value of the increasing speed after a certain time
+     * @return value of the increasing speed
+     */
+    public double getIncreasingSpeed() {
+        return increasingSpeed;
+    }
+
+    /**
+     * Returns how much health the miniboss has got
+     * @return amount of health
+     */
+    public int getHp() {
+        return hp;
     }
 }
