@@ -100,6 +100,11 @@ public class Enemy extends GameObject {
     @Override
     public void render(Graphics g) {
         g.drawImage(displayedImage, x, y, null);
+
+        if(Game.showHitbox) {
+            g.setColor(Color.green);
+            g.fillRect(x, y, 32, 32);
+        }
     }
 
     /**

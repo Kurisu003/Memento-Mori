@@ -129,9 +129,8 @@ public class ShotEnemy extends GameObject{
         g.drawImage(displayedImage, x, y, null);
 
         if(Game.showHitbox) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(Color.red);
-            g2.draw(getBounds());
+            g.setColor(Color.green);
+            g.fillRect(x, y, 64, 64);
         }
     }
 
