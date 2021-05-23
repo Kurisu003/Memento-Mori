@@ -20,9 +20,8 @@ public class SpawnEnemiesInRoom {
      */
     public static void spawnEnemies(int roomStartX, int roomStartY, ID[] typesOfEnemy, Levels currentLevel){
         Random rn = new Random();
-//        int amountOfEnemies = 2 + rn.nextInt(currentLevel.ordinal() + 1);
+        int amountOfEnemies = 2 + rn.nextInt(5) + 3;
 
-        int amountOfEnemies = 5;
         for (int i = 0; i < amountOfEnemies; i++){
             rn = new Random();
             int pos = 0;

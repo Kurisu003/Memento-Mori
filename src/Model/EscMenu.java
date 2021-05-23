@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Date;
 import java.util.logging.Handler;
 
 /**
@@ -76,6 +77,9 @@ public class EscMenu extends MouseAdapter {
     public void mousePressed(MouseEvent e) {
         int mx = (int) (e.getX() + Camera.getInstance().getX());
         int my = (int) (e.getY() + Camera.getInstance().getY());
+
+        System.out.println(Camera.getInstance().getX()+mx);
+        System.out.println(Camera.getInstance().getY()+my);
 
         if(Game.getState().equals(GameState.EscMenu)) {
             // To check for Music Volume
@@ -186,12 +190,26 @@ public class EscMenu extends MouseAdapter {
         else if(Game.getState().equals(GameState.GameOver)){
             if (mx >= Camera.getInstance().getX() + 47 && mx <= Camera.getInstance().getX() + 542 &&
                 my >= Camera.getInstance().getY() + 442 && my <= Camera.getInstance().getY() + 492){
-                // TODO Try again (from checkpoint if available)
+                Handler1.getInstance().objects.clear();
+                Game.setFolder();
+                Dante.getInstance();
+                Dante dante = (Dante) Dante.getInstance();
+                dante.setHealth(7);
+                for(int i = 0; i < 7; i++){
+                    for(int j = 0; j < 7; j++){
+                        dante.getWherePlayerHasBeen()[i][j] = 0;
+                    }
+                }
+                dante.getWherePlayerHasBeen()[3][3] = 1;
+                dante.setCurrentLevel(Levels.Limbo);
+                Game.getInstance(5).loadsprites(2 + Dante.currentLevel.ordinal());
+                Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
+
+                Game.setState(GameState.Game);
             }
             else if (mx >= Camera.getInstance().getX() + 547 && mx <= Camera.getInstance().getX() + 1042 &&
                      my >= Camera.getInstance().getY() + 442 && my <= Camera.getInstance().getY() + 492) {
-                MainMenu.setCamera(1088, 0);
-                Game.setState(GameState.MainMenu);
+                System.out.println("Hallo");
             }
         }
     }
