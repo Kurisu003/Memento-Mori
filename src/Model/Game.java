@@ -151,7 +151,6 @@ public class Game extends Canvas implements Runnable {
      */
     public static synchronized Game getInstance(int test){
         if(instance == null){
-            System.out.println(test);
             instance = new Game();
         }
         return instance;
@@ -308,6 +307,9 @@ public class Game extends Canvas implements Runnable {
                 if(state.equals(GameState.Game) || state.equals(GameState.MainMenu) || state.equals(GameState.GameOver)) {
                     tick();
                 }
+                else if(state.equals(GameState.Won)){
+                    winScreenRender();
+                }
                 if(state.equals(GameState.MainMenu)) {
                     Music.setIsMenu(true);
                     mainMenu.calculations();
@@ -319,7 +321,9 @@ public class Game extends Canvas implements Runnable {
 
 
             }
-            render();
+            if(!state.equals(GameState.Won)) {
+                render();
+            }
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
@@ -405,20 +409,9 @@ public class Game extends Canvas implements Runnable {
             mainMenu.render(g);
         } else if(state == GameState.EscMenu){
             escMenu.render(g);
-        }else if(state == GameState.Won){
-            Camera.getInstance().setX(10880);
-            Camera.getInstance().setY(5760);
-            Graphics2D g2d1 = (Graphics2D)g;
-            g2d1.translate(-Camera.getInstance().getX(), -Camera.getInstance().getY());
-            winScreenAnimationCounter = ++winScreenAnimationCounter % 80;
-            if(winScreenAnimationCounter % 10 == 0) {
-                g.drawImage(winScreenSprites.get(winScreenAnimationCounter/10), 10880, 5760, null);
-            }
-            g2d1.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
         }
         g.dispose();
         bs.show();
-
     }
 
     public void winScreenInit(){
@@ -429,6 +422,27 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
+    public void winScreenRender(){
+        Camera.getInstance().setX(10880);
+        Camera.getInstance().setY(5760);
+
+        BufferStrategy bs = this.getBufferStrategy();
+        if(bs==null){
+            this.createBufferStrategy(2);
+            return;
+        }
+        g = bs.getDrawGraphics();
+        Graphics2D g2d1 = (Graphics2D)g;
+        g2d1.translate(-Camera.getInstance().getX(), -Camera.getInstance().getY());
+        winScreenAnimationCounter = ++winScreenAnimationCounter % 80;
+        if(winScreenAnimationCounter % 10 == 0) {
+            g.drawImage(winScreenSprites.get(winScreenAnimationCounter/10), 10880, 5760, null);
+        }
+        g2d1.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
+
+        g.dispose();
+        bs.show();
+    }
     /**
      * Adds the portal to the game.
      * @param x x-coordinate of the portal's position
