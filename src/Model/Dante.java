@@ -43,7 +43,7 @@ public class Dante extends GameObject {
     private int damage = 0;
     private int health = 7;
     private int armor = 5;
-    private int coins = 100;
+    private int coins = 0;
 
     private int frameCount = 0;
     private int gameOverScreenCounter = 0;

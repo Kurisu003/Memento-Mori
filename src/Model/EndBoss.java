@@ -24,7 +24,7 @@ public class EndBoss extends GameObject{
     Random r= new Random();
     int choose=0;
 
-    private int hp = 10000;
+    private int hp = 1;
 
     /**
      * Constructor to create an instance.
@@ -53,11 +53,10 @@ public class EndBoss extends GameObject{
         choose = r.nextInt(50);
 
         tickCounter++;
-
-        if(tickCounter % 10 == 0){
-
-            System.out.println("bullet");
-            Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet, x+200, y + 200, 20, 1, bulletImage, 30));
+        
+        if(tickCounter % 800 == 0){
+            SpawnEnemiesInRoom.spawnEnemies(3 * 1088 + 64, 3 * 576 + 64,
+                    new ID[]{ID.SmartEnemy, ID.ShotEnemy, ID.Enemy}, Dante.currentLevel);
 
         }
 
@@ -95,7 +94,9 @@ public class EndBoss extends GameObject{
 
 
         if(hp <= 0) {
+            Game.getInstance(0).winScreenInit();
             Game.setState(GameState.Won);
+            Handler1.getInstance().removeObject(this);
         }
     }
 

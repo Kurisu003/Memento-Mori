@@ -47,13 +47,9 @@ public class KeyInput extends KeyAdapter {
             }
         }
 
-        if(key == KeyEvent.VK_H){
-            Handler1.getInstance().addObject(new EndBoss(1088 * 3 + 544,3 * 576 + 288, ID.EndBoss));
-        }
-
-        if(key == KeyEvent.VK_SPACE && Game.getState().equals(GameState.Won)){
-            Game.setState(GameState.MainMenu);
-            MainMenu.setCamera(1088,0);
+        if(key == KeyEvent.VK_M){
+            Dante dante = (Dante) Dante.getInstance();
+            dante.setCoins(dante.getCoins() + 10);
         }
 
         if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.MainMenu)){
