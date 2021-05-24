@@ -456,6 +456,7 @@ public class Game extends Canvas implements Runnable {
     public void changeLevel(String level, int amountRoomsGenerated){
         folder = level;
         loadsprites(amountRoomsGenerated);
+        Handler1.getInstance().addObject(new InGameDialog(200,50, ID.Dialog, folder));
     }
 
     /**
