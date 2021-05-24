@@ -39,7 +39,7 @@ public class InGameDialog extends GameObject implements Serializable {
     }
 
     /**
-     * Renders the dialogues. For the Limbo-Level (="Tutorial") another graphic is drawn.
+     * Renders the dialogues.
      * @param g graphics where the drawing should succeed.
      */
     @Override
@@ -48,9 +48,9 @@ public class InGameDialog extends GameObject implements Serializable {
 
             //Font
             g2.setComposite(fullVisible);
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-            g2.drawString(levelName, 70 + 3 * 64 * 17, 550 + 3 * 64 * 9);
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 40));
+            g2.drawString(levelName, 5 + 3 * 64 * 17, 565 + 3 * 64 * 9);
 
         /*
         x = 3*64*17
