@@ -47,6 +47,10 @@ public class KeyInput extends KeyAdapter {
             }
         }
 
+        if(key == KeyEvent.VK_H){
+            Handler1.getInstance().addObject(new EndBoss(3 * 1088 + 100, 3 * 576 + 100, ID.EndBoss));
+        }
+
         if(key == KeyEvent.VK_SPACE && Game.getState().equals(GameState.Won)){
             Game.setState(GameState.MainMenu);
             MainMenu.setCamera(1088,0);
