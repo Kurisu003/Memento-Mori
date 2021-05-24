@@ -38,7 +38,7 @@ public class EndBoss extends GameObject{
         bulletImage = loader.loadImage("../Assets/SatanBullet.png");
         hpImage = loader.loadImage("../Assets/redRec.png");
         noHpImage = loader.loadImage("../Assets/whiteRec.png");
-        displayImage = loader.loadImage("../Enemies/Satan/SatanSprite1.png");
+        displayImage = loader.loadImage("../Enemies/Satan/SatanSprite2.png");
     }
 
     /**
@@ -131,7 +131,7 @@ public class EndBoss extends GameObject{
             g.drawRect(x, y, 165, 99);
         }
 
-        g.drawImage(displayImage, x + 11, y, null);
+        g.drawImage(displayImage, x, y, null);
 
         for(int i = 0; i < 100; i++){
             g.drawImage(noHpImage, (int) Camera.getInstance().getX() + i * 10 + 50,
