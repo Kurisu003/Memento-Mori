@@ -308,9 +308,6 @@ public class Game extends Canvas implements Runnable {
                 if(state.equals(GameState.Game) || state.equals(GameState.MainMenu) || state.equals(GameState.GameOver)) {
                     tick();
                 }
-                if(state.equals(GameState.Won)){
-                    winScreenRender();
-                }
                 if(state.equals(GameState.MainMenu)) {
                     Music.setIsMenu(true);
                     mainMenu.calculations();
@@ -408,6 +405,16 @@ public class Game extends Canvas implements Runnable {
             mainMenu.render(g);
         } else if(state == GameState.EscMenu){
             escMenu.render(g);
+        }else if(state == GameState.Won){
+            Camera.getInstance().setX(10880);
+            Camera.getInstance().setY(5760);
+            Graphics2D g2d1 = (Graphics2D)g;
+            g2d1.translate(-Camera.getInstance().getX(), -Camera.getInstance().getY());
+            winScreenAnimationCounter = ++winScreenAnimationCounter % 80;
+            if(winScreenAnimationCounter % 10 == 0) {
+                g.drawImage(winScreenSprites.get(1), 10880, 5760, null);
+            }
+            g2d1.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
         }
         g.dispose();
         bs.show();
@@ -415,23 +422,11 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void winScreenInit(){
+        System.out.println("Hallo");
         winScreenSprites = new ArrayList<>();
         for(int i = 1; i <= 8; i++){
             winScreenSprites.add(loader.loadImage("../Assets/Winscreen/Winscreen (" + i + ").png"));
         }
-
-        Camera.getInstance().setX(10880);
-        Camera.getInstance().setY(5760);
-    }
-
-    public void winScreenRender(){
-        winScreenAnimationCounter = ++winScreenAnimationCounter % 80;
-        if(winScreenAnimationCounter % 10 == 0) {
-            g.drawImage(winScreenSprites.get(1), 10880, 5760, null);
-        }
-        g.setColor(Color.ORANGE);
-        g.fillRect(10880, 5760, 1088, 576);
-        System.out.println("test");
     }
 
     /**
