@@ -46,7 +46,7 @@ public class Coin extends GameObject{
 
         if(Game.showHitbox){
             g.setColor(Color.ORANGE);
-            g.drawOval(x,y,32,32);
+            g.drawOval(x - 2,y - 2,35,35);
         }
         g.drawImage(displayImage, x + 3, y + 3, null);
     }
@@ -57,7 +57,7 @@ public class Coin extends GameObject{
      */
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x,y,32,32);
+        return new Rectangle(x - 2,y - 2,35,35);
     }
 
     /**

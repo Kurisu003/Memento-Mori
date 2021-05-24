@@ -27,7 +27,7 @@ public class Dante extends GameObject {
 
     private transient BufferedImage bulletImage;
 
-    public static Levels currentLevel = Levels.Limbos;
+    public static Levels currentLevel = Levels.Limbo;
     private static GameObject instance;
 
     private int roomXCoordinate;
@@ -380,7 +380,7 @@ public class Dante extends GameObject {
         if(Handler1.getInstance().isShootUp() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootLeft())
             spawnBulletOnPress(y-132, y-32, x+25, x+25);
         else if(Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootUp())
-            spawnBulletOnPress(y+175, y+60, x+25, x+25);
+            spawnBulletOnPress(y+175, y+70, x+25, x+25);
         else if(Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp())
             spawnBulletOnPress(y+40, y+40, x-130, x);
         else if(Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp())
