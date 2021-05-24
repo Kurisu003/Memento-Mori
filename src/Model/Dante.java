@@ -483,7 +483,7 @@ public class Dante extends GameObject {
             }
             if(temp.getId() == ID.Door && getBounds().intersects(temp.getBounds()) && !((Door) temp).isLocked()){
 
-                if( temp.getX() >  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
+                if( temp.getX() > x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
                         Handler1.getInstance().isRight() && !Handler1.getInstance().isLeft())
                     setNewCoordinates(250, 1088, 1, true);
                 else if(temp.getX() <  x && (y + 32 > temp.getY() && y + 32 < temp.getY() + 64) &&
