@@ -56,7 +56,7 @@ public class EndBoss extends GameObject{
 
         if(tickCounter % 10 == 0){
             System.out.println("bullet");
-            Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet, x, y + 100, 100, 1, bulletImage, 2));
+            Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet, x+200, y + 200, 20, 1, bulletImage, 30));
         }
 
         for(int i = 0; i < Handler1.getInstance().objects.size(); i++) {
