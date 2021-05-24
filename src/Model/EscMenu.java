@@ -177,9 +177,9 @@ public class EscMenu extends MouseAdapter {
 
             }
             if(mx >= 2320 && mx <= 2379 && my >= -77 && my <= -22){
-                if(((Dante) Dante.getInstance()).getCoins() >= 10){
+                if(((Dante) Dante.getInstance()).getCoins() >= 7){
                     ((Dante) Dante.getInstance()).setHealth(((Dante) Dante.getInstance()).getHealth() + 1);
-                    ((Dante) Dante.getInstance()).setCoins(((Dante) Dante.getInstance()).getCoins() - 10);
+                    ((Dante) Dante.getInstance()).setCoins(((Dante) Dante.getInstance()).getCoins() - 7);
                     Music.getThreadPool().execute(new Music("res/Sounds/Upgrade.wav", ID.UpgradeSound));
                 }
             }
@@ -282,7 +282,7 @@ public class EscMenu extends MouseAdapter {
         g.drawString("5", 2320,-475);
         g.drawString("5", 2320,-325);
         g.drawString("5", 2320,-175);
-        g.drawString("10", 2240,-42);
+        g.drawString("7", 2240,-42);
 
         g.drawImage(Game.getInstance(11).getCoinSprites().get(0), 2340, -500, null);
         g.drawImage(Game.getInstance(12).getCoinSprites().get(0), 2340, -350, null);
