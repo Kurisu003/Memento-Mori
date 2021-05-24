@@ -78,9 +78,6 @@ public class EscMenu extends MouseAdapter {
         int mx = (int) (e.getX() + Camera.getInstance().getX());
         int my = (int) (e.getY() + Camera.getInstance().getY());
 
-        System.out.println(Camera.getInstance().getX()+mx);
-        System.out.println(Camera.getInstance().getY()+my);
-
         if(Game.getState().equals(GameState.EscMenu)) {
             // To check for Music Volume
             if (mx >= 1538 && mx <= 1588 && my >= -526 && my <= -476) {
