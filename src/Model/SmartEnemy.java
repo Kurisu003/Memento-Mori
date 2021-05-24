@@ -55,8 +55,8 @@ public class SmartEnemy extends GameObject{
 
             if(temp.getId() == ID.Block || temp.getId() == ID.Obstacle) {
                 if (getBoundsBigger().intersects(temp.getBounds())) {
-                    x += (velX*5) * -1;
-                    y += (velY*5) * -1;
+                    x += (velX*2) * -1;
+                    y += (velY*2) * -1;
                     velX *= -1;
                     velY *= -1;
                 }

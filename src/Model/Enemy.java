@@ -59,8 +59,8 @@ public class Enemy extends GameObject {
 
             if(temp.getId() == ID.Block || temp.getId() == ID.Obstacle) {
                 if(getBoundsBigger().intersects(temp.getBounds())||(temp.getId()==ID.Enemy && temp.hashCode()!=this.hashCode())) {
-                    x += (velX*5) * -1;
-                    y += (velY*5) * -1;
+                    x += (velX*2) * -1;
+                    y += (velY*2) * -1;
                     velX *= -1;
                     velY *= -1;
                 } else if(choose == 0) {
