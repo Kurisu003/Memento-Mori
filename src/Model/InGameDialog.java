@@ -47,8 +47,8 @@ public class InGameDialog extends GameObject implements Serializable {
 
         //Font
         g2.setComposite(halfVisible);
-        g2.setColor(Color.darkGray);
-        g2.fillRect(2+3*64*17, 530+3*64*9, 200, 40);
+        g2.setColor(Color.red);
+        g2.fillRect(2+3*64*17, 530+3*64*9, levelName.length()*25, 40);
         g2.setComposite(fullVisible);
         g.setColor(Color.WHITE);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 40));
