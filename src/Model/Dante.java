@@ -421,6 +421,9 @@ public class Dante extends GameObject {
      * @param shotXStart x-coordinate where the bullet should start
      */
     private void spawnBulletOnPress(int shotY, int shotYStart, int shotX, int shotXStart){
+
+        Game.setState(GameState.Won);
+        Game.getInstance(0).winScreenInit();
         int damage = 100;
         if(shotY != y || shotX != x){
             Handler1.getInstance().addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, shotX, shotY,
