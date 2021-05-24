@@ -382,7 +382,7 @@ public class Dante extends GameObject {
         else if(Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootUp())
             spawnBulletOnPress(y+175, y+70, x+25, x+25);
         else if(Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp())
-            spawnBulletOnPress(y+40, y+40, x-130, x);
+            spawnBulletOnPress(y+40, y+40, x-130, x-20);
         else if(Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp())
             spawnBulletOnPress(y+40, y+40, x+164, x+64);
     }
