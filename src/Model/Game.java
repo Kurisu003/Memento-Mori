@@ -412,7 +412,7 @@ public class Game extends Canvas implements Runnable {
             g2d1.translate(-Camera.getInstance().getX(), -Camera.getInstance().getY());
             winScreenAnimationCounter = ++winScreenAnimationCounter % 80;
             if(winScreenAnimationCounter % 10 == 0) {
-                g.drawImage(winScreenSprites.get(1), 10880, 5760, null);
+                g.drawImage(winScreenSprites.get(winScreenAnimationCounter/10), 10880, 5760, null);
             }
             g2d1.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
         }
