@@ -6,6 +6,9 @@ import Model.LevelDialog;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class creates the frame where everything gets displayed on.
+ */
 public class Window {
     private static JFrame frame;
 

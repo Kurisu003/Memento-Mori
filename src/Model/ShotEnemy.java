@@ -67,8 +67,8 @@ public class ShotEnemy extends GameObject{
 
             if(temp.getId() == ID.Block||temp.getId()==ID.Door|| temp.getId() == ID.Obstacle) {
                 if(getBoundsBigger().intersects(temp.getBounds())) {
-                    x += (velX*2) * -1;
-                    y += (velY*2) * -1;
+                    x += (velX*5) * -1;
+                    y += (velY*5) * -1;
                     velX *= -1;
                     velY *= -1;
                 } else if(choose == 0) {
@@ -164,6 +164,6 @@ public class ShotEnemy extends GameObject{
      * @return bigger bounds as a rectangle
      */
     public Rectangle getBoundsBigger() {
-        return new Rectangle(x-8,y-8,80,80);
+        return new Rectangle(x-32,y-32,128,128);
     }
 }

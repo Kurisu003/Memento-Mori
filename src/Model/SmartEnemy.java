@@ -55,8 +55,8 @@ public class SmartEnemy extends GameObject{
 
             if(temp.getId() == ID.Block || temp.getId() == ID.Obstacle) {
                 if (getBoundsBigger().intersects(temp.getBounds())) {
-                    x += (velX*2) * -1;
-                    y += (velY*2) * -1;
+                    x += (velX*5) * -1;
+                    y += (velY*5) * -1;
                     velX *= -1;
                     velY *= -1;
                 }
@@ -204,6 +204,6 @@ public class SmartEnemy extends GameObject{
      * @return rectangle which indicates bigger bounds
      */
     public Rectangle getBoundsBigger(){
-        return new Rectangle(x-4,y - 7,40,51);
+        return new Rectangle(x-16,y - 18,64,74);
     }
 }
