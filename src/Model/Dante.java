@@ -27,7 +27,7 @@ public class Dante extends GameObject {
 
     private transient BufferedImage bulletImage;
 
-    public static Levels currentLevel = Levels.Limbos;
+    public static Levels currentLevel = Levels.Limbo;
     private static GameObject instance;
 
     private int roomXCoordinate;
