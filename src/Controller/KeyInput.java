@@ -48,7 +48,7 @@ public class KeyInput extends KeyAdapter {
         }
 
         if(key == KeyEvent.VK_H){
-            Handler1.getInstance().addObject(new EndBoss(3 * 1088 + 100, 3 * 576 + 100, ID.EndBoss));
+            Handler1.getInstance().addObject(new EndBoss(1088 * 3 + 544,3 * 576 + 288, ID.EndBoss));
         }
 
         if(key == KeyEvent.VK_SPACE && Game.getState().equals(GameState.Won)){

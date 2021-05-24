@@ -153,7 +153,8 @@ public class Dante extends GameObject {
                 Game.addPortal(3776, 1984);
                 portalExists = true;
             }else {
-                Handler1.getInstance().addObject(new EndBoss(4,4,ID.EndBoss));
+                Handler1.getInstance().addObject(new EndBoss(1088 * 3 + 544,3 * 576 + 288,ID.EndBoss));
+                portalExists = true;
             }
         }
 

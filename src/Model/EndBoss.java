@@ -55,8 +55,7 @@ public class EndBoss extends GameObject{
         tickCounter++;
 
         if(tickCounter % 10 == 0){
-            System.out.println("bullet");
-            Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet, x, y + 100, 100, 1, bulletImage, 2));
+            Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet, x, y + 100, 100, 1, bulletImage, 20));
         }
 
         for(int i = 0; i < Handler1.getInstance().objects.size(); i++) {
@@ -116,7 +115,7 @@ public class EndBoss extends GameObject{
      * @param action how much damage is done
      */
     public void doAction(int action){
-        this.hp -= action/2;
+        this.hp -= action/4;
     }
 
     /**
