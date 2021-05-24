@@ -88,20 +88,6 @@ public class EndBoss extends GameObject{
                     }
                 }
             }
-//            if(temp.getId() == ID.EndBoss)
-//                if (++tickCounter % (r.nextInt(30) + 30) == 0) {
-//
-//                    Handler1.getInstance().addObject(new Bullet(temp.getX()+32, temp.getY(), ID.Bullet,
-//                            temp.getX() +32, //up
-//                            temp.getY() +1000,
-//                            30, 1, bulletImage,30));
-//                    Handler1.getInstance().addObject(new Bullet(temp.getX()+32, temp.getY()-64, ID.Bullet,
-//                            temp.getX()+32, temp.getY() -64-1000, 30, 1, bulletImage,30)); //down
-//                    Handler1.getInstance().addObject(new Bullet(temp.getX(), temp.getY()-32, ID.Bullet,
-//                            temp.getX() -1000, temp.getY()-32, 30, 1, bulletImage,30)); //left
-//                    Handler1.getInstance().addObject(new Bullet(temp.getX()+64, temp.getY()-32, ID.Bullet,
-//                            temp.getX() +64+1000, temp.getY() -32, 30, 1, bulletImage,30)); //right
-//            }
         }
 
 
