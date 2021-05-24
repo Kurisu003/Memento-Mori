@@ -30,6 +30,22 @@ public class Dante extends GameObject {
     public static Levels currentLevel = Levels.Limbo;
     private static GameObject instance;
 
+    public int getRoomXCoordinate() {
+        return roomXCoordinate;
+    }
+
+    public void setRoomXCoordinate(int roomXCoordinate) {
+        this.roomXCoordinate = roomXCoordinate;
+    }
+
+    public int getRoomYCoordinate() {
+        return roomYCoordinate;
+    }
+
+    public void setRoomYCoordinate(int roomYCoordinate) {
+        this.roomYCoordinate = roomYCoordinate;
+    }
+
     private int roomXCoordinate;
     private int roomYCoordinate;
     private int [][] wherePlayerHasBeen = new int[7][7];
