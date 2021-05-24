@@ -67,8 +67,8 @@ public class ShotEnemy extends GameObject{
 
             if(temp.getId() == ID.Block||temp.getId()==ID.Door|| temp.getId() == ID.Obstacle) {
                 if(getBoundsBigger().intersects(temp.getBounds())) {
-                    x += (velX) * -1;
-                    y += (velY) * -1;
+                    x += (velX*2) * -1;
+                    y += (velY*2) * -1;
                     velX *= -1;
                     velY *= -1;
                 } else if(choose == 0) {
