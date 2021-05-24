@@ -298,7 +298,7 @@ public class Dante extends GameObject {
     public void doAction(int action) {
         // Needed so that damage doesn't get dealt
         // every frame, but only every 30th frame
-        if(timeSinceLastDamage > 50) {
+        if(timeSinceLastDamage > 50 && health > 0) {
             if (armor == 0) health -= action;
             else armor -= action;
             timeSinceLastDamage = 0;
@@ -312,7 +312,7 @@ public class Dante extends GameObject {
     // Applies damage directly to HP,
     // bypassing any armor
     private void doObstacleDamage(){
-        if(timeSinceLastObstacleDamage > 50){
+        if(timeSinceLastObstacleDamage > 50 && health > 0){
             health--;
             timeSinceLastObstacleDamage = 0;
             Music.getThreadPool().execute(new Music("res/Sounds/Hurt.wav", ID.HurtSound));
