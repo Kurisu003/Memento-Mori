@@ -204,6 +204,6 @@ public class SmartEnemy extends GameObject{
      * @return rectangle which indicates bigger bounds
      */
     public Rectangle getBoundsBigger(){
-        return new Rectangle(x,y - 10,30,50);
+        return new Rectangle(x-4,y - 7,40,51);
     }
 }

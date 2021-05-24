@@ -164,6 +164,6 @@ public class ShotEnemy extends GameObject{
      * @return bigger bounds as a rectangle
      */
     public Rectangle getBoundsBigger() {
-        return new Rectangle(x-16,y-16,64,64);
+        return new Rectangle(x-8,y-8,80,80);
     }
 }
