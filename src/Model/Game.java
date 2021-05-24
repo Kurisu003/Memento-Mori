@@ -32,6 +32,8 @@ public class Game extends Canvas implements Runnable {
     private static BufferedImageLoader loader;
     private Graphics g;
 
+    private static int winScreenAnimationCounter;
+    private transient ArrayList<BufferedImage> winScreenSprites;
     private int selectedSaveState;
 
     private final ArrayList<BufferedImage> coinSprites;
@@ -167,6 +169,9 @@ public class Game extends Canvas implements Runnable {
         else if(state.equals(GameState.EscMenu)){
             Camera.getInstance().setX(1088);
             Camera.getInstance().setY(-576);
+        }else if(state.equals(GameState.MainMenu)){
+            Camera.getInstance().setX(1088);
+            Camera.getInstance().setY(0);
         }
         Game.state = state;
     }
@@ -303,6 +308,9 @@ public class Game extends Canvas implements Runnable {
                 if(state.equals(GameState.Game) || state.equals(GameState.MainMenu) || state.equals(GameState.GameOver)) {
                     tick();
                 }
+                if(state.equals(GameState.Won)){
+                    winScreenRender();
+                }
                 if(state.equals(GameState.MainMenu)) {
                     Music.setIsMenu(true);
                     mainMenu.calculations();
@@ -313,15 +321,8 @@ public class Game extends Canvas implements Runnable {
                 delta--;
 
 
-//                long stopTime = System.nanoTime();
-//                if((stopTime - startTime) / 10000 > 4000)
-//                    System.out.println("Tick: " + (stopTime - startTime) / 10000);
             }
-//            long startTime = System.nanoTime();
             render();
-//            long stopTime = System.nanoTime();
-//            if((stopTime - startTime) / 10000 > 4000)
-//                System.out.println("Render: " + (stopTime - startTime) / 10000);
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
@@ -411,6 +412,26 @@ public class Game extends Canvas implements Runnable {
         g.dispose();
         bs.show();
 
+    }
+
+    public void winScreenInit(){
+        winScreenSprites = new ArrayList<>();
+        for(int i = 1; i <= 8; i++){
+            winScreenSprites.add(loader.loadImage("../Assets/Winscreen/Winscreen (" + i + ").png"));
+        }
+
+        Camera.getInstance().setX(10880);
+        Camera.getInstance().setY(5760);
+    }
+
+    public void winScreenRender(){
+        winScreenAnimationCounter = ++winScreenAnimationCounter % 80;
+        if(winScreenAnimationCounter % 10 == 0) {
+            g.drawImage(winScreenSprites.get(1), 10880, 5760, null);
+        }
+        g.setColor(Color.ORANGE);
+        g.fillRect(10880, 5760, 1088, 576);
+        System.out.println("test");
     }
 
     /**

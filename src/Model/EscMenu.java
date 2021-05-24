@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Date;
 import java.util.logging.Handler;
 
 /**
@@ -76,6 +77,9 @@ public class EscMenu extends MouseAdapter {
     public void mousePressed(MouseEvent e) {
         int mx = (int) (e.getX() + Camera.getInstance().getX());
         int my = (int) (e.getY() + Camera.getInstance().getY());
+
+        System.out.println(Camera.getInstance().getX()+mx);
+        System.out.println(Camera.getInstance().getY()+my);
 
         if(Game.getState().equals(GameState.EscMenu)) {
             // To check for Music Volume
@@ -186,12 +190,11 @@ public class EscMenu extends MouseAdapter {
         else if(Game.getState().equals(GameState.GameOver)){
             if (mx >= Camera.getInstance().getX() + 47 && mx <= Camera.getInstance().getX() + 542 &&
                 my >= Camera.getInstance().getY() + 442 && my <= Camera.getInstance().getY() + 492){
-                // TODO Try again (from checkpoint if available)
             }
             else if (mx >= Camera.getInstance().getX() + 547 && mx <= Camera.getInstance().getX() + 1042 &&
                      my >= Camera.getInstance().getY() + 442 && my <= Camera.getInstance().getY() + 492) {
-                MainMenu.setCamera(1088, 0);
                 Game.setState(GameState.MainMenu);
+
             }
         }
     }
@@ -285,6 +288,13 @@ public class EscMenu extends MouseAdapter {
         g.drawImage(Game.getInstance(12).getCoinSprites().get(0), 2340, -350, null);
         g.drawImage(Game.getInstance(13).getCoinSprites().get(0), 2340, -200, null);
         g.drawImage(Game.getInstance(14).getCoinSprites().get(0), 2280, -68, null);
+
+        // For amount of hearts
+
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 25));
+        g.drawString(String.valueOf(((Dante) Dante.getInstance()).getHealth()), 2195, -40);
 
         g2d.translate(Camera.getInstance().getX(), Camera.getInstance().getY());
     }

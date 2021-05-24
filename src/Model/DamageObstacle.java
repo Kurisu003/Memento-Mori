@@ -8,6 +8,27 @@ public class DamageObstacle extends GameObject{
 
     private int x;
     private int y;
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
+    }
+
     private int hitboxH;
     private int hitboxW;
     private transient BufferedImage displayImage;
@@ -23,8 +44,8 @@ public class DamageObstacle extends GameObject{
             hitboxW = 40;
         }
         else{
-            hitboxH = 64;
-            hitboxW = 64;
+            hitboxH = 60;
+            hitboxW = 60;
         }
     }
 
@@ -55,7 +76,7 @@ public class DamageObstacle extends GameObject{
             if(hitboxH == 45)
                 g.drawRect(x,y + 20,hitboxH,hitboxW);
             else
-                g.drawRect(x,y,hitboxH,hitboxW);
+                g.drawRect(x + 2,y + 2,hitboxH,hitboxW);
 
         }
     }
@@ -65,7 +86,7 @@ public class DamageObstacle extends GameObject{
         if(hitboxH == 45)
             return new Rectangle(x, y + 20, hitboxH, hitboxW);
         else
-            return new Rectangle(x, y, hitboxH, hitboxW);
+            return new Rectangle(x + 2, y + 2, hitboxH, hitboxW);
 
     }
 

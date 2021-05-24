@@ -43,7 +43,7 @@ public class Dante extends GameObject {
     private int damage = 0;
     private int health = 7;
     private int armor = 5;
-    private int coins = 1000;
+    private int coins = 100;
 
     private int frameCount = 0;
     private int gameOverScreenCounter = 0;
@@ -51,6 +51,7 @@ public class Dante extends GameObject {
 
     private transient BufferedImage bufferedBodyImage;
     private transient BufferedImage bufferedGunImage;
+    private transient BufferedImage darken;
 
     /**
      * This is the constructor for Dante
@@ -118,6 +119,8 @@ public class Dante extends GameObject {
         gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver3.png"));
         gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver4.png"));
         gameOverScreen.add(loader.loadImage("../MainMenuAssets/GameOver/GameOver5.png"));
+
+        darken = loader.loadImage("../Assets/Darken.png");
     }
 
     /**
@@ -131,7 +134,7 @@ public class Dante extends GameObject {
 
         if(levelIsComplete() && !portalExists) {
             if(currentLevel!=Levels.Fraud) {
-                Game.addPortal(3392 + 64, 1856 + 64);
+                Game.addPortal(3776, 1984);
                 portalExists = true;
             }else {
                 Handler1.getInstance().addObject(new Miniboss(4,4,ID.Miniboss,50));
@@ -238,7 +241,9 @@ public class Dante extends GameObject {
             checkBulletDirection();
             timeSinceLastShot = 0;
         }
+
     }
+
 
     /**
      * Set the desired body image depending on the direction Dante moves at
@@ -377,9 +382,9 @@ public class Dante extends GameObject {
         if(Handler1.getInstance().isShootUp() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootLeft())
             spawnBulletOnPress(y-132, y-32, x+25, x+25);
         else if(Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootUp())
-            spawnBulletOnPress(y+175, y+60, x+25, x+25);
+            spawnBulletOnPress(y+175, y+70, x+25, x+25);
         else if(Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp())
-            spawnBulletOnPress(y+40, y+40, x-130, x);
+            spawnBulletOnPress(y+40, y+40, x-130, x-20);
         else if(Handler1.getInstance().isShootRight() && !Handler1.getInstance().isShootLeft() && !Handler1.getInstance().isShootDown() && !Handler1.getInstance().isShootUp())
             spawnBulletOnPress(y+40, y+40, x+164, x+64);
     }
@@ -418,6 +423,9 @@ public class Dante extends GameObject {
      * @param shotXStart x-coordinate where the bullet should start
      */
     private void spawnBulletOnPress(int shotY, int shotYStart, int shotX, int shotXStart){
+
+        Game.setState(GameState.Won);
+        Game.getInstance(0).winScreenInit();
         int damage = 100;
         if(shotY != y || shotX != x){
             Handler1.getInstance().addObject(new Bullet(shotXStart, shotYStart, ID.Bullet, shotX, shotY,
@@ -567,27 +575,34 @@ public class Dante extends GameObject {
                     (int)Camera.getInstance().getY() + 10,
                     null);
 
+
+        g.drawImage(darken, (int) Camera.getInstance().getX(), (int) Camera.getInstance().getY() + 60, null);
+
         g.drawImage(Game.getInstance(20).getCoinSprites().get(0),
                 (int) Camera.getInstance().getX() + 20,
                 (int) Camera.getInstance().getY() + 64,
                 null);
 
+
         g.setColor(Color.WHITE);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         g.drawString("x" + coins,
                 (int) Camera.getInstance().getX() + 10,
-                (int) Camera.getInstance().getY() + 115);
+                (int) Camera.getInstance().getY() + 110);
 
         // Sets health to a min value of 0
         if (health <= 0) {
+            Game.setState(GameState.GameOver);
             gameOverScreenCounter = ++gameOverScreenCounter % 600;
             g.drawImage(gameOverScreen.get(gameOverScreenCounter / 100),
                     (int) Camera.getInstance().getX(),
                     (int) Camera.getInstance().getY(),
                     null);
-            Game.setState(GameState.GameOver);
         }
+
+
     }
+
 
     /**
      * This method draws the minimap which shows every generated room in the current level.
