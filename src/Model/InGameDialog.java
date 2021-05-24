@@ -12,7 +12,6 @@ public class InGameDialog extends GameObject implements Serializable {
     //Alpha composite to set visibility (0 = invisible)
     private final transient Composite fullVisible = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1);
     private final transient Composite halfVisible = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .5f);
-    private final transient Composite invisible = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0);
 
     //Array to check if W, A, S and D was pressed for the tutorial
     private static boolean[] pressedButtons = {false, false, false, false};
@@ -44,13 +43,16 @@ public class InGameDialog extends GameObject implements Serializable {
      */
     @Override
     public void render(Graphics g) {
-            Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) g;
 
-            //Font
-            g2.setComposite(fullVisible);
-            g.setColor(Color.WHITE);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 40));
-            g2.drawString(levelName, 5 + 3 * 64 * 17, 565 + 3 * 64 * 9);
+        //Font
+        g2.setComposite(halfVisible);
+        g2.setColor(Color.darkGray);
+        g2.fillRect(2+3*64*17, 530+3*64*9, 200, 40);
+        g2.setComposite(fullVisible);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 40));
+        g2.drawString(levelName, 5 + 3 * 64 * 17, 565 + 3 * 64 * 9);
 
         /*
         x = 3*64*17
@@ -67,25 +69,4 @@ public class InGameDialog extends GameObject implements Serializable {
         return new Rectangle(5+3*64*17, 520+3*64*9);
     }
 
-    /*
-    Getter + setter
-     */
-
-//    public static void setPressedButtons(int index) {
-//        System.out.println(index + " set true");
-//        pressedButtons[index] = true;
-//        for (boolean b: pressedButtons
-//             ) {
-//            if(b) {
-//                boolCounter++;
-//                System.out.println("BOOLC = " + boolCounter);
-//            }
-//            else{
-//                boolCounter = 0;
-//                break;
-//            }
-//        }
-//        if(boolCounter == 3)
-//            System.out.println("OK");
-//    }
 }
