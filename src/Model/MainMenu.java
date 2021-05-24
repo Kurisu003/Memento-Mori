@@ -215,7 +215,7 @@ public class MainMenu extends MouseAdapter {
                 Handler1.getInstance().objects.clear();
                 Dante.setInstance(null);
                 try{
-                for (int i = 0; i < 500; i++) {
+                for (int i = 0; i < 1000; i++) {
                     Object d1 = out1.readObject();
                     if (d1 instanceof Dante) {
                         Dante dante = (Dante) Dante.getInstance();

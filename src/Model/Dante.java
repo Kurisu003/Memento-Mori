@@ -32,7 +32,7 @@ public class Dante extends GameObject {
 
     private int roomXCoordinate;
     private int roomYCoordinate;
-    public static int [][] wherePlayerHasBeen = new int[7][7];
+    public  int [][] wherePlayerHasBeen = new int[7][7];
 
     private int timeSinceLastShot = 20;
     private int timeSinceLastDamage = 20;
@@ -651,8 +651,8 @@ public class Dante extends GameObject {
         return new Rectangle(x + 7,y,50,64);
     }
 
-    public void setWherePlayerHasBeen(int[][] wherePlayerHasBeen) {
-        Dante.wherePlayerHasBeen = wherePlayerHasBeen;
+    public void setWherePlayerHasBeen(int[][] wherePlayerHasBeen1) {
+        wherePlayerHasBeen = wherePlayerHasBeen1;
     }
     public  int[][] getWherePlayerHasBeen() {
         return wherePlayerHasBeen;
