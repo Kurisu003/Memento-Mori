@@ -47,11 +47,14 @@ public class SpawnEnemiesInRoom {
                     minibosses = 1;
                 }
             }
+            /*
             if(endboss == 0) {
                 Handler1.getInstance().addObject(new EndBoss(roomStartX + (rn.nextInt(960)),
                         roomStartY + (rn.nextInt(448)), ID.EndBoss));
                 endboss = 1;
             }
+            
+             */
         }
 
     }
