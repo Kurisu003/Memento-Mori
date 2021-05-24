@@ -306,6 +306,9 @@ public class Dante extends GameObject {
         }
     }
 
+    /**
+     * Does damage to Dante when he goes through a hurting obstacle
+     */
     // Applies damage directly to HP,
     // bypassing any armor
     private void doObstacleDamage(){
@@ -389,6 +392,10 @@ public class Dante extends GameObject {
             spawnBulletOnPress(y+40, y+40, x+164, x+64);
     }
 
+    /**
+     * Checks if the level is completed
+     * @return true or false
+     */
     private boolean levelIsComplete(){
 
         boolean levelIsDone = true;
@@ -404,6 +411,10 @@ public class Dante extends GameObject {
         return levelIsDone;
     }
 
+    /**
+     * Checks if the boss is defeated
+     * @return true -> boss is killed, false -> boss is still alive
+     */
     private boolean bossLeft(){
         boolean bossLeft = false;
         for(GameObject temp : Handler1.getInstance().objects){

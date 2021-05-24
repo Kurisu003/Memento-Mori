@@ -9,6 +9,7 @@ import java.util.Random;
  */
 public class SpawnEnemiesInRoom {
     private static int minibosses;
+    private static int endboss;
 
     /**
      * Spawns enemies randomly. What kind of enemy should be spawned can be given to that method and the program
@@ -46,7 +47,12 @@ public class SpawnEnemiesInRoom {
                     minibosses = 1;
                 }
             }
-
+            if(endboss == 0) {
+                Handler1.getInstance().addObject(new EndBoss(roomStartX + (rn.nextInt(960)),
+                        roomStartY + (rn.nextInt(448)), ID.EndBoss));
+                endboss = 1;
+            }
         }
+
     }
 }

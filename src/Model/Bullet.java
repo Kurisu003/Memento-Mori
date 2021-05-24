@@ -57,7 +57,7 @@ public class Bullet extends GameObject {
         for (int i = 0; i < Handler1.getInstance().objects.size(); i++) {
             GameObject temp = Handler1.getInstance().objects.get(i);
             if (getBounds().intersects(temp.getBounds())) {
-                if (temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy || temp.getId() == ID.Miniboss || temp.getId() == ID.ShotEnemy) {
+                if (temp.getId() == ID.Enemy || temp.getId() == ID.SmartEnemy || temp.getId() == ID.Miniboss || temp.getId() == ID.ShotEnemy || temp.getId() == ID.EndBoss) {
                     Handler1.getInstance().removeObject(this);
                     temp.doAction(damage);
                 }

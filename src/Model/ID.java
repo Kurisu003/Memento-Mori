@@ -16,6 +16,7 @@ public enum ID {
     Door(),
     Obstacle(),
     Miniboss(),
+    EndBoss(),
     Coin,
     BG_music(),
     Shop_music(),
