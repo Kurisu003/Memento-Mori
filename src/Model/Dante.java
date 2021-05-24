@@ -666,7 +666,9 @@ public class Dante extends GameObject {
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
                 this.wherePlayerHasBeen[i][j] = wherePlayerHasBeen1[j][i];
+                System.out.print(wherePlayerHasBeen1[i][j]);
             }
+            System.out.println();
         }
 //        this.wherePlayerHasBeen = wherePlayerHasBeen;
     }
