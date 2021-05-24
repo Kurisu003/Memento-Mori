@@ -327,8 +327,9 @@ public class Game extends Canvas implements Runnable {
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                if(showHitbox)
-                System.out.println(updates);
+                if(showHitbox) {
+                    System.out.println(updates);
+                }
                 updates = 0;
             }
         }
@@ -397,8 +398,14 @@ public class Game extends Canvas implements Runnable {
                 }
             }
 
+
+
             if(Dante.currentLevel == Levels.Limbo) {
                 g.drawImage(tutorialOverlay, 3264, 1728, null);
+            }
+
+            if(showHitbox) {
+                g.drawString(String.valueOf(updates),3 * 64 * 17 + 8 * 64,3 * 64 * 9 + 4 * 64);
             }
 
             //Render all images
@@ -470,6 +477,7 @@ public class Game extends Canvas implements Runnable {
     public void changeLevel(String level, int amountRoomsGenerated){
         folder = level;
         loadsprites(amountRoomsGenerated);
+        Handler1.getInstance().addObject(new InGameDialog(200,50, ID.Dialog, folder));
     }
 
     /**
