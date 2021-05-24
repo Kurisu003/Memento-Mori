@@ -27,9 +27,9 @@ public class GenerateLevel implements Serializable {
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
                 this.level[i][j] = level[i][j];
-                System.out.print(level[i][j]);
+//                System.out.print(level[i][j]);
             }
-            System.out.println();
+//            System.out.println();
         }
 //        this.level = level;
     }
