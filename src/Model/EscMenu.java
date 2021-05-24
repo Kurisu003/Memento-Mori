@@ -174,7 +174,6 @@ public class EscMenu extends MouseAdapter {
                     ((Dante) Dante.getInstance()).setRange(((Dante) Dante.getInstance()).getRange() + 1);
                     Music.getThreadPool().execute(new Music("res/Sounds/Upgrade.wav", ID.UpgradeSound));
                 }
-
             }
             if(mx >= 2320 && mx <= 2379 && my >= -77 && my <= -22){
                 if(((Dante) Dante.getInstance()).getCoins() >= 7){
