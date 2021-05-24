@@ -175,6 +175,10 @@ public class Game extends Canvas implements Runnable {
         Game.state = state;
     }
 
+    /**
+     * Sets the state
+     * @param state state which should be set
+     */
     public static void setOnlyState(GameState state) {
 
         Game.state = state;
@@ -243,6 +247,10 @@ public class Game extends Canvas implements Runnable {
 
     }
 
+    /**
+     * Loads the sprites of a saved game
+     * @param amountRoomsGenerated how much rooms should be generated
+     */
     public  void loadspritesOfSavedGame(int amountRoomsGenerated){
 
         wallSprites.clear();
@@ -414,14 +422,20 @@ public class Game extends Canvas implements Runnable {
         bs.show();
     }
 
+    /**
+     * Shows the win screen
+     */
     public void winScreenInit(){
-        System.out.println("Hallo");
+        //System.out.println("Hallo");
         winScreenSprites = new ArrayList<>();
         for(int i = 1; i <= 8; i++){
             winScreenSprites.add(loader.loadImage("../Assets/Winscreen/Winscreen (" + i + ").png"));
         }
     }
 
+    /**
+     * Renders the win screen
+     */
     public void winScreenRender(){
         Camera.getInstance().setX(10880);
         Camera.getInstance().setY(5760);
@@ -498,22 +512,41 @@ public class Game extends Canvas implements Runnable {
         return enemySprites;
     }
 
+    /**
+     * Returns the coin sprites
+     * @return coin sprites
+     */
     public ArrayList<BufferedImage> getCoinSprites() {
         return coinSprites;
     }
 
+    /**
+     * Returns the sprites of the damage obstacle
+     * @return obstacle sprites
+     */
     public ArrayList<BufferedImage> getDamageObstacleSprites() {
         return damageObstacleSprites;
     }
 
+    /**
+     * Returns the sprites of the portal
+     * @return portal sprites
+     */
     public ArrayList<BufferedImage> getPortalSprites() {
         return portalSprites;
     }
 
+    /**
+     * Sets the folder to Limbo
+     */
     public static void setFolder() {
         Game.folder = Levels.Limbo.name();
     }
 
+    /**
+     * Sets the folder to the given folder
+     * @param folder folder to be set
+     */
     public static void setFolder(String folder) {
         Game.folder = folder;
     }

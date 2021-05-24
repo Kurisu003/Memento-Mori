@@ -23,6 +23,10 @@ public class GenerateLevel implements Serializable {
 
     private static GenerateLevel instance = null;
 
+    /**
+     * Sets the level
+     * @param level level to be generated
+     */
     public void setLevel(int[][] level) {
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
@@ -85,6 +89,9 @@ public class GenerateLevel implements Serializable {
         }
     }
 
+    /**
+     * Loads all images of the obstacles
+     */
     public void loadObstacles(){
         BufferedImageLoader loader = new BufferedImageLoader();
         for(int i = 0; i <= GenerateLevel.getInstance().getLevel().length - 1; i++) {

@@ -26,6 +26,8 @@ public class Box extends GameObject {
      * @param y y-coordinate where the block should be displayed
      * @param id this object's id
      * @param bufferedImage the image which should represent the Box
+     * @param smallHitboxTrue checks if the small hitbox is enabled
+     * @param isPortal checks if a portal can be spawned
      */
     public Box(int x, int y, ID id, BufferedImage bufferedImage, boolean smallHitboxTrue, boolean isPortal) {
         super(x, y,id);

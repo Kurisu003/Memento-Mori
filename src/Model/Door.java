@@ -54,10 +54,9 @@ public class Door extends GameObject {
     }
 
     /**
-     * This method
-     * @param action
+     * This method checks if it was the first time entered
+     * @param action 1 if true, 0 if false
      */
-    //TODO zuwos brauchts dess?? -> JAVADOCS anpassen!
     @Override
     public void doAction(int action) {
         int temp = firstTimeEntered;
