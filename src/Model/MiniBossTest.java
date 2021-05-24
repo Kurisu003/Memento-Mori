@@ -1,13 +1,13 @@
 package Model;
 
 import Controller.Handler1;
-import org.junit.Test;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MiniBossTest {
 
-    @Test
+
     public void checkSpeed(){
         Miniboss miniboss = new Miniboss(0, 0, ID.Miniboss, 10000);
 
