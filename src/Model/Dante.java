@@ -662,8 +662,13 @@ public class Dante extends GameObject {
         return new Rectangle(x + 7,y,50,64);
     }
 
-    public void setWherePlayerHasBeen(int[][] wherePlayerHasBeen) {
-        this.wherePlayerHasBeen = wherePlayerHasBeen;
+    public void setWherePlayerHasBeen(int[][] wherePlayerHasBeen1) {
+        for(int i = 0; i < 7; i++){
+            for(int j = 0; j < 7; j++){
+                this.wherePlayerHasBeen[i][j] = wherePlayerHasBeen1[j][i];
+            }
+        }
+//        this.wherePlayerHasBeen = wherePlayerHasBeen;
     }
     public  int[][] getWherePlayerHasBeen() {
         return wherePlayerHasBeen;
