@@ -241,7 +241,9 @@ public class Dante extends GameObject {
             checkBulletDirection();
             timeSinceLastShot = 0;
         }
+
     }
+
 
     /**
      * Set the desired body image depending on the direction Dante moves at
@@ -590,14 +592,17 @@ public class Dante extends GameObject {
 
         // Sets health to a min value of 0
         if (health <= 0) {
+            Game.setState(GameState.GameOver);
             gameOverScreenCounter = ++gameOverScreenCounter % 600;
             g.drawImage(gameOverScreen.get(gameOverScreenCounter / 100),
                     (int) Camera.getInstance().getX(),
                     (int) Camera.getInstance().getY(),
                     null);
-            Game.setState(GameState.GameOver);
         }
+
+
     }
+
 
     /**
      * This method draws the minimap which shows every generated room in the current level.
