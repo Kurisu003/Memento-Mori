@@ -38,7 +38,7 @@ public class EndBoss extends GameObject{
         bulletImage = loader.loadImage("../Assets/SatanBullet.png");
         hpImage = loader.loadImage("../Assets/redRec.png");
         noHpImage = loader.loadImage("../Assets/whiteRec.png");
-        displayImage = loader.loadImage("../Enemies/Satan/SatanSprite1.png");
+        displayImage = loader.loadImage("../Enemies/Satan/SatanSprite2.png");
     }
 
     /**
@@ -55,8 +55,10 @@ public class EndBoss extends GameObject{
         tickCounter++;
 
         if(tickCounter % 10 == 0){
+
             System.out.println("bullet");
             Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet, x+200, y + 200, 20, 1, bulletImage, 30));
+
         }
 
         for(int i = 0; i < Handler1.getInstance().objects.size(); i++) {
@@ -116,7 +118,7 @@ public class EndBoss extends GameObject{
      * @param action how much damage is done
      */
     public void doAction(int action){
-        this.hp -= action/2;
+        this.hp -= action/4;
     }
 
     /**
@@ -131,7 +133,7 @@ public class EndBoss extends GameObject{
             g.drawRect(x, y, 165, 99);
         }
 
-        g.drawImage(displayImage, x + 11, y, null);
+        g.drawImage(displayImage, x, y, null);
 
         for(int i = 0; i < 100; i++){
             g.drawImage(noHpImage, (int) Camera.getInstance().getX() + i * 10 + 50,

@@ -30,22 +30,6 @@ public class Dante extends GameObject {
     public static Levels currentLevel = Levels.Limbo;
     private static GameObject instance;
 
-    public int getRoomXCoordinate() {
-        return roomXCoordinate;
-    }
-
-    public void setRoomXCoordinate(int roomXCoordinate) {
-        this.roomXCoordinate = roomXCoordinate;
-    }
-
-    public int getRoomYCoordinate() {
-        return roomYCoordinate;
-    }
-
-    public void setRoomYCoordinate(int roomYCoordinate) {
-        this.roomYCoordinate = roomYCoordinate;
-    }
-
     private int roomXCoordinate;
     private int roomYCoordinate;
     private int [][] wherePlayerHasBeen = new int[7][7];
@@ -153,7 +137,8 @@ public class Dante extends GameObject {
                 Game.addPortal(3776, 1984);
                 portalExists = true;
             }else {
-                Handler1.getInstance().addObject(new EndBoss(4,4,ID.EndBoss));
+                Handler1.getInstance().addObject(new EndBoss(1088 * 3 + 544,3 * 576 + 288,ID.EndBoss));
+                portalExists = true;
             }
         }
 
@@ -356,6 +341,10 @@ public class Dante extends GameObject {
         this.fireSpeed = fireSpeed;
     }
 
+    /**
+     * Returns the fire speed of a shot
+     * @return fire speed
+     */
     public int getFireSpeed() {
         return fireSpeed;
     }
@@ -368,18 +357,34 @@ public class Dante extends GameObject {
         this.range = range;
     }
 
+    /**
+     * Returns the range of the gun shot
+     * @return size of range
+     */
     public int getRange() {
         return range;
     }
 
+    /**
+     * Returns the amount of damage
+     * @return amount of damage
+     */
     public int getDamage() {
         return damage;
     }
 
+    /**
+     * Sets the current health
+     * @param health amount of health
+     */
     public void setHealth(int health) {
         this.health = health;
     }
 
+    /**
+     * Returns the current health
+     * @return the amount of health
+     */
     public int getHealth() {
         return this.health;
     }
@@ -472,8 +477,6 @@ public class Dante extends GameObject {
         int tempCoin = 0;
         boolean shouldRemoveCoin = false;
 
-
-        //FIXME ConcurrentModificationException
         for(ListIterator<GameObject> iterator = Handler1.getInstance().objects.listIterator(); iterator.hasNext();){
             GameObject temp = iterator.next();
 
@@ -678,6 +681,10 @@ public class Dante extends GameObject {
         return new Rectangle(x + 7,y,50,64);
     }
 
+    /**
+     * Sets the last position of the player
+     * @param wherePlayerHasBeen1 x and y of the position
+     */
     public void setWherePlayerHasBeen(int[][] wherePlayerHasBeen1) {
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
@@ -688,20 +695,76 @@ public class Dante extends GameObject {
         }
 //        this.wherePlayerHasBeen = wherePlayerHasBeen;
     }
+
+    /**
+     * Returns the last player's position
+     * @return coordinates of the last position
+     */
     public  int[][] getWherePlayerHasBeen() {
         return wherePlayerHasBeen;
     }
+
+    /**
+     * Sets an instance of this class
+     * @param instance type of instance
+     */
     public static void setInstance(GameObject instance) {
         Dante.instance = instance;
     }
+
+    /**
+     * sets the current level where the player is
+     * @param currentLevel level where the player is
+     */
     public void setCurrentLevel(Levels currentLevel) {
         Dante.currentLevel = currentLevel;
     }
+
+    /**
+     * Returns the current level
+     * @return which level Dante is in
+     */
     public Levels getCurrentLevel() {
         return currentLevel;
     }
 
+    /**
+     * Sets damage to the player
+     * @param damage how much damage is set to the player
+     */
     public void setDamage(int damage){
         this.damage = damage;
+    }
+
+    /**
+     * Returns the x-coordinate of the room
+     * @return x-coordinate
+     */
+    public int getRoomXCoordinate() {
+        return roomXCoordinate;
+    }
+
+    /**
+     * Sets the x-coordinate of the room
+     * @param roomXCoordinate x-coordinate
+     */
+    public void setRoomXCoordinate(int roomXCoordinate) {
+        this.roomXCoordinate = roomXCoordinate;
+    }
+
+    /**
+     * Returns the y-coordinate of the room
+     * @return y-coordinate
+     */
+    public int getRoomYCoordinate() {
+        return roomYCoordinate;
+    }
+
+    /**
+     * Sets the y-coordinate of the room
+     * @param roomYCoordinate y-coordinate
+     */
+    public void setRoomYCoordinate(int roomYCoordinate) {
+        this.roomYCoordinate = roomYCoordinate;
     }
 }

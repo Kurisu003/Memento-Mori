@@ -29,6 +29,7 @@ public class Bullet extends GameObject {
      * @param range maximal distance the bullet can go to
      * @param damage how much damage the bullet does to enemies
      * @param shotType what image should be displayed for this bullet
+     * @param speed the firespeed of the bullet
      */
     public Bullet(int x, int y, ID id, int mx, int my, int range, int damage, BufferedImage shotType, double speed) {
         super(x, y, id);
