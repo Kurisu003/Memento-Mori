@@ -17,6 +17,7 @@ public class EndBoss extends GameObject{
     private transient final BufferedImage noHpImage;
     private final transient BufferedImageLoader loader;
     private final transient BufferedImage bulletImage;
+    private final transient BufferedImage displayImage;
 
     int tickCounter = 0;
 
@@ -34,9 +35,10 @@ public class EndBoss extends GameObject{
     public EndBoss(int x, int y, ID id) {
         super(x, y, id);
         loader = new BufferedImageLoader();
-        bulletImage = loader.loadImage("../Assets/Bullet.png");
+        bulletImage = loader.loadImage("../Assets/SatanBullet.png");
         hpImage = loader.loadImage("../Assets/redRec.png");
         noHpImage = loader.loadImage("../Assets/whiteRec.png");
+        displayImage = loader.loadImage("../Enemies/Satan/SatanSprite1.png");
     }
 
     /**
@@ -49,6 +51,13 @@ public class EndBoss extends GameObject{
         y+=velY;
 
         choose = r.nextInt(50);
+
+        tickCounter++;
+
+        if(tickCounter % 10 == 0){
+            System.out.println("bullet");
+            Handler1.getInstance().addObject(new Bullet(x, y, ID.Bullet, x, y + 100, 100, 1, bulletImage, 2));
+        }
 
         for(int i = 0; i < Handler1.getInstance().objects.size(); i++) {
             GameObject temp = Handler1.getInstance().objects.get(i);
@@ -80,28 +89,25 @@ public class EndBoss extends GameObject{
                     }
                 }
             }
-            if(temp.getId() == ID.EndBoss)
-                if (++tickCounter % (r.nextInt(30) + 30) == 0) {
-
-                    Handler1.getInstance().addObject(new Bullet(temp.getX()+32, temp.getY(), ID.Bullet,
-                            temp.getX() +32, //up
-                            temp.getY() +1000,
-                            30, 1, bulletImage,30));
-                    Handler1.getInstance().addObject(new Bullet(temp.getX()+32, temp.getY()-64, ID.Bullet,
-                            temp.getX()+32, temp.getY() -64-1000, 30, 1, bulletImage,30)); //down
-                    Handler1.getInstance().addObject(new Bullet(temp.getX(), temp.getY()-32, ID.Bullet,
-                            temp.getX() -1000, temp.getY()-32, 30, 1, bulletImage,30)); //left
-                    Handler1.getInstance().addObject(new Bullet(temp.getX()+64, temp.getY()-32, ID.Bullet,
-                            temp.getX() +64+1000, temp.getY() -32, 30, 1, bulletImage,30)); //right
-            }
+//            if(temp.getId() == ID.EndBoss)
+//                if (++tickCounter % (r.nextInt(30) + 30) == 0) {
+//
+//                    Handler1.getInstance().addObject(new Bullet(temp.getX()+32, temp.getY(), ID.Bullet,
+//                            temp.getX() +32, //up
+//                            temp.getY() +1000,
+//                            30, 1, bulletImage,30));
+//                    Handler1.getInstance().addObject(new Bullet(temp.getX()+32, temp.getY()-64, ID.Bullet,
+//                            temp.getX()+32, temp.getY() -64-1000, 30, 1, bulletImage,30)); //down
+//                    Handler1.getInstance().addObject(new Bullet(temp.getX(), temp.getY()-32, ID.Bullet,
+//                            temp.getX() -1000, temp.getY()-32, 30, 1, bulletImage,30)); //left
+//                    Handler1.getInstance().addObject(new Bullet(temp.getX()+64, temp.getY()-32, ID.Bullet,
+//                            temp.getX() +64+1000, temp.getY() -32, 30, 1, bulletImage,30)); //right
+//            }
         }
 
 
         if(hp <= 0) {
-            Random rand = new Random();
-            if(rand.nextInt(100) <= 33)
-                Handler1.getInstance().addObject(new Coin(x, y));
-            Handler1.getInstance().removeObject(this);
+            Game.setState(GameState.Won);
         }
     }
 
@@ -122,8 +128,11 @@ public class EndBoss extends GameObject{
 
         if(Game.showHitbox) {
             g.setColor(Color.green);
-            g.drawRect(x, y, 64, 64);
+            g.drawRect(x, y, 165, 99);
         }
+
+        g.drawImage(displayImage, x + 11, y, null);
+
         for(int i = 0; i < 100; i++){
             g.drawImage(noHpImage, (int) Camera.getInstance().getX() + i * 10 + 50,
                     (int) Camera.getInstance().getY() + 64 * 8, null);
@@ -149,7 +158,7 @@ public class EndBoss extends GameObject{
      */
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x,y,64,64);
+        return new Rectangle(x ,y,165,99);
     }
 
     /**
