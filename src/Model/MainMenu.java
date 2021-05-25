@@ -163,7 +163,7 @@ public class MainMenu extends MouseAdapter {
         if(mx >= 2618 && mx <= 2818 && my >= 153 && my <= 353){
             Handler1.getInstance().objects.clear();
             Dante.setInstance(null);
-            Game.setFolder();
+            Game.setFolder(Levels.Heresy.name());
             Dante.getInstance();
             Dante dante = (Dante) Dante.getInstance();
             for(int i = 0; i < 7; i++){
@@ -172,7 +172,7 @@ public class MainMenu extends MouseAdapter {
                 }
             }
             dante.getWherePlayerHasBeen()[3][3] = 1;
-            dante.setCurrentLevel(Levels.Limbo);
+            dante.setCurrentLevel(Levels.Heresy);
             Game.getInstance(4).loadsprites(2 + Dante.currentLevel.ordinal());
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 
@@ -184,7 +184,7 @@ public class MainMenu extends MouseAdapter {
         if(mx >= 2981 && mx <= 3181 && my >= 153 && my <= 353) {
             Handler1.getInstance().objects.clear();
             Dante.setInstance(null);
-            Game.setFolder();
+            Game.setFolder(Levels.Fraud.name());
             Dante.getInstance();
             Dante dante = (Dante) Dante.getInstance();
             for(int i = 0; i < 7; i++){
@@ -193,7 +193,7 @@ public class MainMenu extends MouseAdapter {
                 }
             }
             dante.getWherePlayerHasBeen()[3][3] = 1;
-            dante.setCurrentLevel(Levels.Limbo);
+            dante.setCurrentLevel(Levels.Fraud);
             Game.getInstance(5).loadsprites(2 + Dante.currentLevel.ordinal());
             Handler1.getInstance().addObject(new InGameDialog(200, 50, ID.Dialog,Game.getFolder()));
 

@@ -52,6 +52,10 @@ public class KeyInput extends KeyAdapter {
             dante.setCoins(dante.getCoins() + 10);
         }
 
+        if(key == KeyEvent.VK_N){
+            Handler1.getInstance().addObject(new EndBoss(1088 * 3 + 544,3 * 576 + 288,ID.EndBoss));
+        }
+
         if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.MainMenu)){
             MainMenu.setCamera(1088,0);
         }

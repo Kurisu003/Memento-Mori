@@ -24,7 +24,7 @@ public class EndBoss extends GameObject{
     Random r= new Random();
     int choose=0;
 
-    private int hp = 1;
+    private int hp = 10000;
 
     /**
      * Constructor to create an instance.
@@ -54,7 +54,7 @@ public class EndBoss extends GameObject{
 
         tickCounter++;
         
-        if(tickCounter % 800 == 0){
+        if(tickCounter % 700 == 0){
             SpawnEnemiesInRoom.spawnEnemies(3 * 1088 + 64, 3 * 576 + 64,
                     new ID[]{ID.SmartEnemy, ID.ShotEnemy, ID.Enemy}, Dante.currentLevel);
 
