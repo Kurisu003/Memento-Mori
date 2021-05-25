@@ -290,6 +290,8 @@ public class MainMenu extends MouseAdapter {
                             dante.setHealth(((Dante)d1).getHealth());
                             dante.setRange(((Dante)d1).getRange());
                             dante.setDamage(((Dante)d1).getDamage());
+                            dante.setRoomXCoordinate(((Dante)d1).getRoomXCoordinate());
+                            dante.setRoomYCoordinate(((Dante)d1).getRoomYCoordinate());
                             dante.setCurrentLevel(((Dante)d1).getCurrentLevel());
                             dante.setWherePlayerHasBeen(((Dante)d1).getWherePlayerHasBeen());
                             Game.setFolder(((Dante)d1).getCurrentLevel().name());
@@ -350,6 +352,8 @@ public class MainMenu extends MouseAdapter {
                             dante.setHealth(((Dante)d1).getHealth());
                             dante.setRange(((Dante)d1).getRange());
                             dante.setDamage(((Dante)d1).getDamage());
+                            dante.setRoomXCoordinate(((Dante)d1).getRoomXCoordinate());
+                            dante.setRoomYCoordinate(((Dante)d1).getRoomYCoordinate());
                             dante.setCurrentLevel(((Dante)d1).getCurrentLevel());
                             dante.setWherePlayerHasBeen(((Dante)d1).getWherePlayerHasBeen());
                             Game.setFolder(((Dante)d1).getCurrentLevel().name());
