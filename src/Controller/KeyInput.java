@@ -56,6 +56,24 @@ public class KeyInput extends KeyAdapter {
             Handler1.getInstance().addObject(new EndBoss(1088 * 3 + 544,3 * 576 + 288,ID.EndBoss));
         }
 
+        if(key == KeyEvent.VK_B){
+            Game.getInstance(0).winScreenInit();
+            Game.setState(GameState.Won);
+        }
+
+        if(key == KeyEvent.VK_H){
+            for(GameObject temp : Handler1.getInstance().objects){
+                if(temp.getId().equals(ID.Enemy) || temp.getId().equals(ID.SmartEnemy) || temp.getId().equals(ID.ShotEnemy)){
+                    Handler1.getInstance().removeObject(temp);
+                }
+            }
+        }
+
+        if(key == KeyEvent.VK_SPACE && Game.getState().equals(GameState.Won)){
+            Game.setState(GameState.MainMenu);
+            MainMenu.setCamera(1088, 0);
+        }
+
         if(key == KeyEvent.VK_ESCAPE && Game.getState().equals(GameState.MainMenu)){
             MainMenu.setCamera(1088,0);
         }
